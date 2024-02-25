@@ -73,4 +73,7 @@ public class Login {
         fr.setVisible(true);
         
     }
+    public static void main(String[] args) {
+        new Login();
+    }
 }
