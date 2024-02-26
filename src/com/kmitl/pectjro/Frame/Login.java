@@ -29,11 +29,14 @@ public class Login {
         Plast = new JPanel();
         
         //Component Ppic
+
         pic = new JLabel("???PIC???");
         
         //Component Pmid
         email = new JTextField("Email");
+        email.setPreferredSize(new Dimension(250, 30));
         pass = new JPasswordField("Password");
+        pass.setPreferredSize(new Dimension(250, 30));
         check = new JCheckBox("???????");
         login = new JButton("Login");
         
@@ -53,23 +56,43 @@ public class Login {
         Pmain.add(Plast, BorderLayout.SOUTH);
         
         //กำหนด Layout Ppic และ Add Com
+        Ppic.setPreferredSize(new Dimension(200, 180));
         Ppic.setLayout(new FlowLayout());
         Ppic.add(pic);
         
         //กำหนด Layout Pmid และ Add Com
-        Pmid.setLayout(new GridLayout(4,1));
-        Pmid.add(email);
-        Pmid.add(pass);
-        Pmid.add(check);
-        Pmid.add(login);
+        Pmid.setLayout(new GridLayout(5,1));
+        Pmid.add(new JPanel() {
+            {
+                this.add(email);
+            }
+        });
+        Pmid.add(new JPanel() {
+            {
+                this.add(pass);
+            }
+        });
+        Pmid.add(new JPanel() {
+            {
+                this.add(check);
+            }
+        });
+        Pmid.add(new JPanel() {
+            {
+                login.setPreferredSize(new Dimension(170, 40));
+                this.add(login);
+            }
+        });
         
         //กำหนด Layout Plast และ Add Com
-        Plast.setLayout(new FlowLayout());
         Plast.add(info);
         Plast.add(sign);
         
         //set frame size, visible
-        fr.setSize(300,300);
+        Pmain.setPreferredSize(new Dimension(400, 450));
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fr.setLocationRelativeTo(null);
+        fr.pack();
         fr.setVisible(true);
         
     }
