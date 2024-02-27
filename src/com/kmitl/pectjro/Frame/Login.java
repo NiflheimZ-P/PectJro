@@ -8,6 +8,8 @@ package com.kmitl.pectjro.Frame;
  *
  * @author Insi
  */
+import com.formdev.flatlaf.FlatDarkLaf;
+
 import java.awt.*;
 import javax.swing.*;
 public class Login {
@@ -97,6 +99,11 @@ public class Login {
         
     }
     public static void main(String[] args) {
-        new Login();
+        try {
+            UIManager.setLookAndFeel( new FlatDarkLaf() );
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+        SwingUtilities.invokeLater(() -> {new Login();});
     }
 }
