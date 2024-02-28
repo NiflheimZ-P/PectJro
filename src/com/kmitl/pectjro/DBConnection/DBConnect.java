@@ -1,23 +1,38 @@
 package com.kmitl.pectjro.DBConnection;
-import java.sql.*;
-import java.util.LinkedList;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.*;
 
+import java.sql.*;
+import java.io.*;
+import java.util.*;
 
 public class DBConnect {
-    private static Connection connecto;
+    private Connection con;
+    private Setting_Template connect_data;
 
-    public static void main(String[] args) throws Exception {
-        connecto = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "2005253");
-        Statement state = connecto.createStatement();
-        ResultSet result = state.executeQuery("select * from testInfo");
-        result.next();
-        JSONParser pass = new JSONParser();
-        Object obj = pass.parse(result.getString("number"));
-        JSONArray a = (JSONArray) obj;
-        Object c = 1;
-        System.out.println(a);
-        System.out.println(c);
+    public DBConnect() {
+        File info = new File("Database_Setting.dat");
+
+        try (ObjectInputStream data = new ObjectInputStream(new FileInputStream(info))) {
+            connect_data = (Setting_Template) data.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://" + connect_data.host + ":" + connect_data.port + "/" + connect_data.database_name, connect_data.username, connect_data.password);
+        } catch (SQLException e) { throw new RuntimeException(e); }
+
+    }
+
+    public HashMap getData(String query) {
+        Statement state;
+        try {
+            state = con.createStatement();
+            ResultSet result = state.executeQuery(query);
+        } catch (SQLException e) { throw new RuntimeException(e); }
+        return new HashMap(); // เพื่อให้มันไม่ error เฉยๆ
+    }
+
+    public static void main(String[] args) {
+        new DBConnect();
     }
 }
