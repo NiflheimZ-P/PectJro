@@ -1,5 +1,7 @@
 package com.kmitl.pectjro.DBConnection;
 
+import com.kmitl.pectjro.Frame.SetupPage.Setting_Template;
+
 import java.sql.*;
 import java.io.*;
 import java.util.*;
@@ -10,7 +12,6 @@ public class DBConnect {
 
     public DBConnect() {
         File info = new File("Database_Setting.dat");
-
         try (ObjectInputStream data = new ObjectInputStream(new FileInputStream(info))) {
             connect_data = (Setting_Template) data.readObject();
         } catch (IOException | ClassNotFoundException e) {
