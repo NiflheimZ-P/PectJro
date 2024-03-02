@@ -1,7 +1,7 @@
 package com.kmitl.pectjro;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.kmitl.pectjro.Frame.Login;
+import com.kmitl.pectjro.Frame.Main_Frame;
 import com.kmitl.pectjro.Frame.SetupPage.Main_Setup;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ public class Main {
         if (!info.exists()) {
             SwingUtilities.invokeLater(() -> {new Main_Setup();} );
         } else {
-            SwingUtilities.invokeLater(() -> {new Login();});
+            SwingUtilities.invokeLater(() -> {new Main_Frame();});
         }
     }
 }
