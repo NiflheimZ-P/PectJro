@@ -5,6 +5,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
+
+import com.kmitl.pectjro.Frame.Main_Program.Main_Frame;
 import com.kmitl.pectjro.Frame.Tools.*;
 
 public class Login_Page extends JPanel {
@@ -13,7 +15,7 @@ public class Login_Page extends JPanel {
     private JCheckBox check = new JCheckBox("Remember Me");
     private JButton login = new JButton("Login");
     private JButton sign = new JButton("Sign up");
-    public Login_Page() {
+    public Login_Page(Main_Frame frame) {
         super();
         this.setBackground(Color.white);
         this.setBorder(new CompoundBorder(
@@ -22,6 +24,8 @@ public class Login_Page extends JPanel {
         ));
         this.setPreferredSize(new Dimension(480, 610));
         this.setLayout(new GridBagLayout());
+
+        sign.addActionListener(frame);
 
         this.add(
                 new Image_Resizer(new ImageIcon("resources/Images/Logo.jpg"), 200, 200),
