@@ -1,7 +1,7 @@
 package com.kmitl.pectjro;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.kmitl.pectjro.Frame.Main_Frame;
+import com.kmitl.pectjro.Frame.Main_Program.Main_Frame;
 import com.kmitl.pectjro.Frame.SetupPage.Main_Setup;
 
 import javax.swing.*;

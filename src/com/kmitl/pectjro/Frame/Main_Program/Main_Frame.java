@@ -1,5 +1,6 @@
-package com.kmitl.pectjro.Frame;
+package com.kmitl.pectjro.Frame.Main_Program;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.kmitl.pectjro.Frame.Main_Program.Login_System.Login_Page;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,7 @@ public class Main_Frame {
         main_panel = new JPanel(page_manage);
         main_panel.add(new Login_Page());
         frame.add(main_panel, manage);
-        
+
         frame.setLocationRelativeTo(null);
         frame.setSize(1600, 900);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
