@@ -37,27 +37,27 @@ public class Register_Page extends JPanel{
 
         // Firstname
         firstname.setFont(new Font("", Font.PLAIN, 13));
-        this.add(firstname, new Constraints(0, 1, 1, 1, 0, 0, GridBagConstraints.LINE_START,
+        this.add(firstname, new Constraints(0, 1, 0, 0, GridBagConstraints.LINE_START,
                 new Insets(0, 30, 0, 0)));
 
         // Firstname_Field
         firstname_field.setPreferredSize(new Dimension(200, 35));
-        this.add(firstname_field, new Constraints(0, 2, 1, 1, 0, 0, GridBagConstraints.LINE_START,
+        this.add(firstname_field, new Constraints(0, 2, 0, 0, GridBagConstraints.LINE_START,
                 new Insets(0, 30, 20, 0)));
 
         // Lastname
         lastname.setFont(new Font("", Font.PLAIN, 13));
-        this.add(lastname, new Constraints(1, 1, 1, 1, 0, 0, GridBagConstraints.LINE_START,
+        this.add(lastname, new Constraints(1, 1, 0, 0, GridBagConstraints.LINE_START,
                 new Insets(0, 0, 0, 13)));
 
         // Lastname_Field
         lastname_field.setPreferredSize(new Dimension(200, 35));
-        this.add(lastname_field, new Constraints(1, 2, 1, 1, 0, 0, GridBagConstraints.LINE_START,
+        this.add(lastname_field, new Constraints(1, 2, 0, 0, GridBagConstraints.LINE_START,
                 new Insets(0, 0, 20, 13)));
 
         // Username
         username.setFont(new Font("", Font.PLAIN, 13));
-        this.add(username, new Constraints(0, 3, 1, 1, 0, 0, GridBagConstraints.LINE_START,
+        this.add(username, new Constraints(0, 3, 0, 0, GridBagConstraints.LINE_START,
                 new Insets(0, 30, 0, 0)));
 
         // Username_Field
@@ -67,27 +67,27 @@ public class Register_Page extends JPanel{
 
         // Password
         password.setFont(new Font("", Font.PLAIN, 13));
-        this.add(password, new Constraints(0, 5, 1, 1, 0, 0, GridBagConstraints.LINE_START,
+        this.add(password, new Constraints(0, 5, 0, 0, GridBagConstraints.LINE_START,
                 new Insets(0, 30, 0, 0)));
 
         // Password_Field
         password_field.setPreferredSize(new Dimension(200, 35));
-        this.add(password_field, new Constraints(0, 6, 1, 1, 0, 0, GridBagConstraints.LINE_START,
+        this.add(password_field, new Constraints(0, 6, 0, 0, GridBagConstraints.LINE_START,
                 new Insets(0, 30, 20, 0)));
 
         // Confirm Password
         confirmpass.setFont(new Font("", Font.PLAIN, 13));
-        this.add(confirmpass, new Constraints(1, 5, 1, 1, 0, 0, GridBagConstraints.LINE_START,
+        this.add(confirmpass, new Constraints(1, 5, 0, 0, GridBagConstraints.LINE_START,
                 new Insets(0, 0, 0, 0)));
 
         // Confirm Password_Field
         confirmpass_field.setPreferredSize(new Dimension(200, 35));
-        this.add(confirmpass_field, new Constraints(1, 6, 1, 1, 0, 0, GridBagConstraints.LINE_START,
+        this.add(confirmpass_field, new Constraints(1, 6, 0, 0, GridBagConstraints.LINE_START,
                 new Insets(0, 0, 20, 0)));
 
         // Email
         email.setFont(new Font("", Font.PLAIN, 13));
-        this.add(email, new Constraints(0, 7, 1, 1, 0, 0, GridBagConstraints.LINE_START,
+        this.add(email, new Constraints(0, 7, 0, 0, GridBagConstraints.LINE_START,
                 new Insets(0, 30, 0, 0)));
 
         // Email_Field
@@ -98,13 +98,13 @@ public class Register_Page extends JPanel{
         // Submit Button
         submit.setFont(new Font("", Font.PLAIN, 20));
         submit.setPreferredSize(new Dimension(180, 50));
-        this.add(submit, new Constraints(0, 9, 1, 1,  1, 1,
+        this.add(submit, new Constraints(0, 9,  1, 1,
                 new Insets(0, 0, 0, 0)));
 
         // Back Button
         back.setFont(new Font("", Font.PLAIN, 20));
         back.setPreferredSize(new Dimension(180, 50));
-        this.add(back, new Constraints(1, 9, 1, 1, 1, 1,
+        this.add(back, new Constraints(1, 9, 1, 1,
                 new Insets(0, 0, 0, 13)));
 
     }
