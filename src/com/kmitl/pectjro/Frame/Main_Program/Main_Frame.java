@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Main_Frame {
-    private JFrame frame = new JFrame();
+    private JFrame frame = new JFrame("PectJro");
     private JPanel main_panel;
 
     public Main_Frame(){
@@ -14,7 +14,6 @@ public class Main_Frame {
         frame.setContentPane(new JLabel(icon));
         frame.setLayout(new GridBagLayout());
         GridBagConstraints manage = new GridBagConstraints();
-        manage.gridx = 0; manage.gridy = 0; manage.weightx = 1; manage.weighty = 1;
         CardLayout page_manage = new CardLayout();
         main_panel = new JPanel(page_manage);
         main_panel.add(new Login_Page());
