@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.util.ArrayList;
+import com.kmitl.pectjro.Frame.Tools.*;
 
 public class connect_panel extends JPanel {
     private JLabel info;
@@ -31,50 +32,26 @@ public class connect_panel extends JPanel {
         hostname = new JTextField("aws.connect.psdb.cloud", 15); port = new JTextField("3306"); database = new JTextField("pectjro", 26);
         username = new JTextField("Normal_user", 26); password = new JPasswordField("Minecraft_hardcore_100_days", 26);
 
-        manage.insets = new Insets(5, 5, 5, 5);
-        manage.anchor = GridBagConstraints.LINE_START;
-        manage.gridx = 0;
-        manage.gridy = 0;
-        connection_info.add(new JLabel("Hostname"), manage);
+        // GridBag Component
+        connection_info.add(new JLabel("Hostname"), new Constraints(0, 0, 0, 0, GridBagConstraints.LINE_START, new Insets(5, 5, 5, 5)));
 
-        manage.insets = new Insets(5, 5, 5, 15);
-        manage.gridx = 1;
-        connection_info.add(hostname, manage);
+        connection_info.add(hostname, new Constraints(1, 0, new Insets(5, 5, 5, 15)));
 
-        manage.insets = new Insets(5, 5, 5, 5);
-        manage.gridx = 2;
-        connection_info.add(new JLabel("Port"), manage);
+        connection_info.add(new JLabel("Port"), new Constraints(2, 0, new Insets(5, 5, 5, 5)));
 
-        manage.gridx = 3;
-        connection_info.add(port, manage);
+        connection_info.add(port, new Constraints(3, 0, new Insets(5, 5, 5, 5)));
 
-        manage.insets = new Insets(5, 5, 30, 5);
-        manage.gridy = 1;
-        manage.gridx = 0;
-        connection_info.add(new JLabel("Database"), manage);
+        connection_info.add(new JLabel("Database"), new Constraints(0, 1, new Insets(5, 5, 30, 5)));
 
-        manage.gridx = 1;
-        manage.gridwidth = 3;
-        connection_info.add(database, manage);
+        connection_info.add(database, new Constraints(1, 1, 3, 1, 0, 0, new Insets(5, 5, 30, 5)));
 
-        manage.insets = new Insets(5, 5, 5, 5);
-        manage.gridwidth = 1;
-        manage.gridx = 0;
-        manage.gridy = 2;
-        connection_info.add(new JLabel("Username"), manage);
+        connection_info.add(new JLabel("Username"), new Constraints(0, 2, new Insets(5, 5, 5, 5)));
 
-        manage.gridx = 1;
-        manage.gridwidth = 3;
-        connection_info.add(username, manage);
+        connection_info.add(username, new Constraints(1, 2, 3, 1, 0, 0, new Insets(5, 5, 5, 5)));
 
-        manage.gridwidth = 1;
-        manage.gridx = 0;
-        manage.gridy = 3;
-        connection_info.add(new JLabel("Password"), manage);
+        connection_info.add(new JLabel("Password"), new Constraints(0, 3, new Insets(5, 5, 5, 5)));
 
-        manage.gridwidth = 3;
-        manage.gridx = 1;
-        connection_info.add(password, manage);
+        connection_info.add(password, new Constraints(1, 3, 3, 1, 0, 0, new Insets(5, 5, 5, 5)));
 
         this.add(connection_info);
     }

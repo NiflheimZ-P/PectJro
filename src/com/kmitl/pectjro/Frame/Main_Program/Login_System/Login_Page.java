@@ -40,6 +40,7 @@ public class Login_Page extends JPanel {
 
         this.add(check, new Constraints(0, 4, 1, 1, 0, 0, GridBagConstraints.LINE_START, new Insets(20, 0, 0, 0)));
 
+        login.setFont(new Font("", Font.PLAIN, 13));
         login.setPreferredSize(new Dimension(200, 50));
         this.add(login, new Constraints(0, 5, 0, 1, new Insets(0, 0, 0, 0)));
 
