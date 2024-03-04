@@ -11,6 +11,7 @@ public class Main_Interact{
     private JLabel l1, l2, l3, l4;
     private JTextField sear_bar;
     private JDesktopPane dp;
+    private JInternalFrame if1;
     public Main_Interact(){
         //create frame
         fr = new JFrame("PectJro");
@@ -46,6 +47,9 @@ public class Main_Interact{
         //create TextField
         sear_bar = new JTextField();
 
+        //create Internalframe
+        if1 = new JInternalFrame("Page", true, true, true, true);
+
         //create JPanel
         pmain = new JPanel();
         pnorth = new JPanel();
@@ -76,7 +80,18 @@ public class Main_Interact{
         pleft.add(pcar);
         pleft.add(papr);
         pleft.add(pdead);
-        pmain.add(pleft, BorderLayout.WEST);
+        if1.getContentPane().add(pleft, BorderLayout.CENTER);
+        dp.add(if1, BorderLayout.WEST);
+
+        //if1 setting
+        if1.setVisible(true);
+        if1.setClosable(false);
+        if1.setIconifiable(false);
+        if1.setResizable(false);
+
+        if1.setBounds(-1, 125, 300, 875);
+
+
 
         //add to center
         pmain.add(pcen, BorderLayout.CENTER);
@@ -85,7 +100,7 @@ public class Main_Interact{
         dp.setBackground(Color.lightGray);
 
         // add dp to fr
-        fr.add(pmain);
+        fr.add(dp);
         fr.setJMenuBar(men);
         men.add(fil);
         men.add(edit);
@@ -97,7 +112,9 @@ public class Main_Interact{
         //set visible
         fr.setSize(1920,1080);
         fr.setVisible(true);
+        fr.setLocationRelativeTo(null);
     }
+
 
     public static void main(String[] args) {
         new Main_Interact();
