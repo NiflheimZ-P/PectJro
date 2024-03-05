@@ -1,10 +1,8 @@
-package com.kmitl.pectjro.DBConnection;
+package com.kmitl.pectjro.Database.Connection;
 
 import com.kmitl.pectjro.Frame.SetupPage.Setting_Template;
-
 import java.sql.*;
 import java.io.*;
-import java.util.*;
 
 public class DBConnect {
     private static Connection con;
@@ -24,15 +22,11 @@ public class DBConnect {
         System.out.println("Successful connect");
     }
 
-//    public HashMap getData(String query) throws SQLException{
-//        ArrayList<HashMap> output = new ArrayList<HashMap>();
-//        HashMap infomation = new HashMap<String, String>();
-//        Statement state = con.createStatement();
-//        ResultSet result = state.executeQuery(query);
-//        while (result.next()) {
-//            result.getMetaData().getColumnCount();
-//        }
-//    }
+    public static ResultSet getData(String sql) throws SQLException{
+        Statement state = con.createStatement();
+        ResultSet result = state.executeQuery(sql);
+        return result;
+    }
 
     public static void updateData(String sql) throws SQLException{
         Statement state = con.createStatement();

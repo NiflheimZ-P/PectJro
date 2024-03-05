@@ -1,7 +1,6 @@
 package com.kmitl.pectjro.Frame.Main_Program;
-import com.kmitl.pectjro.Frame.Tools.Constraints;
-import com.kmitl.pectjro.Frame.Tools.Image_Resizer;
 
+import com.kmitl.pectjro.Frame.Tools.*;
 import java.awt.*;
 import javax.swing.*;
 
