@@ -5,9 +5,9 @@ import java.sql.SQLException;
 
 public class CreateDatabase {
     public static void createUserTable(){
-        DBConnect.createConnect();
+        DBConnect data = new DBConnect();
         try {
-            DBConnect.updateData("CREATE TABLE IF NOT EXISTS User_info (" +
+            data.updateData("CREATE TABLE IF NOT EXISTS User_info (" +
                     "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
                     "Username VARCHAR(50) NOT NULL," +
                     "Gmail VARCHAR(62) UNIQUE," +

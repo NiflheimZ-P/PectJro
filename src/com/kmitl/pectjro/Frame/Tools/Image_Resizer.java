@@ -18,6 +18,8 @@ public class Image_Resizer extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D gp = (Graphics2D) g;
+        gp.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         gp.drawImage(image, 0, 0, width, height, this);
     }
 }
+

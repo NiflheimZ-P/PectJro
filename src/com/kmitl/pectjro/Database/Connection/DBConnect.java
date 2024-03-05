@@ -34,6 +34,14 @@ public class DBConnect {
         System.out.println("Successful Update Table");
     }
 
+    public static void close(){
+        try {
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         new DBConnect();
     }

@@ -28,7 +28,7 @@ public class Login_Page extends JPanel {
         sign.addActionListener(frame);
 
         this.add(
-                new Image_Resizer(new ImageIcon("resources/Images/Logo.jpg"), 200, 200),
+                new Image_Resizer(new ImageIcon("resources/Images/Logo.png"), 200, 200),
                 new Constraints(0, 0, 0, 1, new Insets(0, 0, 0, 0))
         );
 

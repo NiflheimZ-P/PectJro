@@ -1,8 +1,11 @@
 package com.kmitl.pectjro.Frame.Main_Program;
 
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.kmitl.pectjro.Frame.Tools.*;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.plaf.InternalFrameUI;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class Main_Interact{
     private JFrame fr;
@@ -50,8 +53,24 @@ public class Main_Interact{
         sear_bar = new JTextField("Search                                                                                                                                        ");
 
         //create Internalframe
-        if1 = new JInternalFrame("Page", false, false, false, false);
-        up_if = new JInternalFrame("UP_BAR", false, false, false, false);
+        if1 = new JInternalFrame("Page", false, false, false, false) {
+        @Override
+        public void setUI(InternalFrameUI ui) {
+            super.setUI(ui); // this gets called internally when updating the ui and makes the northPane reappear
+            BasicInternalFrameUI frameUI = (BasicInternalFrameUI) getUI(); // so...
+            if (frameUI != null) frameUI.setNorthPane(null); // lets get rid of it
+        }
+    };
+        up_if = new JInternalFrame("UP_BAR", false, false, false, false) {
+            @Override
+            public void setUI(InternalFrameUI ui) {
+                super.setUI(ui); // this gets called internally when updating the ui and makes the northPane reappear
+                BasicInternalFrameUI frameUI = (BasicInternalFrameUI) getUI(); // so...
+                if (frameUI != null) frameUI.setNorthPane(null); // lets get rid of it
+            }
+        };
+        up_if.setBorder(null);
+        if1.setBorder(null);
 
         //create JPanel
         pmain = new JPanel();
@@ -137,7 +156,8 @@ public class Main_Interact{
     }
 
 
-    public static void main(String[] args) {
-        new Main_Interact();
+    public static void main(String[] args) throws Exception{
+        UIManager.setLookAndFeel(new FlatMacLightLaf());
+        SwingUtilities.invokeLater(() -> {new Main_Interact(); });
     }
 }

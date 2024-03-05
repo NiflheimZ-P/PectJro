@@ -62,11 +62,7 @@ public class connect_panel extends JPanel {
         data.add(port.getText().trim());
         data.add(database.getText().trim());
         data.add(username.getText().trim());
-        String pass = "";
-        for (Character i : password.getPassword()) {
-            pass += i;
-        }
-        data.add(pass.trim());
+        data.add(String.valueOf(password.getPassword()));
         return data;
     }
 }
