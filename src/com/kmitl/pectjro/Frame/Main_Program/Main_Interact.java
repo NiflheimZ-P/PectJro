@@ -1,17 +1,20 @@
 package com.kmitl.pectjro.Frame.Main_Program;
+import com.kmitl.pectjro.Frame.Tools.Constraints;
+import com.kmitl.pectjro.Frame.Tools.Image_Resizer;
+
 import java.awt.*;
 import javax.swing.*;
 
 public class Main_Interact{
     private JFrame fr;
-    private JPanel pmain, pnorth, pleft, pcen, ptask, pcar, papr, pdead;
+    private JPanel pmain, pnorth, pleft, pcen, ptask, pcar, papr, pdead, npane1, npane2, npane3;
     private JButton task_bn, ca_bn, apr_bn, new_bn, op_bn;
     private JMenuBar men;
     private JMenu fil, edit, view, tool, win, help;
     private JLabel l1, l2, l3, l4;
     private JTextField sear_bar;
     private JDesktopPane dp;
-    private JInternalFrame if1;
+    private JInternalFrame if1, up_if;
     public Main_Interact(){
         //create frame
         fr = new JFrame("PectJro");
@@ -45,10 +48,11 @@ public class Main_Interact{
         dp = new JDesktopPane();
 
         //create TextField
-        sear_bar = new JTextField();
+        sear_bar = new JTextField("Search                                                                                                                                        ");
 
         //create Internalframe
-        if1 = new JInternalFrame("Page", true, true, true, true);
+        if1 = new JInternalFrame("Page", false, false, false, false);
+        up_if = new JInternalFrame("UP_BAR", false, false, false, false);
 
         //create JPanel
         pmain = new JPanel();
@@ -59,14 +63,33 @@ public class Main_Interact{
         papr = new JPanel();
         pdead = new JPanel();
         pcen = new JPanel();
+        npane1 = new JPanel();
+        npane2 = new JPanel();
+        npane3 = new JPanel();
         ptask.setLayout(new GridLayout(2,1));
         pcar.setLayout(new GridLayout(2,1));
         papr.setLayout(new GridLayout(2,1));
         pdead.setLayout(new GridLayout(2,1));
         pleft.setLayout(new GridLayout(4,1));
+        pnorth.setLayout(new GridLayout(1, 3));
+        npane1.setLayout(new FlowLayout());
+        npane2.setLayout(new FlowLayout());
+        npane3.setLayout(new FlowLayout());
 
-        //add to pnorth
-
+        //add to upnorth
+        npane1.add(
+                new Image_Resizer(new ImageIcon("resources/Images/Logo.jpg"), 50, 100),
+                new Constraints(0, 0, 0, 1, new Insets(0, 0, 0, 0))
+        );
+        npane2.add(sear_bar);
+        sear_bar.setSize(200,100);
+        npane3.add(new_bn);
+        npane3.add(op_bn);
+        pnorth.add(npane1);
+        pnorth.add(npane2);
+        pnorth.add(npane3);
+        up_if.add(pnorth);
+        dp.add(up_if, BorderLayout.NORTH);
 
         //add to pLeft
         ptask.add(l1);
@@ -85,11 +108,11 @@ public class Main_Interact{
 
         //if1 setting
         if1.setVisible(true);
-        if1.setClosable(false);
-        if1.setIconifiable(false);
-        if1.setResizable(false);
-
         if1.setBounds(-1, 125, 300, 875);
+
+        //up_if setting
+        up_if.setVisible(true);
+        up_if.setBounds(-1, -30, 1920, 200);
 
 
 
@@ -97,7 +120,7 @@ public class Main_Interact{
         pmain.add(pcen, BorderLayout.CENTER);
 
         //set dp
-        dp.setBackground(Color.lightGray);
+        dp.setBackground(Color.WHITE);
 
         // add dp to fr
         fr.add(dp);
