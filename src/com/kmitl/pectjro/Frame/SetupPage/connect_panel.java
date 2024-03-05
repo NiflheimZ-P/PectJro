@@ -30,7 +30,7 @@ public class connect_panel extends JPanel {
         GridBagConstraints manage = new GridBagConstraints();
 
         hostname = new JTextField("aws.connect.psdb.cloud", 15); port = new JTextField("3306"); database = new JTextField("pectjro", 26);
-        username = new JTextField("Normal_user", 26); password = new JPasswordField("Minecraft_hardcore_100_days", 26);
+        username = new JTextField("zt8wkxjqbn95hf7we6fg", 26); password = new JPasswordField("pscale_pw_NHBpwE674vJkMIl8jcJymBBD29T5RHgkZ0asTH0UFUK", 26);
 
         // GridBag Component
         connection_info.add(new JLabel("Hostname"), new Constraints(0, 0, 0, 0, GridBagConstraints.LINE_START, new Insets(5, 5, 5, 5)));

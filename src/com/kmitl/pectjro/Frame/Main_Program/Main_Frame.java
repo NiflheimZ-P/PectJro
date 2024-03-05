@@ -1,8 +1,8 @@
 package com.kmitl.pectjro.Frame.Main_Program;
+
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.Login_Page;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.Register_Page;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -42,8 +42,7 @@ public class Main_Frame implements ActionListener  {
     }
 
     public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel( new FlatMacLightLaf() );
+        try { UIManager.setLookAndFeel( new FlatMacLightLaf() );
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }

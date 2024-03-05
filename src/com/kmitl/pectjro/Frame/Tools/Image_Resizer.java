@@ -11,11 +11,9 @@ public class Image_Resizer extends JPanel {
         this.image = image.getImage();
         this.height = height;
         this.width = width;
+        this.setPreferredSize(new Dimension(this.width, this.height));
     }
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(width, height);
-    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

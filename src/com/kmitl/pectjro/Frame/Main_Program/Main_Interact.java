@@ -78,8 +78,7 @@ public class Main_Interact{
 
         //add to upnorth
         npane1.add(
-                new Image_Resizer(new ImageIcon("resources/Images/Logo.jpg"), 50, 100),
-                new Constraints(0, 0, 0, 1, new Insets(0, 0, 0, 0))
+                new Image_Resizer(new ImageIcon("resources/Images/Logo.jpg"), 50, 100)
         );
         npane2.add(sear_bar);
         sear_bar.setSize(200,100);
