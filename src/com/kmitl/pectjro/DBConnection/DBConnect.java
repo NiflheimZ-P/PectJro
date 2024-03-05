@@ -7,10 +7,10 @@ import java.io.*;
 import java.util.*;
 
 public class DBConnect {
-    private Connection con;
-    private Setting_Template connect_data;
+    private static Connection con;
+    private static Setting_Template connect_data;
 
-    public DBConnect() {
+    public static void createConnect() {
         File info = new File("Database_Setting.dat");
         try (ObjectInputStream data = new ObjectInputStream(new FileInputStream(info))) {
             connect_data = (Setting_Template) data.readObject();
@@ -21,16 +21,23 @@ public class DBConnect {
         try {
             con = DriverManager.getConnection("jdbc:mysql://" + connect_data.host + ":" + connect_data.port + "/" + connect_data.database_name, connect_data.username, connect_data.password);
         } catch (SQLException e) { throw new RuntimeException(e); }
-
+        System.out.println("Successful connect");
     }
 
-    public HashMap getData(String query) {
-        Statement state;
-        try {
-            state = con.createStatement();
-            ResultSet result = state.executeQuery(query);
-        } catch (SQLException e) { throw new RuntimeException(e); }
-        return new HashMap(); // เพื่อให้มันไม่ error เฉยๆ
+//    public HashMap getData(String query) throws SQLException{
+//        ArrayList<HashMap> output = new ArrayList<HashMap>();
+//        HashMap infomation = new HashMap<String, String>();
+//        Statement state = con.createStatement();
+//        ResultSet result = state.executeQuery(query);
+//        while (result.next()) {
+//            result.getMetaData().getColumnCount();
+//        }
+//    }
+
+    public static void updateData(String sql) throws SQLException{
+        Statement state = con.createStatement();
+        state.executeUpdate(sql);
+        System.out.println("Successful Update Table");
     }
 
     public static void main(String[] args) {

@@ -66,7 +66,7 @@ public class connect_panel extends JPanel {
         for (Character i : password.getPassword()) {
             pass += i;
         }
-        data.add(pass);
+        data.add(pass.trim());
         return data;
     }
 }
