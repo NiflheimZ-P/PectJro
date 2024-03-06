@@ -10,8 +10,8 @@ import com.kmitl.pectjro.Frame.Main_Program.Main_Frame;
 import com.kmitl.pectjro.Frame.Tools.*;
 
 public class Login_Page extends JPanel {
-    private JTextField email = new JTextField("Email");
-    private JTextField password = new JPasswordField("Password");
+    private JInfoGet email = new JInfoGet("Email");
+    private JPassGet password = new JPassGet("Password");
     private JCheckBox check = new JCheckBox("Remember Me");
     private JButton login = new JButton("Login");
     private JButton sign = new JButton("Sign up");

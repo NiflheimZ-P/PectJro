@@ -88,7 +88,7 @@ public class checkDatabase_panel extends JPanel {
         SwingWorker check = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                if (DB_Command.testConnection(info)) {
+                if (DBConnect.createConnection(info)) {
                     data_bar.setImage(pass);
                     check_userInfo();
                     userInfo_bar.setImage(pass);

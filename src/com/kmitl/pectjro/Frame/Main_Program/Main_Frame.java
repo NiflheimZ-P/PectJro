@@ -2,6 +2,7 @@ package com.kmitl.pectjro.Frame.Main_Program;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
+import com.kmitl.pectjro.Database.DB_Performance;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.Login_Page;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.Register_Page;
 import javax.swing.*;
@@ -16,7 +17,7 @@ public class Main_Frame implements ActionListener {
     private JPanel[] page = new JPanel[2];
 
     public Main_Frame(){
-        DBConnect.createConnect();
+        DB_Performance.createBackground();
         ImageIcon icon = new ImageIcon("resources/Images/kmitl_it_data_science_01.jpg");
         frame.setContentPane(new JLabel(icon));
         frame.setLayout(new GridBagLayout());
@@ -30,6 +31,9 @@ public class Main_Frame implements ActionListener {
         main_panel.add(page[1], "register");
 
         frame.add(main_panel, manage);
+
+        frame.setFocusable(true);
+        frame.requestFocusInWindow();
 
         frame.setLocationRelativeTo(null);
         frame.setSize(1600, 900);

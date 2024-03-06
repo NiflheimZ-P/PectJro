@@ -78,7 +78,7 @@ public class Main_Setup implements ActionListener {
 
             page_manage.show(center, String.valueOf(current_page));
         }
-        if (command.equals("< Back")) {
+        else if (command.equals("< Back")) {
             current_page -= 1;
             next.setEnabled(true);
             if (current_page == 0){ back.setEnabled(false);}
@@ -88,10 +88,10 @@ public class Main_Setup implements ActionListener {
             }
             page_manage.show(center, String.valueOf(current_page));
         }
-        if (command.equals("Cancel")) {
+        else if (command.equals("Cancel")) {
             System.exit(0);
         }
-        if (command.equals("Finish")) {
+        else if (command.equals("Finish")) {
             Setting_Template storage = new Setting_Template();
             storage.host = info.get(0);
             storage.port = info.get(1);

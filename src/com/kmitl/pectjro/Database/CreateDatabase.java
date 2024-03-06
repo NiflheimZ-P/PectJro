@@ -14,8 +14,6 @@ public class CreateDatabase {
                     "Firstname VARCHAR(50)," +
                     "Lastname VARCHAR(50));");
             return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false; }
+        } catch (Exception e) { return false; }
     }
 }
