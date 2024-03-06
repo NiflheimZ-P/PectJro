@@ -5,7 +5,7 @@ import java.sql.*;
 import java.io.*;
 
 public class DBConnect {
-    private static Connection con;
+    public static Connection con;
     private static Setting_Template connect_data;
 
     public static void createConnect() {

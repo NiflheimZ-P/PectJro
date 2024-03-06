@@ -28,10 +28,9 @@ public class DB_Command {
         System.out.println("Successful insert");
     }
 
-    public static boolean testConnection(String[] info) {
+    public static boolean testConnection(ArrayList<String> info) {
         try {
-            Connection connec = DriverManager.getConnection(String.format("jdbc:mysql://%s:%s/%s", info[0], info[1], info[2]), info[3], info[4]);
-            connec.close();
+            DBConnect.con = DriverManager.getConnection(String.format("jdbc:mysql://%s:%s/%s", info.get(0), info.get(1), info.get(2)), info.get(3), info.get(4));
             return true;
         } catch (SQLException e) {
             return false;

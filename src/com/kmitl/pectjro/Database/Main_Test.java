@@ -6,12 +6,6 @@ import java.sql.SQLException;
 
 public class Main_Test {
     public static void main(String[] args) {
-        try {
-            InetAddress ia = InetAddress.getLocalHost();
-            String str = ia.getHostAddress();
-            System.out.println(str);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        CreateDatabase.createUserTable();
     }
 }
