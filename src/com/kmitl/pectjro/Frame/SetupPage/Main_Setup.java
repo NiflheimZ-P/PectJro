@@ -13,8 +13,8 @@ import java.io.*;
 public class Main_Setup implements ActionListener {
     private JFrame frame = new JFrame("PectJro Setup");
     private JPanel south, west, center;
-    private JButton next, back, cancel;
-    private JPanel[] page = {new default_panel(), new connect_panel()};
+    public static JButton next, back, cancel;
+    private JPanel[] page = {new default_panel(), new connect_panel(), new checkDatabase_panel()};
     private CardLayout page_manage = new CardLayout();
     private JLabel warn = new JLabel("!!Please insert all the info");
 
@@ -38,6 +38,7 @@ public class Main_Setup implements ActionListener {
 
         center.add(page[0], "0");
         center.add(page[1], "1");
+        center.add(page[2], "2");
         center.setBorder(BorderFactory.createEmptyBorder(5, 13, 5, 10));
 
         frame.add(south, BorderLayout.SOUTH);
@@ -47,6 +48,7 @@ public class Main_Setup implements ActionListener {
         warn.setForeground(Color.RED);
         warn.setFont(new Font("", Font.BOLD, 13));
 
+        page_manage.show(center, "2");
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 500);
@@ -65,11 +67,13 @@ public class Main_Setup implements ActionListener {
             back.setEnabled(true);
             page_manage.last(center);
             next.setText("Finish");
+            next.setEnabled(false);
         }
         if (command.equals("< Back")) {
             back.setEnabled(false);
             page_manage.first(center);
             next.setText("Next >");
+            next.setEnabled(true);
         }
         if (command.equals("Cancel")) {
             System.exit(0);

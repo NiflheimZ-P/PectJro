@@ -9,19 +9,12 @@ public class default_panel extends JPanel {
     public default_panel() {
         super();
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
-        info = new JLabel("<html><h1>Can you be my valentine UwU</h1><br/>" +
-                "For the love of my life<br/>" +
-                "She's got glow on her face<br/>" +
-                "A glorious look in her eyes<br/>" +
-                "My angel of light<br/>" +
-                "I was all alone with the love of my life<br/>" +
-                "She's got glitter for skin<br/>" +
-                "My radiant beam in the night<br/>" +
-                "I don't need no light to see you<br/>" +
-                "Shine<br/>" +
-                "It's your golden hour (oh)<br/>" +
-                "You slow down time<br/>" +
-                "In your golden hour (oh)</html>");
+        info = new JLabel("<html><h1>Welcome to the PectJro<br/>Desktop Setup program.</h1><br/>" +
+                "It is strongly recommended that you exit all Windows programs<br/>" +
+                "before running this setup program.<br/>" +
+                " <br/>" +
+                "Click Cancel to quit setup and close any programs you have running.<br/>" +
+                "Click Next to continue the installation<br/>");
         this.add(info);
     }
 }
