@@ -9,7 +9,8 @@ import javax.swing.border.TitledBorder;
 public class home_page {
 
     private JFrame fr;
-    private JPanel pn_north, pn_west, pn_center, ctn_pn_task, ctn_pn_calendar, ctn_pn_appraisement, ctn_pn_deadline, ctn_pn_deadline_2;
+    private JPanel pn_north, pn_west, pn_south, ctn_pn_task, ctn_pn_calendar, ctn_pn_appraisement, ctn_pn_deadline,
+            ctn_pn_deadline_2, pn_north_right;
     private JTextField tf_seach_bar;
     private JButton bn_task, bn_calendar, bn_appraisement, bn_new, bn_option;
     private JLabel l1, l2, l3, l4;
@@ -21,47 +22,55 @@ public class home_page {
 
         pn_north = new JPanel();
         pn_west = new JPanel();
-        pn_center = new JPanel();
+        pn_south = new JPanel();
         ctn_pn_task = new JPanel();
         ctn_pn_calendar = new JPanel();
         ctn_pn_appraisement = new JPanel();
         ctn_pn_deadline = new JPanel();
         ctn_pn_deadline_2 = new JPanel();
+        pn_north_right = new JPanel();
 
         tf_seach_bar = new JTextField();
 
-        bn_task = new JButton();
-        bn_calendar = new JButton();
-        bn_appraisement = new JButton();
-        bn_new = new JButton();
-        bn_option = new JButton();
+        bn_task = new JButton("Task");
+        bn_calendar = new JButton("Calendar");
+        bn_appraisement = new JButton("Appraisement");
+        bn_new = new JButton("+");
+        bn_option = new JButton("Option");
 
-        l1 = new JLabel("- 1");
-        l2 = new JLabel("- 2");
-        l3 = new JLabel("- 3");
+        l1 = new JLabel("Logo Program");
+        l2 = new JLabel("Profile");
+        l3 = new JLabel("3");
         l4 = new JLabel("Deadline");
 
         tb_task = new TitledBorder("");
         tb_calendar = new TitledBorder("");
         tb_appraisement = new TitledBorder("");
 
+
         //set upper part (pn_north)
         fr.setLayout(new BorderLayout());
         fr.setBackground(Color.white);
+
         fr.add(pn_north, BorderLayout.NORTH);
+        pn_north.setLayout(new GridLayout(1,3));
+
         pn_north.setBackground(Color.lightGray);
+        pn_north.add(l1);
+
         pn_north.add(tf_seach_bar);
-        tf_seach_bar.setColumns(25);
+        tf_seach_bar.setColumns(15);
+
+        pn_north_right.setLayout(new FlowLayout(2));//2 = right
+        pn_north_right.setBackground(Color.lightGray);
+        pn_north_right.add(bn_option); pn_north_right.add(l2);
+        pn_north.add(pn_north_right);
+
 
         //set left part (pn_west)
         fr.add(pn_west, BorderLayout.WEST);
         pn_west.setLayout(new GridLayout(8, 1,0,10));
         pn_west.setBackground(Color.lightGray);
-
-        //set up button
-        bn_task.setText("Task");
-        bn_calendar.setText("Calendar");
-        bn_appraisement.setText("Appraisement");
 
         //set up inside left part
         ctn_pn_task.setBorder(tb_task);
@@ -82,6 +91,14 @@ public class home_page {
         ctn_pn_deadline.setLayout(new FlowLayout());
         ctn_pn_deadline.setBackground(Color.lightGray);
         ctn_pn_deadline.add(l4); pn_west.add(ctn_pn_deadline);
+
+
+        //button (+) at bottom right of corner
+        //แก้ตรงนี้ให้ที
+        fr.add(pn_south, BorderLayout.EAST);
+        bn_new.setPreferredSize(new Dimension(30,30));
+        pn_south.setLayout(new BorderLayout());
+        pn_south.add(bn_new, BorderLayout.SOUTH);
 
         //show
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
