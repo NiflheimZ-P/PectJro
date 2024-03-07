@@ -1,31 +1,35 @@
 package com.kmitl.pectjro.Frame.Main_Program;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.formdev.flatlaf.ui.FlatRoundBorder;
 import com.kmitl.pectjro.Frame.Tools.*;
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.plaf.InternalFrameUI;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.border.Border;
 
 public class home_page {
 
     private JFrame fr;
-    private JPanel pn_north, pn_west, pn_south, ctn_pn_task, ctn_pn_calendar, ctn_pn_appraisement, ctn_pn_deadline,
-            ctn_pn_deadline_2, pn_north_right, ps_mar_pmain, paneforsearch, up_mar_search, l_mar_search, r_mar_search, s_mar_search;
+    private JPanel bg, pn_north, pn_west, pn_east, ctn_pn_task, ctn_pn_calendar, ctn_pn_appraisement, ctn_pn_deadline,
+            ctn_pn_deadline_2, pn_north_right, ps_mar_pmain, paneforsearch, up_mar_search, l_mar_search, r_mar_search,
+            s_mar_search;
     private JTextField tf_seach_bar;
+    private ImageIcon ic_program, ic_profile, ic_task, ic_calendar, ic_appraisement;
     private JButton bn_task, bn_calendar, bn_appraisement, bn_new, bn_option;
     private JLabel l1, l2, l3, l4;
-    private TitledBorder tb_task, tb_calendar, tb_appraisement;
+
 
     public home_page(){
         //set up
         fr = new JFrame("PectJro");
 
+        bg = new JPanel();
         pn_north = new JPanel();
         pn_west = new JPanel();
         paneforsearch = new JPanel();
-        pn_south = new JPanel();
+        pn_east = new JPanel();
         ps_mar_pmain = new JPanel();
         ctn_pn_task = new JPanel();
         ctn_pn_calendar = new JPanel();
@@ -39,6 +43,12 @@ public class home_page {
         s_mar_search = new JPanel();
 
         tf_seach_bar = new JTextField();
+        //prepare to add image
+        ic_program = new ImageIcon();
+        ic_profile = new ImageIcon();
+        ic_task = new ImageIcon("/Users/win/Documents/GitHub/PectJro/Untitled/resources/Images/task.png");
+        ic_calendar = new ImageIcon();
+        ic_appraisement = new ImageIcon();
 
         bn_task = new JButton("Task");
         bn_calendar = new JButton("Calendar");
@@ -51,73 +61,103 @@ public class home_page {
         l3 = new JLabel("3");
         l4 = new JLabel("Deadline");
 
-        tb_task = new TitledBorder("");
-        tb_calendar = new TitledBorder("");
-        tb_appraisement = new TitledBorder("");
+
+        //set center part
+        fr.setLayout(new BorderLayout());
+        fr.add(bg);
 
 
         //set upper part (pn_north)
-        fr.setLayout(new BorderLayout());
-        fr.setBackground(Color.white);
-
         fr.add(pn_north, BorderLayout.NORTH);
         pn_north.setLayout(new GridLayout(1,3));
         pn_north.setPreferredSize(new Dimension(1400, 75));
 
-        pn_north.setBackground(Color.lightGray);
         pn_north.add(l1);
 
         paneforsearch.setLayout(new BorderLayout());
         paneforsearch.add(tf_seach_bar, BorderLayout.CENTER);
-        paneforsearch.add(up_mar_search, BorderLayout.NORTH); up_mar_search.setBackground(Color.lightGray);
-        paneforsearch.add(l_mar_search, BorderLayout.WEST); l_mar_search.setBackground(Color.lightGray);
-        paneforsearch.add(r_mar_search, BorderLayout.EAST); r_mar_search.setBackground(Color.lightGray);
-        paneforsearch.add(s_mar_search, BorderLayout.SOUTH); s_mar_search.setBackground(Color.lightGray);
+        paneforsearch.add(up_mar_search, BorderLayout.NORTH);
+        paneforsearch.add(l_mar_search, BorderLayout.WEST);
+        paneforsearch.add(r_mar_search, BorderLayout.EAST);
+        paneforsearch.add(s_mar_search, BorderLayout.SOUTH);
         pn_north.add(paneforsearch);
-        tf_seach_bar.setColumns(15);
+        tf_seach_bar.setFocusable(true);
 
         pn_north_right.setLayout(new FlowLayout(2,20,20)); // 2 = right , hgap = ซ้าย - ขวา , vgap = บน-ล่าง
-        pn_north_right.setBackground(Color.lightGray);
         pn_north_right.add(bn_option); pn_north_right.add(l2);
         pn_north.add(pn_north_right);
 
+
         //set left part (pn_west)
         fr.add(pn_west, BorderLayout.WEST);
-        pn_west.setLayout(new GridLayout(8, 1,-10,15));
-        pn_west.setBackground(Color.lightGray);
-        pn_west.setPreferredSize(new Dimension(125, 600));
+        pn_west.setLayout(new GridLayout(10, 1,0,0));
+        pn_west.setPreferredSize(new Dimension(200, 600));
 
         //set up inside left part
-        ctn_pn_task.setBorder(tb_task);
-        ctn_pn_task.setLayout(new FlowLayout());
-        ctn_pn_task.setBackground(Color.lightGray);
-        bn_task.setPreferredSize(new Dimension(100, 50));
+        ctn_pn_task.setLayout(new GridLayout());
+        bn_task.setBorder(BorderFactory.createEmptyBorder());
+        bn_task.setFont(new Font("Sans", Font.PLAIN, 24));
+        bn_task.setPreferredSize(new Dimension(190, 60));
         ctn_pn_task.add(bn_task); pn_west.add(ctn_pn_task);
 
-        ctn_pn_calendar.setBorder(tb_calendar);
-        ctn_pn_calendar.setLayout(new FlowLayout());
-        ctn_pn_calendar.setBackground(Color.lightGray);
-        bn_calendar.setPreferredSize(new Dimension(100, 50));
+        ctn_pn_calendar.setLayout(new GridLayout());
+        bn_calendar.setBorder(BorderFactory.createEmptyBorder());
+        bn_calendar.setFont(new Font("Sans", Font.PLAIN, 24));
+        bn_calendar.setPreferredSize(new Dimension(190, 60));
         ctn_pn_calendar.add(bn_calendar); pn_west.add(ctn_pn_calendar);
 
-        ctn_pn_appraisement.setBorder(tb_appraisement);
-        ctn_pn_appraisement.setLayout(new FlowLayout());
-        ctn_pn_appraisement.setBackground(Color.lightGray);
-        bn_appraisement.setPreferredSize(new Dimension(100, 50));
+        ctn_pn_appraisement.setLayout(new GridLayout());
+        bn_appraisement.setBorder(BorderFactory.createEmptyBorder());
+        bn_appraisement.setFont(new Font("Sans", Font.PLAIN, 24));
+        bn_appraisement.setPreferredSize(new Dimension(190, 60));
         ctn_pn_appraisement.add(bn_appraisement); pn_west.add(ctn_pn_appraisement);
 
         ctn_pn_deadline.setLayout(new FlowLayout());
-        ctn_pn_deadline.setBackground(Color.lightGray);
+        l4.setFont(new Font("Sans", Font.BOLD, 18));
         ctn_pn_deadline.add(l4); pn_west.add(ctn_pn_deadline);
 
 
-        //button (+) at bottom right of corner
+        //button (+) at bottom right of corner and right part (pn_east)
         ps_mar_pmain.setLayout(new FlowLayout(2, 30,25));
-        fr.add(pn_south, BorderLayout.EAST);
+        fr.add(pn_east, BorderLayout.EAST);
         bn_new.setPreferredSize(new Dimension(40,40));
         ps_mar_pmain.add(bn_new);
-        pn_south.setLayout(new BorderLayout());
-        pn_south.add(ps_mar_pmain, BorderLayout.SOUTH);
+        pn_east.setLayout(new BorderLayout());
+        pn_east.add(ps_mar_pmain, BorderLayout.SOUTH);
+
+
+        //set color
+            //Panel
+        bg.setBackground(new Color(0, 0, 0));
+        pn_north.setBackground(new Color(33, 33, 33));
+        up_mar_search.setBackground(new Color(33, 33, 33));
+        l_mar_search.setBackground(new Color(33, 33, 33));
+        r_mar_search.setBackground(new Color(33, 33, 33));
+        s_mar_search.setBackground(new Color(33, 33, 33));
+        pn_north_right.setBackground(new Color(33, 33, 33));
+        l1.setForeground(Color.white);
+        l2.setForeground(Color.white);
+
+        pn_west.setBackground(new Color(18, 18, 18));
+        ctn_pn_task.setBackground(new Color(205, 198, 195));
+        ctn_pn_calendar.setBackground(Color.lightGray);
+        ctn_pn_appraisement.setBackground(Color.lightGray);
+        ctn_pn_deadline.setBackground(new Color(18, 18, 18));
+        ps_mar_pmain.setBackground(new Color(0, 0, 0));
+
+        pn_east.setBackground(new Color(0, 0, 0));
+            //Button
+        bn_option.setForeground(Color.white) ; bn_option.setBackground(new Color(0x757575));
+        bn_task.setForeground(Color.white); bn_task.setBackground(new Color(186, 9, 0));
+        bn_calendar.setForeground(Color.white); bn_calendar.setBackground(new Color(186, 9, 0));
+        bn_appraisement.setForeground(Color.white); bn_appraisement.setBackground(new Color(186, 9, 0));
+        bn_new.setForeground(Color.white) ; bn_new.setBackground(new Color(0xBA0900));
+
+            //Label
+        l4.setForeground(Color.red);
+
+
+
 
         //show
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
