@@ -172,13 +172,13 @@ public class Register_Page extends JPanel implements DocumentListener {
     }
 
     public boolean checkGmail(){
-        return (email_field.getText().contains("@"));
+        return (email_field.getText().contains("@") && email_field.getText().contains("."));
     }
 
     public void updateSubmit(){
         if (!checkEmpty() && checkPass() && checkGmail()){
             submit.setEnabled(true);
-            setToolTipText("");
+            submit.setToolTipText("");
         } else if (!checkPass()) {
             submit.setEnabled(false);
             submit.setToolTipText("password and confirm password validation");

@@ -1,27 +1,24 @@
 package com.kmitl.pectjro.Database.Connection;
 
-import com.kmitl.pectjro.Frame.SetupPage.Setting_Template;
+import com.kmitl.pectjro.Frame.Cache_Templates.Setting_Template;
 import java.sql.*;
 import java.io.*;
 import java.util.ArrayList;
 
 public class DBConnect {
     public static Connection con;
-    private static Setting_Template connect_data;
 
-    public static boolean createConnect() {
+	public static void createConnect() {
         File info = new File("Database_Setting.dat");
-        try (ObjectInputStream data = new ObjectInputStream(new FileInputStream(info))) {
+		Setting_Template connect_data = null;
+		try (ObjectInputStream data = new ObjectInputStream(new FileInputStream(info))) {
             connect_data = (Setting_Template) data.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-
         try {
-            con = DriverManager.getConnection("jdbc:mysql://" + connect_data.host + ":" + connect_data.port + "/" + connect_data.database_name, connect_data.username, connect_data.password);
+			con = DriverManager.getConnection("jdbc:mysql://" + connect_data.host + ":" + connect_data.port + "/" + connect_data.database_name, connect_data.username, connect_data.password);
         } catch (SQLException e) { throw new RuntimeException(e); }
-        System.out.println("Created");
-        return true;
     }
 
     public static boolean createConnection(ArrayList<String> info) {
@@ -54,6 +51,6 @@ public class DBConnect {
     }
 
     public static void main(String[] args) {
-        new DBConnect();
+        System.out.println(DBConnect.con);
     }
 }

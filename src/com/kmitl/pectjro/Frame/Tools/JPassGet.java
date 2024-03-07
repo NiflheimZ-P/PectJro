@@ -25,7 +25,6 @@ public class JPassGet extends JPasswordField implements FocusListener {
             this.setEchoChar('*');
             this.setForeground(Color.BLACK);
         }
-        System.out.println(getMyPass());
     }
 
     @Override
@@ -35,7 +34,6 @@ public class JPassGet extends JPasswordField implements FocusListener {
             this.setEchoChar((char) 0);
             this.setForeground(Color.GRAY);
         }
-        System.out.println(getMyPass());
     }
 
     public String getMyPass(){

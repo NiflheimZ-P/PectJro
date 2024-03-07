@@ -1,6 +1,8 @@
 package com.kmitl.pectjro.Frame.SetupPage;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.kmitl.pectjro.Frame.Cache_Templates.Setting_Template;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -93,14 +95,9 @@ public class Main_Setup implements ActionListener {
         }
         else if (command.equals("Finish")) {
             Setting_Template storage = new Setting_Template();
-            storage.host = info.get(0);
-            storage.port = info.get(1);
-            storage.database_name = info.get(2);
-            storage.username = info.get(3);
-            storage.password = info.get(4);
+            storage.setData(info);
             File info = new File("Database_Setting.dat");
             try(ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(info))){
-                info.createNewFile();
                 write.writeObject(storage);
             } catch (IOException ex){
                 ex.printStackTrace();

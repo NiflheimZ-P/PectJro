@@ -13,6 +13,8 @@ public class DB_Performance {
                 return null;
             }
         };
+
         back.execute();
+        System.out.println("Created");
     }
 }

@@ -9,20 +9,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.*;
 
-public class Main_Frame implements ActionListener {
-    private JFrame frame = new JFrame("PectJro");
+public class Main_Frame implements ActionListener, WindowListener {
+    private static JFrame frame = new JFrame("PectJro");
     private JPanel main_panel;
     private CardLayout page_manage = new CardLayout();
     private JPanel[] page = new JPanel[2];
+    private static Boolean remember = false;
 
     public Main_Frame(){
         DB_Performance.createBackground();
         ImageIcon icon = new ImageIcon("resources/Images/kmitl_it_data_science_01.jpg");
         frame.setContentPane(new JLabel(icon));
         frame.setLayout(new GridBagLayout());
-        GridBagConstraints manage = new GridBagConstraints();
+        frame.addWindowListener(this);
 
+        GridBagConstraints manage = new GridBagConstraints();
         page[0] = new Login_Page(this);
         page[1] = new Register_Page(this);
 
@@ -42,6 +47,12 @@ public class Main_Frame implements ActionListener {
         frame.setVisible(true);
     }
 
+    public static void change_content(Container swap){
+        frame.setContentPane(swap);
+    }
+
+    public static void setRemember(Boolean stats) { remember = stats; }
+
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getActionCommand().equals("Sign up")) {
@@ -54,6 +65,43 @@ public class Main_Frame implements ActionListener {
                 ((Register_Page) page[1]).setEmpty();
             }
         }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        File target = new File("User_Cache");
+        if (!remember) { target.delete(); }
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        File target = new File("User_Cache");
+        if (!remember) { target.delete(); }
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 
     public static void main(String[] args) {

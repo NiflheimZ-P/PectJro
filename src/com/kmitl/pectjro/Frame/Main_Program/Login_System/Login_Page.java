@@ -5,11 +5,17 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.HashMap;
+import com.kmitl.pectjro.Database.DB_Command;
+import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame;
 import com.kmitl.pectjro.Frame.Tools.*;
+import java.io.*;
 
-public class Login_Page extends JPanel {
+public class Login_Page extends JPanel implements ActionListener {
     private JInfoGet email = new JInfoGet("Email");
     private JPassGet password = new JPassGet("Password");
     private JCheckBox check = new JCheckBox("Remember Me");
@@ -42,6 +48,7 @@ public class Login_Page extends JPanel {
 
         login.setFont(new Font("", Font.PLAIN, 13));
         login.setPreferredSize(new Dimension(200, 50));
+        login.addActionListener(this);
         this.add(login, new Constraints(0, 5, 0, 1, new Insets(0, 0, 0, 0)));
 
         JPanel under = new JPanel();
@@ -49,5 +56,38 @@ public class Login_Page extends JPanel {
         under.add(sign);
         under.setBackground(Color.white);
         this.add(under, new Constraints(0, 6, 0, 0, new Insets(0, 0, 20, 0)));
+
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String gmail = email.getText();
+        String pass = password.getMyPass();
+        HashMap<String, String> thisGmail;
+		try { thisGmail = DB_Command.getUserData(gmail); }
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "The email address doesn't exist.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+		}
+        loginSystem(pass, thisGmail);
+	}
+
+    public void loginSystem(String pass, HashMap<String, String> data) {
+        if(!pass.equals(data.get("password"))){
+            JOptionPane.showMessageDialog(null, "Password incorrect", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            Main_Frame.setRemember(check.isSelected());
+        }
+        User_Template cache = new User_Template();
+        cache.setData(data);
+        File remember = new File("User_Cache");
+        try (ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(remember))) {
+            remember.createNewFile();
+            write.writeObject(cache);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
