@@ -1,17 +1,18 @@
 package com.kmitl.pectjro.Frame.Main_Program.Login_System;
 
 import com.kmitl.pectjro.Database.DB_Performance;
-
+import com.kmitl.pectjro.Frame.Groups_interface.Changeable;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class Main_Login extends JPanel implements ActionListener {
+
+public class Main_Login extends JPanel implements ActionListener, Changeable {
 	private JPanel main_panel;
 	private CardLayout page_manage = new CardLayout();
 	private Login_Page login;
 	private Register_Page regis;
-	private static Boolean remember = false;
+	private static Boolean remember;
 
 	public Main_Login() {
 		DB_Performance.createBackground();
@@ -32,6 +33,7 @@ public class Main_Login extends JPanel implements ActionListener {
 	}
 
 	public static void setRemember(Boolean stats) { remember = stats; }
+	public static boolean getRemember() { return remember; }
 
 	@Override
 	public void actionPerformed(ActionEvent e){
@@ -55,6 +57,5 @@ public class Main_Login extends JPanel implements ActionListener {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
 	}
-
 }
 

@@ -37,5 +37,6 @@ build/
 ### Mac OS ###
 .DS_Store
 
-### Setting file ###
+### Cache file ###
 Database_Setting.dat
+User_Cache

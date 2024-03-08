@@ -12,6 +12,7 @@ import java.util.HashMap;
 import com.kmitl.pectjro.Database.DB_Command;
 import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame;
+import com.kmitl.pectjro.Frame.Main_Program.home_page;
 import com.kmitl.pectjro.Frame.Tools.*;
 import java.io.*;
 
@@ -72,13 +73,15 @@ public class Login_Page implements ActionListener {
             JOptionPane.showMessageDialog(null, "The email address doesn't exist.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
 		}
-        loginSystem(pass, thisGmail);
+        if (loginSystem(pass, thisGmail)) {
+            Main_Frame.changePage(new home_page());
+        }
 	}
 
-    public void loginSystem(String pass, HashMap<String, String> data) {
+    public boolean loginSystem(String pass, HashMap<String, String> data) {
         if(!pass.equals(data.get("password"))){
             JOptionPane.showMessageDialog(null, "Password incorrect", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         } else {
             Main_Login.setRemember(check.isSelected());
         }
@@ -88,8 +91,10 @@ public class Login_Page implements ActionListener {
         try (ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(remember))) {
             remember.createNewFile();
             write.writeObject(cache);
+            return true;
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
 }

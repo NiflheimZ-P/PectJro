@@ -1,10 +1,8 @@
 package com.kmitl.pectjro.Frame.Main_Program;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.kmitl.pectjro.Database.DB_Performance;
-import com.kmitl.pectjro.Frame.Main_Program.Login_System.Login_Page;
+import com.kmitl.pectjro.Frame.Groups_interface.Changeable;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.Main_Login;
-import com.kmitl.pectjro.Frame.Main_Program.Login_System.Register_Page;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
@@ -13,13 +11,10 @@ import java.io.*;
 
 public class Main_Frame implements WindowListener {
     private static JFrame frame = new JFrame("PectJro");
-    private static Boolean remember = false;
 
     public Main_Frame(){
-        DB_Performance.createBackground();
-        frame.setContentPane(new Main_Login());
+        frame.setLayout(new CardLayout());
         frame.addWindowListener(this);
-
         frame.setLocationRelativeTo(null);
         frame.setSize(1600, 900);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -27,42 +22,40 @@ public class Main_Frame implements WindowListener {
         frame.setVisible(true);
     }
 
-    @Override
-    public void windowOpened(WindowEvent e) {
-
+    public static void changePage(Changeable page){
+        frame.setContentPane((Container) page);
+        frame.repaint();
+        frame.revalidate();
     }
 
+    @Override
+    public void windowOpened(WindowEvent e) {
+        File user = new File("User_Cache");
+        if (user.exists()){
+            Main_Login.setRemember(true);
+            changePage(new home_page());
+        } else {
+            changePage(new Main_Login());
+        }
+    }
     @Override
     public void windowClosing(WindowEvent e) {
         File target = new File("User_Cache");
-        if (!remember) { target.delete(); }
+        if (!Main_Login.getRemember()) { target.delete(); }
     }
-
     @Override
     public void windowClosed(WindowEvent e) {
         File target = new File("User_Cache");
-        if (!remember) { target.delete(); }
+        if (!Main_Login.getRemember()) { target.delete(); }
     }
-
     @Override
-    public void windowIconified(WindowEvent e) {
-
-    }
-
+    public void windowIconified(WindowEvent e) {}
     @Override
-    public void windowDeiconified(WindowEvent e) {
-
-    }
-
+    public void windowDeiconified(WindowEvent e) {}
     @Override
-    public void windowActivated(WindowEvent e) {
-
-    }
-
+    public void windowActivated(WindowEvent e) {}
     @Override
-    public void windowDeactivated(WindowEvent e) {
-
-    }
+    public void windowDeactivated(WindowEvent e) {}
 
     public static void main(String[] args) {
         try { UIManager.setLookAndFeel( new FlatMacLightLaf() );

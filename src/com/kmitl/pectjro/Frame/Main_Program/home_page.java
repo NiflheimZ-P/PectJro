@@ -2,6 +2,7 @@ package com.kmitl.pectjro.Frame.Main_Program;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.formdev.flatlaf.ui.FlatRoundBorder;
+import com.kmitl.pectjro.Frame.Groups_interface.Changeable;
 import com.kmitl.pectjro.Frame.Tools.*;
 import java.awt.*;
 import javax.swing.*;
@@ -9,9 +10,8 @@ import javax.swing.plaf.InternalFrameUI;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.border.Border;
 
-public class home_page {
+public class home_page extends JPanel implements Changeable {
 
-    private JFrame fr;
     private JPanel bg, pn_north, pn_west, pn_east, ctn_pn_task, ctn_pn_calendar, ctn_pn_appraisement, ctn_pn_deadline,
             ctn_pn_deadline_2, pn_north_right, ps_mar_pmain, paneforsearch, up_mar_search, l_mar_search, r_mar_search,
             s_mar_search;
@@ -23,7 +23,6 @@ public class home_page {
 
     public home_page(){
         //set up
-        fr = new JFrame("PectJro");
 
         bg = new JPanel();
         pn_north = new JPanel();
@@ -63,12 +62,12 @@ public class home_page {
 
 
         //set center part
-        fr.setLayout(new BorderLayout());
-        fr.add(bg);
+        this.setLayout(new BorderLayout());
+        this.add(bg);
 
 
         //set upper part (pn_north)
-        fr.add(pn_north, BorderLayout.NORTH);
+        this.add(pn_north, BorderLayout.NORTH);
         pn_north.setLayout(new GridLayout(1,3));
         pn_north.setPreferredSize(new Dimension(1400, 75));
 
@@ -89,7 +88,7 @@ public class home_page {
 
 
         //set left part (pn_west)
-        fr.add(pn_west, BorderLayout.WEST);
+        this.add(pn_west, BorderLayout.WEST);
         pn_west.setLayout(new GridLayout(10, 1,0,0));
         pn_west.setPreferredSize(new Dimension(200, 600));
 
@@ -119,7 +118,7 @@ public class home_page {
 
         //button (+) at bottom right of corner and right part (pn_east)
         ps_mar_pmain.setLayout(new FlowLayout(2, 30,25));
-        fr.add(pn_east, BorderLayout.EAST);
+        this.add(pn_east, BorderLayout.EAST);
         bn_new.setPreferredSize(new Dimension(40,40));
         ps_mar_pmain.add(bn_new);
         pn_east.setLayout(new BorderLayout());
@@ -160,10 +159,10 @@ public class home_page {
 
 
         //show
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fr.setSize(1400, 800);
-        fr.setResizable(false);
-        fr.setVisible(true);
+//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.setSize(1400, 800);
+//        this.setResizable(false);
+//        this.setVisible(true);
     }
 
     public static void main(String[] args) throws Exception{
