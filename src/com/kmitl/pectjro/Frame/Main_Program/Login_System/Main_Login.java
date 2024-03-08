@@ -12,7 +12,7 @@ public class Main_Login extends JPanel implements ActionListener, Changeable {
 	private CardLayout page_manage = new CardLayout();
 	private Login_Page login;
 	private Register_Page regis;
-	private static Boolean remember;
+	private static Boolean remember = false;
 
 	public Main_Login() {
 		DB_Performance.createBackground();

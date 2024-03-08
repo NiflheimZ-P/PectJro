@@ -1,6 +1,8 @@
 package com.kmitl.pectjro.Frame.Main_Program;
 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.kmitl.pectjro.Frame.Admin.Main_Admin;
 import com.kmitl.pectjro.Frame.Groups_interface.Changeable;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.Main_Login;
 import javax.swing.*;
@@ -10,9 +12,10 @@ import java.awt.event.WindowListener;
 import java.io.*;
 
 public class Main_Frame implements WindowListener {
-    private static JFrame frame = new JFrame("PectJro");
+    public static JFrame frame;
 
     public Main_Frame(){
+        frame = new JFrame("PectJro");
         frame.setLayout(new CardLayout());
         frame.addWindowListener(this);
         frame.setLocationRelativeTo(null);
@@ -26,6 +29,17 @@ public class Main_Frame implements WindowListener {
         frame.setContentPane((Container) page);
         frame.repaint();
         frame.revalidate();
+    }
+
+    public static void changeTheme(boolean check){
+        try {
+            if (check) {
+                UIManager.setLookAndFeel(new FlatMacLightLaf());
+            } else {
+                UIManager.setLookAndFeel(new FlatMacDarkLaf());
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+        SwingUtilities.updateComponentTreeUI(Main_Frame.frame);
     }
 
     @Override
