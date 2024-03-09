@@ -11,7 +11,7 @@ public class DB_Command {
         ResultSet result = DBConnect.getData(sql);
         HashMap<String, String> output = new HashMap<String, String>();
         result.next();
-        String[] get = {"Id", "Username", "Gmail", "Password", "Firstname", "Lastname"};
+        String[] get = {"Id", "Username", "Gmail", "Password", "Firstname", "Lastname", "Admin"};
         for (String i: get){
             output.put(i.toLowerCase(), result.getString(i));
         }
@@ -19,7 +19,7 @@ public class DB_Command {
     }
 
     public static void addUserData(String username, String gmail, String password, String firstname, String lastname) throws SQLException{
-        String sql = String.format("INSERT INTO User_info VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s');", username, gmail, password, firstname, lastname);
+        String sql = String.format("INSERT INTO User_info VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s', DEFAULT);", username, gmail, password, firstname, lastname);
         DBConnect.updateData(sql);
         System.out.println("Successful insert");
     }

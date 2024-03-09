@@ -8,12 +8,14 @@ import java.awt.*;
 
 public class Main_Admin extends JDesktopPane implements Changeable {
 	private JInternalFrame controls;
+	private Table_Page table;
 
 	public Main_Admin() {
 		super();
 		//Main_Frame.changeTheme(false);
 		controls = new Main_Controls().getFrame();
 
+		this.add(table);
 		this.add(controls);
 	}
 
