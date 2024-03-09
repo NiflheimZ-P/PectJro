@@ -22,7 +22,6 @@ public class Main_Frame implements WindowListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.setLayout(new CardLayout());
-
         frame.setVisible(true);
     }
 
@@ -50,7 +49,7 @@ public class Main_Frame implements WindowListener {
             Main_Login.setRemember(true);
             changePage(new home_page());
         } else {
-            changePage(new Main_Admin());
+            changePage(new Main_Login());
         }
     }
     @Override

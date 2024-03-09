@@ -11,6 +11,7 @@ public class User_Template implements Serializable {
     public String password;
     public String firstname;
     public String lastname;
+    public String admin;
 
     public void setData(ArrayList<String> info) {
         id = info.get(0);
@@ -19,15 +20,17 @@ public class User_Template implements Serializable {
         password = info.get(3);
         firstname = info.get(4);
         lastname = info.get(5);
+        admin = info.get(6);
     }
 
-    public void setData(String id, String username, String gmail, String password, String firstname, String lastname){
+    public void setData(String id, String username, String gmail, String password, String firstname, String lastname, String admin){
         this.id = id;
         this.username = username;
         this.gmail = gmail;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.admin = admin;
     }
 
     public void setData(HashMap<String, String> info){
@@ -37,5 +40,6 @@ public class User_Template implements Serializable {
         password = info.get("password");
         firstname = info.get("firstname");
         lastname = info.get("lastname");
+        admin = info.get("admin");
     }
 }
