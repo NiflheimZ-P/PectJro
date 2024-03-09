@@ -10,7 +10,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.border.Border;
 public class project_progress {
     private JFrame fr;
-    private JPanel upper_pmain, upper_west, upper_west_rpart, pane_for_note, panefor_close, logo_lmar;
+    private JPanel upper_pmain, upper_west, upper_west_rpart, pane_for_note, panefor_close, logo_lmar, mini_west_rpart, mid_mar_rpart;
     private JLabel pro_pic, team_label, pro_name_label;
     private JButton note_bn, close_bn;
     public project_progress(){
@@ -28,6 +28,8 @@ public class project_progress {
 
         //panel
         upper_west_rpart = new JPanel();
+        mid_mar_rpart = new JPanel();
+        mini_west_rpart = new JPanel();
         upper_west = new JPanel();
         pane_for_note = new JPanel();
         panefor_close = new JPanel();
@@ -46,8 +48,13 @@ public class project_progress {
         upper_west.setBackground(Color.lightGray);
 
         //uppper west rpart add
-        upper_west_rpart.add(pro_name_label, BorderLayout.NORTH);
-        upper_west_rpart.add(team_label, BorderLayout.SOUTH);
+        mini_west_rpart.setLayout(new GridLayout(3,1,50,5));
+        mini_west_rpart.add(pro_name_label);
+        mini_west_rpart.add(mid_mar_rpart);
+        mini_west_rpart.add(team_label);
+        mid_mar_rpart.setBackground(Color.lightGray);
+        mini_west_rpart.setBackground(Color.lightGray);
+        upper_west_rpart.add(mini_west_rpart, BorderLayout.CENTER);
         upper_west_rpart.setBackground(Color.lightGray);
 
         //upper part
