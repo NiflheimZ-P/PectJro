@@ -16,12 +16,14 @@ public class Main_Frame implements WindowListener {
 
     public Main_Frame(){
         frame = new JFrame("PectJro");
-        frame.setLayout(new CardLayout());
         frame.addWindowListener(this);
         frame.setLocationRelativeTo(null);
         frame.setSize(1600, 900);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        frame.setLayout(new CardLayout());
+
         frame.setVisible(true);
     }
 
@@ -49,7 +51,7 @@ public class Main_Frame implements WindowListener {
             Main_Login.setRemember(true);
             changePage(new home_page());
         } else {
-            changePage(new Main_Login());
+            changePage(new Main_Admin());
         }
     }
     @Override

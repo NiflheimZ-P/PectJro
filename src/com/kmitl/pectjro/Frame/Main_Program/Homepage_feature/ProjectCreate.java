@@ -7,8 +7,9 @@
  *
  * @author Insi
  */
-import java.net.URL;
 import com.toedter.calendar.JDateChooser;
+
+import java.net.URL;
 import java.awt.*;
 import javax.swing.*;
 public class ProjectCreate {
@@ -20,10 +21,8 @@ public class ProjectCreate {
     private JDateChooser d1, d2;
     public ProjectCreate(){
         ImageIcon icon = null;
-        URL imageURL = page4.class.getResource("images/aunkung.jpg");
-        if (imageURL != null) {
-            icon = new ImageIcon(imageURL);
-        }
+        icon = new ImageIcon("resources/Images/aunkung.jpeg");
+
 
         fr = new JFrame();
         p_main = new JPanel();
