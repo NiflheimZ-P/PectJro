@@ -1,3 +1,4 @@
+package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -7,6 +8,7 @@
  *
  * @author Insi
  */
+import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import com.toedter.calendar.JDateChooser;
 
 import java.net.URL;
@@ -17,7 +19,7 @@ public class ProjectCreate {
     private JPanel p_main, p_zone1, p_zone2, p_zone11, p_zone12, p_zone21, p_zone22, p_zone23, p_zone221, p_zone222;
     private JButton b_photo, b_create, b_back;
     private JLabel picture, l1, l2, l3, l4;
-    private JTextField projectname;
+    private JInfoGet projectname;
     private JDateChooser d1, d2;
     public ProjectCreate(){
         ImageIcon icon = null;
@@ -45,7 +47,7 @@ public class ProjectCreate {
         l2 = new JLabel("Enter your ProjectName");
         l3 = new JLabel("Start");
         l4 = new JLabel("End");
-        projectname = new JTextField("ProjectName");
+        projectname = new JInfoGet("ProjectName");
 
         d1 = new JDateChooser();
         d2 = new JDateChooser();

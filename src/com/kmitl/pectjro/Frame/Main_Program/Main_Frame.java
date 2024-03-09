@@ -13,7 +13,6 @@ import java.io.*;
 
 public class Main_Frame implements WindowListener {
     public static JFrame frame;
-
     public Main_Frame(){
         frame = new JFrame("PectJro");
         frame.addWindowListener(this);

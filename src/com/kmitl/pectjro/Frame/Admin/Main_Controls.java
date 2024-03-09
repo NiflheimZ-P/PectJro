@@ -22,7 +22,7 @@ public class Main_Controls {
 		user = create_button("resources/Images/Icons/user.png");
 		project = create_button("resources/Images/Icons/project.png");
 		feedback = create_button("resources/Images/Icons/feedback.png");
-		setting = create_button("resources/Images/Icons/setting.png");
+		setting = create_button("resources/Images/Icons/Summary.png");
 
 		main_Panel.setLayout(new GridBagLayout());
 		main_Panel.add(user, new Constraints(0, 0, 1, 0, new Insets(0, 0, 0, 0)));
