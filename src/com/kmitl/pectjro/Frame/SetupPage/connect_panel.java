@@ -61,7 +61,7 @@ public class connect_panel extends JPanel implements DocumentListener, ActionLis
         this.add(allow);
     }
 
-    public static ArrayList<String> getData() {
+    public ArrayList<String> getData() {
         ArrayList<String> data = new ArrayList<String>();
         data.add(hostname.getText().trim());
         data.add(port.getText().trim());
@@ -72,19 +72,9 @@ public class connect_panel extends JPanel implements DocumentListener, ActionLis
     }
 
     public boolean checkInfo(){
+        Main_Setup.bypass = false;
         return (!username.getText().trim().isEmpty() & !hostname.getText().trim().isEmpty() & !port.getText().trim().isEmpty() &
                 !database.getText().trim().isEmpty() & !String.valueOf(password.getPassword()).isEmpty() & allow.isSelected());
-    }
-
-    public String[] getInfo() {
-        String[] output = {
-                hostname.getText(),
-            port.getText(),
-            database.getText(),
-            username.getText(),
-            String.valueOf(password.getPassword())
-        };
-        return output;
     }
 
     @Override

@@ -13,7 +13,6 @@ public class Image_Resizer extends JPanel {
         this.width = width;
         this.setPreferredSize(new Dimension(this.width, this.height));
     }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -21,5 +20,8 @@ public class Image_Resizer extends JPanel {
         gp.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         gp.drawImage(image, 0, 0, width, height, this);
     }
+
+    public void setImage(ImageIcon image){ this.image = image.getImage(); }
+    public Image getImage() {return image;}
 }
 

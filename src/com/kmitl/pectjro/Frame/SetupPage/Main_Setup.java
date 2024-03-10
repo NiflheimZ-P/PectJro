@@ -1,6 +1,7 @@
 package com.kmitl.pectjro.Frame.SetupPage;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.kmitl.pectjro.Frame.Cache_Templates.Setting_Template;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,9 +15,12 @@ public class Main_Setup implements ActionListener {
     private JFrame frame = new JFrame("PectJro Setup");
     private JPanel south, west, center;
     public static JButton next, back, cancel;
-    private JPanel[] page = {new default_panel(), new connect_panel(), new checkDatabase_panel()};
+    private JPanel[] page = new JPanel[3];
     private CardLayout page_manage = new CardLayout();
     private JLabel warn = new JLabel("!!Please insert all the info");
+    private int current_page = 0;
+    private ArrayList<String> info;
+    public static boolean bypass = false;
 
     public Main_Setup() {
         south = new JPanel(new FlowLayout(FlowLayout.RIGHT)); west = new JPanel(); center = new JPanel(page_manage);
@@ -36,6 +40,7 @@ public class Main_Setup implements ActionListener {
         west.add(new JLabel(icon));
         west.setPreferredSize(new Dimension(250, 0));
 
+        page = new JPanel[]{new default_panel(), new connect_panel(), new checkDatabase_panel()};
         center.add(page[0], "0");
         center.add(page[1], "1");
         center.add(page[2], "2");
@@ -48,7 +53,7 @@ public class Main_Setup implements ActionListener {
         warn.setForeground(Color.RED);
         warn.setFont(new Font("", Font.BOLD, 13));
 
-        page_manage.show(center, "2");
+        //page_manage.show(center, "2");
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 500);
@@ -56,54 +61,56 @@ public class Main_Setup implements ActionListener {
         frame.setVisible(true);
     }
 
-    public JButton getNext() {
-        return this.next;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e){
         String command = e.getActionCommand();
         if (command.equals("Next >")) {
             back.setEnabled(true);
-            page_manage.last(center);
-            next.setText("Finish");
-            next.setEnabled(false);
+            current_page += 1;
+
+            if (current_page == 1 && !bypass){ next.setEnabled(false); }
+            else if (current_page == 2) {
+                next.setEnabled(false);
+                page_manage.show(center, String.valueOf(current_page));
+                info = ((connect_panel) page[1]).getData();
+                ((checkDatabase_panel) page[2]).check(info);
+                next.setText("Finish");
+                return;
+            }
+
+            page_manage.show(center, String.valueOf(current_page));
         }
-        if (command.equals("< Back")) {
-            back.setEnabled(false);
-            page_manage.first(center);
-            next.setText("Next >");
+        else if (command.equals("< Back")) {
+            current_page -= 1;
             next.setEnabled(true);
+            if (current_page == 0){ back.setEnabled(false);}
+            else if (current_page == 1){
+                next.setText("Next >");
+                ((checkDatabase_panel)page[2]).clear();
+            }
+            page_manage.show(center, String.valueOf(current_page));
         }
-        if (command.equals("Cancel")) {
+        else if (command.equals("Cancel")) {
             System.exit(0);
         }
-        if (command.equals("Finish")) {
+        else if (command.equals("Finish")) {
             Setting_Template storage = new Setting_Template();
-            ArrayList<String> data = connect_panel.getData();
-            if (data.contains("")) {
-                JOptionPane.showMessageDialog(null, "Please insert all the info", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                storage.host = data.get(0);
-                storage.port = data.get(1);
-                storage.database_name = data.get(2);
-                storage.username = data.get(3);
-                storage.password = data.get(4);
-
-                File info = new File("Database_Setting.dat");
-                try(ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(info))){
-                    info.createNewFile();
-                    write.writeObject(storage);
-                } catch (IOException ex){
-                    ex.printStackTrace();
-                }
-                System.exit(0);
+            storage.setData(info);
+            File info = new File("Database_Setting.dat");
+            try(ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(info))){
+                write.writeObject(storage);
+            } catch (IOException ex){
+                ex.printStackTrace();
             }
+            System.exit(0);
         }
     }
+
 
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel( new FlatMacLightLaf() );
         SwingUtilities.invokeLater(() -> { new Main_Setup(); });
     }
+
 }
+

@@ -1,12 +1,8 @@
 package com.kmitl.pectjro.Database;
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DB_Command {
@@ -15,7 +11,7 @@ public class DB_Command {
         ResultSet result = DBConnect.getData(sql);
         HashMap<String, String> output = new HashMap<String, String>();
         result.next();
-        String[] get = {"Id", "Username", "Gmail", "Password", "Firstname", "Lastname"};
+        String[] get = {"Id", "Username", "Gmail", "Password", "Firstname", "Lastname", "Admin"};
         for (String i: get){
             output.put(i.toLowerCase(), result.getString(i));
         }
@@ -23,18 +19,8 @@ public class DB_Command {
     }
 
     public static void addUserData(String username, String gmail, String password, String firstname, String lastname) throws SQLException{
-        String sql = String.format("INSERT INTO User_info VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s');", username, gmail, password, firstname, lastname);
+        String sql = String.format("INSERT INTO User_info VALUES (DEFAULT, '%s', '%s', '%s', '%s', '%s', DEFAULT);", username, gmail, password, firstname, lastname);
         DBConnect.updateData(sql);
         System.out.println("Successful insert");
-    }
-
-    public static boolean testConnection(String[] info) {
-        try {
-            Connection connec = DriverManager.getConnection(String.format("jdbc:mysql://%s:%s/%s", info[0], info[1], info[2]), info[3], info[4]);
-            connec.close();
-            return true;
-        } catch (SQLException e) {
-            return false;
-        }
     }
 }

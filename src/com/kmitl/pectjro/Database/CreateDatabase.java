@@ -12,8 +12,9 @@ public class CreateDatabase {
                     "Gmail VARCHAR(62) UNIQUE," +
                     "Password VARCHAR(62)," +
                     "Firstname VARCHAR(50)," +
-                    "Lastname VARCHAR(50));");
+                    "Lastname VARCHAR(50)," +
+                    "Admin boolean DEFAULT false);");
             return true;
-        } catch (SQLException e) { return false; }
+        } catch (Exception e) { return false; }
     }
 }
