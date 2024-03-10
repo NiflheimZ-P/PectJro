@@ -6,15 +6,17 @@ import javax.swing.*;
 
 public class DB_Performance {
     public static void createBackground(){
-        SwingWorker<Void, Void> back = new SwingWorker<Void, Void>() {
+        Thread a = new Thread(new Runnable() {
             @Override
-            protected Void doInBackground() throws Exception {
-                DBConnect.createConnect();
-                return null;
-            }
-        };
-
-        back.execute();
-        System.out.println("Created");
+            public void run() {
+                while (true) {
+                    DBConnect.createConnect();
+                    try { Thread.sleep(10 * 60 * 1000);}
+                    catch (InterruptedException e) { throw new RuntimeException(e); }
+                }
+			}
+        });
+        a.start();
+        System.out.println("create done");
     }
 }

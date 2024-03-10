@@ -13,6 +13,10 @@ public class CreateDatabase {
                     "Password VARCHAR(62)," +
                     "Firstname VARCHAR(50)," +
                     "Lastname VARCHAR(50)," +
+                    "Image LONGBLOB DEFAULT NULL," +
+                    "Project_Done int DEFAULT 0," +
+                    "Project_Expired int DEFAULT 0," +
+                    "Project_Ontime int DEFAULT 0," +
                     "Admin boolean DEFAULT false);");
             return true;
         } catch (Exception e) { return false; }

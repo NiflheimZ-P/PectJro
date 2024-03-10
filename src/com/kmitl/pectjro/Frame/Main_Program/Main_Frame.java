@@ -2,6 +2,7 @@ package com.kmitl.pectjro.Frame.Main_Program;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.kmitl.pectjro.Database.DB_Performance;
 import com.kmitl.pectjro.Frame.Admin.Main_Admin;
 import com.kmitl.pectjro.Frame.Groups_interface.Changeable;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.Main_Login;
@@ -14,6 +15,7 @@ import java.io.*;
 public class Main_Frame implements WindowListener {
     public static JFrame frame;
     public Main_Frame(){
+        DB_Performance.createBackground();
         frame = new JFrame("PectJro");
         frame.addWindowListener(this);
         frame.setLocationRelativeTo(null);
@@ -49,7 +51,7 @@ public class Main_Frame implements WindowListener {
             Main_Login.setRemember(true);
             changePage(new home_page());
         } else {
-            changePage(new Main_Login());
+            changePage(new Main_Admin());
         }
     }
     @Override

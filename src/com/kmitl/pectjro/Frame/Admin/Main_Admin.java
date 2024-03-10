@@ -15,7 +15,7 @@ public class Main_Admin extends JDesktopPane implements Changeable {
 		//Main_Frame.changeTheme(false);
 		controls = new Main_Controls().getFrame();
 
-		this.add(table);
+		//this.add(table);
 		this.add(controls);
 	}
 

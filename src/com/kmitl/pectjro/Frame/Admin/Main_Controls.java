@@ -12,7 +12,7 @@ public class Main_Controls {
 	public Main_Controls() {
 		main_Panel = new JInternalFrame("Controls", false, false);
 		main_Panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		main_Panel.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.3),
+		main_Panel.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.25),
 				(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.17));
 		main_Panel.setLocation(
 				(Main_Frame.frame.getWidth() - main_Panel.getWidth())/2,
@@ -35,8 +35,8 @@ public class Main_Controls {
 	public JButton create_button(String path){
 		ImageIcon in = new ImageIcon(path);
 		return new JButton(new ImageIcon(in.getImage().getScaledInstance(
-				((int) (main_Panel.getWidth()*0.21)),
-				((int) (main_Panel.getWidth()*0.21)), Image.SCALE_DEFAULT)));
+				((int) (main_Panel.getWidth()*0.27)),
+				((int) (main_Panel.getWidth()*0.27)), Image.SCALE_DEFAULT)));
 	}
 
 	public JInternalFrame getFrame(){

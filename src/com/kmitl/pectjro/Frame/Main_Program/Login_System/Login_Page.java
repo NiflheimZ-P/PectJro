@@ -67,7 +67,7 @@ public class Login_Page implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String gmail = email.getText();
         String pass = password.getMyPass();
-        HashMap<String, String> thisGmail;
+        User_Template thisGmail;
 		try { thisGmail = DB_Command.getUserData(gmail); }
         catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "The email address doesn't exist.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -78,19 +78,17 @@ public class Login_Page implements ActionListener {
         }
 	}
 
-    public boolean loginSystem(String pass, HashMap<String, String> data) {
-        if(!pass.equals(data.get("password"))){
+    public boolean loginSystem(String pass, User_Template data) {
+        if(!pass.equals(data.password)){
             JOptionPane.showMessageDialog(null, "Password incorrect", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
             Main_Login.setRemember(check.isSelected());
         }
-        User_Template cache = new User_Template();
-        cache.setData(data);
         File remember = new File("User_Cache");
         try (ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(remember))) {
             remember.createNewFile();
-            write.writeObject(cache);
+            write.writeObject(data);
             return true;
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);

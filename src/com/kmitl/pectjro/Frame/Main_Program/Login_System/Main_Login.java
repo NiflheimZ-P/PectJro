@@ -15,7 +15,6 @@ public class Main_Login extends JPanel implements ActionListener, Changeable {
 	private static Boolean remember = false;
 
 	public Main_Login() {
-		DB_Performance.createBackground();
 		this.setLayout(new GridBagLayout());
 
 		GridBagConstraints manage = new GridBagConstraints();
