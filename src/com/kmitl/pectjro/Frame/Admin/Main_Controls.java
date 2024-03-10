@@ -8,7 +8,7 @@ import com.kmitl.pectjro.Frame.Tools.*;
 
 public class Main_Controls {
 	private JInternalFrame main_Panel;
-	private JButton user, project, feedback, setting;
+	private JButton user, project, feedback;
 	public Main_Controls() {
 		main_Panel = new JInternalFrame("Controls", false, false);
 		main_Panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,13 +22,12 @@ public class Main_Controls {
 		user = create_button("resources/Images/Icons/user.png");
 		project = create_button("resources/Images/Icons/project.png");
 		feedback = create_button("resources/Images/Icons/feedback.png");
-		setting = create_button("resources/Images/Icons/Summary.png");
+
 
 		main_Panel.setLayout(new GridBagLayout());
 		main_Panel.add(user, new Constraints(0, 0, 1, 0, new Insets(0, 0, 0, 0)));
 		main_Panel.add(project, new Constraints(1, 0, 1, 0, new Insets(0, 0, 0, 0)));
 		main_Panel.add(feedback, new Constraints(2, 0, 1, 0, new Insets(0, 0, 0, 0)));
-		main_Panel.add(setting, new Constraints(3, 0, 1, 0, new Insets(0, 0, 0, 0)));
 
 		main_Panel.setVisible(true);
 	}
