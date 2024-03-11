@@ -3,17 +3,32 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.formdev.flatlaf.ui.FlatRoundBorder;
 import com.kmitl.pectjro.Frame.Main_Program.home_page;
 import com.kmitl.pectjro.Frame.Tools.*;
+
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.plaf.InternalFrameUI;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
+
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.util.Date;
+
+import org.jetbrains.annotations.NotNull;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.IntervalCategoryDataset;
+import org.jfree.data.gantt.Task;
+import org.jfree.data.gantt.TaskSeries;
+import org.jfree.data.gantt.TaskSeriesCollection;
+
+import javax.swing.JTable;
 import javax.swing.border.Border;
-public class project_progress {
+public class project_progress extends JFrame{
     private JFrame fr;
     private JPanel upper_pmain, upper_west, upper_west_rpart, pane_for_note, panefor_close, logo_lmar, mini_west_rpart, mid_mar_rpart;
     private JLabel pro_pic, team_label, pro_name_label;
     private JButton note_bn, close_bn;
-    public project_progress(){
+    private static final long serialVersionUID = 1L;
+    public project_progress(String applicationTitle, String chartTitle){
         fr = new JFrame();
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -74,11 +89,65 @@ public class project_progress {
         fr.add(upper_pmain, BorderLayout.NORTH);
         fr.setVisible(true);
         fr.setSize(1000, 600);
-    }
 
+
+        JFreeChart chart = ChartFactory.createGanttChart(chartTitle, "Development", "Time", createDataset(),
+                true, true, true);
+
+        // เพิ่ม chart เข้า chart panel
+        ChartPanel chartPanel = new ChartPanel(chart);
+
+        // setting size
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+
+        // add
+        fr.add(chartPanel, BorderLayout.CENTER);
+    }
+    private @NotNull IntervalCategoryDataset createDataset() {
+
+        TaskSeriesCollection dataset = new TaskSeriesCollection();
+        TaskSeries expected = new TaskSeries("Expected Date");
+        expected.add(new Task("Analysis", Date.from(LocalDate.of(2018, 9, 5).atStartOfDay().toInstant(ZoneOffset.UTC)),
+                Date.from(LocalDate.of(2018, 9, 8).atStartOfDay().toInstant(ZoneOffset.UTC))));
+
+        expected.add(new Task("Design", Date.from(LocalDate.of(2018, 9, 12).atStartOfDay().toInstant(ZoneOffset.UTC)),
+                Date.from(LocalDate.of(2018, 9, 16).atStartOfDay().toInstant(ZoneOffset.UTC))));
+
+        expected.add(
+                new Task("Development", Date.from(LocalDate.of(2018, 9, 19).atStartOfDay().toInstant(ZoneOffset.UTC)),
+                        Date.from(LocalDate.of(2018, 9, 23).atStartOfDay().toInstant(ZoneOffset.UTC))));
+
+        expected.add(new Task("Testing", Date.from(LocalDate.of(2018, 9, 26).atStartOfDay().toInstant(ZoneOffset.UTC)),
+                Date.from(LocalDate.of(2018, 9, 29).atStartOfDay().toInstant(ZoneOffset.UTC))));
+
+        dataset.add(expected);
+
+        TaskSeries actual = new TaskSeries("Actual Date");
+        actual.add(
+                new Task("Analysis", Date.from(LocalDate.of(2018, 9, 5).atStartOfDay().toInstant(ZoneOffset.UTC)),
+                        Date.from(LocalDate.of(2018, 9, 7).atStartOfDay().toInstant(ZoneOffset.UTC))));
+
+        actual.add(new Task("Design", Date.from(LocalDate.of(2018, 9, 8).atStartOfDay().toInstant(ZoneOffset.UTC)),
+                Date.from(LocalDate.of(2018, 9, 19).atStartOfDay().toInstant(ZoneOffset.UTC))));
+
+        actual.add(new Task("Development", Date.from(LocalDate.of(2018, 9, 20).atStartOfDay().toInstant(ZoneOffset.UTC)),
+                Date.from(LocalDate.of(2018, 9, 28).atStartOfDay().toInstant(ZoneOffset.UTC))));
+
+        actual.add(new Task("Testing", Date.from(LocalDate.of(2018, 9, 28).atStartOfDay().toInstant(ZoneOffset.UTC)),
+                Date.from(LocalDate.of(2018, 10, 3).atStartOfDay().toInstant(ZoneOffset.UTC))));
+        dataset.add(actual);
+
+
+        return dataset;
+
+    }
     public static void main(String[] args) throws Exception {
 
         UIManager.setLookAndFeel(new FlatMacLightLaf());
-        SwingUtilities.invokeLater(() -> {new project_progress(); });
+        SwingUtilities.invokeLater(() -> {project_progress chart = new project_progress("Gnatt Chart", "Your Task Progress");
+            chart.pack();
+            chart.setVisible(true);
+        });
+
     }
 }
