@@ -7,7 +7,6 @@ import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginPage.Login_Page;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginPage.Register_Page;
 import com.kmitl.pectjro.Frame.Main_Program.home_page;
-
 import javax.swing.*;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,32 +30,39 @@ public class LoginModel {
 
 	// Methods
 	public void loginSystem() {
-		String gmail = login.getEmail().getText();
-		String pass = login.getPass().getMyPass();
-		User_Template thisGmail;
+		SwingWorker<Void, Void> getIn = new SwingWorker<Void, Void>() {
+			@Override
+			protected Void doInBackground() throws Exception {
+				String gmail = login.getEmail().getText();
+				String pass = login.getPass().getMyPass();
+				User_Template thisGmail;
 
-		File remember = new File("User_Cache");
-		try (ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(remember))) {
-			Connection con = DBConnect.createConnect();
-			GetInfomation data = new GetInfomation(con);
-			thisGmail = data.getUserData(gmail);
+				File remember = new File("User_Cache");
+				try (ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(remember))) {
+					Connection con = DBConnect.createConnect();
+					GetInfomation data = new GetInfomation(con);
+					thisGmail = data.getUserData(gmail);
 
-			if(!pass.equals(thisGmail.password)){
-				JOptionPane.showMessageDialog(null, "Password incorrect", "Error", JOptionPane.ERROR_MESSAGE);
-				return ;
-			} else {
-				controller.getMain_controller().setRemember(login.getCheck().isSelected());
+					if(!pass.equals(thisGmail.password)){
+						JOptionPane.showMessageDialog(null, "Password incorrect", "Error", JOptionPane.ERROR_MESSAGE);
+						return null;
+					} else {
+						controller.getMain_controller().setRemember(login.getCheck().isSelected());
+					}
+
+					remember.createNewFile();
+					write.writeObject(thisGmail);
+					controller.getMain_controller().setCache(thisGmail);
+					controller.getMain_controller().getModel().changePage(new home_page());
+				} catch (SQLException ex) {
+					JOptionPane.showMessageDialog(null, "The email address doesn't exist.", "Error", JOptionPane.ERROR_MESSAGE);
+				} catch (IOException ex) {
+					JOptionPane.showMessageDialog(null, "Cannot access file 'User_Cache'", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				return null;
 			}
-
-			remember.createNewFile();
-			write.writeObject(thisGmail);
-			controller.getMain_controller().setCache(thisGmail);
-			controller.getMain_controller().getModel().changePage(new home_page());
-		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(null, "The email address doesn't exist.", "Error", JOptionPane.ERROR_MESSAGE);
-		} catch (IOException ex) {
-			JOptionPane.showMessageDialog(null, "Cannot access file 'User_Cache'", "Error", JOptionPane.ERROR_MESSAGE);
-		}
+		};
+		getIn.execute();
 	}
 
 	public boolean creatingAccount() {

@@ -24,12 +24,12 @@ public class DBConnect {
         return con;
     }
 
-    public synchronized static boolean checkConnection(ArrayList<String> info) {
+    public synchronized static Connection checkConnection(ArrayList<String> info) {
         try {
-            DBConnect.con = DriverManager.getConnection(String.format("jdbc:mysql://%s:%s/%s", info.get(0), info.get(1), info.get(2)), info.get(3), info.get(4));
-            return true;
+            Connection con = DriverManager.getConnection(String.format("jdbc:mysql://%s:%s/%s", info.get(0), info.get(1), info.get(2)), info.get(3), info.get(4));
+            return con;
         } catch (SQLException e) {
-            return false;
+            return null;
         }
     }
 }

@@ -14,8 +14,9 @@ import com.kmitl.pectjro.Frame.Tools.*;
 
 public class checkDatabase_panel extends JPanel {
     private JPanel main_panel;
-    private Image_Resizer data_bar, userInfo_bar, userpro_bar, project_bar, proStep_bar, all_bar;
+    private Image_Resizer data_bar, userInfo_bar, userpro_bar, project_bar, proStep_bar, all_bar, feed_bar;
     private ImageIcon pass, error, wait;
+    private Connection con;
 
     public checkDatabase_panel() {
         super();
@@ -60,10 +61,16 @@ public class checkDatabase_panel extends JPanel {
         main_panel.add(prost,
                 new Constraints(0, 4, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10, 1, 1)));
 
-        JLabel all = new JLabel("All_step Table");
+        JLabel all = new JLabel("Step_info Table");
         all.setFont(new Font("", Font.PLAIN, 15));
         main_panel.add(all,
-                new Constraints(0, 5, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 10, 1)));
+                new Constraints(0, 5, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 1, 1)));
+
+        JLabel feed = new JLabel("Feedback Table");
+        feed.setFont(new Font("", Font.PLAIN, 15));
+        main_panel.add(feed,
+                new Constraints(0, 6, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 10, 1)));
+
 
         data_bar = new Image_Resizer(wait, 20, 100);
         main_panel.add(data_bar, new Constraints(1, 0, 1, 1, GridBagConstraints.LINE_END, new Insets(10, 1, 1, 10)));
@@ -83,19 +90,23 @@ public class checkDatabase_panel extends JPanel {
         all_bar = new Image_Resizer(wait, 20, 100);
         main_panel.add(all_bar, new Constraints(1, 5, 1, 1, 22, new Insets(0, 1, 1, 10)));
 
+        feed_bar = new Image_Resizer(wait, 20, 100);
+        main_panel.add(feed_bar, new Constraints(1, 6, 1, 1, 22, new Insets(0, 1, 10, 10)));
+
     }
-    public void check(ArrayList<String> info){
+    public void check(ArrayList <String> info){
         SwingWorker check = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                if (DBConnect.checkConnection(info)) {
+                con = DBConnect.checkConnection(info);
+                if (con != null) {
                     data_bar.setImage(pass);
                     check_userInfo();
-                    userInfo_bar.setImage(pass);
-                    userpro_bar.setImage(pass);
-                    project_bar.setImage(pass);
-                    proStep_bar.setImage(pass);
-                    all_bar.setImage(pass);
+                    check_UserProject();
+                    check_projectInfo();
+                    check_ProjectStep();
+                    check_StepInfo();
+                    check_Feedback();
                     Main_Setup.bypass = true;
                 } else {
                     setError();
@@ -108,11 +119,55 @@ public class checkDatabase_panel extends JPanel {
     }
 
     public void check_userInfo() {
-        Connection con = DBConnect.createConnect();
         if (new CreateTable(con).createUserTable()){
-            SwingUtilities.invokeLater(() -> {userInfo_bar.setImage(pass);});
+            userInfo_bar.setImage(pass);
         } else {
-            SwingUtilities.invokeLater(() -> {userInfo_bar.setImage(error);});
+            userInfo_bar.setImage(error);
+        }
+        repaint();
+    }
+
+    public void check_projectInfo() {
+        if (new CreateTable(con).createProjectTable()) {
+            project_bar.setImage(pass);
+        } else {
+            project_bar.setImage(error);
+        }
+        repaint();
+    }
+
+    public void check_StepInfo() {
+        if (new CreateTable(con).createStepTable()) {
+            all_bar.setImage(pass);
+        } else {
+            all_bar.setImage(error);
+        }
+        repaint();
+    }
+
+    public void check_UserProject() {
+        if (new CreateTable(con).createJoinUserProject()) {
+            userpro_bar.setImage(pass);
+        } else {
+            userpro_bar.setImage(error);
+        }
+        repaint();
+    }
+
+    public void check_ProjectStep() {
+        if (new CreateTable(con).createJoinProjectStep()) {
+            proStep_bar.setImage(pass);
+        } else {
+            proStep_bar.setImage(error);
+        }
+        repaint();
+    }
+
+    public void check_Feedback() {
+        if (new CreateTable(con).createFeedbackTable()) {
+            feed_bar.setImage(pass);
+        } else {
+            feed_bar.setImage(error);
         }
         repaint();
     }
@@ -123,7 +178,8 @@ public class checkDatabase_panel extends JPanel {
                 userpro_bar.getImage().equals(pass.getImage()) ||
                 project_bar.getImage().equals(pass.getImage()) ||
                 proStep_bar.getImage().equals(pass.getImage()) ||
-                all_bar.getImage().equals(pass.getImage())
+                all_bar.getImage().equals(pass.getImage()) ||
+                feed_bar.getImage().equals(pass.getImage())
                 );
     }
 

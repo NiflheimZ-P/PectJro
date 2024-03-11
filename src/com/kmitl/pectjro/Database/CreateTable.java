@@ -21,7 +21,6 @@ public class CreateTable {
         }
     }
     public boolean createUserTable(){
-        Connection con = DBConnect.createConnect();
         try {
             updateData("CREATE TABLE IF NOT EXISTS User_info (" +
                     "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
@@ -37,5 +36,67 @@ public class CreateTable {
                     "Admin boolean DEFAULT false);");
             return true;
         } catch (Exception e) { return false; }
+    }
+
+    public boolean createProjectTable(){
+        try{
+            updateData("CREATE TABLE IF NOT EXISTS Project_info (" +
+                    "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
+                    "Name VARCHAR(50) NOT NULL," +
+                    "Note LONGTEXT," +
+                    "Start DATE NOT NULL," +
+                    "Expired DATE NOT NULL);");
+            return true;
+        } catch (Exception e) {
+            return false;}
+    }
+
+    public boolean createStepTable(){
+        try{
+            updateData("CREATE TABLE IF NOT EXISTS Step_info (" +
+                    "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
+                    "Name VARCHAR(50) NOT NULL," +
+                    "Note LONGTEXT," +
+                    "Start DATE NOT NULL," +
+                    "Expired DATE NOT NULL);");
+            return true;
+        } catch (Exception e) {
+            return false;}
+    }
+
+    public boolean createFeedbackTable(){
+        try {
+            updateData("CREATE TABLE IF NOT EXISTS Feedback (" +
+                    "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
+                    "User_id int NOT NULL," +
+                    "Word MEDIUMTEXT);");
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean createJoinUserProject(){
+        try {
+            updateData("CREATE TABLE IF NOT EXISTS User_Project (" +
+                    "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
+                    "User_id int NOT NULL," +
+                    "Project_id int NOT NULL);");
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean createJoinProjectStep(){
+        try {
+            updateData("CREATE TABLE IF NOT EXISTS Project_Step (" +
+                    "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
+                    "Project_id int NOT NULL," +
+                    "Step_id int NOT NULL);");
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

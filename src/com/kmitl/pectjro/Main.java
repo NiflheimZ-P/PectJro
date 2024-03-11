@@ -12,7 +12,7 @@ public class Main {
         UIManager.setLookAndFeel( new FlatMacLightLaf() );
         File info = new File("Database_Setting.dat");
         if (!info.exists()) {
-            SwingUtilities.invokeLater(() -> {new Main_Setup();} );
+            SwingUtilities.invokeLater(() -> {new Main_Setup();});
         } else {
             SwingUtilities.invokeLater(() -> {new MainController().getView();});
         }
