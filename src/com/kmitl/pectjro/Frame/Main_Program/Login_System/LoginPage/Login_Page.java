@@ -1,4 +1,4 @@
-package com.kmitl.pectjro.Frame.Main_Program.Login_System;
+package com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginPage;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -7,23 +7,27 @@ import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.HashMap;
-import com.kmitl.pectjro.Database.DB_Command;
+import com.kmitl.pectjro.Database.Connection.DBConnect;
+import com.kmitl.pectjro.Database.GetInfomation;
 import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
-import com.kmitl.pectjro.Frame.Main_Program.Main_Frame;
+import com.kmitl.pectjro.Frame.Groups_interface.LoginPage;
+import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 import com.kmitl.pectjro.Frame.Main_Program.home_page;
 import com.kmitl.pectjro.Frame.Tools.*;
-import java.io.*;
 
-public class Login_Page implements ActionListener {
-    private static JPanel main_panel;
+public class Login_Page implements LoginPage {
+    // Attribute
+    private final JPanel main_panel;
     private JInfoGet email = new JInfoGet("Email");
     private JPassGet password = new JPassGet("Password");
     private JCheckBox check = new JCheckBox("Remember Me");
     private JButton login = new JButton("Login");
     private JButton sign = new JButton("Sign up");
-    public Login_Page(ActionListener frame) {
+
+    // Constructor
+    public Login_Page() {
         super();
         main_panel = new JPanel();
         main_panel.setBackground(Color.white);
@@ -33,8 +37,6 @@ public class Login_Page implements ActionListener {
         ));
         main_panel.setPreferredSize(new Dimension(480, 610));
         main_panel.setLayout(new GridBagLayout());
-
-        sign.addActionListener(frame);
 
         main_panel.add(
                 new Image_Resizer(new ImageIcon("resources/Images/Logo.png"), 200, 200),
@@ -51,7 +53,6 @@ public class Login_Page implements ActionListener {
 
         login.setFont(new Font("", Font.PLAIN, 13));
         login.setPreferredSize(new Dimension(200, 50));
-        login.addActionListener(this);
         main_panel.add(login, new Constraints(0, 5, 0, 1, new Insets(0, 0, 0, 0)));
 
         JPanel under = new JPanel();
@@ -61,38 +62,14 @@ public class Login_Page implements ActionListener {
         main_panel.add(under, new Constraints(0, 6, 0, 0, new Insets(0, 0, 20, 0)));
     }
 
-    public JPanel getMain_panel() { return main_panel; }
-
+    // Accessor
     @Override
-    public void actionPerformed(ActionEvent e) {
-        String gmail = email.getText();
-        String pass = password.getMyPass();
-        User_Template thisGmail;
-		try { thisGmail = DB_Command.getUserData(gmail); }
-        catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "The email address doesn't exist.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-		}
-        if (loginSystem(pass, thisGmail)) {
-            Main_Frame.changePage(new home_page());
-        }
-	}
+    public JPanel getPanel() { return main_panel; }
 
-    public boolean loginSystem(String pass, User_Template data) {
-        if(!pass.equals(data.password)){
-            JOptionPane.showMessageDialog(null, "Password incorrect", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        } else {
-            Main_Login.setRemember(check.isSelected());
-        }
-        File remember = new File("User_Cache");
-        try (ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(remember))) {
-            remember.createNewFile();
-            write.writeObject(data);
-            return true;
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-    }
+    public JButton getLogin() {return login;}
+    public JButton getSign() {return sign;}
+    public JInfoGet getEmail() {return email;}
+    public JPassGet getPass() {return password;}
+    public JCheckBox getCheck() {return check;}
+
 }

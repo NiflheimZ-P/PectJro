@@ -1,11 +1,28 @@
-package com.kmitl.pectjro.Frame.Admin;
+package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows;
 
-import javax.swing.*;
+import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Table_Page;
 
 public class UserTablePage extends Table_Page {
 
     public UserTablePage() {
         super(); // เรียกใช้งานคอนสตรักเตอร์ของ Table_Page
+        this.setTitle("User Data");
+        this.setVisible(true);
+    }
+
+    @Override
+    public void addNew() {
+
+    }
+
+    @Override
+    public void delete() {
+
+    }
+
+    @Override
+    public void refresh() {
+
     }
 
     // เมทอดสำหรับแสดงข้อมูลผู้ใช้

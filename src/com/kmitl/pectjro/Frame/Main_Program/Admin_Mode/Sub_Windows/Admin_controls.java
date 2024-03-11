@@ -1,22 +1,21 @@
-package com.kmitl.pectjro.Frame.Admin;
+package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows;
 
 import javax.swing.*;
 import java.awt.*;
 
-import com.kmitl.pectjro.Frame.Main_Program.Main_Frame;
 import com.kmitl.pectjro.Frame.Tools.*;
 
-public class Main_Controls {
+public class Admin_controls {
 	private JInternalFrame main_Panel;
 	private JButton user, project, feedback;
-	public Main_Controls() {
+	public Admin_controls(int frame_width, int frame_height) {
 		main_Panel = new JInternalFrame("Controls", false, false);
 		main_Panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main_Panel.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.25),
 				(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.17));
 		main_Panel.setLocation(
-				(Main_Frame.frame.getWidth() - main_Panel.getWidth())/2,
-				(Main_Frame.frame.getHeight() - main_Panel.getHeight())/2
+				(frame_width - main_Panel.getWidth())/2,
+				(frame_height - main_Panel.getHeight())/2
 		);
 
 		user = create_button("resources/Images/Icons/user.png");

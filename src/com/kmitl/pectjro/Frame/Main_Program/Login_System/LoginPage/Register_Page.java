@@ -1,7 +1,8 @@
-package com.kmitl.pectjro.Frame.Main_Program.Login_System;
+package com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginPage;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -9,18 +10,22 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import com.kmitl.pectjro.Frame.Main_Program.Main_Frame;
-import com.kmitl.pectjro.Frame.Tools.*;
-import com.kmitl.pectjro.Database.DB_Command;
 
-public class Register_Page implements DocumentListener {
-    private static JPanel main_panel;
+import com.kmitl.pectjro.Database.Connection.DBConnect;
+import com.kmitl.pectjro.Database.UpdateTable;
+import com.kmitl.pectjro.Frame.Groups_interface.LoginPage;
+import com.kmitl.pectjro.Frame.Tools.*;
+
+public class Register_Page implements LoginPage {
+    // Attribute
+    private JPanel main_panel;
     private JLabel regis, firstname, lastname, username, password, confirmpass, email;
     private JTextField firstname_field, lastname_field, username_field, email_field;
     private JPasswordField password_field, confirmpass_field;
     private JButton submit, back;
-    private String status = "Missing";
-    public Register_Page(ActionListener frame) {
+
+    // Constructor
+    public Register_Page() {
         super();
         main_panel = new JPanel();
         main_panel.setBackground(Color.white);
@@ -37,10 +42,7 @@ public class Register_Page implements DocumentListener {
         firstname_field = new JTextField(); lastname_field = new JTextField(); username_field = new JTextField(); password_field = new JPasswordField();
         confirmpass_field = new JPasswordField(); email_field = new JTextField();
 
-        firstname_field.getDocument().addDocumentListener(this); lastname_field.getDocument().addDocumentListener(this); username_field.getDocument().addDocumentListener(this);
-        password_field.getDocument().addDocumentListener(this); confirmpass_field.getDocument().addDocumentListener(this); email_field.getDocument().addDocumentListener(this);
-
-        submit = new JButton("Submit"); back = new JButton("Back"); back.addActionListener(frame);
+        submit = new JButton("Submit"); back = new JButton("Back");
         submit.setToolTipText("Missing some information");
         // Register
         regis.setFont(new Font("", Font.BOLD, 40));
@@ -114,7 +116,6 @@ public class Register_Page implements DocumentListener {
                 new Insets(0, 30, 20, 0)));
 
         // Submit Button
-        submit.addActionListener(frame);
         submit.setEnabled(false);
         submit.setFont(new Font("", Font.PLAIN, 20));
         submit.setPreferredSize(new Dimension(180, 50));
@@ -129,83 +130,39 @@ public class Register_Page implements DocumentListener {
 
     }
 
-    public boolean creatingAccount() {
-        String user = username_field.getText();
-        String gmail = email_field.getText();
-        String pass = password_field.getText();
-        String first = firstname_field.getText();
-        String last = lastname_field.getText();
-        {
-            try {
-                DB_Command.addUserData(user, gmail, pass, first, last);
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "this email is already in use", "Error", JOptionPane.ERROR_MESSAGE);
-                return false;
-            }
-            JOptionPane.showMessageDialog(null, "Your account has been created", "Created", JOptionPane.PLAIN_MESSAGE);
-            return true;
-        }
-    }
-
-    public void setEmpty() {
-        username_field.setText("");
-        email_field.setText("");
-        password_field.setText("");
-        confirmpass_field.setText("");
-        firstname_field.setText("");
-        lastname_field.setText("");
-    }
-
-    public boolean checkEmpty(){
-        return (username_field.getText().isEmpty() ||
-                email_field.getText().isEmpty() ||
-                String.valueOf(password_field.getPassword()).isEmpty() ||
-                String.valueOf(confirmpass_field).isEmpty() ||
-                firstname_field.getText().isEmpty() ||
-                lastname_field.getText().isEmpty()
-        );
-    }
-
-    public static JPanel getMain_panel() {return main_panel;}
-
-    public boolean checkPass(){
-        return (String.valueOf(password_field.getPassword()).equals(String.valueOf(confirmpass_field.getPassword())));
-    }
-
-    public boolean checkGmail(){
-        return (email_field.getText().contains("@") && email_field.getText().contains("."));
-    }
-
-    public void updateSubmit(){
-        if (!checkEmpty() && checkPass() && checkGmail()){
-            submit.setEnabled(true);
-            submit.setToolTipText("");
-        } else if (!checkPass()) {
-            submit.setEnabled(false);
-            submit.setToolTipText("password and confirm password validation");
-        } else if (checkEmpty()){
-            submit.setEnabled(false);
-            submit.setToolTipText("Missing some information");
-        } else if (!checkGmail()){
-            submit.setEnabled(false);
-            submit.setToolTipText("Email must contain character '@'");
-        }
-    }
-
+    // Accessor
     @Override
-    public void insertUpdate(DocumentEvent e) {
-        SwingUtilities.invokeLater(() -> { updateSubmit(); });
+    public JPanel getPanel() {return main_panel;}
+
+    public JTextField getFirstname_field() {
+        return firstname_field;
     }
 
-
-
-    @Override
-    public void removeUpdate(DocumentEvent e) {
-        SwingUtilities.invokeLater(() -> { updateSubmit(); });
+    public JTextField getLastname_field() {
+        return lastname_field;
     }
 
-    @Override
-    public void changedUpdate(DocumentEvent e) {
-        SwingUtilities.invokeLater(() -> { updateSubmit(); });
+    public JTextField getUsername_field() {
+        return username_field;
+    }
+
+    public JPasswordField getPassword_field() {
+        return password_field;
+    }
+
+    public JPasswordField getConfirmpass_field() {
+        return confirmpass_field;
+    }
+
+    public JTextField getEmail_field() {
+        return email_field;
+    }
+
+    public JButton getSubmit() {
+        return submit;
+    }
+
+    public JButton getBack() {
+        return back;
     }
 }

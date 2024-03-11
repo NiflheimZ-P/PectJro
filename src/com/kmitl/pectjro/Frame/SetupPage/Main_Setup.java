@@ -106,7 +106,6 @@ public class Main_Setup implements ActionListener {
         }
     }
 
-
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel( new FlatMacLightLaf() );
         SwingUtilities.invokeLater(() -> { new Main_Setup(); });

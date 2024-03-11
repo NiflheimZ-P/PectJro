@@ -1,7 +1,8 @@
 package com.kmitl.pectjro;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.kmitl.pectjro.Frame.Main_Program.Main_Frame;
+import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
+import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainView;
 import com.kmitl.pectjro.Frame.SetupPage.Main_Setup;
 import javax.swing.*;
 import java.io.*;
@@ -13,7 +14,7 @@ public class Main {
         if (!info.exists()) {
             SwingUtilities.invokeLater(() -> {new Main_Setup();} );
         } else {
-            SwingUtilities.invokeLater(() -> {new Main_Frame();});
+            SwingUtilities.invokeLater(() -> {new MainController().getView();});
         }
     }
 }

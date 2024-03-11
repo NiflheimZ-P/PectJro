@@ -5,11 +5,11 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.CreateDatabase;
-import com.kmitl.pectjro.Database.DB_Command;
+import com.kmitl.pectjro.Database.CreateTable;
 import com.kmitl.pectjro.Frame.Tools.*;
 
 public class checkDatabase_panel extends JPanel {
@@ -88,7 +88,7 @@ public class checkDatabase_panel extends JPanel {
         SwingWorker check = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
-                if (DBConnect.createConnection(info)) {
+                if (DBConnect.checkConnection(info)) {
                     data_bar.setImage(pass);
                     check_userInfo();
                     userInfo_bar.setImage(pass);
@@ -98,10 +98,9 @@ public class checkDatabase_panel extends JPanel {
                     all_bar.setImage(pass);
                     Main_Setup.bypass = true;
                 } else {
-                    SwingUtilities.invokeLater(() -> {setError();});
+                    setError();
                 }
-                DBConnect.close();
-                SwingUtilities.invokeLater(() -> Main_Setup.next.setEnabled(check_enable()));
+                Main_Setup.next.setEnabled(check_enable());
                 return null;
             }
         };
@@ -109,7 +108,8 @@ public class checkDatabase_panel extends JPanel {
     }
 
     public void check_userInfo() {
-        if (CreateDatabase.createUserTable()){
+        Connection con = DBConnect.createConnect();
+        if (new CreateTable(con).createUserTable()){
             SwingUtilities.invokeLater(() -> {userInfo_bar.setImage(pass);});
         } else {
             SwingUtilities.invokeLater(() -> {userInfo_bar.setImage(error);});

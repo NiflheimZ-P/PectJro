@@ -1,24 +1,25 @@
-package com.kmitl.pectjro.Frame.Admin;
+package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.*;
+
 import com.kmitl.pectjro.Frame.Tools.*;
 
 public abstract class Table_Page extends JInternalFrame {
-	private JPanel north_panel;
-	protected JButton add_new, refresh, delete;
+	private final JPanel north_panel;
+	protected final JButton add_new, refresh, delete;
 	protected JInfoGet search;
-	protected JTable table;
+	protected final JTable table;
 	protected DefaultTableModel model;
-	protected JScrollPane scroll;
+	protected final JScrollPane scroll;
 	public Table_Page() {
 		super("", true, true, false);
 		this.setLayout(new BorderLayout());
 		this.setFocusable(true);
 		this.requestFocus();
+		this.setSize(750, 450);
 
 		add_new = new JButton("Add New");
 		refresh = new JButton("Refresh");
@@ -46,5 +47,7 @@ public abstract class Table_Page extends JInternalFrame {
 
 		this.add(scroll);
 	}
-
+	public abstract void addNew();
+	public abstract void delete();
+	public abstract void refresh();
 }

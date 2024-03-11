@@ -1,4 +1,4 @@
-package com.kmitl.pectjro.Frame.Admin;
+package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Feedback_Page;
 
 import com.kmitl.pectjro.Frame.Tools.Image_Resizer;
 
