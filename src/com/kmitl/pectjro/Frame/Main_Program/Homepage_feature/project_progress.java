@@ -87,6 +87,7 @@ public class project_progress extends JFrame{
 
         //set fr
         fr.add(upper_pmain, BorderLayout.NORTH);
+        fr.setResizable(false);
         fr.setVisible(true);
         fr.setSize(1000, 600);
 

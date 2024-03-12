@@ -98,6 +98,7 @@ public class ProjectCreate {
         p_zone23.add(b_back);
 
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fr.setResizable(false);
         fr.setSize(600,300);
         fr.setVisible(true);
     }
