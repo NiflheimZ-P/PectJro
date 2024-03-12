@@ -7,8 +7,10 @@ import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage.UserTableView;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class AdminController implements MainPage_Controller, ActionListener {
 	// Attribute
@@ -17,9 +19,11 @@ public class AdminController implements MainPage_Controller, ActionListener {
 	private MainController main_controller;
 	private Admin_controls admin_control;
 	private UserTableController userTable;
+	private ArrayList<Container> opened;
 
 	// Constructor
 	public AdminController(MainController main_controller){
+		this.opened = new ArrayList<>();
 		this.main_controller = main_controller;
 		view = new AdminView();
 		model = new AdminModel(view);
@@ -38,14 +42,19 @@ public class AdminController implements MainPage_Controller, ActionListener {
 		return view;
 	}
 	public UserTableController getUserTable() {return userTable;}
+	public ArrayList<Container> getOpened() {return opened;}
 
 	// Listener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(admin_control.getUser())){
-			System.out.println("Press");
-			view.getView().add(userTable.getView());
-			userTable.getModel().setTable();
+			if (!opened.contains(userTable.getView())) {
+				opened.add(userTable.getView());
+				view.getView().add(userTable.getView());
+				userTable.getView().setVisible(true);
+				userTable.getModel().setTable();
+				userTable.getView().toFront();
+			} else { userTable.getView().toFront(); }
 		}
 	}
 }
