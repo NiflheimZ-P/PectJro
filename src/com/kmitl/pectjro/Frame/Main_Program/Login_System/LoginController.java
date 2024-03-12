@@ -38,6 +38,9 @@ public class LoginController implements MainPage_Controller, ActionListener, Doc
 		view = new LoginView(login, regis, page_manage);
 		model = new LoginModel(login, regis, this);
 
+		view.getMain_panel().add(login.getPanel(), "login");
+		view.getMain_panel().add(regis.getPanel(), "register");
+
 		login.getSign().addActionListener(this);
 		login.getLogin().addActionListener(this);
 
@@ -69,12 +72,12 @@ public class LoginController implements MainPage_Controller, ActionListener, Doc
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Sign up")) {
-			page_manage.show(view.getView(), "register");
+			page_manage.show(view.getMain_panel(), "register");
 		} else if (e.getActionCommand().equals("Back")) {
-			page_manage.show(view.getView(), "login");
+			page_manage.show(view.getMain_panel(), "login");
 		} else if (e.getActionCommand().equals("Submit")) {
 			if (model.creatingAccount()) {
-				page_manage.show(view.getView(), "login");
+				page_manage.show(view.getMain_panel(), "login");
 				model.setEmpty();
 			}
 		} else {

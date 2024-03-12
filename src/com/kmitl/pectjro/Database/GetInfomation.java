@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class GetInfomation {
 	private final Connection con;
@@ -41,6 +42,35 @@ public class GetInfomation {
 				result.getInt("Project_Expired"),
 				result.getInt("Project_Ontime"),
 				result.getBoolean("Admin"));
+		return output;
+	}
+
+	public ArrayList<User_Template> load_AllUser() throws SQLException{
+		ArrayList<User_Template> output = new ArrayList<>();
+		ResultSet result = getData("SELECT * FROM User_info;");
+		Image image;
+		User_Template user;
+		while (result.next()){
+			if (result.getBytes("Image") == null) {
+				image = new ImageIcon("resources/Images/Logo.png").getImage();
+			} else {
+				image = new ImageIcon(result.getBytes("Image")).getImage();
+			}
+			user = new User_Template();
+			user.setData(
+					result.getInt("Id"),
+					result.getString("Username"),
+					result.getString("Gmail"),
+					result.getString("Password"),
+					result.getString("Firstname"),
+					result.getString("Lastname"),
+					image,
+					result.getInt("Project_Done"),
+					result.getInt("Project_Expired"),
+					result.getInt("Project_Ontime"),
+					result.getBoolean("Admin"));
+			output.add(user);
+		}
 		return output;
 	}
 }

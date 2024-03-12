@@ -11,7 +11,6 @@ public class MainView {
 
     // Constructor
     public MainView(){
-        DB_Performance.createBackground();
         frame = new JFrame("PectJro");
         frame.setLocationRelativeTo(null);
         frame.setSize(1600, 900);

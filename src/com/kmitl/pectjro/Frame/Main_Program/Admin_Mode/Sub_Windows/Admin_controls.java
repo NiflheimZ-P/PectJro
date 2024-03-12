@@ -22,7 +22,6 @@ public class Admin_controls {
 		project = create_button("resources/Images/Icons/project.png");
 		feedback = create_button("resources/Images/Icons/feedback.png");
 
-
 		main_Panel.setLayout(new GridBagLayout());
 		main_Panel.add(user, new Constraints(0, 0, 1, 0, new Insets(0, 0, 0, 0)));
 		main_Panel.add(project, new Constraints(1, 0, 1, 0, new Insets(0, 0, 0, 0)));
@@ -38,7 +37,11 @@ public class Admin_controls {
 				((int) (main_Panel.getWidth()*0.27)), Image.SCALE_DEFAULT)));
 	}
 
+	// Accessor
 	public JInternalFrame getFrame(){
 		return main_Panel;
 	}
+	public JButton getUser() { return user; }
+	public JButton getProject() { return project; }
+	public JButton getFeedback() { return feedback; }
 }

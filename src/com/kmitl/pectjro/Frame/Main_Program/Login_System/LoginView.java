@@ -20,18 +20,17 @@ public class LoginView implements View_Getter {
 		GridBagConstraints manage = new GridBagConstraints();
 
 		main_panel = new JPanel(page_manage);
-		main_panel.add(login.getPanel(), "login");
-		main_panel.add(regis.getPanel(), "register");
 
 		loginview.add(main_panel, manage);
 
 		loginview.setFocusable(true);
 		loginview.requestFocusInWindow();
 	}
-
+	// Accessor
 	@Override
 	public Container getView() {
 		return loginview;
 	}
+	public JPanel getMain_panel() { return main_panel; }
 }
 

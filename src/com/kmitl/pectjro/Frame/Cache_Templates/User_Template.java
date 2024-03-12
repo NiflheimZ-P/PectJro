@@ -26,6 +26,10 @@ public class User_Template implements Serializable {
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.image = image;
+        this.project_done = project_done;
+        this.project_expired = project_expired;
+        this.project_ontime = project_ontime;
         this.admin = admin;
     }
 }
