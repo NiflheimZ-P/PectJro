@@ -23,4 +23,9 @@ public class UpdateTable {
 		updateData(sql);
 		JOptionPane.showMessageDialog(null, "Your account has been created", "Created", JOptionPane.PLAIN_MESSAGE);
 	}
+
+	public void deleteUser(String gmail) throws SQLException {
+		String sql = String.format("DELETE FROM User_info WHERE Gmail = '%s';", gmail);
+		updateData(sql);
+	}
 }

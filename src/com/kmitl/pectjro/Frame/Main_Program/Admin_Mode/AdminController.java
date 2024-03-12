@@ -51,8 +51,11 @@ public class AdminController implements MainPage_Controller, ActionListener {
 			if (!opened.contains(userTable.getView())) {
 				opened.add(userTable.getView());
 				view.getView().add(userTable.getView());
+				userTable.getView().setLocation(
+						(main_controller.getView().getFrame().getWidth() - userTable.getView().getWidth()) / 2,
+						(main_controller.getView().getFrame().getHeight() - userTable.getView().getHeight()) / 2
+				);
 				userTable.getView().setVisible(true);
-				userTable.getModel().setTable();
 				userTable.getView().toFront();
 			} else { userTable.getView().toFront(); }
 		}

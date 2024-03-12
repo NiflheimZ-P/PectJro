@@ -2,10 +2,12 @@ package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePag
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.GetInfomation;
+import com.kmitl.pectjro.Database.UpdateTable;
 import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
 import com.kmitl.pectjro.Frame.Groups_interface.Admin_Table_Model;
 import javax.swing.*;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class UserTableModel implements Admin_Table_Model {
 	// Attribute
@@ -23,6 +25,25 @@ public class UserTableModel implements Admin_Table_Model {
 	}
 
 	// Methods
+	public void DeleteUser(String gmail, int row){
+		SwingWorker<Void, Void> userDelete = new SwingWorker<Void, Void>() {
+			@Override
+			protected Void doInBackground() throws Exception {
+				Connection con = DBConnect.createConnect();
+				UpdateTable delete = new UpdateTable(con);
+				try {
+					delete.deleteUser(gmail);
+					JOptionPane.showMessageDialog(null, "Deleted account", "Successful", JOptionPane.PLAIN_MESSAGE);
+					controller.getUserData().remove(row);
+					view.getModel().removeRow(row);
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog(null, "Cannot delete this account", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				return null;
+			}
+		};
+		userDelete.execute();
+	}
 
 	@Override
 	public void loadData() {

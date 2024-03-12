@@ -5,11 +5,13 @@ import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.AdminController;
 
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-public class UserTableController implements MouseListener, InternalFrameListener {
+public class UserTableController implements MouseListener, InternalFrameListener, ActionListener {
 	// Attribute
 	private UserTableView view;
 	private UserTableModel model;
@@ -25,6 +27,7 @@ public class UserTableController implements MouseListener, InternalFrameListener
 
 		view.getTable().addMouseListener(this);
 		view.addInternalFrameListener(this);
+		view.getDelete().addActionListener(this);
 	}
 
 	// Accessor
@@ -34,6 +37,13 @@ public class UserTableController implements MouseListener, InternalFrameListener
 	public void setUserData(ArrayList<User_Template> data) {this.userData = data;}
 
 	// Listener
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equals("Delete")){
+			model.DeleteUser(String.valueOf(view.getModel().getValueAt(view.getTable().getSelectedRow(), 2)), view.getTable().getSelectedRow());
+		}
+	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (model.checkDoubleClick(view.getTable().getSelectedRow())){

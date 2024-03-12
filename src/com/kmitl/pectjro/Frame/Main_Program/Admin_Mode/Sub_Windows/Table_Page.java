@@ -37,5 +37,21 @@ public abstract class Table_Page extends JInternalFrame {
 		north_panel.add(delete, new Constraints(3, 0, 0, 0, 22, new Insets(10, 0, 0, 10)));
 		this.add(north_panel, BorderLayout.NORTH);
 	}
+
+	public JButton getDelete() {
+		return delete;
+	}
+
+	public JButton getAdd_new() {
+		return add_new;
+	}
+
+	public JButton getRefresh() {
+		return refresh;
+	}
+	public JInfoGet getSearch() {
+		return search;
+	}
+
 	public abstract void createTable(String[] columns);
 }
