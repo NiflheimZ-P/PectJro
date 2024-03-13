@@ -1,8 +1,5 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.formdev.flatlaf.ui.FlatRoundBorder;
-import com.kmitl.pectjro.Frame.Main_Program.home_page;
-import com.kmitl.pectjro.Frame.Tools.*;
 
 import java.awt.*;
 import javax.swing.*;
@@ -11,7 +8,6 @@ import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.Date;
 
-import org.jetbrains.annotations.NotNull;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -20,15 +16,13 @@ import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 
-import javax.swing.JTable;
-import javax.swing.border.Border;
-public class project_progress extends JFrame{
+public class project_progressbar extends JFrame{
     private JFrame fr;
-    private JPanel upper_pmain, upper_west, upper_west_rpart, pane_for_note, panefor_close, logo_lmar, mini_west_rpart, mid_mar_rpart;
+    private JPanel upper_pmain, upper_west, upper_west_rpart, pane_for_note, panefor_close, logo_lmar, mini_west_rpart, mid_mar_rpart, psouth_main, psouth_move, psouth_add, psouth_midmar;
     private JLabel pro_pic, team_label, pro_name_label;
-    private JButton note_bn, close_bn;
+    private JButton note_bn, close_bn, add_bn, lmove_arrow, rmove_arrow;
     private static final long serialVersionUID = 1L;
-    public project_progress(String applicationTitle, String chartTitle){
+    public project_progressbar(String applicationTitle, String chartTitle){
         fr = new JFrame();
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -40,6 +34,9 @@ public class project_progress extends JFrame{
         //button
         note_bn = new JButton("Note");
         close_bn = new JButton("X");
+        add_bn = new JButton("+");
+        lmove_arrow = new JButton("<");
+        rmove_arrow = new JButton(">");
 
         //panel
         upper_west_rpart = new JPanel();
@@ -49,6 +46,9 @@ public class project_progress extends JFrame{
         pane_for_note = new JPanel();
         panefor_close = new JPanel();
         logo_lmar = new JPanel();
+        psouth_add = new JPanel();
+        psouth_midmar = new JPanel();
+        psouth_move = new JPanel();
         upper_west.setLayout(new BorderLayout());
         upper_west_rpart.setLayout(new BorderLayout());
         pane_for_note.setLayout(new FlowLayout(2, 40,60));
@@ -85,8 +85,32 @@ public class project_progress extends JFrame{
         upper_pmain.add(panefor_close);
         upper_pmain.setPreferredSize(new Dimension(1000, 100));
 
+        //south part
+        psouth_main = new JPanel();
+        psouth_add.add(add_bn);
+
+        //psouth_move add
+        psouth_move.add(lmove_arrow);
+        psouth_move.add(rmove_arrow);
+
+        // psouth_main add
+        psouth_main.add(psouth_add);
+        psouth_main.add(psouth_midmar);
+        psouth_main.add(psouth_move);
+
+        //south part setting
+        psouth_main.setLayout(new GridLayout(1,3));
+        psouth_move.setLayout(new FlowLayout(2));
+        psouth_add.setLayout(new FlowLayout(0));
+        psouth_main.setBackground(Color.lightGray);
+        psouth_add.setBackground(Color.lightGray);
+        psouth_midmar.setBackground(Color.lightGray);
+        psouth_move.setBackground(Color.lightGray);
+
+
         //set fr
         fr.add(upper_pmain, BorderLayout.NORTH);
+        fr.add(psouth_main, BorderLayout.SOUTH);
         fr.setResizable(false);
         fr.setVisible(true);
         fr.setSize(1000, 600);
@@ -99,12 +123,12 @@ public class project_progress extends JFrame{
         ChartPanel chartPanel = new ChartPanel(chart);
 
         // setting size
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 100));
 
         // add
         fr.add(chartPanel, BorderLayout.CENTER);
     }
-    private @NotNull IntervalCategoryDataset createDataset() {
+    private IntervalCategoryDataset createDataset() {
 
         TaskSeriesCollection dataset = new TaskSeriesCollection();
         TaskSeries expected = new TaskSeries("Expected Date");
@@ -145,9 +169,7 @@ public class project_progress extends JFrame{
     public static void main(String[] args) throws Exception {
 
         UIManager.setLookAndFeel(new FlatMacLightLaf());
-        SwingUtilities.invokeLater(() -> {project_progress chart = new project_progress("Gnatt Chart", "Your Task Progress");
-            chart.pack();
-            chart.setVisible(true);
+        SwingUtilities.invokeLater(() -> {new project_progressbar("Gnatt Chart", "Your Task Progress");
         });
 
     }
