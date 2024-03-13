@@ -77,6 +77,18 @@ public class UserTableModel implements Admin_Table_Model {
 		return count == 2;
 	}
 
+	public void searching(){
+		String word = view.getSearch().getText();
+		view.getModel().setRowCount(0);
+		for (User_Template i : controller.getUserData()){
+			if (String.valueOf(i.id).contains(word) || i.username.contains(word) || i.gmail.contains(word) ||
+			i.firstname.contains(word) || i.lastname.contains(word)){
+				Object[] info = {i.id, i.username, i.gmail, i.password, i.firstname, i.lastname, i.project_done, i.project_expired, i.project_ontime, i.admin};
+				view.getModel().addRow(info);
+			}
+		}
+	}
+
 	// Accessor
 	public int getRow() {
 		return row;

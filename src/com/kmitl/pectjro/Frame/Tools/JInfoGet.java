@@ -15,6 +15,10 @@ public class JInfoGet extends JTextField implements FocusListener {
         this.addFocusListener(this);
     }
 
+    public String getShouldbe() {
+        return shouldbe;
+    }
+
     @Override
     public void focusGained(FocusEvent e) {
         if (getText().equals(shouldbe)){

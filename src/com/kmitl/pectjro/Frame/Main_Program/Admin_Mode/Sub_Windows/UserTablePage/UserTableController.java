@@ -3,6 +3,8 @@ package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePag
 import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.AdminController;
 
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import java.awt.event.ActionEvent;
@@ -11,7 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-public class UserTableController implements MouseListener, InternalFrameListener, ActionListener {
+public class UserTableController implements MouseListener, InternalFrameListener, ActionListener, DocumentListener {
 	// Attribute
 	private UserTableView view;
 	private UserTableModel model;
@@ -25,9 +27,13 @@ public class UserTableController implements MouseListener, InternalFrameListener
 		this.view = new UserTableView();
 		this.model = new UserTableModel(this, view);
 
+
 		view.getTable().addMouseListener(this);
 		view.addInternalFrameListener(this);
 		view.getDelete().addActionListener(this);
+		view.getAdd_new().addActionListener(this);
+		view.getSearch().getDocument().addDocumentListener(this);
+
 	}
 
 	// Accessor
@@ -39,8 +45,17 @@ public class UserTableController implements MouseListener, InternalFrameListener
 	// Listener
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("Delete")){
-			model.DeleteUser(String.valueOf(view.getModel().getValueAt(view.getTable().getSelectedRow(), 2)), view.getTable().getSelectedRow());
+		try {
+			if (e.getActionCommand().equals("Delete")){
+				model.DeleteUser(String.valueOf(view.getModel().getValueAt(view.getTable().getSelectedRow(), 2)), view.getTable().getSelectedRow());
+			} else if (e.getActionCommand().equals("Add New")){
+				UserAdd add = new UserAdd();
+				add.getFrame().addInternalFrameListener(this);
+				head_controll.getContainer().getView().add(add.getFrame());
+				add.getFrame().setVisible(true);
+			}
+		} catch (Exception ex) {
+			System.out.println("can't delete");
 		}
 	}
 
@@ -80,7 +95,12 @@ public class UserTableController implements MouseListener, InternalFrameListener
 
 	@Override
 	public void internalFrameOpened(InternalFrameEvent e) {
-
+		System.out.println(e.getInternalFrame().getTitle());
+		e.getInternalFrame().setLocation((int) ((head_controll.getContainer().getView().getWidth() - e.getInternalFrame().getWidth()) / 2),
+				(int) ((head_controll.getContainer().getView().getHeight() - e.getInternalFrame().getHeight()) / 2));
+		e.getInternalFrame().setFocusable(true);
+		e.getInternalFrame().requestFocus();
+		e.getInternalFrame().toFront();
 	}
 
 	@Override
@@ -113,5 +133,26 @@ public class UserTableController implements MouseListener, InternalFrameListener
 	@Override
 	public void internalFrameDeactivated(InternalFrameEvent e) {
 
+	}
+
+	@Override
+	public void insertUpdate(DocumentEvent e) {
+		if (!view.getSearch().getText().isEmpty() && !view.getSearch().getText().equals(view.getSearch().getShouldbe())){
+			model.searching();
+		}
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent e) {
+		if (!view.getSearch().getText().isEmpty() && !view.getSearch().getText().equals(view.getSearch().getShouldbe())){
+			model.searching();
+		}
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+		if (!view.getSearch().getText().isEmpty() && !view.getSearch().getText().equals(view.getSearch().getShouldbe())){
+			model.searching();
+		}
 	}
 }
