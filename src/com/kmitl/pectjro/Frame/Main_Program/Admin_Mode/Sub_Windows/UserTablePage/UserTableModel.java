@@ -50,11 +50,13 @@ public class UserTableModel implements Admin_Table_Model {
 		SwingWorker<Void, Void> load = new SwingWorker<Void, Void>() {
 			@Override
 			protected Void doInBackground() throws Exception {
+				view.getRefresh().setEnabled(false);
 				view.getModel().setRowCount(0);
 				Connection con = DBConnect.createConnect();
 				GetInfomation got = new GetInfomation(con);
 				controller.setUserData(got.load_AllUser());
 				setTable();
+				view.getRefresh().setEnabled(true);
 				return null;
 			}
 		};
@@ -68,13 +70,6 @@ public class UserTableModel implements Admin_Table_Model {
 			view.getModel().addRow(info);
 		}
 		view.repaint();
-	}
-
-	public boolean checkDoubleClick(int row){
-		if (this.row != row){count = 0;}
-		this.row = row;
-		count += 1;
-		return count == 2;
 	}
 
 	public void searching(){

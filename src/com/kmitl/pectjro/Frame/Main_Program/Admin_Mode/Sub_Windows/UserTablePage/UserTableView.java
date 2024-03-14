@@ -30,7 +30,7 @@ public class UserTableView extends Table_Page {
         table = new JTable() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false;
+                return (column == 6 || column == 7 || column == 8 || column == 9);
             }
 
             @Override

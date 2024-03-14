@@ -3,14 +3,11 @@ package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePag
 import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 import com.kmitl.pectjro.Frame.Tools.Image_Resizer;
-
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
 
-public class UserEdit {
+public class UserView {
 	// Attribute
 	private JInternalFrame frame;
 	private JPanel main_panel;
@@ -19,7 +16,7 @@ public class UserEdit {
 	private JTextField first, last, username, pass, gmail;
 
 	// Constructor
-	public UserEdit(User_Template user) {
+	public UserView(User_Template user) {
 		frame = new JInternalFrame("User Profile", true, true, false);
 		main_panel = new JPanel(new GridBagLayout());
 		frame.setSize(400, 550);

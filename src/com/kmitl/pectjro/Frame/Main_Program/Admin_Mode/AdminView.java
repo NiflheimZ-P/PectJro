@@ -1,8 +1,6 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode;
 
-import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
-import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage.UserEdit;
 import com.kmitl.pectjro.Frame.Tools.JDesktopBG;
 
 import javax.swing.*;

@@ -1,5 +1,8 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage;
 
+import com.kmitl.pectjro.Database.Connection.DBConnect;
+import com.kmitl.pectjro.Database.UpdateTable;
+import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 import com.kmitl.pectjro.Frame.Tools.Image_Resizer;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
@@ -9,9 +12,17 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 
-public class UserAdd {
+public class UserAdd implements DocumentListener, ActionListener {
     // Attribute
     private JInternalFrame frame;
     private JPanel main_panel, west_panel, center, south_panel;
@@ -20,9 +31,13 @@ public class UserAdd {
     private JInfoGet first, last, username, gmail;
     private JPassGet pass, confirm_pass;
     private JCheckBox admin;
+    private String path;
+    private UserTableController controller;
 
     // Constructor
-    public UserAdd() {
+    public UserAdd(UserTableController controller){
+        this.controller = controller;
+
         frame = new JInternalFrame("Add new user", true, true, false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(600, 400);
@@ -38,6 +53,7 @@ public class UserAdd {
         west_panel.add(image, new Constraints(0, 1, 1, 0, new Insets(20, 20, 20, 20)));
 
         chooser = new JButton("Choose image");
+        chooser.addActionListener(this);
         west_panel.add(chooser, new Constraints(0, 2, 1, 1, GridBagConstraints.PAGE_START, new Insets(0, 20, 0, 20)));
 
         first = new JInfoGet("Firstname"); last = new JInfoGet("Lastname");
@@ -49,6 +65,9 @@ public class UserAdd {
         first.setPreferredSize(new Dimension(185, 40)); last.setPreferredSize(new Dimension(185, 40));
         gmail.setPreferredSize(new Dimension(380, 40)); username.setPreferredSize(new Dimension(185, 40));
         pass.setPreferredSize(new Dimension(185, 40)); confirm_pass.setPreferredSize(new Dimension(185, 40));
+
+        first.getDocument().addDocumentListener(this); last.getDocument().addDocumentListener(this); gmail.getDocument().addDocumentListener(this);
+        username.getDocument().addDocumentListener(this); pass.getDocument().addDocumentListener(this); confirm_pass.getDocument().addDocumentListener(this);
 
         center.setBorder(new CompoundBorder(
                 new EmptyBorder(10, 10, 0, 10),
@@ -63,7 +82,10 @@ public class UserAdd {
         center.add(admin, new Constraints(0, 5, 2, 1, 1, 1, 21, new Insets(0, 5, 0, 0)));
 
         save = new JButton("Save");
+        save.setEnabled(false);
+        save.addActionListener(this);
         cancel = new JButton("Cancel");
+        cancel.addActionListener(this);
 
         south_panel.add(save);
         south_panel.add(cancel);
@@ -78,5 +100,79 @@ public class UserAdd {
     // Accessor
     public JInternalFrame getFrame() {
         return frame;
+    }
+
+    // Methods
+    public boolean checkEmpty(){
+        return (first.getText().isEmpty() && last.getText().isEmpty() && gmail.getText().isEmpty() && username.getText().isEmpty()
+        && pass.getMyPass().isEmpty() && confirm_pass.getMyPass().isEmpty());
+    }
+
+    public boolean checkPass(){
+        return (pass.getMyPass().equals(confirm_pass.getMyPass()));
+    }
+
+    public boolean checkGmail(){
+        return (gmail.getText().contains("@") && gmail.getText().contains("."));
+    }
+
+    public void checkSave(){
+		save.setEnabled(!checkEmpty() && checkPass() && checkGmail());
+    }
+
+    public void adduser() {
+        SwingWorker<Void, Void> saveUser = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                try (InputStream pic = new FileInputStream(path)){
+                    Connection con = DBConnect.createConnect();
+                    UpdateTable addUser = new UpdateTable(con);
+                    addUser.addUserData(username.getText(), gmail.getText(), pass.getMyPass(), first.getText(), last.getText(), pic, admin.isSelected());
+                    controller.getModel().loadData();
+                    frame.dispose();
+                } catch (FileNotFoundException ex) {
+                    JOptionPane.showMessageDialog(null, "File not found.", "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (IOException io) {
+                    JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (SQLException ed) {
+                    JOptionPane.showMessageDialog(null, "this email is already in use", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                return null;
+            }
+        };
+        saveUser.execute();
+    }
+
+    // Listener
+    @Override
+    public void actionPerformed(ActionEvent e){
+        if (e.getActionCommand().equals("Save")) {
+            adduser();
+        } else if (e.getActionCommand().equals("Cancel")) {
+            frame.dispose();
+        } else if (e.getActionCommand().equals("Choose image")) {
+            JFileChooser choose = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(".IMAGE", "jpg", "gif", "png");
+            choose.addChoosableFileFilter(filter);
+            if (choose.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                path = choose.getSelectedFile().getAbsolutePath();
+                image.setImage(new ImageIcon(path));
+            }
+        }
+    }
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        checkSave();
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        checkSave();
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        checkSave();
     }
 }
