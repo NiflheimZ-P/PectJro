@@ -3,48 +3,45 @@ package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Feedback_Pag
 import com.kmitl.pectjro.Frame.Tools.Image_Resizer;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 
 public class user_feedback extends JPanel {
-    private JTextArea user_name, user_message;
+    private JTextArea name, message;
+    private Image_Resizer image;
+    private JPanel north;
 
-    private JPanel pl;
+    public user_feedback(String username ,String usermessage, String path ){
+        super();
+        name = new JTextArea(username);
+        message = new JTextArea(usermessage);
+        image = new Image_Resizer(new ImageIcon(path), 50, 50);
+        image.setBorder(new MatteBorder(1, 1, 1, 1, Color.gray));
+        north = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        this.setLayout(new BorderLayout(0, 5));
 
-    public user_feedback(String username ,String usermessage, String userImage ){
+        name.setPreferredSize(new Dimension(400, 30));
+        message.setLineWrap(true);
+        north.add(image); north.add(name);
 
-        pl = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        ImageIcon icon = new ImageIcon("resources/Images/aunkung.jpeg");
+        this.add(message);
+        this.add(north, BorderLayout.NORTH);
 
-        user_name = new JTextArea(); user_message = new JTextArea();
+        name.setFont(new Font("", Font.BOLD, 20));
+        message.setFont(new Font("", Font.PLAIN, 15));
 
-        user_message.setPreferredSize(new Dimension(500,150));
-
-        this.setLayout(new BorderLayout(1,6));
-        this.add(pl,BorderLayout.NORTH);
-        this.add(user_message,BorderLayout.CENTER);
-
-        ////
-
-        pl.add(new Image_Resizer(icon, 80,60));
-        pl.add(user_name);
-        user_name.setFont(new Font("",Font.PLAIN,28));
-        user_message.setFont(new Font("", Font.PLAIN,14));
-
-        /// setter
-        user_message.setText(usermessage);
-        user_name.setText(username);
-        icon.setImage(new ImageIcon(userImage).getImage());
-
-        /////////Test
-
-        //user_message.setText("Message --- EOFHWAEFJIOFJassweiopFJ0WEIOPFJASSWEIOPFJA90FJawe0iopfjAWEIOPFJAWEIasdfAdgrfxheweghwjkghasghasjkhgasjkl.ghasjghasdughasdg;hasweuighawerui;gwGH    WGHQWUIOGHWUIOHG    WUIOhgwurijSJGHBUIOAJWRHGUA;HWRGUIOHASRJKUGHBAUSJFGHSUIKFGHASDLDRYUIHLDGASUKGHASUIGASUGHUIASLRGHYUASGHEUASGHFASFGHAWEUIFGASEUIFGWUIEGF;WUgua;qwe;h;OPFAWEIOFWEAio");
-        //user_name.setText("AuonAuon");
-
-        user_message.setLineWrap(true);
-        user_name.setEditable(false);
-        user_message.setEditable(false);
-        //////
-        this.setBorder(BorderFactory.createMatteBorder(0,0,1,0,Color.gray));
+        name.setBackground(Color.lightGray);
+        message.setBackground(Color.lightGray);
+        north.setBackground(Color.lightGray);
+        this.setBackground(Color.lightGray);
+        this.setBorder(new CompoundBorder(
+                new MatteBorder(1, 1, 1, 1, Color.gray),
+                new EmptyBorder(10, 10, 20, 10)
+        ));
     }
 
 }
