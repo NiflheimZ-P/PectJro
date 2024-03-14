@@ -37,6 +37,7 @@ public class UserAdd implements DocumentListener, ActionListener {
     // Constructor
     public UserAdd(UserTableController controller){
         this.controller = controller;
+        path = "resources/Images/aunkung.jpeg";
 
         frame = new JInternalFrame("Add new user", true, true, false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -147,6 +148,7 @@ public class UserAdd implements DocumentListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         if (e.getActionCommand().equals("Save")) {
+            System.out.println("save");
             adduser();
         } else if (e.getActionCommand().equals("Cancel")) {
             frame.dispose();
