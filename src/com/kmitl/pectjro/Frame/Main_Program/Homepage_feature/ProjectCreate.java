@@ -8,8 +8,8 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
  *
  * @author Insi
  */
+import com.github.lgooddatepicker.components.DatePicker;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
-import com.toedter.calendar.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -19,7 +19,7 @@ public class ProjectCreate {
     private JButton b_photo, b_create, b_back;
     private JLabel picture, l1, l2, l3, l4;
     private JInfoGet projectname;
-    private JDateChooser d1, d2;
+    private DatePicker d1, d2;
     public ProjectCreate(){
         ImageIcon icon = null;
         icon = new ImageIcon("resources/Images/aunkung.jpeg");
@@ -47,8 +47,8 @@ public class ProjectCreate {
         l4 = new JLabel("End");
         projectname = new JInfoGet("ProjectName");
 
-        d1 = new JDateChooser();
-        d2 = new JDateChooser();
+        d1 = new DatePicker();
+        d2 = new DatePicker();
 
         fr.add(p_main);
         p_main.setLayout(new BorderLayout());
