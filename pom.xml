@@ -31,13 +31,12 @@
             <artifactId>json</artifactId>
             <version>20240205</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.toedter/jcalendar -->
+        <!-- https://mvnrepository.com/artifact/com.github.lgooddatepicker/LGoodDatePicker -->
         <dependency>
-            <groupId>com.toedter</groupId>
-            <artifactId>jcalendar</artifactId>
-            <version>1.4</version>
+            <groupId>com.github.lgooddatepicker</groupId>
+            <artifactId>LGoodDatePicker</artifactId>
+            <version>11.2.1</version>
         </dependency>
-        <!-- Thanks for using https://jar-download.com -->
         <!-- https://mvnrepository.com/artifact/jfree/jfreechart -->
         <dependency>
             <groupId>jfree</groupId>

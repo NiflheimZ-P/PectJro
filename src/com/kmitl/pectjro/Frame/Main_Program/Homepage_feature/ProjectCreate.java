@@ -10,9 +10,9 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
  */
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import com.toedter.calendar.*;
-import java.net.URL;
 import java.awt.*;
 import javax.swing.*;
+
 public class ProjectCreate {
     private JFrame fr;
     private JPanel p_main, p_zone1, p_zone2, p_zone11, p_zone12, p_zone21, p_zone22, p_zone23, p_zone221, p_zone222;
@@ -23,7 +23,6 @@ public class ProjectCreate {
     public ProjectCreate(){
         ImageIcon icon = null;
         icon = new ImageIcon("resources/Images/aunkung.jpeg");
-
 
         fr = new JFrame();
         p_main = new JPanel();
