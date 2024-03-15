@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-public class UserTableController implements TableModelListener, InternalFrameListener, ActionListener, DocumentListener {
+public class UserTableController implements TableModelListener, ActionListener, DocumentListener {
 	// Attribute
 	private UserTableView view;
 	private UserTableModel model;
@@ -25,7 +25,7 @@ public class UserTableController implements TableModelListener, InternalFrameLis
 		this.view = new UserTableView();
 		this.model = new UserTableModel(this, view);
 
-		view.addInternalFrameListener(this);
+		view.addInternalFrameListener(head_controll);
 		view.getDelete().addActionListener(this);
 		view.getAdd_new().addActionListener(this);
 		view.getSearch().getDocument().addDocumentListener(this);
@@ -48,7 +48,7 @@ public class UserTableController implements TableModelListener, InternalFrameLis
 				model.DeleteUser(String.valueOf(view.getModel().getValueAt(view.getTable().getSelectedRow(), 2)), view.getTable().getSelectedRow());
 			} else if (e.getActionCommand().equals("Add New")){
 				UserAdd add = new UserAdd(this);
-				add.getFrame().addInternalFrameListener(this);
+				add.getFrame().addInternalFrameListener(head_controll);
 				head_controll.getContainer().getView().add(add.getFrame());
 				add.getFrame().setVisible(true);
 			} else if (e.getActionCommand().equals("Refresh")) {model.loadData();}
@@ -65,47 +65,6 @@ public class UserTableController implements TableModelListener, InternalFrameLis
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-	}
-
-	@Override
-	public void internalFrameOpened(InternalFrameEvent e) {
-		e.getInternalFrame().setLocation((int) ((head_controll.getContainer().getView().getWidth() - e.getInternalFrame().getWidth()) / 2),
-				(int) ((head_controll.getContainer().getView().getHeight() - e.getInternalFrame().getHeight()) / 2));
-		e.getInternalFrame().setFocusable(true);
-		e.getInternalFrame().requestFocus();
-		e.getInternalFrame().toFront();
-	}
-
-	@Override
-	public void internalFrameClosing(InternalFrameEvent e) {
-		head_controll.getOpened().remove(e.getInternalFrame());
-		head_controll.getContainer().getView().remove(e.getInternalFrame());
-		head_controll.getContainer().getView().repaint();
-	}
-
-	@Override
-	public void internalFrameClosed(InternalFrameEvent e) {
-
-	}
-
-	@Override
-	public void internalFrameIconified(InternalFrameEvent e) {
-
-	}
-
-	@Override
-	public void internalFrameDeiconified(InternalFrameEvent e) {
-
-	}
-
-	@Override
-	public void internalFrameActivated(InternalFrameEvent e) {
-
-	}
-
-	@Override
-	public void internalFrameDeactivated(InternalFrameEvent e) {
-
 	}
 
 	@Override

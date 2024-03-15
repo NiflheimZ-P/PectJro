@@ -55,6 +55,9 @@ public class UserTableModel implements Admin_Table_Model {
 				UserTable got = new UserTable(con);
 				controller.setUserData(got.load_AllUser());
 				setTable();
+				if (!view.getSearch().getText().equals(view.getSearch().getShouldbe())){
+					searching();
+				}
 				view.getRefresh().setEnabled(true);
 				return null;
 			}
@@ -72,11 +75,11 @@ public class UserTableModel implements Admin_Table_Model {
 	}
 
 	public void searching(){
-		String word = view.getSearch().getText();
+		String word = view.getSearch().getText().toLowerCase();
 		view.getModel().setRowCount(0);
 		for (User_Template i : controller.getUserData()){
-			if (String.valueOf(i.id).contains(word) || i.username.contains(word) || i.gmail.contains(word) ||
-			i.firstname.contains(word) || i.lastname.contains(word)){
+			if (String.valueOf(i.id).contains(word) || i.username.toLowerCase().contains(word) || i.gmail.toLowerCase().contains(word) ||
+					i.firstname.toLowerCase().contains(word) || i.lastname.toLowerCase().contains(word)){
 				Object[] info = {i.id, i.username, i.gmail, i.password, i.firstname, i.lastname, i.project_done, i.project_expired, i.project_ontime, i.admin};
 				view.getModel().addRow(info);
 			}

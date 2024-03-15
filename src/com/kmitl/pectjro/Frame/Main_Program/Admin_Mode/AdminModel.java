@@ -12,4 +12,6 @@ public class AdminModel {
 		this.view = view;
 		this.controller = controller;
 	}
+
+	// Methods
 }

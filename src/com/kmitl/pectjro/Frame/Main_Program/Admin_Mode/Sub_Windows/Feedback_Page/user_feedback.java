@@ -1,5 +1,7 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Feedback_Page;
 
+import com.kmitl.pectjro.Frame.Templates.Feedback_Template;
+import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Tools.Image_Resizer;
 
 import javax.swing.*;
@@ -15,17 +17,18 @@ public class user_feedback extends JPanel {
     private Image_Resizer image;
     private JPanel north;
 
-    public user_feedback(String username ,String usermessage, String path ){
+    public user_feedback(Feedback_Template user){
         super();
-        name = new JTextArea(username);
-        message = new JTextArea(usermessage);
-        image = new Image_Resizer(new ImageIcon(path), 50, 50);
+        name = new JTextArea(user.username);
+        message = new JTextArea(user.word);
+        image = new Image_Resizer(new ImageIcon(user.image), 50, 50);
         image.setBorder(new MatteBorder(1, 1, 1, 1, Color.gray));
         north = new JPanel(new FlowLayout(FlowLayout.LEFT));
         this.setLayout(new BorderLayout(0, 5));
 
         name.setPreferredSize(new Dimension(400, 30));
         message.setLineWrap(true);
+        message.setWrapStyleWord(true);
         north.add(image); north.add(name);
 
         this.add(message);

@@ -23,7 +23,7 @@ public class MainController implements WindowListener {
 		this.model = new MainModel(view, this);
 		login = new LoginController(this);
 		admin = new AdminController(this);
-		admin.getUserTable().getModel().loadData();
+
 		remember = false;
 		view.getFrame().addWindowListener(this);
 	}
