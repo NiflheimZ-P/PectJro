@@ -12,15 +12,15 @@ public abstract class Table_Page extends JInternalFrame {
 	protected final JButton add_new, refresh, delete, view;
 	protected JInfoGet search;
 	protected DefaultTableModel model;
-	public Table_Page() {
+	public Table_Page(int width, int height) {
 		super("", true, true, false);
 		this.setLayout(new BorderLayout());
 		this.setFocusable(true);
 		this.requestFocus();
-		this.setSize(1100, 500);
+		this.setSize(width, height);
 
 		add_new = new JButton("Add New");
-		refresh = new JButton("Refresh");
+		refresh = new JButton("Refresh"); refresh.setEnabled(false);
 		delete = new JButton("Delete");
 		view = new JButton("View");
 

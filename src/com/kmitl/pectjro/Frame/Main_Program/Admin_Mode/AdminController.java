@@ -4,6 +4,7 @@ import com.kmitl.pectjro.Frame.Groups_interface.MainPage_Controller;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Admin_controls;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Feedback_Page.FeedbackController;
+import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.ProjectTablePage.ProjectTableController;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage.UserTableController;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage.UserTableView;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
@@ -23,6 +24,7 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 	private MainController main_controller;
 	private Admin_controls admin_control;
 	private UserTableController userTable;
+	private ProjectTableController projectTable;
 	private ArrayList<JInternalFrame> opened;
 	private FeedbackController feedback;
 
@@ -42,9 +44,21 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 		feedback = new FeedbackController(this);
 		feedback.getModel().loadData();
 
+		projectTable = new ProjectTableController(this);
+
 		view.getView().add(admin_control.getFrame());
 		admin_control.getUser().addActionListener(this);
 		admin_control.getFeedback().addActionListener(this);
+		admin_control.getProject().addActionListener(this);
+	}
+
+	// Methods
+	public void addNew(JInternalFrame add){
+		getContainer().getView().add(add);
+		add.setLocation(
+				(getContainer().getView().getWidth() - add.getWidth()) / 2,
+				(getContainer().getView().getHeight() - add.getHeight()) / 2);
+		add.setVisible(true);
 	}
 
 	// Accessor
@@ -80,11 +94,23 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 				view.getView().add(feedback.getView().getFrame());
 				feedback.getView().getFrame().moveToFront();
 			} else { feedback.getView().getFrame().toFront(); }
+		} else if (e.getSource().equals(admin_control.getProject())){
+			if (!opened.contains(projectTable.getView())) {
+				opened.add(projectTable.getView());
+				projectTable.getView().setLocation(
+						(main_controller.getView().getFrame().getWidth() - feedback.getView().getFrame().getWidth()) / 2,
+						(main_controller.getView().getFrame().getHeight() - feedback.getView().getFrame().getHeight()) / 2
+				);
+				projectTable.getView().setVisible(true);
+				view.getView().add(projectTable.getView());
+				projectTable.getView().moveToFront();
+			} else { feedback.getView().getFrame().toFront(); }
 		}
 	}
 
 	@Override
 	public void internalFrameOpened(InternalFrameEvent e) {
+
 	}
 
 	@Override

@@ -61,7 +61,6 @@ public class UserView {
 		main_panel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
 
 		frame.add(main_panel);
-		frame.setVisible(true);
 	}
 
 	// Accessor

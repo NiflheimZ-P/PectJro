@@ -15,13 +15,13 @@ public class UserTableController implements TableModelListener, ActionListener, 
 	// Attribute
 	private UserTableView view;
 	private UserTableModel model;
-	private AdminController head_controll;
+	private AdminController head_control;
 	private ArrayList<User_Template> userData;
 
 
 	// Constructor
 	public UserTableController(AdminController head_controll) {
-		this.head_controll = head_controll;
+		this.head_control = head_controll;
 		this.view = new UserTableView();
 		this.model = new UserTableModel(this, view);
 
@@ -48,22 +48,16 @@ public class UserTableController implements TableModelListener, ActionListener, 
 				model.DeleteUser(String.valueOf(view.getModel().getValueAt(view.getTable().getSelectedRow(), 2)), view.getTable().getSelectedRow());
 			} else if (e.getActionCommand().equals("Add New")){
 				UserAdd add = new UserAdd(this);
-				add.getFrame().addInternalFrameListener(head_controll);
-				head_controll.getContainer().getView().add(add.getFrame());
-				add.getFrame().setVisible(true);
+				add.getFrame().addInternalFrameListener(head_control);
+				head_control.addNew(add.getFrame());
 			} else if (e.getActionCommand().equals("Refresh")) {model.loadData();}
 			else if (e.getActionCommand().equals("View")){
 				model.setCount(0);
-				UserView profile = new UserView(userData.get(view.getTable().getSelectedRow()));
-				profile.getFrame().setLocation(
-						(head_controll.getContainer().getView().getWidth() - profile.getFrame().getWidth()) / 2,
-						(head_controll.getContainer().getView().getHeight() - profile.getFrame().getHeight()) / 2
-				);
-				head_controll.getContainer().getView().add(profile.getFrame());
-				profile.getFrame().toFront();
+				UserView add = new UserView(userData.get(view.getTable().getSelectedRow()));
+				head_control.addNew(add.getFrame());
 			}
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Please select user first.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

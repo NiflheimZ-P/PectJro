@@ -56,15 +56,13 @@ public class FeedbackModel {
 		int a = 0;
 		String word = view.getSearch().getText().toLowerCase();
 
-		System.out.println("in");
-		System.out.println(word);
-
 		for (Feedback_Template i: controller.getFeed()){
 			if (i.username.toLowerCase().contains(word) || i.username.toUpperCase().contains(word)){
 				view.getComment().add(new user_feedback(i), new Constraints(0, a, 1, 1, new Insets(0, 0, 20, 0)));
 				a++;
 			}
 		}
+
 		javax.swing.SwingUtilities.invokeLater(() -> view.getScroll().getVerticalScrollBar().setValue(0));
 		view.getFrame().revalidate();
 		view.getFrame().repaint();
