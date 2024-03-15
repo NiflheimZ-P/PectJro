@@ -57,7 +57,7 @@ public class ProjectAdd implements ActionListener {
 		center.add(end, new Constraints(1, 5, 1, 1, new Insets(0, 0, 0, 0)));
 		start.setPreferredSize(new Dimension(200, 35)); end.setPreferredSize(new Dimension(200, 35));
 
-		create = new JButton("Create"); create.setEnabled(true); create.addActionListener(this);
+		create = new JButton("Create"); create.setEnabled(false); create.addActionListener(this);
 		cancel = new JButton("Cancel"); cancel.addActionListener(this);
 		south.add(create); south.add(cancel);
 		south.setBorder(new EmptyBorder(20, 10, 10, 10));
@@ -70,8 +70,7 @@ public class ProjectAdd implements ActionListener {
 	public void actionPerformed(ActionEvent e){
 		if (e.getActionCommand().equals("Cancel")){frame.dispose();}
 		else if (e.getActionCommand().equals("Create")){
-			LocalDate a = LocalDate.now();
-			System.out.println(a);
+			// TODO
 		}
 	}
 

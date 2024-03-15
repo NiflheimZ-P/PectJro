@@ -47,7 +47,7 @@ public class MainController implements WindowListener {
 			model.loadCache();
 			model.changePage(new home_page());
 		} else {
-			model.changePage(admin.getContainer());
+			model.changePage(login.getContainer());
 		}
 	}
 
