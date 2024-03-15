@@ -1,8 +1,7 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage;
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.UpdateTable;
-import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
+import com.kmitl.pectjro.Database.UserTable;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 import com.kmitl.pectjro.Frame.Tools.Image_Resizer;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
@@ -127,7 +126,7 @@ public class UserAdd implements DocumentListener, ActionListener {
             protected Void doInBackground() throws Exception {
                 try (InputStream pic = new FileInputStream(path)){
                     Connection con = DBConnect.createConnect();
-                    UpdateTable addUser = new UpdateTable(con);
+                    UserTable addUser = new UserTable(con);
                     addUser.addUserData(username.getText(), gmail.getText(), pass.getMyPass(), first.getText(), last.getText(), pic, admin.isSelected());
                     controller.getModel().loadData();
                     frame.dispose();

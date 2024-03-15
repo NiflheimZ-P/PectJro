@@ -5,16 +5,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.SQLException;
-import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.GetInfomation;
-import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
+
 import com.kmitl.pectjro.Frame.Groups_interface.LoginPage;
-import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
-import com.kmitl.pectjro.Frame.Main_Program.home_page;
 import com.kmitl.pectjro.Frame.Tools.*;
 
 public class Login_Page implements LoginPage {

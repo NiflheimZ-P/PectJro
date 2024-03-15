@@ -7,6 +7,7 @@ import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage.UserTableView;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,14 +20,14 @@ public class AdminController implements MainPage_Controller, ActionListener {
 	private MainController main_controller;
 	private Admin_controls admin_control;
 	private UserTableController userTable;
-	private ArrayList<Container> opened;
+	private ArrayList<JInternalFrame> opened;
 
 	// Constructor
 	public AdminController(MainController main_controller){
 		this.opened = new ArrayList<>();
 		this.main_controller = main_controller;
 		view = new AdminView();
-		model = new AdminModel(view);
+		model = new AdminModel(view, this);
 		admin_control = new Admin_controls(main_controller.getView().getFrame().getWidth(),
 				main_controller.getView().getFrame().getHeight()
 		);
@@ -42,7 +43,7 @@ public class AdminController implements MainPage_Controller, ActionListener {
 		return view;
 	}
 	public UserTableController getUserTable() {return userTable;}
-	public ArrayList<Container> getOpened() {return opened;}
+	public ArrayList<JInternalFrame> getOpened() {return opened;}
 
 	// Listener
 	@Override

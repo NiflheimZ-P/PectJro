@@ -1,8 +1,7 @@
 package com.kmitl.pectjro.Frame.Main_Program.Main_Frame;
 
-import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
+import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.AdminController;
-import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.AdminView;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginController;
 import com.kmitl.pectjro.Frame.Main_Program.home_page;
 import java.awt.event.WindowEvent;

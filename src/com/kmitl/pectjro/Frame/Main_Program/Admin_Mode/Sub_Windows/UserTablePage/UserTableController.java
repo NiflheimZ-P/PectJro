@@ -1,8 +1,8 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage;
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.UpdateTable;
-import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
+import com.kmitl.pectjro.Database.UserTable;
+import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.AdminController;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -135,7 +135,7 @@ public class UserTableController implements TableModelListener, InternalFrameLis
 			@Override
 			protected Void doInBackground() throws Exception {
 				Connection con = DBConnect.createConnect();
-				UpdateTable update = new UpdateTable(con);
+				UserTable update = new UserTable(con);
 				int i = view.getTable().getSelectedRow();
 				switch (e.getColumn()){
 					case 6:

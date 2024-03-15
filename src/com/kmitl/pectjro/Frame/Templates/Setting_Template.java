@@ -1,8 +1,7 @@
-package com.kmitl.pectjro.Frame.Cache_Templates;
+package com.kmitl.pectjro.Frame.Templates;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Setting_Template implements Serializable{
     public String host;

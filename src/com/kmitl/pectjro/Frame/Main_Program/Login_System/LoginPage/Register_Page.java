@@ -1,18 +1,11 @@
 package com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginPage;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
-import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.UpdateTable;
 import com.kmitl.pectjro.Frame.Groups_interface.LoginPage;
 import com.kmitl.pectjro.Frame.Tools.*;
 

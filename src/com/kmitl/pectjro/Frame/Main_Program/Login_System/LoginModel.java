@@ -1,17 +1,13 @@
 package com.kmitl.pectjro.Frame.Main_Program.Login_System;
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.GetInfomation;
-import com.kmitl.pectjro.Database.UpdateTable;
-import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
+import com.kmitl.pectjro.Database.UserTable;
+import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginPage.Login_Page;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginPage.Register_Page;
 import com.kmitl.pectjro.Frame.Main_Program.home_page;
 import javax.swing.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -35,13 +31,12 @@ public class LoginModel {
 			protected Void doInBackground() throws Exception {
 				String gmail = login.getEmail().getText();
 				String pass = login.getPass().getMyPass();
-				User_Template thisGmail;
 
 				File remember = new File("User_Cache");
 				try (ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(remember))) {
 					Connection con = DBConnect.createConnect();
-					GetInfomation data = new GetInfomation(con);
-					thisGmail = data.getUserData(gmail);
+					UserTable data = new UserTable(con);
+					User_Template thisGmail = data.getUserData(gmail);
 
 					if(!pass.equals(thisGmail.password)){
 						JOptionPane.showMessageDialog(null, "Password incorrect", "Error", JOptionPane.ERROR_MESSAGE);
@@ -58,6 +53,7 @@ public class LoginModel {
 					JOptionPane.showMessageDialog(null, "The email address doesn't exist.", "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (IOException ex) {
 					JOptionPane.showMessageDialog(null, "Cannot access file 'User_Cache'", "Error", JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
 				}
 				return null;
 			}
@@ -73,10 +69,12 @@ public class LoginModel {
 		String last = regis.getLastname_field().getText();
 		try {
 			Connection con = DBConnect.createConnect();
-			UpdateTable add = new UpdateTable(con);
+			UserTable add = new UserTable(con);
 			add.addUserData(user, gmail, pass, first, last);
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "this email is already in use", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		} catch (FileNotFoundException e) {
 			return false;
 		}
 		JOptionPane.showMessageDialog(null, "Your account has been created", "Created", JOptionPane.PLAIN_MESSAGE);

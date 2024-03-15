@@ -1,6 +1,6 @@
 package com.kmitl.pectjro.Database.Connection;
 
-import com.kmitl.pectjro.Frame.Cache_Templates.Setting_Template;
+import com.kmitl.pectjro.Frame.Templates.*;
 import java.sql.*;
 import java.io.*;
 import java.util.ArrayList;

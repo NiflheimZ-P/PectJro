@@ -1,7 +1,7 @@
 package com.kmitl.pectjro.Frame.SetupPage;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.kmitl.pectjro.Frame.Cache_Templates.Setting_Template;
+import com.kmitl.pectjro.Frame.Templates.Setting_Template;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

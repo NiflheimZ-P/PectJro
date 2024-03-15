@@ -1,9 +1,8 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage;
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.GetInfomation;
-import com.kmitl.pectjro.Database.UpdateTable;
-import com.kmitl.pectjro.Frame.Cache_Templates.User_Template;
+import com.kmitl.pectjro.Database.UserTable;
+import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Groups_interface.Admin_Table_Model;
 import javax.swing.*;
 import java.sql.Connection;
@@ -30,7 +29,7 @@ public class UserTableModel implements Admin_Table_Model {
 			@Override
 			protected Void doInBackground() throws Exception {
 				Connection con = DBConnect.createConnect();
-				UpdateTable delete = new UpdateTable(con);
+				UserTable delete = new UserTable(con);
 				try {
 					delete.deleteUser(gmail);
 					JOptionPane.showMessageDialog(null, "Deleted account", "Successful", JOptionPane.PLAIN_MESSAGE);
@@ -53,7 +52,7 @@ public class UserTableModel implements Admin_Table_Model {
 				view.getRefresh().setEnabled(false);
 				view.getModel().setRowCount(0);
 				Connection con = DBConnect.createConnect();
-				GetInfomation got = new GetInfomation(con);
+				UserTable got = new UserTable(con);
 				controller.setUserData(got.load_AllUser());
 				setTable();
 				view.getRefresh().setEnabled(true);

@@ -10,7 +10,7 @@ import javax.swing.border.MatteBorder;
 import java.awt.*;
 
 public class Feedback{
-    private JFrame fr;
+    private JInternalFrame fr;
 
     private JPanel pl_select, pl_Main_FeedBack, north;
 
@@ -18,7 +18,7 @@ public class Feedback{
     public Feedback() {
 		int a = 10;
 
-        fr = new JFrame("Feedback");
+        fr = new JInternalFrame("Feedback", true, true, false);
         text_Area = new JTextArea();
         pl_select = new JPanel(new GridBagLayout());
 		north = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -51,10 +51,6 @@ public class Feedback{
 		fr.setFocusable(true);
 		fr.requestFocus();
 		fr.setSize(650, 600);
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fr.setLocationRelativeTo(null);
-        fr.setVisible(true);
-
     }
     public static void main(String[] args) throws Exception{
         UIManager.setLookAndFeel(new FlatMacLightLaf());
