@@ -52,7 +52,6 @@ public class UserTableController implements TableModelListener, ActionListener, 
 				head_control.addNew(add.getFrame());
 			} else if (e.getActionCommand().equals("Refresh")) {model.loadData();}
 			else if (e.getActionCommand().equals("View")){
-				model.setCount(0);
 				UserView add = new UserView(userData.get(view.getTable().getSelectedRow()));
 				head_control.addNew(add.getFrame());
 			}

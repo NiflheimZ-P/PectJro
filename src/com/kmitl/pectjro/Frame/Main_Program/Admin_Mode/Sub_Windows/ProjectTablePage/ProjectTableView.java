@@ -16,7 +16,7 @@ public class ProjectTableView extends Table_Page {
 	public ProjectTableView() {
 		super(700, 500);
 		this.setTitle("Project Data");
-		String[] columns = {"Id", "Project name", "Start", "End"};
+		String[] columns = {"Id", "Name", "Description", "Start", "End"};
 		this.createTable(columns);
 		view.setText("Edit");
 	}
@@ -45,7 +45,7 @@ public class ProjectTableView extends Table_Page {
 			model.addColumn(name);
 		}
 
-		table.getColumnModel().getColumn(1).setPreferredWidth(200);
+		table.getColumnModel().getColumn(2).setPreferredWidth(200);
 
 		scroll.setViewportView(table);
 		scroll.setBorder(new EmptyBorder(15, 10, 10, 10));
@@ -53,4 +53,7 @@ public class ProjectTableView extends Table_Page {
 	}
 
 	// Accessor
+	public JTable getTable() {return this.table;}
+	public DefaultTableModel getModel() {return this.model;}
+	public JScrollPane getScroll() {return this.scroll;}
 }

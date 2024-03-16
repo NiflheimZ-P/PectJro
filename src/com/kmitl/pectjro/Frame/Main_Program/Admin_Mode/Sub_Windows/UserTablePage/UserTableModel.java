@@ -12,13 +12,9 @@ public class UserTableModel implements Admin_Table_Model {
 	// Attribute
 	private UserTableView view;
 	private UserTableController controller;
-	private int count;
-	private int row;
 
 	// Constructor
 	public UserTableModel(UserTableController controller, UserTableView view){
-		count = 0;
-		row = -1;
 		this.controller = controller;
 		this.view = view;
 	}
@@ -87,16 +83,4 @@ public class UserTableModel implements Admin_Table_Model {
 	}
 
 	// Accessor
-	public int getRow() {
-		return row;
-	}
-	public int getCount() {
-		return count;
-	}
-	public void setRow(int row) {
-		this.row = row;
-	}
-	public void setCount(int count) {
-		this.count = count;
-	}
 }

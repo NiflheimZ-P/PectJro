@@ -43,9 +43,10 @@ public class CreateTable {
             updateData("CREATE TABLE IF NOT EXISTS Project_info (" +
                     "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
                     "Name VARCHAR(50) NOT NULL," +
-                    "Note LONGTEXT," +
+                    "Description MEDIUMTEXT," +
                     "Start DATE NOT NULL," +
-                    "Expired DATE NOT NULL);");
+                    "Expired DATE NOT NULL," +
+                    "Note LONGTEXT);");
             return true;
         } catch (Exception e) {
             return false;}

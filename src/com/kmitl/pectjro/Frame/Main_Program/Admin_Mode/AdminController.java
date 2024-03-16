@@ -45,6 +45,7 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 		feedback.getModel().loadData();
 
 		projectTable = new ProjectTableController(this);
+		projectTable.getModel().loadData();
 
 		view.getView().add(admin_control.getFrame());
 		admin_control.getUser().addActionListener(this);

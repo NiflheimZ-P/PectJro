@@ -147,7 +147,6 @@ public class UserAdd implements DocumentListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         if (e.getActionCommand().equals("Save")) {
-            System.out.println("save");
             adduser();
         } else if (e.getActionCommand().equals("Cancel")) {
             frame.dispose();

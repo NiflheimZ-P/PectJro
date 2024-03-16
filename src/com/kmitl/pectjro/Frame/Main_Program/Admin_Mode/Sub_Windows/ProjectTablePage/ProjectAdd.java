@@ -1,27 +1,38 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.ProjectTablePage;
 
 import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
+import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
+import com.kmitl.pectjro.Database.Connection.DBConnect;
+import com.kmitl.pectjro.Database.ProjectTable;
+import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Date;
 
-public class ProjectAdd implements ActionListener {
+public class ProjectAdd implements ActionListener, DocumentListener, DateChangeListener {
 	// Attribute
 	private JInternalFrame frame;
 	private JPanel main_panel, south, center, north;
 	private JButton create, cancel;
 	private JTextField name, description;
 	private DatePicker start, end;
+	private ProjectTableController controller;
 
 	// Constructor
-	public ProjectAdd() {
+	public ProjectAdd(ProjectTableController controller) {
+		this.controller = controller;
+
 		frame = new JInternalFrame("Add new project", false, true, false);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setSize(600, 400);
@@ -62,15 +73,30 @@ public class ProjectAdd implements ActionListener {
 		south.add(create); south.add(cancel);
 		south.setBorder(new EmptyBorder(20, 10, 10, 10));
 
+		name.getDocument().addDocumentListener(this); description.getDocument().addDocumentListener(this);
+		start.addDateChangeListener(this); end.addDateChangeListener(this);
+
 		frame.add(main_panel);
 	}
 
-	// Listener
-	@Override
-	public void actionPerformed(ActionEvent e){
-		if (e.getActionCommand().equals("Cancel")){frame.dispose();}
-		else if (e.getActionCommand().equals("Create")){
-			// TODO
+	// Methods
+	public boolean checkEmpty(){
+		return (name.getText().isEmpty() || description.getText().isEmpty() || start.getText().isEmpty() || end.getText().isEmpty());
+	}
+
+	public boolean checkDate(){
+		LocalDate begin = start.getDate();
+		LocalDate finish = end.getDate();
+		return (begin.isBefore(finish) || begin.isEqual(finish));
+	}
+
+	public void checkAll() {
+		if (!checkEmpty() && checkDate()){
+			create.setEnabled(true);
+			create.setToolTipText("");
+		} else {
+			create.setEnabled(false);
+			create.setToolTipText("Please insert all data.");
 		}
 	}
 
@@ -82,4 +108,45 @@ public class ProjectAdd implements ActionListener {
 	public JTextField getDescription(){return description;}
 	public DatePicker getStart(){return start;}
 	public DatePicker getEnd(){return end;}
+
+	// Listener
+	@Override
+	public void actionPerformed(ActionEvent e){
+		if (e.getActionCommand().equals("Cancel")){frame.dispose();}
+		else if (e.getActionCommand().equals("Create")){
+			SwingWorker<Void, Void> add = new SwingWorker<Void, Void>() {
+				@Override
+				protected Void doInBackground() throws Exception {
+					Connection con = DBConnect.createConnect();
+					ProjectTable project = new ProjectTable(con);
+					project.addProjectData(name.getText(), description.getText(), Date.valueOf(start.getDate()), Date.valueOf(end.getDate()));
+					controller.getModel().loadData();
+					frame.dispose();
+					System.out.println("Done");
+					return null;
+				}
+			};
+			add.execute();
+		}
+	}
+
+	@Override
+	public void insertUpdate(DocumentEvent e) {
+		checkAll();
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent e) {
+		checkAll();
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+		checkAll();
+	}
+
+	@Override
+	public void dateChanged(DateChangeEvent dateChangeEvent) {
+		checkAll();
+	}
 }
