@@ -2,11 +2,16 @@ package com.kmitl.pectjro.Frame.Main_Program;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
+
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
 
-public class home_page implements View_Getter {
-    private JPanel main_panel;
+public class home_page implements View_Getter, ActionListener {
+    private JFrame main_panel;
 
     private JPanel bg, pn_north, pn_west, pn_east, ctn_pn_task, ctn_pn_calendar, ctn_pn_appraisement, ctn_pn_deadline,
             ctn_pn_deadline_2, pn_north_right, ps_mar_pmain, paneforsearch, up_mar_search, l_mar_search, r_mar_search,
@@ -16,10 +21,9 @@ public class home_page implements View_Getter {
     private JButton bn_task, bn_calendar, bn_appraisement, bn_new, bn_option;
     private JLabel l1, l2, l3, l4;
 
-
     public home_page(){
         //set up
-        main_panel = new JPanel();
+        main_panel = new JFrame();
         bg = new JPanel();
         pn_north = new JPanel();
         pn_west = new JPanel();
@@ -151,14 +155,14 @@ public class home_page implements View_Getter {
             //Label
         l4.setForeground(Color.red);
 
-
-
+        //add event
+        bn_new.addActionListener(this);
 
         //show
-//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        this.setSize(1400, 800);
-//        this.setResizable(false);
-//        this.setVisible(true);
+        main_panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        main_panel.setSize(1400, 800);
+        main_panel.setResizable(false);
+        main_panel.setVisible(true);
     }
 
     public static void main(String[] args) throws Exception{
@@ -169,5 +173,12 @@ public class home_page implements View_Getter {
     @Override
     public Container getView() {
         return main_panel;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(bn_new)){
+            new ProjectCreate();
+        }
     }
 }

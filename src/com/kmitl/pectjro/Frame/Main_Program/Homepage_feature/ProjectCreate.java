@@ -14,7 +14,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class ProjectCreate {
-    private JFrame fr;
+    private JDialog fr;
     private JPanel p_main, p_zone1, p_zone2, p_zone11, p_zone12, p_zone21, p_zone22, p_zone23, p_zone221, p_zone222;
     private JButton b_photo, b_create, b_back;
     private JLabel picture, l1, l2, l3, l4;
@@ -24,7 +24,7 @@ public class ProjectCreate {
         ImageIcon icon = null;
         icon = new ImageIcon("resources/Images/aunkung.jpeg");
 
-        fr = new JFrame();
+        fr = new JDialog();
         p_main = new JPanel();
         p_zone1 = new JPanel();
         p_zone2 = new JPanel();
@@ -95,11 +95,13 @@ public class ProjectCreate {
         p_zone23.add(b_create);
         p_zone23.add(b_back);
 
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         fr.setResizable(false);
         fr.setSize(600,300);
         fr.setVisible(true);
+        fr.setLocation(400,200);
     }
+
     public static void main(String[] args) {
         new ProjectCreate();
     }
