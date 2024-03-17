@@ -2,6 +2,8 @@ package com.kmitl.pectjro.Frame.Main_Program;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Progress;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
 
 import java.awt.*;
@@ -15,11 +17,16 @@ public class home_page implements View_Getter, ActionListener {
 
     private JPanel bg, pn_north, pn_west, pn_east, ctn_pn_task, ctn_pn_calendar, ctn_pn_appraisement, ctn_pn_deadline,
             ctn_pn_deadline_2, pn_north_right, ps_mar_pmain, paneforsearch, up_mar_search, l_mar_search, r_mar_search,
-            s_mar_search;
+            s_mar_search, center_part;
     private JTextField tf_seach_bar;
     private ImageIcon ic_program, ic_profile, ic_task, ic_calendar, ic_appraisement;
     private JButton bn_task, bn_calendar, bn_appraisement, bn_new, bn_option;
     private JLabel l1, l2, l3, l4;
+
+    CardLayout page = new CardLayout();
+
+    private Progress pro;
+    private Profile profile;
 
     public home_page(){
         //set up
@@ -60,10 +67,22 @@ public class home_page implements View_Getter, ActionListener {
         l3 = new JLabel("3");
         l4 = new JLabel("Deadline");
 
+        //feature create
+        pro = new Progress();
+        profile = new Profile();
+
+        //card
+        center_part = new JPanel();
+        center_part.setLayout(page);
+
+        //add to centerpart
+        center_part.add(pro.getFr(),"0");
+        center_part.add(profile.getFr(), "1");
 
         //set center part
         main_panel.setLayout(new BorderLayout());
         main_panel.add(bg);
+        main_panel.add(center_part, BorderLayout.CENTER);
 
 
         //set upper part (pn_north)
@@ -127,24 +146,24 @@ public class home_page implements View_Getter, ActionListener {
 
         //set color
             //Panel
-        bg.setBackground(new Color(0, 0, 0));
-        pn_north.setBackground(new Color(33, 33, 33));
-        up_mar_search.setBackground(new Color(33, 33, 33));
-        l_mar_search.setBackground(new Color(33, 33, 33));
-        r_mar_search.setBackground(new Color(33, 33, 33));
-        s_mar_search.setBackground(new Color(33, 33, 33));
-        pn_north_right.setBackground(new Color(33, 33, 33));
-        l1.setForeground(Color.white);
-        l2.setForeground(Color.white);
+        bg.setBackground(new Color(255,250,250));
+        pn_north.setBackground(new Color(255,248,220));
+        up_mar_search.setBackground(new Color(255,248,220));
+        l_mar_search.setBackground(new Color(255,248,220));
+        r_mar_search.setBackground(new Color(255,248,220));
+        s_mar_search.setBackground(new Color(255,248,220));
+        pn_north_right.setBackground(new Color(255,248,220));
+        l1.setForeground(Color.BLACK);
+        l2.setForeground(Color.BLACK);
 
-        pn_west.setBackground(new Color(18, 18, 18));
-        ctn_pn_task.setBackground(new Color(205, 198, 195));
+        pn_west.setBackground(new Color(255,255,240));
+        ctn_pn_task.setBackground(new Color(255,255,240));
         ctn_pn_calendar.setBackground(Color.lightGray);
         ctn_pn_appraisement.setBackground(Color.lightGray);
-        ctn_pn_deadline.setBackground(new Color(18, 18, 18));
-        ps_mar_pmain.setBackground(new Color(0, 0, 0));
+        ctn_pn_deadline.setBackground(new Color(255,255,240));
+        ps_mar_pmain.setBackground(new Color(255,255,240));
 
-        pn_east.setBackground(new Color(0, 0, 0));
+        pn_east.setBackground(new Color(255,250,250));
             //Button
         bn_option.setForeground(Color.white) ; bn_option.setBackground(new Color(0x757575));
         bn_task.setForeground(Color.white); bn_task.setBackground(new Color(186, 9, 0));
@@ -157,6 +176,8 @@ public class home_page implements View_Getter, ActionListener {
 
         //add event
         bn_new.addActionListener(this);
+        bn_task.addActionListener(this);
+        bn_appraisement.addActionListener(this);
 
         //show
         main_panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -179,6 +200,10 @@ public class home_page implements View_Getter, ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(bn_new)){
             new ProjectCreate();
+        }else if (e.getSource().equals(bn_appraisement)){
+            page.show(center_part, "0");
+        }else if (e.getSource().equals(bn_task)){
+            page.show(center_part, "1");
         }
     }
 }

@@ -11,12 +11,12 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
 import java.awt.*;
 import javax.swing.*;
 public class Progress {
-    private JFrame fr;
+    private JPanel fr;
     private JPanel p, p_zone1, p_zone2, p_zone11, p_zone12, p_zone121, p_zone122 , p_zone21, p_zone22;
     private JProgressBar pg;
     private JLabel progress, percent, l1, l2, l3, l4, r1, r2, r3, r4;
     public Progress(){
-        fr = new JFrame("Progress page");
+        fr = new JPanel();
         p = new JPanel();
         p_zone1 = new JPanel();
         p_zone2 = new JPanel();
@@ -83,10 +83,15 @@ public class Progress {
         p_zone22.add(r4);
 
 
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.setSize(1000,700);
         fr.setVisible(true);
     }
+
+    public JPanel getFr() {
+        return fr;
+    }
+
     public static void main(String[] args) {
         new Progress();
     }

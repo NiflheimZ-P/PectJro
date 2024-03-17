@@ -9,7 +9,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Profile {
-    private JFrame fr;
+    private JPanel fr;
     private JPanel pn_north, pn_west, pn_east, pn_south, pn_center, empty_pn_north_left, empty_pn_north_right,
             margin_pn_north_mid, pn_center_left,  pn_center_right, ctn_pn_center_right, margin_name,
             margin_email, margin_bn_profile;
@@ -17,10 +17,13 @@ public class Profile {
     private JButton bn_select_photo, bn_change_name, bn_change_password, bn_exit, bn_log_out;
     private ImageIcon im_profile;
 
+    public JPanel getFr() {
+        return fr;
+    }
 
     public Profile() {
         //set up
-        fr = new JFrame();
+        fr = new JPanel();
 
         pn_north = new JPanel();
         pn_west = new JPanel();
@@ -110,9 +113,9 @@ public class Profile {
 
 
         //show
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.setSize(1000,600);
-        fr.setResizable(false);
+        //fr.setResizable(false);
         fr.setVisible(true);
     }
     public static void main(String[] args) throws Exception{
