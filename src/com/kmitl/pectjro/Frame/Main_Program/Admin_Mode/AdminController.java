@@ -105,7 +105,7 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 				projectTable.getView().setVisible(true);
 				view.getView().add(projectTable.getView());
 				projectTable.getView().moveToFront();
-			} else { feedback.getView().getFrame().toFront(); }
+			} else { projectTable.getView().toFront(); }
 		}
 	}
 

@@ -3,6 +3,7 @@ package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.ProjectTable
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.AdminController;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
@@ -50,14 +51,22 @@ public class ProjectTableController implements ActionListener, DocumentListener 
 	// Listener
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("Add New")) {
-			ProjectAdd add = new ProjectAdd(this);
-			add.getFrame().addInternalFrameListener(head_control);
-			head_control.addNew(add.getFrame());
-		} else if (e.getActionCommand().equals("Delete")) {
-			model.DeleteUser(Integer.parseInt(String.valueOf(view.getModel().getValueAt(view.getTable().getSelectedRow(), 0))), view.getTable().getSelectedRow());
-		} else if (e.getActionCommand().equals("Refresh")) {
-			model.loadData();
+		try {
+			if (e.getActionCommand().equals("Add New")) {
+				ProjectAdd add = new ProjectAdd(this);
+				add.getFrame().addInternalFrameListener(head_control);
+				head_control.addNew(add.getFrame());
+			} else if (e.getActionCommand().equals("Delete")) {
+				model.DeleteUser(Integer.parseInt(String.valueOf(view.getModel().getValueAt(view.getTable().getSelectedRow(), 0))), view.getTable().getSelectedRow());
+			} else if (e.getActionCommand().equals("Refresh")) {
+				model.loadData();
+			} else if (e.getActionCommand().equals("Edit")) {
+				ProjectEdit edit = new ProjectEdit(projectInfo.get(view.getTable().getSelectedRow()));
+				edit.getFrame().addInternalFrameListener(head_control);
+				head_control.addNew(edit.getFrame());
+			}
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, "Please select user first.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
