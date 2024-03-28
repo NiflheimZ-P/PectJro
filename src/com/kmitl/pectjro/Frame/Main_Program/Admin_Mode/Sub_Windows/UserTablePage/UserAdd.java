@@ -2,6 +2,7 @@ package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePag
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.UserTable;
+import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 import com.kmitl.pectjro.Frame.Tools.Image_Resizer;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
@@ -122,8 +123,10 @@ public class UserAdd implements DocumentListener, ActionListener {
 
     public void adduser() {
         SwingWorker<Void, Void> saveUser = new SwingWorker<Void, Void>() {
+            private Loading_dialog loading = new Loading_dialog(frame);
             @Override
             protected Void doInBackground() throws Exception {
+                loading.setVisible(true);
                 try (InputStream pic = new FileInputStream(path)){
                     Connection con = DBConnect.createConnect();
                     UserTable addUser = new UserTable(con);
@@ -138,6 +141,11 @@ public class UserAdd implements DocumentListener, ActionListener {
                     JOptionPane.showMessageDialog(null, "this email is already in use", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 return null;
+            }
+
+            @Override
+            protected void done() {
+                loading.dispose();
             }
         };
         saveUser.execute();

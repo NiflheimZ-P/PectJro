@@ -1,5 +1,6 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.ProjectTablePage;
 
+import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.AdminController;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 
@@ -29,6 +30,8 @@ public class ProjectTableController implements ActionListener, DocumentListener 
 		view.getDelete().addActionListener(this);
 		view.getSearch().getDocument().addDocumentListener(this);
 		view.getView().addActionListener(this);
+
+		// TODO: make this can save to database
 	}
 
 	// Accessor
@@ -63,10 +66,29 @@ public class ProjectTableController implements ActionListener, DocumentListener 
 			} else if (e.getActionCommand().equals("Edit")) {
 				ProjectEdit edit = new ProjectEdit(projectInfo.get(view.getTable().getSelectedRow()));
 				edit.getFrame().addInternalFrameListener(head_control);
-				head_control.addNew(edit.getFrame());
+
+				SwingWorker<Void, Void> loadEdit = new SwingWorker<Void, Void>() {
+					private final Loading_dialog loading = new Loading_dialog(view);
+					@Override
+					protected Void doInBackground() throws Exception {
+						loading.setVisible(true);
+						edit.loadCon();
+						return null;
+					}
+
+					@Override
+					protected void done() {
+						loading.dispose();
+						head_control.addNew(edit.getFrame());
+						edit.chooseOutput();
+					}
+				};
+
+				loadEdit.execute();
 			}
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, "Please select user first.", "Error", JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
 		}
 	}
 

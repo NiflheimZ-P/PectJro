@@ -39,13 +39,10 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 		);
 
 		userTable = new UserTableController(this);
-		userTable.getModel().loadData();
 
 		feedback = new FeedbackController(this);
-		feedback.getModel().loadData();
 
 		projectTable = new ProjectTableController(this);
-		projectTable.getModel().loadData();
 
 		view.getView().add(admin_control.getFrame());
 		admin_control.getUser().addActionListener(this);
@@ -83,6 +80,7 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 				userTable.getView().setVisible(true);
 				view.getView().add(userTable.getView());
 				userTable.getView().moveToFront();
+				userTable.getModel().loadData();
 			} else { userTable.getView().toFront(); }
 		} else if (e.getSource().equals(admin_control.getFeedback())){
 			if (!opened.contains(feedback.getView().getFrame())) {
@@ -94,6 +92,7 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 				feedback.getView().getFrame().setVisible(true);
 				view.getView().add(feedback.getView().getFrame());
 				feedback.getView().getFrame().moveToFront();
+				feedback.getModel().loadData();
 			} else { feedback.getView().getFrame().toFront(); }
 		} else if (e.getSource().equals(admin_control.getProject())){
 			if (!opened.contains(projectTable.getView())) {
@@ -105,6 +104,7 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 				projectTable.getView().setVisible(true);
 				view.getView().add(projectTable.getView());
 				projectTable.getView().moveToFront();
+				projectTable.getModel().loadData();
 			} else { projectTable.getView().toFront(); }
 		}
 	}

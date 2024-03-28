@@ -43,11 +43,9 @@ public abstract class Table_Page extends JInternalFrame {
 	public JButton getDelete() {
 		return delete;
 	}
-
 	public JButton getAdd_new() {
 		return add_new;
 	}
-
 	public JButton getRefresh() {
 		return refresh;
 	}
@@ -56,6 +54,9 @@ public abstract class Table_Page extends JInternalFrame {
 	}
 	public JButton getView() {
 		return view;
+	}
+	public JPanel getNorth_panel() {
+		return north_panel;
 	}
 
 	public abstract void createTable(String[] columns);

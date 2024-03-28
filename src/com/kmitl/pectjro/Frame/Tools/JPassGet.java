@@ -23,7 +23,7 @@ public class JPassGet extends JPasswordField implements FocusListener {
         if ((this.getMyPass().equals(shouldbe) && this.getEchoChar() != '*') || this.getMyPass().isEmpty()){
             this.setText("");
             this.setEchoChar('*');
-            this.setForeground(Color.BLACK);
+            this.setForeground(Color.WHITE);
         }
     }
 

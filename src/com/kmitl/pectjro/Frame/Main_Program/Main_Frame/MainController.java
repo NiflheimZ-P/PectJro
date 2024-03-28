@@ -36,13 +36,15 @@ public class MainController implements WindowListener {
 	public boolean getRemember() { return remember; }
 
 	public User_Template getCache(){ return this.cache; }
-	public void setCache(User_Template cache) { this.cache = cache; }
+	public void setCache(User_Template cache) {
+		this.cache = cache;
+	}
 
 	// Listener
 	@Override
 	public void windowOpened(WindowEvent e) {
 		File user = new File("User_Cache");
-		if (user.exists()){
+		if (user.exists()) {
 			setRemember(true);
 			model.loadCache();
 			model.changePage(new home_page());

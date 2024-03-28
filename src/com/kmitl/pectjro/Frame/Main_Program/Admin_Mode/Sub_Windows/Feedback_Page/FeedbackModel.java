@@ -2,6 +2,7 @@ package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Feedback_Pag
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.FeedbackTable;
+import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Templates.Feedback_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 
@@ -34,8 +35,14 @@ public class FeedbackModel {
 
 	public void loadData() {
 		SwingWorker<Void, Void> getFeed = new SwingWorker<Void, Void>() {
+			private Loading_dialog loading = new Loading_dialog(view.getFrame());
 			@Override
 			protected Void doInBackground() throws Exception {
+				loading.setVisible(true);
+				view.getComment().removeAll();
+				view.getFrame().revalidate();
+				view.getFrame().revalidate();
+
 				view.getRefresh().setEnabled(false);
 				Connection con = DBConnect.createConnect();
 				FeedbackTable get = new FeedbackTable(con);
@@ -46,6 +53,11 @@ public class FeedbackModel {
 					search();
 				}
 				return null;
+			}
+
+			@Override
+			protected void done() {
+				loading.dispose();
 			}
 		};
 		getFeed.execute();
