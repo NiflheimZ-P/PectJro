@@ -21,8 +21,7 @@ public class ProjectCreate {
     private JInfoGet projectname;
     private DatePicker d1, d2;
     public ProjectCreate(){
-        ImageIcon icon = null;
-        icon = new ImageIcon("resources/Images/aunkung.jpeg");
+
 
         fr = new JDialog();
         p_main = new JPanel();
@@ -41,7 +40,7 @@ public class ProjectCreate {
         b_back = new JButton("Back");
 
         picture = new JLabel("picture here");
-        l1 = new JLabel("           Get Starto");
+        l1 = new JLabel("Get Starto");
         l2 = new JLabel("Enter your ProjectName");
         l3 = new JLabel("Start");
         l4 = new JLabel("End");
@@ -52,7 +51,7 @@ public class ProjectCreate {
 
         fr.add(p_main);
         p_main.setLayout(new BorderLayout());
-        p_main.add(p_zone1, BorderLayout.WEST);
+        //p_main.add(p_zone1, BorderLayout.WEST);
         p_zone1.setPreferredSize(new Dimension(200, 300));
         p_main.add(p_zone2, BorderLayout.CENTER);
 
@@ -97,7 +96,7 @@ public class ProjectCreate {
 
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         fr.setResizable(false);
-        fr.setSize(600,300);
+        fr.setSize(400,300);
         fr.setVisible(true);
         fr.setLocation(400,200);
     }
