@@ -221,12 +221,16 @@ public class home_page implements View_Getter, ActionListener {
             new ProjectCreate();
         }else if (e.getSource().equals(bn_task)){
             page.show(center_part, "0");
+            main_panel.add(pn_east, BorderLayout.EAST);
         }else if (e.getSource().equals(bn_calendar)) {
             page.show(center_part, "1");
+            main_panel.remove(pn_east);
         }else if (e.getSource().equals(bn_appraisement)){
             page.show(center_part, "2");
+            main_panel.remove(pn_east);
         }else if (e.getSource().equals(bn_profile)){
             page.show(center_part, "3");
+            main_panel.remove(pn_east);
         }
     }
 }
