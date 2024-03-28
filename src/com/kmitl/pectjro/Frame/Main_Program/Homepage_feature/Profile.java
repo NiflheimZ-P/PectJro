@@ -43,7 +43,7 @@ public class Profile {
         bn_change_password = new JButton("Change password");
         bn_log_out = new JButton("Log out");
 
-        im_profile = new ImageIcon("resources/Images/Logo.png").getImage();
+        im_profile = new ImageIcon("resources/Images/aunkung.jpeg").getImage();
         Image newImage = im_profile.getScaledInstance(400, 400, Image.SCALE_DEFAULT);
         ImageIcon ic_image = new ImageIcon(newImage);
 

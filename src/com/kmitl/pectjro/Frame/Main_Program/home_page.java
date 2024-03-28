@@ -6,6 +6,7 @@ import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Calendars;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Progress;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Task;
 
 import java.awt.*;
 import javax.swing.*;
@@ -21,15 +22,16 @@ public class home_page implements View_Getter, ActionListener {
             ctn_pn_deadline_2, pn_north_right, ps_mar_pmain, paneforsearch, up_mar_search, l_mar_search, r_mar_search,
             s_mar_search, center_part;
     private JTextField tf_seach_bar;
-    private Image im_program, im_profile, im_task, im_calendar, im_appraisement;
-    private JButton bn_task, bn_calendar, bn_appraisement, bn_new, bn_option;
-    private JLabel l1, l2, l3, l4;
+    private Image im_program, im_profile;
+    private JButton bn_task, bn_calendar, bn_appraisement, bn_new, bn_option, bn_profile;
+    private JLabel l1, l3, l4;
 
     CardLayout page = new CardLayout();
 
     private Progress pro;
     private Profile profile;
     private Calendars calen;
+    private Task task;
 
     public home_page(){
         //set up
@@ -60,17 +62,15 @@ public class home_page implements View_Getter, ActionListener {
         Image tmp_profile = im_profile.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
         ImageIcon ic_profile = new ImageIcon(tmp_profile);
         //im_task = new ImageIcon("resources/Images/task.png").getImage();
-        im_calendar = new ImageIcon().getImage();
-        im_appraisement = new ImageIcon().getImage();
 
         bn_task = new JButton("Task");
         bn_calendar = new JButton("Calendar");
         bn_appraisement = new JButton("Appraisement");
         bn_new = new JButton("+");
         bn_option = new JButton("Option");
+        bn_profile = new JButton();
 
         l1 = new JLabel();
-        l2 = new JLabel();
         l3 = new JLabel("3");
         l4 = new JLabel("Deadline");
 
@@ -78,6 +78,7 @@ public class home_page implements View_Getter, ActionListener {
         pro = new Progress();
         profile = new Profile();
         calen = new Calendars();
+        task = new Task();
 
 
         //card
@@ -85,9 +86,10 @@ public class home_page implements View_Getter, ActionListener {
         center_part.setLayout(page);
 
         //add to centerpart
-        center_part.add(pro.getFr(),"0");
-        center_part.add(profile.getFr(), "1");
-        center_part.add(calen.getFrame(), "2");
+        center_part.add(task.getFrame(), "0");
+        center_part.add(calen.getFrame(), "1");
+        center_part.add(pro.getFr(),"2");
+        center_part.add(profile.getFr(), "3");
 
         //set center part
         main_panel.setLayout(new BorderLayout());
@@ -98,9 +100,12 @@ public class home_page implements View_Getter, ActionListener {
         //set upper part (pn_north)
         main_panel.add(pn_north, BorderLayout.NORTH);
         pn_north.setLayout(new GridLayout(1,3));
-        pn_north.setPreferredSize(new Dimension(1400, 75));
 
-        pn_north.add(l1);
+        JPanel margin_l1 = new JPanel();
+        pn_north.add(margin_l1);
+        margin_l1.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 20));
+        margin_l1.add(l1);
+        l1.setIcon(ic_program);;
 
         paneforsearch.setLayout(new BorderLayout());
         paneforsearch.add(tf_seach_bar, BorderLayout.CENTER);
@@ -112,7 +117,8 @@ public class home_page implements View_Getter, ActionListener {
         tf_seach_bar.setFocusable(true);
 
         pn_north_right.setLayout(new FlowLayout(2,20,20)); // 2 = right , hgap = ซ้าย - ขวา , vgap = บน-ล่าง
-        pn_north_right.add(bn_option); pn_north_right.add(l2);
+        pn_north_right.add(bn_option); pn_north_right.add(bn_profile);
+        bn_profile.setIcon(ic_profile);
         pn_north.add(pn_north_right);
 
 
@@ -163,10 +169,9 @@ public class home_page implements View_Getter, ActionListener {
         r_mar_search.setBackground(new Color(30,31,34));
         s_mar_search.setBackground(new Color(30,31,34));
         pn_north_right.setBackground(new Color(30,31,34));
+        margin_l1.setBackground(new Color(30,31,34));
         l1.setForeground(Color.BLACK);
-        l1.setIcon(ic_program);;
-        l2.setForeground(Color.BLACK);
-        l2.setIcon(ic_profile);
+        bn_profile.setBackground(new Color(49,51,56));
 
         pn_west.setBackground(new Color(30,31,34));
         //ctn_pn_task.setBackground(new Color(30,31,34));
@@ -191,6 +196,7 @@ public class home_page implements View_Getter, ActionListener {
         bn_task.addActionListener(this);
         bn_appraisement.addActionListener(this);
         bn_calendar.addActionListener(this);
+        bn_profile.addActionListener(this);
 
         //show
         main_panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -213,12 +219,14 @@ public class home_page implements View_Getter, ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(bn_new)){
             new ProjectCreate();
-        }else if (e.getSource().equals(bn_appraisement)){
+        }else if (e.getSource().equals(bn_task)){
             page.show(center_part, "0");
-        }else if (e.getSource().equals(bn_task)) {
+        }else if (e.getSource().equals(bn_calendar)) {
             page.show(center_part, "1");
-        }else if (e.getSource().equals(bn_calendar)){
+        }else if (e.getSource().equals(bn_appraisement)){
             page.show(center_part, "2");
+        }else if (e.getSource().equals(bn_profile)){
+            page.show(center_part, "3");
         }
     }
 }
