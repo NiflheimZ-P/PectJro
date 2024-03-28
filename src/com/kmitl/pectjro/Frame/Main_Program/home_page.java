@@ -2,6 +2,7 @@ package com.kmitl.pectjro.Frame.Main_Program;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Calendars;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Progress;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
@@ -11,6 +12,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.Calendar;
 
 public class home_page implements View_Getter, ActionListener {
     private JFrame main_panel;
@@ -27,6 +29,7 @@ public class home_page implements View_Getter, ActionListener {
 
     private Progress pro;
     private Profile profile;
+    private Calendars calen;
 
     public home_page(){
         //set up
@@ -70,6 +73,8 @@ public class home_page implements View_Getter, ActionListener {
         //feature create
         pro = new Progress();
         profile = new Profile();
+        calen = new Calendars();
+
 
         //card
         center_part = new JPanel();
@@ -78,6 +83,7 @@ public class home_page implements View_Getter, ActionListener {
         //add to centerpart
         center_part.add(pro.getFr(),"0");
         center_part.add(profile.getFr(), "1");
+        center_part.add(calen.getFrame(), "2");
 
         //set center part
         main_panel.setLayout(new BorderLayout());
@@ -178,6 +184,7 @@ public class home_page implements View_Getter, ActionListener {
         bn_new.addActionListener(this);
         bn_task.addActionListener(this);
         bn_appraisement.addActionListener(this);
+        bn_calendar.addActionListener(this);
 
         //show
         main_panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -202,8 +209,10 @@ public class home_page implements View_Getter, ActionListener {
             new ProjectCreate();
         }else if (e.getSource().equals(bn_appraisement)){
             page.show(center_part, "0");
-        }else if (e.getSource().equals(bn_task)){
+        }else if (e.getSource().equals(bn_task)) {
             page.show(center_part, "1");
+        }else if (e.getSource().equals(bn_calendar)){
+            page.show(center_part, "2");
         }
     }
 }

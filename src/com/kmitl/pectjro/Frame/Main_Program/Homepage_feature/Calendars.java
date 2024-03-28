@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.*;
 
 public class Calendars {
-    private JFrame frame;
+    private JPanel frame;
     private JTable table;
     private JButton left, right, cancel;
     private JPanel pn;
@@ -19,7 +19,7 @@ public class Calendars {
 
     public Calendars() {
         // Add Button
-        frame = new JFrame("Calendar Table Example");
+        frame = new JPanel();
         left = new JButton("<");
         right = new JButton(">");
         cancel = new JButton("X");
@@ -116,9 +116,12 @@ public class Calendars {
         frame.add(table, BorderLayout.SOUTH); // Add table itself
 
         // Set frame size and make it visible
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 600);
         frame.setVisible(true);
+    }
+
+    public JPanel getFrame() {
+        return frame;
     }
 
     public static void main(String[] args) {
