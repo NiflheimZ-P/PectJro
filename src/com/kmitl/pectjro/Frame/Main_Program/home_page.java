@@ -19,7 +19,7 @@ public class home_page implements View_Getter, ActionListener {
             ctn_pn_deadline_2, pn_north_right, ps_mar_pmain, paneforsearch, up_mar_search, l_mar_search, r_mar_search,
             s_mar_search, center_part;
     private JTextField tf_seach_bar;
-    private ImageIcon ic_program, ic_profile, ic_task, ic_calendar, ic_appraisement;
+    private Image im_program, im_profile, im_task, im_calendar, im_appraisement;
     private JButton bn_task, bn_calendar, bn_appraisement, bn_new, bn_option;
     private JLabel l1, l2, l3, l4;
 
@@ -50,11 +50,15 @@ public class home_page implements View_Getter, ActionListener {
 
         tf_seach_bar = new JTextField();
         //prepare to add image
-        ic_program = new ImageIcon();
-        ic_profile = new ImageIcon();
-        ic_task = new ImageIcon("/Users/win/Documents/GitHub/PectJro/Untitled/resources/Images/task.png");
-        ic_calendar = new ImageIcon();
-        ic_appraisement = new ImageIcon();
+        im_program = new ImageIcon("resources/Images/Logo.png").getImage();
+        Image tmp_program = im_program.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+        ImageIcon ic_program = new ImageIcon(tmp_program);
+        im_profile = new ImageIcon("resources/Images/aunkung.jpeg").getImage();
+        Image tmp_profile = im_profile.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+        ImageIcon ic_profile = new ImageIcon(tmp_profile);
+        //im_task = new ImageIcon("resources/Images/task.png").getImage();
+        im_calendar = new ImageIcon().getImage();
+        im_appraisement = new ImageIcon().getImage();
 
         bn_task = new JButton("Task");
         bn_calendar = new JButton("Calendar");
@@ -62,8 +66,8 @@ public class home_page implements View_Getter, ActionListener {
         bn_new = new JButton("+");
         bn_option = new JButton("Option");
 
-        l1 = new JLabel("Logo Program");
-        l2 = new JLabel("Profile");
+        l1 = new JLabel();
+        l2 = new JLabel();
         l3 = new JLabel("3");
         l4 = new JLabel("Deadline");
 
@@ -146,30 +150,32 @@ public class home_page implements View_Getter, ActionListener {
 
         //set color
             //Panel
-        bg.setBackground(new Color(255,250,250));
-        pn_north.setBackground(new Color(255,248,220));
-        up_mar_search.setBackground(new Color(255,248,220));
-        l_mar_search.setBackground(new Color(255,248,220));
-        r_mar_search.setBackground(new Color(255,248,220));
-        s_mar_search.setBackground(new Color(255,248,220));
-        pn_north_right.setBackground(new Color(255,248,220));
+        bg.setBackground(new Color(49,51,56));
+        pn_north.setBackground(new Color(30,31,34));
+        up_mar_search.setBackground(new Color(30,31,34));
+        l_mar_search.setBackground(new Color(30,31,34));
+        r_mar_search.setBackground(new Color(30,31,34));
+        s_mar_search.setBackground(new Color(30,31,34));
+        pn_north_right.setBackground(new Color(30,31,34));
         l1.setForeground(Color.BLACK);
+        l1.setIcon(ic_program);;
         l2.setForeground(Color.BLACK);
+        l2.setIcon(ic_profile);
 
-        pn_west.setBackground(new Color(255,255,240));
-        ctn_pn_task.setBackground(new Color(255,255,240));
-        ctn_pn_calendar.setBackground(Color.lightGray);
-        ctn_pn_appraisement.setBackground(Color.lightGray);
-        ctn_pn_deadline.setBackground(new Color(255,255,240));
-        ps_mar_pmain.setBackground(new Color(255,255,240));
+        pn_west.setBackground(new Color(30,31,34));
+        //ctn_pn_task.setBackground(new Color(30,31,34));
+        //ctn_pn_calendar.setBackground(Color.lightGray);
+        //ctn_pn_appraisement.setBackground(Color.lightGray);
+        ctn_pn_deadline.setBackground(new Color(30,31,34));
+        ps_mar_pmain.setBackground(new Color(49,51,56));
 
-        pn_east.setBackground(new Color(255,250,250));
+        pn_east.setBackground(new Color(49,51,56));
             //Button
-        bn_option.setForeground(Color.white) ; bn_option.setBackground(new Color(0x757575));
-        bn_task.setForeground(Color.white); bn_task.setBackground(new Color(186, 9, 0));
-        bn_calendar.setForeground(Color.white); bn_calendar.setBackground(new Color(186, 9, 0));
-        bn_appraisement.setForeground(Color.white); bn_appraisement.setBackground(new Color(186, 9, 0));
-        bn_new.setForeground(Color.white) ; bn_new.setBackground(new Color(0xBA0900));
+        bn_option.setForeground(Color.white) ; bn_option.setBackground(new Color(43,45,49));
+        bn_task.setForeground(Color.white); bn_task.setBackground(new Color(43,45,49));
+        bn_calendar.setForeground(Color.white); bn_calendar.setBackground(new Color(43,45,49));
+        bn_appraisement.setForeground(Color.white); bn_appraisement.setBackground(new Color(43,45,49));
+        bn_new.setForeground(Color.white) ; bn_new.setBackground(new Color(43,45,49));
 
             //Label
         l4.setForeground(Color.red);

@@ -29,14 +29,14 @@ public class Progress {
         pg = new JProgressBar();
         progress = new JLabel("Progress");
         percent = new JLabel(" 0%");
-        l1 = new JLabel("somesomesomesome");
-        l2 = new JLabel("somesomesomesomesomesomesomesome");
-        l3 = new JLabel("somesomesomesomesomesomesomesome");
-        l4 = new JLabel("somesomesomesomesomesomesomesome");
-        r1 = new JLabel("somesomesomesome");
-        r2 = new JLabel("somesomesomesomesomesomesomesome");
-        r3 = new JLabel("somesomesomesomesomesomesomesome");
-        r4 = new JLabel("somesomesomesomesomesomesomesome");
+        l1 = new JLabel("Advantage");
+        l2 = new JLabel("- ข้อดี 1");
+        l3 = new JLabel("- ข้อดี 2");
+        l4 = new JLabel("- ข้อดี 3");
+        r1 = new JLabel("Disadvantage");
+        r2 = new JLabel("- ข้อเสีย 1");
+        r3 = new JLabel("- ข้อเสีย 2");
+        r4 = new JLabel("- ข้อเสีย 3");
 
 
         fr.add(p);
@@ -51,7 +51,7 @@ public class Progress {
         p_zone1.add(p_zone11, BorderLayout.NORTH);
         p_zone11.setPreferredSize(new Dimension(500, 100));
         p_zone11.setLayout(new FlowLayout());
-        progress.setFont(new Font("Arial", Font.PLAIN, 40));
+        progress.setFont(new Font("Sans", Font.BOLD, 40));
         p_zone11.add(progress);
 
         p_zone121.setLayout(new FlowLayout());
@@ -59,7 +59,7 @@ public class Progress {
         p_zone121.add(pg);
         p_zone122.setLayout(new BorderLayout());
         p_zone121.add(percent);
-        percent.setFont(new Font("Arial", Font.PLAIN, 25));
+        percent.setFont(new Font("Sans", Font.BOLD, 25));
 
         p_zone1.add(p_zone12, BorderLayout.CENTER);
         p_zone12.setPreferredSize(new Dimension(500, 300));
@@ -81,6 +81,37 @@ public class Progress {
         p_zone22.add(r2);
         p_zone22.add(r3);
         p_zone22.add(r4);
+
+        //set color and font
+        fr.setBackground(new Color(49,51,56));
+        p.setBackground(new Color(49,51,56));
+        p_zone1.setBackground(new Color(49,51,56));
+        p_zone2.setBackground(new Color(49,51,56));
+        p_zone11.setBackground(new Color(49,51,56));
+        p_zone12.setBackground(new Color(49,51,56));
+        p_zone121.setBackground(new Color(49,51,56));
+        p_zone122.setBackground(new Color(49,51,56));
+        p_zone21.setBackground(new Color(49,51,56));
+        p_zone22.setBackground(new Color(49,51,56));
+
+        progress.setForeground(Color.white);
+        percent.setForeground(Color.white);
+        l1.setForeground(Color.white);
+        l1.setFont(new Font("Sans", Font.BOLD, 24));
+        l2.setForeground(Color.white);
+        l2.setFont(new Font("Sans", Font.PLAIN, 16));
+        l3.setForeground(Color.white);
+        l3.setFont(new Font("Sans", Font.PLAIN, 16));
+        l4.setForeground(Color.white);
+        l4.setFont(new Font("Sans", Font.PLAIN, 16));
+        r1.setForeground(Color.white);
+        r1.setFont(new Font("Sans", Font.BOLD, 24));
+        r2.setForeground(Color.white);
+        r2.setFont(new Font("Sans", Font.PLAIN, 16));
+        r3.setForeground(Color.white);
+        r3.setFont(new Font("Sans", Font.PLAIN, 16));
+        r4.setForeground(Color.white);
+        r4.setFont(new Font("Sans", Font.PLAIN, 16));
 
 
         //fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
