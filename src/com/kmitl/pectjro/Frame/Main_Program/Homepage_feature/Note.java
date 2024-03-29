@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.sql.*;
 
 
-public class Note extends JFrame implements ActionListener{
+public class Note extends JFrame{
 
     private JTextArea textArea;
     private JPanel mainPanel;
@@ -30,7 +30,7 @@ public class Note extends JFrame implements ActionListener{
 
         // สร้าง Button
         save = new JButton("Save");
-        save.addActionListener(this); // เพิ่ม ActionListener
+        //save.addActionListener(this); // เพิ่ม ActionListener
         mainPanel.add(save, BorderLayout.EAST); // เพิ่มปุ่ม save ไปทางขวา
 
         // แสดงหน้าต่าง
@@ -42,42 +42,42 @@ public class Note extends JFrame implements ActionListener{
         new Note();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == save) {
-            // บันทึกข้อมูล text area
-            String text = textArea.getText();
-            saveToDatabase(text); // เรียกใช้ฟังก์ชั่น saveToDatabase
-        }
-
-    }
-    private void saveToDatabase(String text) {
-        try {
-            // สร้าง Connection object
-            Connection dbConnect = DriverManager.getConnection(JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD);
-
-            // สร้าง Statement object
-            Statement statement = dbConnect.createStatement();
-
-            // เขียน SQL query
-            String sql = "INSERT INTO notes (text) VALUES (?)";
-
-            // เตรียม PreparedStatement
-            PreparedStatement preparedStatement = dbConnect.prepareStatement(sql);
-            preparedStatement.setString(1, text);
-
-            // Execute query
-            preparedStatement.executeUpdate();
-
-            // ปิด Connection
-            dbConnect.close();
-
-            // แสดงข้อความแจ้งเตือน
-            JOptionPane.showMessageDialog(this, "Data saved successfully!");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "An error logging has occurred!");
-        }
-    }
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        if (e.getSource() == save) {
+//            // บันทึกข้อมูล text area
+//            String text = textArea.getText();
+//            saveToDatabase(text); // เรียกใช้ฟังก์ชั่น saveToDatabase
+//        }
+//
+//    }
+//    private void saveToDatabase(String text) {
+//        try {
+//            // สร้าง Connection object
+//            Connection dbConnect = DriverManager.getConnection(JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD);
+//
+//            // สร้าง Statement object
+//            Statement statement = dbConnect.createStatement();
+//
+//            // เขียน SQL query
+//            String sql = "INSERT INTO notes (text) VALUES (?)";
+//
+//            // เตรียม PreparedStatement
+//            PreparedStatement preparedStatement = dbConnect.prepareStatement(sql);
+//            preparedStatement.setString(1, text);
+//
+//            // Execute query
+//            preparedStatement.executeUpdate();
+//
+//            // ปิด Connection
+//            dbConnect.close();
+//
+//            // แสดงข้อความแจ้งเตือน
+//            JOptionPane.showMessageDialog(this, "Data saved successfully!");
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//            JOptionPane.showMessageDialog(this, "An error logging has occurred!");
+//        }
+//    }
 
 }

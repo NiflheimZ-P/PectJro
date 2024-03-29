@@ -22,7 +22,7 @@ public class Login_Page implements LoginPage {
     public Login_Page() {
         super();
         main_panel = new JPanel();
-        main_panel.setBackground(Color.white);
+
         main_panel.setBorder(new CompoundBorder(
                 new EmptyBorder(5, 5, 5, 5),
                 new MatteBorder(1, 1, 1, 1, Color.gray)
@@ -50,7 +50,6 @@ public class Login_Page implements LoginPage {
         JPanel under = new JPanel();
         under.add(new JLabel("Haven't signed yet"));
         under.add(sign);
-        under.setBackground(Color.white);
         main_panel.add(under, new Constraints(0, 6, 0, 0, new Insets(0, 0, 20, 0)));
     }
 

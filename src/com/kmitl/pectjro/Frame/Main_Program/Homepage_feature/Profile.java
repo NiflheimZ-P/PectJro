@@ -20,6 +20,9 @@ public class Profile {
     private Image im_profile;
     private home_page home;
 
+    public JButton getBn_log_out() {
+        return bn_log_out;
+    }
 
     public JPanel getFr() {
         return fr;

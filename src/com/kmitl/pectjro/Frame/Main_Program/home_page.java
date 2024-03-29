@@ -8,6 +8,7 @@ import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Progress;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Task;
+import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginController;
 
 import java.awt.*;
 import javax.swing.*;
@@ -200,6 +201,7 @@ public class home_page implements View_Getter, ActionListener {
 
         //ads
         profile.getBn_select_photo().addActionListener(this);
+        profile.getBn_log_out().addActionListener(this);
 
 
         //show
@@ -261,6 +263,8 @@ public class home_page implements View_Getter, ActionListener {
             page.show(center_part, "3");
             main_panel.remove(pn_east);
             paneforsearch.setVisible(false);
-        }
+        }//else if (e.getSource().equals(profile.getBn_log_out())){
+
+        //}
     }
 }

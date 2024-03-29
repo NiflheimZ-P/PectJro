@@ -21,7 +21,7 @@ public class Register_Page implements LoginPage {
     public Register_Page() {
         super();
         main_panel = new JPanel();
-        main_panel.setBackground(Color.white);
+
         main_panel.setBorder(new CompoundBorder(
                 new EmptyBorder(5, 5, 5, 5),
                 new MatteBorder(1, 1, 1, 1, Color.gray)
