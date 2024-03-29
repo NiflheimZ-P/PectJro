@@ -57,7 +57,7 @@ public class home_page implements View_Getter, ActionListener {
         tf_seach_bar = new JTextField();
         //prepare to add image
         im_program = new ImageIcon("resources/Images/Logo.png").getImage();
-        Image tmp_program = im_program.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+        Image tmp_program = im_program.getScaledInstance(180, 60, Image.SCALE_DEFAULT);
         ImageIcon ic_program = new ImageIcon(tmp_program);
         im_profile = new ImageIcon("resources/Images/aunkung.jpeg").getImage();
         Image tmp_profile = im_profile.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
@@ -156,11 +156,11 @@ public class home_page implements View_Getter, ActionListener {
 
         //button (+) at bottom right of corner and right part (pn_east)
         ps_mar_pmain.setLayout(new FlowLayout(2, 30,25));
-        main_panel.add(pn_east, BorderLayout.EAST);
+        //main_panel.add(pn_east, BorderLayout.EAST);
         bn_new.setPreferredSize(new Dimension(40,40));
-        ps_mar_pmain.add(bn_new);
-        pn_east.setLayout(new BorderLayout());
-        pn_east.add(ps_mar_pmain, BorderLayout.SOUTH);
+       // ps_mar_pmain.add(bn_new);
+        //pn_east.setLayout(new BorderLayout());
+        //pn_east.add(ps_mar_pmain, BorderLayout.SOUTH);
 
 
         //set color
@@ -189,7 +189,7 @@ public class home_page implements View_Getter, ActionListener {
         bn_new.setForeground(Color.white) ; bn_new.setBackground(new Color(43,45,49));
 
             //Label
-        l4.setForeground(Color.red);
+        l4.setForeground(new Color(88,101,242));
 
         //add event
         bn_new.addActionListener(this);

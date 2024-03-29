@@ -31,7 +31,7 @@ public class Login_Page implements LoginPage {
         main_panel.setLayout(new GridBagLayout());
 
         main_panel.add(
-                new Image_Resizer(new ImageIcon("resources/Images/Logo.png"), 200, 200),
+                new Image_Resizer(new ImageIcon("resources/Images/Logo.png"), 200, 400),
                 new Constraints(0, 0, 0, 1, new Insets(0, 0, 0, 0))
         );
 
