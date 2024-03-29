@@ -1,11 +1,14 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.ProjectTablePage;
 
 import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.ProjectTable;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
+import com.kmitl.pectjro.Frame.Tools.LgoodDatePicker_Setting;
+
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -55,8 +58,9 @@ public class ProjectAdd implements ActionListener, DocumentListener, DateChangeL
 
 		name = new JTextField(); name.setPreferredSize(new Dimension(250, 35));
 		description = new JTextField(); description.setPreferredSize(new Dimension(500, 35));
-		start = new DatePicker();
-		end = new DatePicker();
+		start = new DatePicker(new LgoodDatePicker_Setting().getSettings());
+		end = new DatePicker(new LgoodDatePicker_Setting().getSettings());
+
 		center.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 40));
 		center.add(new JLabel("Project name"), new Constraints(0, 0, 1, 1, 25, new Insets(0, 0, 0, 0)));
 		center.add(name, new Constraints(0, 1, 1 ,1, 21, new Insets(0, 0, 0, 0)));
