@@ -198,6 +198,10 @@ public class home_page implements View_Getter, ActionListener {
         bn_profile.addActionListener(this);
         bn_admin.addActionListener(this);
 
+        //ads
+        profile.getBn_select_photo().addActionListener(this);
+
+
         //show
         main_panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         main_panel.setSize(1400, 800);
@@ -208,6 +212,14 @@ public class home_page implements View_Getter, ActionListener {
     public static void main(String[] args) throws Exception{
         UIManager.setLookAndFeel(new FlatMacDarkLaf());
         SwingUtilities.invokeLater(() -> {new home_page(); });
+    }
+
+    public JButton getBn_profile() {
+        return bn_profile;
+    }
+
+    public void setBn_profile(ImageIcon bn_profile) {
+        this.bn_profile.setIcon(bn_profile);
     }
 
     @Override
@@ -230,6 +242,20 @@ public class home_page implements View_Getter, ActionListener {
         }else if (e.getSource().equals(bn_appraisement)){
             page.show(center_part, "2");
             main_panel.remove(pn_east);
+        }else if (e.getSource().equals(bn_profile)) {
+            page.show(center_part, "3");
+            main_panel.remove(pn_east);
+        }else if (e.getSource().equals(profile.getBn_select_photo())) {
+            JFileChooser fc = new JFileChooser();
+            fc.showOpenDialog(profile.getFr());
+            File f = fc.getSelectedFile();
+            im_profile = new ImageIcon(f.getAbsolutePath()).getImage();
+            Image newImage = im_profile.getScaledInstance(400, 400, Image.SCALE_DEFAULT);
+            ImageIcon ic_image = new ImageIcon(newImage);
+            profile.getIcon().setIcon(ic_image);
+            Image tmp = im_profile.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+            ImageIcon imttmp = new ImageIcon(tmp);
+            bn_profile.setIcon(imttmp);
             paneforsearch.setVisible(false);
         }else if (e.getSource().equals(bn_profile)){
             page.show(center_part, "3");
