@@ -22,6 +22,8 @@ public class Task {
     public Task(){
         fr = new JPanel();
         ref = new JButton("Refresh");
+        ref.setEnabled(false);
+
         p = new JPanel();
         margin_p = new JPanel();
 
@@ -44,8 +46,13 @@ public class Task {
 
     }
 
+    public JButton getRef() {
+        return ref;
+    }
+
     public static void main(String[] args) throws Exception{
         UIManager.setLookAndFeel(new FlatMacDarkLaf());
         SwingUtilities.invokeLater(() -> {new Profile(); });
     }
+
 }
