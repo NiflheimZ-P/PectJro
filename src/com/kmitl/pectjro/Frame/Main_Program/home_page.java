@@ -19,11 +19,11 @@ public class home_page implements View_Getter, ActionListener {
     private JFrame main_panel;
 
     private JPanel bg, pn_north, pn_west, pn_east, ctn_pn_task, ctn_pn_calendar, ctn_pn_appraisement, ctn_pn_deadline,
-            ctn_pn_deadline_2, pn_north_right, ps_mar_pmain, paneforsearch, up_mar_search, l_mar_search, r_mar_search,
+            pn_north_right, ps_mar_pmain, paneforsearch, up_mar_search, l_mar_search, r_mar_search,
             s_mar_search, center_part;
     private JTextField tf_seach_bar;
     private Image im_program, im_profile;
-    private JButton bn_task, bn_calendar, bn_appraisement, bn_new, bn_option, bn_profile;
+    private JButton bn_task, bn_calendar, bn_appraisement, bn_new, bn_admin, bn_profile;
     private JLabel l1, l3, l4;
 
     CardLayout page = new CardLayout();
@@ -46,7 +46,6 @@ public class home_page implements View_Getter, ActionListener {
         ctn_pn_calendar = new JPanel();
         ctn_pn_appraisement = new JPanel();
         ctn_pn_deadline = new JPanel();
-        ctn_pn_deadline_2 = new JPanel();
         pn_north_right = new JPanel();
         up_mar_search = new JPanel();
         l_mar_search = new JPanel();
@@ -67,7 +66,7 @@ public class home_page implements View_Getter, ActionListener {
         bn_calendar = new JButton("Calendar");
         bn_appraisement = new JButton("Appraisement");
         bn_new = new JButton("+");
-        bn_option = new JButton("Option");
+        bn_admin = new JButton("Admin");
         bn_profile = new JButton();
 
         l1 = new JLabel();
@@ -117,7 +116,7 @@ public class home_page implements View_Getter, ActionListener {
         tf_seach_bar.setFocusable(true);
 
         pn_north_right.setLayout(new FlowLayout(2,20,20)); // 2 = right , hgap = ซ้าย - ขวา , vgap = บน-ล่าง
-        pn_north_right.add(bn_option); pn_north_right.add(bn_profile);
+        pn_north_right.add(bn_admin); pn_north_right.add(bn_profile);
         bn_profile.setIcon(ic_profile);
         pn_north.add(pn_north_right);
 
@@ -174,15 +173,12 @@ public class home_page implements View_Getter, ActionListener {
         bn_profile.setBackground(new Color(49,51,56));
 
         pn_west.setBackground(new Color(30,31,34));
-        //ctn_pn_task.setBackground(new Color(30,31,34));
-        //ctn_pn_calendar.setBackground(Color.lightGray);
-        //ctn_pn_appraisement.setBackground(Color.lightGray);
         ctn_pn_deadline.setBackground(new Color(30,31,34));
         ps_mar_pmain.setBackground(new Color(49,51,56));
 
         pn_east.setBackground(new Color(49,51,56));
             //Button
-        bn_option.setForeground(Color.white) ; bn_option.setBackground(new Color(43,45,49));
+        bn_admin.setForeground(Color.white) ; bn_admin.setBackground(new Color(43,45,49));
         bn_task.setForeground(Color.white); bn_task.setBackground(new Color(43,45,49));
         bn_calendar.setForeground(Color.white); bn_calendar.setBackground(new Color(43,45,49));
         bn_appraisement.setForeground(Color.white); bn_appraisement.setBackground(new Color(43,45,49));
@@ -197,6 +193,7 @@ public class home_page implements View_Getter, ActionListener {
         bn_appraisement.addActionListener(this);
         bn_calendar.addActionListener(this);
         bn_profile.addActionListener(this);
+        bn_admin.addActionListener(this);
 
         //show
         main_panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
