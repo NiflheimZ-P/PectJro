@@ -5,11 +5,11 @@ import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.ProjectTable;
-import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -75,13 +75,17 @@ public class ProjectAdd implements ActionListener, DocumentListener, DateChangeL
 
 		name.getDocument().addDocumentListener(this); description.getDocument().addDocumentListener(this);
 		start.addDateChangeListener(this); end.addDateChangeListener(this);
+		start.getComponentDateTextField().setBackground(new Color(40,40,40,255));
+		end.getComponentDateTextField().setBackground(new Color(40,40,40,255));
+		start.getComponentDateTextField().setBorder(new LineBorder(new Color(60,60,60,255)));
+		end.getComponentDateTextField().setBorder(new LineBorder(new Color(60,60,60,255)));
 
 		frame.add(main_panel);
 	}
 
 	// Methods
 	public boolean checkEmpty(){
-		return (name.getText().isEmpty() || description.getText().isEmpty() || start.getText().isEmpty() || end.getText().isEmpty());
+		return (name.getText().isEmpty() || start.getText().isEmpty() || end.getText().isEmpty());
 	}
 
 	public boolean checkDate(){

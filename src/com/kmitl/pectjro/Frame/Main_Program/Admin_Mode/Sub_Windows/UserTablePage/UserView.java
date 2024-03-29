@@ -23,12 +23,12 @@ public class UserView {
 
 		image = new Image_Resizer(new ImageIcon(user.image), 130, 130);
 		image.setBorder(new MatteBorder(1, 1, 1, 1, Color.gray));
-		first = new JTextField(user.firstname, 13); first.setPreferredSize(new Dimension(50, 30)); first.setEditable(false); first.setBackground(Color.white);
-		last = new JTextField(user.lastname, 13); last.setPreferredSize(new Dimension(50, 30)); last.setEditable(false); last.setBackground(Color.white);
-		username = new JTextField(user.username, 13); username.setPreferredSize(new Dimension(50, 30)); username.setEditable(false); username.setBackground(Color.white);
-		pass = new JTextField(user.password, 13); pass.setPreferredSize(new Dimension(50, 30)); pass.setEditable(false); pass.setBackground(Color.white);
+		first = new JTextField(user.firstname, 13); first.setPreferredSize(new Dimension(50, 30)); first.setEditable(false); first.setBackground(new Color(48,44,44));
+		last = new JTextField(user.lastname, 13); last.setPreferredSize(new Dimension(50, 30)); last.setEditable(false); last.setBackground(new Color(48,44,44));
+		username = new JTextField(user.username, 13); username.setPreferredSize(new Dimension(50, 30)); username.setEditable(false); username.setBackground(new Color(48,44,44));
+		pass = new JTextField(user.password, 13); pass.setPreferredSize(new Dimension(50, 30)); pass.setEditable(false); pass.setBackground(new Color(48,44,44));
 		gmail = new JTextField(user.gmail, 29); gmail.setPreferredSize(new Dimension(50, 30));
-		gmail.setEditable(false); gmail.setBackground(Color.white);
+		gmail.setEditable(false); gmail.setBackground(new Color(48,44,44));
 
 
 		int allPercent;

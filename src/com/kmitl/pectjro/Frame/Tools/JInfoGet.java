@@ -23,7 +23,7 @@ public class JInfoGet extends JTextField implements FocusListener {
     public void focusGained(FocusEvent e) {
         if (getText().equals(shouldbe)){
             this.setText("");
-            this.setForeground(Color.BLACK);
+            this.setForeground(Color.WHITE);
         }
     }
 

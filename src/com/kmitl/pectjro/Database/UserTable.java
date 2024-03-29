@@ -63,6 +63,15 @@ public class UserTable {
 
 	public User_Template getUserData(String gmail) throws SQLException {
 		String sql = "SELECT * FROM User_info WHERE Gmail = '" + gmail + "';";
+		return setData(sql);
+	}
+
+	public User_Template getUserData(int id) throws SQLException {
+		String sql = "SELECT * FROM User_info WHERE Id = '" + id + "';";
+		return setData(sql);
+	}
+
+	private User_Template setData(String sql) throws SQLException {
 		ResultSet result = getData(sql);
 		User_Template output = new User_Template();
 		result.next();
@@ -100,6 +109,36 @@ public class UserTable {
 					result.getBoolean("Admin"));
 			output.add(user);
 		}
+		return output;
+	}
+
+	public ArrayList<User_Template> getById(ArrayList<Integer> id) throws SQLException{
+		String sql = String.format("SELECT * FROM User_info WHERE Id = %s", id.get(0));
+
+		for (int i = 1; i < id.size(); i++) {
+			sql += " || Id = " + id.get(i);
+		}
+		sql += ";";
+
+		ResultSet result = getData(sql);
+		ArrayList<User_Template> output = new ArrayList<>();
+		while (result.next()) {
+			User_Template current = new User_Template();
+			current.setData(
+					result.getInt("Id"),
+					result.getString("Username"),
+					result.getString("Gmail"),
+					result.getString("Password"),
+					result.getString("Firstname"),
+					result.getString("Lastname"),
+					result.getBytes("Image"),
+					result.getInt("Project_Done"),
+					result.getInt("Project_Expired"),
+					result.getInt("Project_Ontime"),
+					result.getBoolean("Admin"));
+			output.add(current);
+		}
+
 		return output;
 	}
 }

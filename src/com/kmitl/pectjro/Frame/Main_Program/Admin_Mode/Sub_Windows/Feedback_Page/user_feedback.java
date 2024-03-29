@@ -37,10 +37,10 @@ public class user_feedback extends JPanel {
         name.setFont(new Font("", Font.BOLD, 20));
         message.setFont(new Font("", Font.PLAIN, 15));
 
-        name.setBackground(new Color(204, 204, 204));
-        message.setBackground(new Color(204, 204, 204));
-        north.setBackground(new Color(204, 204, 204));
-        this.setBackground(new Color(204, 204, 204));
+        name.setBackground(Color.darkGray);
+        message.setBackground(Color.darkGray);
+        north.setBackground(Color.darkGray);
+        this.setBackground(Color.darkGray);
         this.setBorder(new CompoundBorder(
                 new MatteBorder(1, 1, 1, 1, Color.gray),
                 new EmptyBorder(10, 10, 20, 10)

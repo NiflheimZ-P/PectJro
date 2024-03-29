@@ -2,9 +2,13 @@ package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePag
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.UserTable;
+import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Groups_interface.Admin_Table_Model;
+import com.kmitl.pectjro.Frame.Tools.Constraints;
+
 import javax.swing.*;
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -22,19 +26,25 @@ public class UserTableModel implements Admin_Table_Model {
 	// Methods
 	public void DeleteUser(String gmail, int row){
 		SwingWorker<Void, Void> userDelete = new SwingWorker<Void, Void>() {
+			private final Loading_dialog loading = new Loading_dialog(view);
 			@Override
 			protected Void doInBackground() throws Exception {
+				loading.setVisible(true);
 				Connection con = DBConnect.createConnect();
 				UserTable delete = new UserTable(con);
 				try {
 					delete.deleteUser(gmail);
-					JOptionPane.showMessageDialog(null, "Deleted account", "Successful", JOptionPane.PLAIN_MESSAGE);
 					controller.getUserData().remove(row);
 					view.getModel().removeRow(row);
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(null, "Cannot delete this account", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				return null;
+			}
+
+			@Override
+			protected void done(){
+				loading.dispose();
 			}
 		};
 		userDelete.execute();
@@ -43,8 +53,10 @@ public class UserTableModel implements Admin_Table_Model {
 	@Override
 	public void loadData() {
 		SwingWorker<Void, Void> load = new SwingWorker<Void, Void>() {
+			private final Loading_dialog loading = new Loading_dialog(view);
 			@Override
 			protected Void doInBackground() throws Exception {
+				loading.setVisible(true);
 				view.getRefresh().setEnabled(false);
 				view.getModel().setRowCount(0);
 				Connection con = DBConnect.createConnect();
@@ -56,6 +68,11 @@ public class UserTableModel implements Admin_Table_Model {
 				}
 				view.getRefresh().setEnabled(true);
 				return null;
+			}
+
+			@Override
+			protected void done() {
+				loading.dispose();
 			}
 		};
 		load.execute();

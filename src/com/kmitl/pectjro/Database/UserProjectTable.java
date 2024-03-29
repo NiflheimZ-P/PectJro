@@ -1,5 +1,7 @@
 package com.kmitl.pectjro.Database;
 
+import com.kmitl.pectjro.Frame.Templates.User_Template;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,5 +33,10 @@ public class UserProjectTable {
 			output.add(result.getInt("User_id"));
 		}
 		return output;
+	}
+
+	public void addCollaborator(int userId, int projectId) throws SQLException{
+		String sql = String.format("INSERT INTO User_Project VALUES (DEFAULT, %s, %s);", userId, projectId);
+		updateData(sql);
 	}
 }
