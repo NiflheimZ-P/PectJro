@@ -41,7 +41,7 @@ public class Login_Page implements LoginPage {
         password.setPreferredSize(new Dimension(350, 35));
         main_panel.add(password, new Constraints(0, 2, 0, 0, new Insets(20, 0, 0, 0)));
 
-        main_panel.add(check, new Constraints(0, 4, 1, 1, 0, 0, GridBagConstraints.LINE_START, new Insets(20, 0, 0, 0)));
+        main_panel.add(check, new Constraints(0, 4, 1, 1, 0, 0, GridBagConstraints.LINE_START, new Insets(20, 30, 0, 0)));
 
         login.setFont(new Font("", Font.PLAIN, 13));
         login.setPreferredSize(new Dimension(200, 50));

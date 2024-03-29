@@ -45,4 +45,14 @@ public class UserProjectTable {
 		updateData(sql);
 		System.out.println(sql);
 	}
+
+	public ArrayList<Integer> getProject(int userId) throws SQLException{
+		String sql = String.format("SELECT * FROM User_Project WHERE User_id = %s", userId);
+		ArrayList<Integer> output = new ArrayList<>();
+		ResultSet result = getData(sql);
+		while (result.next()) {
+			output.add(result.getInt("Project_id"));
+		}
+		return output;
+	}
 }

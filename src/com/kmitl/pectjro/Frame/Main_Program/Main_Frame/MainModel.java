@@ -2,6 +2,10 @@ package com.kmitl.pectjro.Frame.Main_Program.Main_Frame;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.kmitl.pectjro.Database.Connection.DBConnect;
+import com.kmitl.pectjro.Database.ProjectTable;
+import com.kmitl.pectjro.Database.UserProjectTable;
+import com.kmitl.pectjro.Frame.Main_Program.home_page;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
 import javax.swing.*;
@@ -9,6 +13,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MainModel {
 	// Attribute
@@ -47,5 +54,23 @@ public class MainModel {
 			JOptionPane.showMessageDialog(null, "Cannot access file 'User_Cache'", "Error", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		}
+	}
+
+	public void createHome() {
+		controller.setHome(new home_page(controller.getCache()));
+		changePage(controller.getHome());
+	}
+
+	public void getProject() throws SQLException {
+		Connection con = DBConnect.createConnect();
+		UserProjectTable allPro = new UserProjectTable(con);
+		ArrayList<Integer> inPro = allPro.getProject(controller.getCache().id);
+
+		ProjectTable project = new ProjectTable(con);
+		controller.setProjectIn(project.getProjectData(inPro));
+	}
+
+	public void loadHome() throws SQLException {
+
 	}
 }

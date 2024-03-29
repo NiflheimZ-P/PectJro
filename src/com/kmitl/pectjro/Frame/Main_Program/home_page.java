@@ -9,6 +9,7 @@ import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
 
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginController;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.Task;
+import com.kmitl.pectjro.Frame.Templates.User_Template;
 
 
 import java.awt.*;
@@ -18,7 +19,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 
 public class home_page implements View_Getter, ActionListener {
-    private JFrame main_panel;
+    private JPanel main_panel;
 
     private JPanel bg, pn_north, pn_west, pn_east, ctn_pn_task, ctn_pn_calendar, ctn_pn_appraisement, ctn_pn_deadline,
             pn_north_right, ps_mar_pmain, paneforsearch, up_mar_search, l_mar_search, r_mar_search,
@@ -35,9 +36,9 @@ public class home_page implements View_Getter, ActionListener {
     private Calendars calen;
     private Task task;
 
-    public home_page(){
+    public home_page(User_Template user){
         //set up
-        main_panel = new JFrame();
+        main_panel = new JPanel(new BorderLayout());
         bg = new JPanel();
         pn_north = new JPanel();
         pn_west = new JPanel();
@@ -205,15 +206,10 @@ public class home_page implements View_Getter, ActionListener {
 
 
         //show
-        main_panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        main_panel.setSize(1400, 800);
-        main_panel.setResizable(false);
-        main_panel.setVisible(true);
-    }
-
-    public static void main(String[] args) throws Exception{
-        UIManager.setLookAndFeel(new FlatMacDarkLaf());
-        SwingUtilities.invokeLater(() -> {new home_page(); });
+//        main_panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        main_panel.setSize(1400, 800);
+//        main_panel.setResizable(false);
+//        main_panel.setVisible(true);
     }
 
     public JButton getBn_profile() {

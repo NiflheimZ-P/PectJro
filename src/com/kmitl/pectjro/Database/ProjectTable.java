@@ -65,4 +65,25 @@ public class ProjectTable {
 		sql.setInt(5, info.id);
 		sql.executeUpdate();
 	}
+
+	public ArrayList<Project_Template> getProjectData(ArrayList<Integer> info) throws SQLException{
+		String sql = String.format("SELECT * FROM Project_info WHERE Id = %s", info.get(0));
+		for (int i = 1; i < info.size(); i++) {
+			sql += "|| Id = " + info.get(i);
+		}
+		sql += ";";
+
+		ArrayList<Project_Template> output = new ArrayList<>();
+		ResultSet result = getData(sql);
+		while (result.next()) {
+			Project_Template current = new Project_Template();
+			current.id = result.getInt("Id");
+			current.name = result.getString("Name");
+			current.description = result.getString("Description");
+			current.start = result.getDate("Start");
+			current.end = result.getDate("Expired");
+			output.add(current);
+		}
+		return output;
+	}
 }
