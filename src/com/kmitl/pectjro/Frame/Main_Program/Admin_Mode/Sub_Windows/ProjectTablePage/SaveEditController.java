@@ -55,6 +55,8 @@ public class SaveEditController implements ActionListener {
 						collaborators.deleteCollaborator(j, editing.id);
 					}
 
+					System.out.println(editing.id);
+					System.out.println(edit.getDelete().get(0));
 					return null;
 				}
 

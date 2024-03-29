@@ -40,11 +40,9 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 	private AddCollaborator find;
 	private ArrayList<Integer> delete, addNew;
 	private ArrayList<User_Template> data;
-	private boolean refresh;
 
 	// Constructor
 	public ProjectEdit(Project_Template info) {
-		refresh = true;
 		delete = new ArrayList<>();
 		addNew = new ArrayList<>();
 		this.info = info;
@@ -136,6 +134,8 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 		search = new JInfoGet("Find a collaborator");
 		search.setPreferredSize(new Dimension((int) (frame.getWidth()*0.88), 35));
 
+		search.getDocument().addDocumentListener(this);
+
 		noPeople = new JPanel(new GridBagLayout());
 		noPeople.setPreferredSize(new Dimension((int) (frame.getWidth()*0.89), (int) (frame.getHeight()*0.4)));
 		JLabel noOne = new JLabel("This project doesn't have any collaborators yet");
@@ -168,15 +168,13 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 		}
 	}
 
-	public void setUser() {
+	public void setUser(ArrayList<Integer> show) {
 		SwingWorker<Void, Void> set = new SwingWorker<Void, Void>() {
 			@Override
 			protected Void doInBackground() throws Exception {
-				if (info.people.size() > 4) {
+				if (show.size() > 4) {
 					scroll_people.setPreferredSize(new Dimension((int) (frame.getWidth()*0.87), (int) (frame.getHeight()*0.4)));
-					refresh = true;
-				} else if (refresh){
-					System.out.println("in");
+				} else {
 					scroll_people.setPreferredSize(null);
 					people.remove(addPeople);
 					people.remove(add);
@@ -185,34 +183,32 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 
 				center_add.removeAll();
 				for (int i = 0; i < info.people.size(); i++) {
-					UserBanner goingToAdd = new UserBanner(data.get(i));
-					JButton remove = new JButton("Remove");
+					if (show.contains(data.get(i).id)) {
+						UserBanner goingToAdd = new UserBanner(data.get(i));
+						JButton remove = new JButton("Remove");
 
-					int currentNumber = i;
-					remove.addActionListener(new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							Integer thisId = info.people.get(currentNumber);
+						int currentNumber = i;
+						remove.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								Integer thisId = info.people.get(currentNumber);
 
-							if (!addNew.contains(thisId)) {
-								delete.add(thisId);
-							} else {
-								addNew.remove(thisId);
+								if (!addNew.contains(thisId)) {
+									delete.add(thisId);
+								} else {
+									addNew.remove(thisId);
+								}
+								info.people.remove(thisId);
+								show.remove(thisId);
+
+								data.remove(currentNumber);
+
+								setUser(show);
 							}
-							info.people.remove(thisId);
-
-							if (info.people.isEmpty()) {
-								refresh = true;
-							}
-
-							data.remove(currentNumber);
-
-							setUser();
-						}
 					});
-
 					goingToAdd.add(remove, new Constraints(3, 0, 1, 0, 22, new Insets(10, 10, 10, 5)));
 					center_add.add(goingToAdd, new Constraints(0, i, 0, 0, 21, new Insets(0, 0, 0, 0)));
+					}
 				}
 
 				frame.revalidate();
@@ -240,7 +236,7 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 			protected void done(){
 				loading.dispose();
 				chooseOutput();
-				setUser();
+				setUser(info.people);
 			}
 		};
 		load.execute();
@@ -251,17 +247,30 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 			noPeople.add(add, new Constraints(0, 1, 0, 0, new Insets(0, 0, 0, 0)));
 			people.add(noPeople, new Constraints(0, 2, 2, 1, 1, 1, GridBagConstraints.PAGE_START,
 					new Insets(0, 0, 0, 0)));
-			refresh = true;
 		} else{
 			people.add(add, new Constraints(1, 1, 0, 0, GridBagConstraints.LAST_LINE_END,
 					new Insets(0, 0, 15, 0)));
 			people.add(addPeople, new Constraints(0, 2, 2, 1, 1, 1, GridBagConstraints.PAGE_START,
 					new Insets(0, 0, 0, 0)));
 			north_add.add(search);
-			refresh = false;
 		}
+		search.requestFocus();
 		frame.revalidate();
 		frame.repaint();
+	}
+
+	public void searchUp() {
+		if (!search.getText().equals(search.getShouldbe()) && !search.getText().isEmpty()) {
+			ArrayList<Integer> find = new ArrayList<>();
+			for (int i = 0; i < info.people.size(); i++) {
+				if (data.get(i).username.toLowerCase().contains(search.getText().toLowerCase()) ||
+						data.get(i).firstname.toLowerCase().contains(search.getText().toLowerCase()) ||
+						data.get(i).gmail.toLowerCase().contains(search.getText().toLowerCase())) {
+					find.add(info.people.get(i));
+				}
+			}
+			setUser(find);
+		}
 	}
 
 	// Listener
@@ -276,9 +285,16 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 		} else if (e.getActionCommand().equals("Select a collaborator")) {
 			info.people.add(((UserBanner)find.getSelect()).getUser().id);
 			loadNewUser(((UserBanner)find.getSelect()).getUser().id);
-			addNew.add(((UserBanner)find.getSelect()).getUser().id);
+
+			if (delete.contains(((UserBanner)find.getSelect()).getUser().id)) {
+				delete.remove(((UserBanner)find.getSelect()).getUser().id);
+			} else {
+				addNew.add(((UserBanner)find.getSelect()).getUser().id);
+			}
+
 			find.getFrame().dispose();
 			people.remove(noPeople);
+			search.setText("");
 		}
 	}
 
@@ -319,17 +335,17 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 
 	@Override
 	public void insertUpdate(DocumentEvent e) {
-
+		searchUp();
 	}
 
 	@Override
 	public void removeUpdate(DocumentEvent e) {
-
+		searchUp();
 	}
 
 	@Override
 	public void changedUpdate(DocumentEvent e) {
-
+		searchUp();
 	}
 
 	// Accessor
