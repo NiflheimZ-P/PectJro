@@ -6,6 +6,9 @@ import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
 import com.kmitl.pectjro.Frame.Main_Program.home_page;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
 import javax.swing.*;
 
 public class Profile {
@@ -15,6 +18,8 @@ public class Profile {
     private JLabel l_topic, icon, l_name, l_email;
     private JButton bn_select_photo, bn_change_name, bn_change_password, bn_log_out;
     private Image im_profile;
+    private home_page home;
+
 
     public JPanel getFr() {
         return fr;
@@ -50,7 +55,6 @@ public class Profile {
         //Frame set up
         fr.setLayout(new BorderLayout());
         fr.setBackground(new Color(49,51,56));
-
 
         //top part and exit button
         fr.add(pn_north, BorderLayout.NORTH);
@@ -134,12 +138,22 @@ public class Profile {
 
 
 
+
         //show
         //fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.setSize(1000,600);
         //fr.setResizable(false);
         fr.setVisible(true);
     }
+
+    public JButton getBn_select_photo() {
+        return bn_select_photo;
+    }
+
+    public JLabel getIcon() {
+        return icon;
+    }
+
     public static void main(String[] args) throws Exception{
         UIManager.setLookAndFeel(new FlatMacLightLaf());
         SwingUtilities.invokeLater(() -> {new Profile(); });
