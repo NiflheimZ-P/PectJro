@@ -41,7 +41,8 @@ public class UserProjectTable {
 	}
 
 	public void deleteCollaborator(int userId, int projectId) throws SQLException {
-		String sql = String.format("DELETE FROM User_Project WHERE User_id = %s & Project_id = %s", userId, projectId);
+		String sql = String.format("DELETE FROM User_Project WHERE User_id = %s && Project_id = %s;", userId, projectId);
 		updateData(sql);
+		System.out.println(sql);
 	}
 }

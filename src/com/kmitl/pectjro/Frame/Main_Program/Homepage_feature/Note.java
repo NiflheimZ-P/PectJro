@@ -1,3 +1,4 @@
+
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
 
 import javax.swing.*;
@@ -42,6 +43,51 @@ public class Note extends JFrame{
         new Note();
     }
 
+
+//package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
+//
+//import javax.swing.*;
+//import java.awt.*;
+//import java.awt.event.*;
+//import java.sql.*;
+//
+//
+//public class Note extends JFrame implements ActionListener{
+//
+//    private JTextArea textArea;
+//    private JPanel mainPanel;
+//    private JButton save;
+//
+//    public Note() {
+//        setTitle("Note");
+//        setSize(800, 600);
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        // สร้าง Panel หลัก
+//        mainPanel = new JPanel();
+//        mainPanel.setLayout(new BorderLayout());
+//        add(mainPanel, BorderLayout.CENTER);
+//
+//        // สร้าง TextArea
+//        textArea = new JTextArea();
+//        textArea.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//        JScrollPane scrollPane = new JScrollPane(textArea);
+//        add(scrollPane, BorderLayout.CENTER);
+//
+//        // สร้าง Button
+//        save = new JButton("Save");
+//        save.addActionListener(this); // เพิ่ม ActionListener
+//        mainPanel.add(save, BorderLayout.EAST); // เพิ่มปุ่ม save ไปทางขวา
+//
+//        // แสดงหน้าต่าง
+//        setVisible(true);
+//    }
+//
+//
+//    public static void main(String[] args) {
+//        new Note();
+//    }
+//
 //    @Override
 //    public void actionPerformed(ActionEvent e) {
 //        if (e.getSource() == save) {
@@ -80,4 +126,9 @@ public class Note extends JFrame{
 //        }
 //    }
 
+
 }
+
+//
+//}
+

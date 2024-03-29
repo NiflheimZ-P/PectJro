@@ -30,8 +30,6 @@ public class ProjectTableController implements ActionListener, DocumentListener 
 		view.getDelete().addActionListener(this);
 		view.getSearch().getDocument().addDocumentListener(this);
 		view.getView().addActionListener(this);
-
-		// TODO: make this can save to database
 	}
 
 	// Accessor
@@ -74,7 +72,7 @@ public class ProjectTableController implements ActionListener, DocumentListener 
 					protected Void doInBackground() throws Exception {
 						loading.setVisible(true);
 						edit.loadCon();
-						edit.setUser();
+						edit.setUser(edit.getInfo().people);
 						return null;
 					}
 
@@ -90,7 +88,6 @@ public class ProjectTableController implements ActionListener, DocumentListener 
 			}
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, "Please select user first.", "Error", JOptionPane.ERROR_MESSAGE);
-			ex.printStackTrace();
 		}
 	}
 
