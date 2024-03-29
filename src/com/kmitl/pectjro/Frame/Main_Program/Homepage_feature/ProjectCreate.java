@@ -10,6 +10,8 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
  */
 import com.github.lgooddatepicker.components.DatePicker;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
+import com.kmitl.pectjro.Frame.Tools.LgoodDatePicker_Setting;
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -44,8 +46,8 @@ public class ProjectCreate {
         l4 = new JLabel("End");
         projectname = new JInfoGet("ProjectName");
 
-        d1 = new DatePicker();
-        d2 = new DatePicker();
+        d1 = new DatePicker(new LgoodDatePicker_Setting().getSettings());
+        d2 = new DatePicker(new LgoodDatePicker_Setting().getSettings());
 
         fr.add(p_main);
         p_main.setLayout(new BorderLayout());
