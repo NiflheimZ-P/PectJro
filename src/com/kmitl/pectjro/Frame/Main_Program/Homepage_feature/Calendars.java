@@ -14,7 +14,7 @@ public class Calendars {
     private String[] columns = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     private Object[][] data;
     private Calendar cal;
-    private int month, day, year, daysInMonth, firstDayOfWeek, row, col, currentDay, currentMonth;
+    private int month, year, daysInMonth, firstDayOfWeek, row, col;
     private JLabel label;
 
     public Calendars() {
@@ -69,10 +69,10 @@ public class Calendars {
         col = firstDayOfWeek - 1;
 
         // Add data to the model
-        for (day = 1; day <= daysInMonth; day++) {
+        for (int day = 1; day <= daysInMonth; day++) {
             cal.set(Calendar.DAY_OF_MONTH, day);
-            currentDay = cal.get(Calendar.DAY_OF_MONTH);
-            currentMonth = cal.get(Calendar.MONTH);
+            int currentDay = cal.get(Calendar.DAY_OF_MONTH);
+            int currentMonth = cal.get(Calendar.MONTH);
 
             if (currentMonth == month) {
                 data[row][col] = currentDay; // Add day to cell
@@ -105,7 +105,7 @@ public class Calendars {
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class, centerRenderer);
 
-        table.setRowHeight(150);
+        table.setRowHeight(100);
 
         frame.setLayout(new BorderLayout());
         frame.add(pn, BorderLayout.NORTH);
