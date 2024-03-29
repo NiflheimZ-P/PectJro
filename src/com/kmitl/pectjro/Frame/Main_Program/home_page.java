@@ -21,14 +21,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.*;
 
-<<<<<<< HEAD
-public class home_page implements View_Getter, ActionListener {
-    private JPanel main_panel;
-=======
 public class home_page implements View_Getter, ActionListener, MouseListener {
 
-    private JFrame main_panel;
->>>>>>> e834b0a8d8f0eecf0483a2102ea953491f169ebe
+    private JPanel main_panel;
 
     private JPanel bg, pn_north, pn_west, pn_east, ctn_pn_task, ctn_pn_calendar, ctn_pn_appraisement, ctn_pn_deadline,
             pn_north_right, ps_mar_pmain, paneforsearch, up_mar_search, l_mar_search, r_mar_search,
@@ -44,13 +39,9 @@ public class home_page implements View_Getter, ActionListener, MouseListener {
     private Profile profile;
     private Calendars calen;
     private Task task;
-<<<<<<< HEAD
+    private task_select ts;
 
     public home_page(User_Template user){
-=======
-    private task_select ts;
-    public home_page(){
->>>>>>> e834b0a8d8f0eecf0483a2102ea953491f169ebe
         //set up
         main_panel = new JPanel(new BorderLayout());
         bg = new JPanel();
