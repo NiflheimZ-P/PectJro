@@ -39,4 +39,9 @@ public class UserProjectTable {
 		String sql = String.format("INSERT INTO User_Project VALUES (DEFAULT, %s, %s);", userId, projectId);
 		updateData(sql);
 	}
+
+	public void deleteCollaborator(int userId, int projectId) throws SQLException {
+		String sql = String.format("DELETE FROM User_Project WHERE User_id = %s & Project_id = %s", userId, projectId);
+		updateData(sql);
+	}
 }

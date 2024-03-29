@@ -14,6 +14,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +25,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ProjectEdit implements ActionListener, WindowListener {
+public class ProjectEdit implements ActionListener, WindowListener, DocumentListener {
 	// Attribute
 	private JInternalFrame frame;
 	private JPanel north_info, north_peo, south, infomation, people, addPeople, north_add, center_add, noPeople, note;
@@ -315,6 +317,21 @@ public class ProjectEdit implements ActionListener, WindowListener {
 
 	}
 
+	@Override
+	public void insertUpdate(DocumentEvent e) {
+
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent e) {
+
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+
+	}
+
 	// Accessor
 	public JInternalFrame getFrame() {
 		return frame;
@@ -371,4 +388,11 @@ public class ProjectEdit implements ActionListener, WindowListener {
 	public void setAddNew(ArrayList<Integer> addNew) {
 		this.addNew = addNew;
 	}
+	public Project_Template getInfo() {
+		return info;
+	}
+	public void setInfo(Project_Template info) {
+		this.info = info;
+	}
+
 }

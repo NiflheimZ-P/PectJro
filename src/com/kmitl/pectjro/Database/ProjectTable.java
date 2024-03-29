@@ -55,4 +55,14 @@ public class ProjectTable {
 		String sql = String.format("DELETE FROM Project_info WHERE Id = %s;", id);
 		updateData(sql);
 	}
+
+	public void updateProject(Project_Template info) throws SQLException {
+		PreparedStatement sql = con.prepareStatement("UPDATE Project_info SET Name = ?, Description = ?, Start = ?, Expired = ? WHERE Id = ?");
+		sql.setString(1, info.name);
+		sql.setString(2, info.description);
+		sql.setDate(3, info.start);
+		sql.setDate(4, info.end);
+		sql.setInt(5, info.id);
+		sql.executeUpdate();
+	}
 }
