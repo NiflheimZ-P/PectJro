@@ -10,14 +10,13 @@ public class task_view extends JPanel{
     public task_view(){
 
         pl = new JPanel();
-        pl.setBackground(new Color(49,51,56));
         pl.setLayout(new GridLayout(10,1));
         for (int i = 0; i < 10; i++){
             pl.add(new task_select());
         }
         this.add(pl);
+        this.setBackground(new Color(49,51,56));
         this.setPreferredSize(new Dimension(600,1000));
-
         this.setVisible(true);
     }
 

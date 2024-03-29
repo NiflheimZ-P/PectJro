@@ -11,8 +11,8 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Task {
-    private JPanel fr, p;
-    private JButton  ref;
+    private JPanel fr, p, margin_p;
+    private JButton ref;
 
     public JPanel getFrame() {
         return fr;
@@ -23,15 +23,19 @@ public class Task {
         fr = new JPanel();
         ref = new JButton("Refresh");
         p = new JPanel();
+        margin_p = new JPanel();
 
-        fr.setLayout(new BorderLayout());
+        fr.setLayout(new BorderLayout(20, 20));
         fr.setBackground(new Color(49,51,56));
         fr.add(new task_view());
-        fr.add(p, BorderLayout.SOUTH);
-        
+        fr.add(p, BorderLayout.WEST);
+
         p.setBackground(new Color(49,51,56));
-        p.setLayout(new FlowLayout(FlowLayout.LEFT));
-        p.add(ref);
+        p.setLayout(new BorderLayout());
+        p.add(margin_p, BorderLayout.SOUTH);
+        margin_p.setBackground(new Color(49,51,56));
+        margin_p.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
+        margin_p.add(ref);
 
 
 
