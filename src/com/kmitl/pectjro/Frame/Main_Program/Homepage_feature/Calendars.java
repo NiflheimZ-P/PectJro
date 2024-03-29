@@ -7,35 +7,33 @@ import java.util.*;
 public class Calendars {
     private JPanel frame;
     private JTable table;
-    private JButton left, right, cancel;
+    private JButton left, right;
     private JPanel pn;
     private DefaultTableModel model;
     private DefaultTableCellRenderer centerRenderer;
     private String[] columns = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     private Object[][] data;
     private Calendar cal;
-    private int month, year, daysInMonth, firstDayOfWeek, row, col;
-    private JProgressBar jb;
+    private int month, day, year, daysInMonth, firstDayOfWeek, row, col, currentDay, currentMonth;
+    private JLabel label;
 
     public Calendars() {
         // Add Button
         frame = new JPanel();
         left = new JButton("<");
         right = new JButton(">");
-        cancel = new JButton("X");
-
-        jb = new JProgressBar();
-        jb.setStringPainted(true);
         // Add Button on Panel
         pn = new JPanel();
+        label = new JLabel("Deadline Calendar");
 
-
-        pn.setLayout(new FlowLayout());
-        pn.add(jb);
-        pn.add(cancel);
-        pn.add(left);
-        pn.add(right);
-
+        pn.setLayout(new BorderLayout());
+        JPanel p_left = new JPanel();
+        JPanel p_right = new JPanel();
+        p_left.add(label);
+        pn.add(p_left, BorderLayout.WEST);
+        p_right.add(left);
+        p_right.add(right);
+        pn.add(p_right, BorderLayout.EAST);
 
         // Create a table model
         model = new DefaultTableModel() {
@@ -58,6 +56,7 @@ public class Calendars {
         month = cal.get(Calendar.MONTH);
         year = cal.get(Calendar.YEAR);
 
+
         // Get the number of days in the month
         daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 
@@ -70,12 +69,11 @@ public class Calendars {
         col = firstDayOfWeek - 1;
 
         // Add data to the model
-        for (int day = 1; day <= daysInMonth; day++) {
+        for (day = 1; day <= daysInMonth; day++) {
             cal.set(Calendar.DAY_OF_MONTH, day);
-            int currentDay = cal.get(Calendar.DAY_OF_MONTH);
-            int currentMonth = cal.get(Calendar.MONTH);
+            currentDay = cal.get(Calendar.DAY_OF_MONTH);
+            currentMonth = cal.get(Calendar.MONTH);
 
-            // Check if the current day is in the current month
             if (currentMonth == month) {
                 data[row][col] = currentDay; // Add day to cell
             } else {
@@ -107,16 +105,26 @@ public class Calendars {
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         table.setDefaultRenderer(Object.class, centerRenderer);
 
-        // Set row height
         table.setRowHeight(150);
 
-        // Add the table directly to the frame
+        frame.setLayout(new BorderLayout());
         frame.add(pn, BorderLayout.NORTH);
+        frame.setBackground(Color.black);
         frame.add(table.getTableHeader(), BorderLayout.CENTER); // Add table header
         frame.add(table, BorderLayout.SOUTH); // Add table itself
 
-        // Set frame size and make it visible
-        frame.setSize(400, 600);
+        //Set color and set border button
+        frame.setBackground(new Color(49, 51, 56));
+        left.setFont(new Font("Sans", Font.PLAIN, 12));
+        right.setFont(new Font("Sans", Font.PLAIN, 12));
+        label.setFont(new Font("Sans", Font.PLAIN, 18));
+        pn.setBackground(new Color(49, 51, 56));
+        p_left.setBackground(new Color(49, 51, 56));
+        p_right.setBackground(new Color(49, 51, 56));
+        table.setBackground(new Color(43, 45, 49));
+        table.getTableHeader().setBackground(new Color(30, 31, 34));
+
+        frame.setSize(1000, 600);
         frame.setVisible(true);
     }
 
