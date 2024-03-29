@@ -12,12 +12,12 @@ import java.awt.*;
 import javax.swing.*;
 public class Progress {
     private JPanel fr;
-    private JPanel p, p_zone1, p_zone2, p_zone11, p_zone12, p_zone121, p_zone122 , p_zone21, p_zone22;
+    private JPanel p, p_zone1, p_zone2, p_zone11, p_zone12, p_zone121, p_zone122 , p_zone21, p_zone22, pl_adven, pl_disadven;
     private JProgressBar pg;
     private JLabel progress, percent, l1, l2, l3, l4, r1, r2, r3, r4;
     public Progress(){
         fr = new JPanel();
-        p = new JPanel();
+        p = new JPanel();   pl_adven = new JPanel(); pl_disadven = new JPanel();
         p_zone1 = new JPanel();
         p_zone2 = new JPanel();
         p_zone11 = new JPanel();
@@ -57,6 +57,7 @@ public class Progress {
         p_zone121.setLayout(new FlowLayout());
         pg.setPreferredSize(new Dimension(400, 80));
         p_zone121.add(pg);
+        pg.setBackground(Color.LIGHT_GRAY);
         p_zone122.setLayout(new BorderLayout());
         p_zone121.add(percent);
         percent.setFont(new Font("Sans", Font.BOLD, 25));
@@ -70,14 +71,18 @@ public class Progress {
         p_zone2.add(p_zone21);
         p_zone21.setPreferredSize(new Dimension(300, 300));
         p_zone21.setLayout(new GridLayout(4,1));
-        p_zone21.add(l1);
+        p_zone21.add(pl_adven);
+        pl_adven.setLayout(new FlowLayout());
+        pl_adven.add(l1);
         p_zone21.add(l2);
         p_zone21.add(l3);
         p_zone21.add(l4);
         p_zone2.add(p_zone22);
         p_zone22.setPreferredSize(new Dimension(300, 300));
         p_zone22.setLayout(new GridLayout(4,1));
-        p_zone22.add(r1);
+        pl_disadven.add(r1);
+        pl_disadven.setLayout(new FlowLayout());
+        p_zone22.add(pl_disadven);
         p_zone22.add(r2);
         p_zone22.add(r3);
         p_zone22.add(r4);
@@ -93,7 +98,8 @@ public class Progress {
         p_zone122.setBackground(new Color(49,51,56));
         p_zone21.setBackground(new Color(49,51,56));
         p_zone22.setBackground(new Color(49,51,56));
-
+        pl_disadven.setBackground(new Color(49,51,56));
+        pl_adven.setBackground(new Color(49,51,56));
         progress.setForeground(Color.white);
         percent.setForeground(Color.white);
         l1.setForeground(Color.white);

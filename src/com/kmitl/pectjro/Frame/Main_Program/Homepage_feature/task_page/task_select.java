@@ -1,15 +1,15 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
-import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.FeedbackTable;
-import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
+import com.kmitl.pectjro.Frame.Main_Program.home_page;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.sql.Connection;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class task_select extends JPanel{
+public class task_select extends JPanel implements MouseListener {
     private JPanel pl;
     private JLabel name, desc;
 
@@ -30,6 +30,37 @@ public class task_select extends JPanel{
         this.setBackground(new Color(49,51,56));
         this.setVisible(true);
         pl.setPreferredSize(new Dimension(550,80));
+        pl.addMouseListener(this);
+    }
+    public JPanel getFrame(){
+        return pl;
+    }
+    @Override
+    public void mouseClicked(MouseEvent e) {
+//        if(e.getSource().equals(pl)){
+//            new project_progressbar("1","2");
+//            home_page.page.show();
+//        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 //    public void loadData() {
 //        SwingWorker<Void, Void> getFeed = new SwingWorker<Void, Void>() {

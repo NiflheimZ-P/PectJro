@@ -7,6 +7,7 @@ import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Progress;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
 
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.task_select;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginController;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.Task;
 
@@ -15,9 +16,12 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.*;
 
-public class home_page implements View_Getter, ActionListener {
+public class home_page implements View_Getter, ActionListener, MouseListener {
+
     private JFrame main_panel;
 
     private JPanel bg, pn_north, pn_west, pn_east, ctn_pn_task, ctn_pn_calendar, ctn_pn_appraisement, ctn_pn_deadline,
@@ -34,7 +38,7 @@ public class home_page implements View_Getter, ActionListener {
     private Profile profile;
     private Calendars calen;
     private Task task;
-
+    private task_select ts;
     public home_page(){
         //set up
         main_panel = new JFrame();
@@ -80,7 +84,7 @@ public class home_page implements View_Getter, ActionListener {
         profile = new Profile();
         calen = new Calendars();
         task = new Task();
-
+        ts = new task_select();
 
         //card
         center_part = new JPanel();
@@ -91,6 +95,7 @@ public class home_page implements View_Getter, ActionListener {
         center_part.add(calen.getFrame(), "1");
         center_part.add(pro.getFr(),"2");
         center_part.add(profile.getFr(), "3");
+        center_part.add(ts.getFrame(),"4");
 
         //set center part
         main_panel.setLayout(new BorderLayout());
@@ -187,7 +192,7 @@ public class home_page implements View_Getter, ActionListener {
         bn_calendar.setForeground(Color.white); bn_calendar.setBackground(new Color(43,45,49));
         bn_appraisement.setForeground(Color.white); bn_appraisement.setBackground(new Color(43,45,49));
         bn_new.setForeground(Color.white) ; bn_new.setBackground(new Color(43,45,49));
-
+        bn_admin.setPreferredSize(new Dimension(80,35));
             //Label
         l4.setForeground(new Color(88,101,242));
 
@@ -198,6 +203,7 @@ public class home_page implements View_Getter, ActionListener {
         bn_calendar.addActionListener(this);
         bn_profile.addActionListener(this);
         bn_admin.addActionListener(this);
+        ts.addMouseListener(this);
 
         //ads
         profile.getBn_select_photo().addActionListener(this);
@@ -266,5 +272,32 @@ public class home_page implements View_Getter, ActionListener {
         }//else if (e.getSource().equals(profile.getBn_log_out())){
 
         //}
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(e.getSource().equals(ts)){
+            page.show(center_part,"4");
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }

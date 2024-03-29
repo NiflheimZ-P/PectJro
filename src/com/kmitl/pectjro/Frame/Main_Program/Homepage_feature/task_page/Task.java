@@ -5,6 +5,7 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.kmitl.pectjro.Frame.Groups_interface.MainPage_Controller;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
 import com.kmitl.pectjro.Frame.Main_Program.home_page;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 
@@ -62,6 +63,8 @@ public class Task implements ActionListener {
         ref.setBackground(new Color(43,45,49));
         ref.setForeground(Color.white);
         fr.setBackground(new Color(49,51,56));
+        create_pro.addActionListener(this);
+
 
         fr.add(p, BorderLayout.WEST);
 
@@ -90,6 +93,8 @@ public class Task implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if (e.getSource().equals(create_pro)){
+            new ProjectCreate();
+        }
     }
 }
