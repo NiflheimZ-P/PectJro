@@ -9,6 +9,8 @@ import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
+import com.kmitl.pectjro.Frame.Tools.LgoodDatePicker_Setting;
+
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -79,11 +81,11 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 		infomation.add(scroll_des, new Constraints(0, 4, 2, 1, 1, 1, GridBagConstraints.FIRST_LINE_START,
 				new Insets(0, 0, 0, 0)));
 
-		start = new DatePicker(); start.setPreferredSize(new Dimension(200, 35));
+		start = new DatePicker(new LgoodDatePicker_Setting().getSettings()); start.setPreferredSize(new Dimension(200, 35));
 		start.setDate(info.start.toLocalDate()); start.getComponentDateTextField().setBackground(new Color(40,40,40,255));
 		start.getComponentDateTextField().setBorder(new MatteBorder(1, 1, 1, 1, new Color(60,60,60,255)));
 		start.getComponentDateTextField().setForeground(Color.white);
-		end = new DatePicker(); end.setPreferredSize(new Dimension(200, 35));
+		end = new DatePicker(new LgoodDatePicker_Setting().getSettings()); end.setPreferredSize(new Dimension(200, 35));
 		end.setDate(info.end.toLocalDate()); end.getComponentDateTextField().setBackground(new Color(40,40,40,255));
 		end.getComponentDateTextField().setBorder(new MatteBorder(1, 1, 1, 1, new Color(60,60,60,255)));
 		end.getComponentDateTextField().setForeground(Color.white);
