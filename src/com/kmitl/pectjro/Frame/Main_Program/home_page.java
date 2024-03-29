@@ -1,5 +1,6 @@
 package com.kmitl.pectjro.Frame.Main_Program;
 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Calendars;
@@ -109,9 +110,11 @@ public class home_page implements View_Getter, ActionListener {
         paneforsearch.setLayout(new BorderLayout());
         paneforsearch.add(tf_seach_bar, BorderLayout.CENTER);
         paneforsearch.add(up_mar_search, BorderLayout.NORTH);
+        up_mar_search.setPreferredSize(new Dimension(0, 25));
         paneforsearch.add(l_mar_search, BorderLayout.WEST);
         paneforsearch.add(r_mar_search, BorderLayout.EAST);
         paneforsearch.add(s_mar_search, BorderLayout.SOUTH);
+        s_mar_search.setPreferredSize(new Dimension(0, 25));
         pn_north.add(paneforsearch);
         tf_seach_bar.setFocusable(true);
 
@@ -203,7 +206,7 @@ public class home_page implements View_Getter, ActionListener {
     }
 
     public static void main(String[] args) throws Exception{
-        UIManager.setLookAndFeel(new FlatMacLightLaf());
+        UIManager.setLookAndFeel(new FlatMacDarkLaf());
         SwingUtilities.invokeLater(() -> {new home_page(); });
     }
 
@@ -219,15 +222,19 @@ public class home_page implements View_Getter, ActionListener {
         }else if (e.getSource().equals(bn_task)){
             page.show(center_part, "0");
             main_panel.add(pn_east, BorderLayout.EAST);
+            paneforsearch.setVisible(true);
         }else if (e.getSource().equals(bn_calendar)) {
             page.show(center_part, "1");
             main_panel.remove(pn_east);
+            paneforsearch.setVisible(false);
         }else if (e.getSource().equals(bn_appraisement)){
             page.show(center_part, "2");
             main_panel.remove(pn_east);
+            paneforsearch.setVisible(false);
         }else if (e.getSource().equals(bn_profile)){
             page.show(center_part, "3");
             main_panel.remove(pn_east);
+            paneforsearch.setVisible(false);
         }
     }
 }
