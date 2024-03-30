@@ -86,27 +86,27 @@ public class Profile {
         pn_center.add(pn_center_right);
 
         ctn_pn_center_right.setLayout(new GridLayout(4,0));
-        margin_first.setLayout(new FlowLayout(3, 30 ,100));
+        margin_first.setLayout(new FlowLayout(3, 30 ,40));
         margin_first.add(l_firstn);
-        l_firstn.setFont(new Font("Sans", Font.BOLD, 24));
+        l_firstn.setFont(new Font("Sans", Font.BOLD, 30));
         l_firstn.setForeground(Color.white);
         ctn_pn_center_right.add(margin_first);
 
-        margin_last.setLayout(new FlowLayout(3, 30 ,100));
+        margin_last.setLayout(new FlowLayout(3, 30 ,40));
         margin_last.add(l_lastn);
-        l_lastn.setFont(new Font("Sans", Font.BOLD, 24));
+        l_lastn.setFont(new Font("Sans", Font.BOLD, 30));
         l_lastn.setForeground(Color.white);
         ctn_pn_center_right.add(margin_last);
 
-        margin_name.setLayout(new FlowLayout(3,30,100));
+        margin_name.setLayout(new FlowLayout(3,30,40));
         margin_name.add(l_name);
-        l_name.setFont(new Font("Sans", Font.BOLD, 24));
+        l_name.setFont(new Font("Sans", Font.BOLD, 30));
         l_name.setForeground(Color.white);
         ctn_pn_center_right.add(margin_name);
 
-        margin_email.setLayout(new FlowLayout(3,30,100));
+        margin_email.setLayout(new FlowLayout(3,30,40));
         margin_email.add(l_email);
-        l_email.setFont(new Font("Sans", Font.BOLD, 24));
+        l_email.setFont(new Font("Sans", Font.BOLD, 30));
         l_email.setForeground(Color.white);
         ctn_pn_center_right.add(margin_email);
 
