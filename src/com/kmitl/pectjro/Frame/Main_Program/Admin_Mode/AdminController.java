@@ -48,6 +48,7 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 		admin_control.getUser().addActionListener(this);
 		admin_control.getFeedback().addActionListener(this);
 		admin_control.getProject().addActionListener(this);
+		admin_control.getExit().addActionListener(this);
 	}
 
 	// Methods
@@ -106,6 +107,8 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 				projectTable.getView().moveToFront();
 				projectTable.getModel().loadData();
 			} else { projectTable.getView().toFront(); }
+		} else if (e.getSource().equals(admin_control.getExit())) {
+			main_controller.getModel().createHome();
 		}
 	}
 
