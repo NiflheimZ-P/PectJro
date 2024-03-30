@@ -9,12 +9,12 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.CreateTable;
+import com.kmitl.pectjro.Database.Connection.CreateTable;
 import com.kmitl.pectjro.Frame.Tools.*;
 
 public class checkDatabase_panel extends JPanel {
     private JPanel main_panel;
-    private Image_Resizer data_bar, userInfo_bar, userpro_bar, project_bar, proStep_bar, all_bar, feed_bar;
+    private Image_Resizer data_bar, userInfo_bar, userpro_bar, project_bar, proStep_bar, all_bar, feed_bar, proNote_bar, note_bar;
     private ImageIcon pass, error, wait;
     private Connection con;
 
@@ -22,7 +22,7 @@ public class checkDatabase_panel extends JPanel {
         super();
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        JLabel head = new JLabel("<html><h1>Checking Database</h1><br/>Hello my name is Anawat wongprachanukul i want to tell you fuck you</html>");
+        JLabel head = new JLabel("<html><h1>Checking Database</h1><br/>creating database table on your computer, Please wait...</html>");
         this.add(head);
 
         pass = new ImageIcon("resources/Images/Status/Pass.png"); error = new ImageIcon("resources/Images/Status/Error.png");
@@ -69,8 +69,17 @@ public class checkDatabase_panel extends JPanel {
         JLabel feed = new JLabel("Feedback Table");
         feed.setFont(new Font("", Font.PLAIN, 15));
         main_panel.add(feed,
-                new Constraints(0, 6, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 10, 1)));
+                new Constraints(0, 6, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 1, 1)));
 
+        JLabel proNote = new JLabel("Project_note");
+        proNote.setFont(new Font("", Font.PLAIN, 15));
+        main_panel.add(proNote,
+                new Constraints(0, 7, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 1, 1)));
+
+        JLabel note = new JLabel("Note_info");
+        note.setFont(new Font("", Font.PLAIN, 15));
+        main_panel.add(note,
+                new Constraints(0, 8, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 10, 1)));
 
         data_bar = new Image_Resizer(wait, 20, 100);
         main_panel.add(data_bar, new Constraints(1, 0, 1, 1, GridBagConstraints.LINE_END, new Insets(10, 1, 1, 10)));
@@ -91,11 +100,17 @@ public class checkDatabase_panel extends JPanel {
         main_panel.add(all_bar, new Constraints(1, 5, 1, 1, 22, new Insets(0, 1, 1, 10)));
 
         feed_bar = new Image_Resizer(wait, 20, 100);
-        main_panel.add(feed_bar, new Constraints(1, 6, 1, 1, 22, new Insets(0, 1, 10, 10)));
+        main_panel.add(feed_bar, new Constraints(1, 6, 1, 1, 22, new Insets(0, 1, 1, 10)));
+
+        proNote_bar = new Image_Resizer(wait, 20, 100);
+        main_panel.add(proNote_bar, new Constraints(1, 7, 1, 1, 22, new Insets(0, 1, 1, 10)));
+
+        note_bar = new Image_Resizer(wait, 20, 100);
+        main_panel.add(note_bar, new Constraints(1, 8, 1, 1, 22, new Insets(0, 1, 10, 10)));
 
     }
     public void check(ArrayList <String> info){
-        SwingWorker check = new SwingWorker() {
+        SwingWorker<Void, Void> check = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
                 con = DBConnect.checkConnection(info);
@@ -107,6 +122,8 @@ public class checkDatabase_panel extends JPanel {
                     check_ProjectStep();
                     check_StepInfo();
                     check_Feedback();
+                    check_ProNote();
+                    check_Note();
                     Main_Setup.bypass = true;
                 } else {
                     setError();
@@ -172,14 +189,34 @@ public class checkDatabase_panel extends JPanel {
         repaint();
     }
 
+    public void check_ProNote() {
+        if (new CreateTable(con).createJoinProjectNote()) {
+            proNote_bar.setImage(pass);
+        } else {
+            proNote_bar.setImage(error);
+        }
+        repaint();
+    }
+
+    public void check_Note() {
+        if (new CreateTable(con).createNoteTable()) {
+            note_bar.setImage(pass);
+        } else {
+            note_bar.setImage(error);
+        }
+        repaint();
+    }
+
     public boolean check_enable(){
-        return (data_bar.getImage().equals(pass.getImage()) ||
-                userInfo_bar.getImage().equals(pass.getImage()) ||
-                userpro_bar.getImage().equals(pass.getImage()) ||
-                project_bar.getImage().equals(pass.getImage()) ||
-                proStep_bar.getImage().equals(pass.getImage()) ||
-                all_bar.getImage().equals(pass.getImage()) ||
-                feed_bar.getImage().equals(pass.getImage())
+        return (data_bar.getImage().equals(pass.getImage()) &&
+                userInfo_bar.getImage().equals(pass.getImage()) &&
+                userpro_bar.getImage().equals(pass.getImage()) &&
+                project_bar.getImage().equals(pass.getImage()) &&
+                proStep_bar.getImage().equals(pass.getImage()) &&
+                all_bar.getImage().equals(pass.getImage()) &&
+                feed_bar.getImage().equals(pass.getImage()) &&
+                proNote_bar.getImage().equals(pass.getImage()) &&
+                note_bar.getImage().equals(pass.getImage())
                 );
     }
 
@@ -190,8 +227,12 @@ public class checkDatabase_panel extends JPanel {
         project_bar.setImage(error);
         proStep_bar.setImage(error);
         all_bar.setImage(error);
+        feed_bar.setImage(error);
+        proNote_bar.setImage(error);
+        note_bar.setImage(error);
         repaint();
     }
+
     public void clear(){
         data_bar.setImage(wait);
         userInfo_bar.setImage(wait);
@@ -199,6 +240,9 @@ public class checkDatabase_panel extends JPanel {
         project_bar.setImage(wait);
         proStep_bar.setImage(wait);
         all_bar.setImage(wait);
+        feed_bar.setImage(wait);
+        proNote_bar.setImage(wait);
+        note_bar.setImage(wait);
         repaint();
     }
 }

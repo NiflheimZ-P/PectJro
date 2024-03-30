@@ -1,7 +1,7 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Feedback_Page;
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.FeedbackTable;
+import com.kmitl.pectjro.Database.DatabaseTable.FeedbackTable;
 import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Templates.Feedback_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;

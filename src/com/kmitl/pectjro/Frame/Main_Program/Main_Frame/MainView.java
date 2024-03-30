@@ -1,7 +1,5 @@
 package com.kmitl.pectjro.Frame.Main_Program.Main_Frame;
 
-import com.kmitl.pectjro.Database.DB_Performance;
-
 import javax.swing.*;
 import java.awt.*;
 

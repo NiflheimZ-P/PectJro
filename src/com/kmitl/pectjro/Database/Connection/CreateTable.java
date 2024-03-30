@@ -1,6 +1,4 @@
-package com.kmitl.pectjro.Database;
-
-import com.kmitl.pectjro.Database.Connection.DBConnect;
+package com.kmitl.pectjro.Database.Connection;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -57,7 +55,6 @@ public class CreateTable {
             updateData("CREATE TABLE IF NOT EXISTS Step_info (" +
                     "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
                     "Name VARCHAR(50) NOT NULL," +
-                    "Note LONGTEXT," +
                     "Start DATE NOT NULL," +
                     "Expired DATE NOT NULL);");
             return true;
@@ -95,6 +92,31 @@ public class CreateTable {
                     "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
                     "Project_id int NOT NULL," +
                     "Step_id int NOT NULL);");
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean createJoinProjectNote() {
+        try {
+            updateData("CREATE TABLE IF NOT EXISTS Project_note (" +
+                    "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
+                    "Project_id int NOT NULL," +
+                    "Note_id int NOT NULL);");
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean createNoteTable() {
+        try {
+            updateData("CREATE TABLE IF NOT EXISTS Note_info (" +
+                    "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
+                    "Name VARCHAR(250) NOT NULL," +
+                    "Note LONGTEXT," +
+                    "Access boolean DEFAULT true);");
             return true;
         } catch (Exception e) {
             return false;

@@ -1,4 +1,4 @@
-package com.kmitl.pectjro.Database;
+package com.kmitl.pectjro.Database.DatabaseTable;
 
 import com.kmitl.pectjro.Frame.Templates.Feedback_Template;
 import com.kmitl.pectjro.Frame.Templates.User_Template;

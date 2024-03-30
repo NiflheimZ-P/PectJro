@@ -1,16 +1,13 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.ProjectTablePage;
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.ProjectTable;
-import com.kmitl.pectjro.Database.UserTable;
+import com.kmitl.pectjro.Database.DatabaseTable.ProjectTable;
 import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
-import com.kmitl.pectjro.Frame.Templates.User_Template;
 
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class ProjectTableModel {
 	// Attribute

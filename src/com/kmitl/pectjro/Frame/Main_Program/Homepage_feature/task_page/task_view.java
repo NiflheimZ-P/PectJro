@@ -1,12 +1,7 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
-import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.FeedbackTable;
-import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
-
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Connection;
 
 public class task_view extends JPanel{
 

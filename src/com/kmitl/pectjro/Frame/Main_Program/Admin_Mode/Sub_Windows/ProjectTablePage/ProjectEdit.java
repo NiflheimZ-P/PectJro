@@ -2,8 +2,8 @@ package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.ProjectTable
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.UserProjectTable;
-import com.kmitl.pectjro.Database.UserTable;
+import com.kmitl.pectjro.Database.DatabaseTable.UserProjectTable;
+import com.kmitl.pectjro.Database.DatabaseTable.UserTable;
 import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
