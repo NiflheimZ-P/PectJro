@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class Task implements ActionListener {
     private JPanel fr, p, margin_p,pl, pl_but;
@@ -57,11 +58,12 @@ public class Task implements ActionListener {
         create_pro.addActionListener(this);
         pl.setBackground(new Color(49,51,56));
 
+        pl.setBorder(new EmptyBorder(30, 30, 0, 10));
+
         margin_p.setBackground(new Color(49,51,56));
         margin_p.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
         //margin_p.add(ref);
 
-        fr.setSize(1000,600);
         fr.setVisible(true);
 
     }

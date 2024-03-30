@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.*;
 
 public class Calendars implements ActionListener {
-    private JFrame frame;
+    private JPanel frame;
     private JButton left, right, previousMonth, nextMonth;
     private JPanel pn, calendarPanel, p_left, p_right;
     private Calendar cal;
@@ -16,7 +16,7 @@ public class Calendars implements ActionListener {
 
     public Calendars() {
         // Add Button
-        frame = new JFrame();
+        frame = new JPanel();
         left = new JButton("<");
         right = new JButton(">");
         // Add Button on Panel
@@ -126,7 +126,10 @@ public class Calendars implements ActionListener {
 
    //public JPanel getFrame() {
         //return frame;
-    public static void main(String[] args) {
-        new Calendars();
+    public JPanel getFrame() {
+        return frame;
+    }
+    public void setFrame(JPanel frame) {
+        this.frame = frame;
     }
 }

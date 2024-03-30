@@ -11,7 +11,8 @@ import java.awt.event.MouseListener;
 
 public class task_select extends JPanel implements MouseListener {
     private JPanel pl;
-    private JLabel name, desc;
+    private JLabel name;
+    private JTextArea desc;
     private project_progressbar pro_pro;
 
 
@@ -20,8 +21,9 @@ public class task_select extends JPanel implements MouseListener {
     public task_select(Project_Template info){
         pl = new JPanel();
 
-        name = new JLabel("   "+"Project Name");
-        desc = new JLabel("  - "+"Cum ar thi buy");
+        name = new JLabel(info.name);
+        desc = new JTextArea(info.description);
+        desc.setEditable(false);
 
         pl.setLayout(new GridLayout(2,1));
         this.add(pl);
@@ -32,7 +34,7 @@ public class task_select extends JPanel implements MouseListener {
         pl.setBorder(new LineBorder(new Color(30,31,34)));
         this.setBackground(new Color(49,51,56));
         this.setVisible(true);
-        pl.setPreferredSize(new Dimension(550,80));
+        pl.setPreferredSize(new Dimension(300,350));
         pl.addMouseListener(this);
     }
 
