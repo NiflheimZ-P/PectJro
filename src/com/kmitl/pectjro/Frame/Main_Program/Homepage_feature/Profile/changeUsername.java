@@ -32,7 +32,7 @@ public class changeUsername {
         txt = new JLabel("    Change Username");
 
         //button
-        submit = new JButton("Submit");
+        submit = new JButton("Done");
         cancel = new JButton("Cancel");
 
         //txtfield
@@ -67,6 +67,10 @@ public class changeUsername {
 
     public JButton getSubmit() {
         return submit;
+    }
+
+    public JTextField getUser() {
+        return user;
     }
 
     public JButton getCancel() {

@@ -151,12 +151,12 @@ public class UserTable {
 	}
 
 	public void updateName(int id, String username) throws SQLException{
-		String sql = String.format("UPDATE User_info SET Username = %s WHERE Id = %s;", username, id);
+		String sql = String.format("UPDATE User_info SET Username = '%s' WHERE Id = %s;", username, id);
 		updateData(sql);
 	}
 
 	public void updatePassword(int id, String Password) throws SQLException{
-		String sql = String.format("UPDATE User_info SET Password = %s WHERE Id = %s;", Password, id);
+		String sql = String.format("UPDATE User_info SET Password = '%s' WHERE Id = %s;", Password, id);
 		updateData(sql);
 	}
 
