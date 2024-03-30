@@ -15,7 +15,6 @@ public class Task implements ActionListener {
     private JPanel fr, p, margin_p,pl, pl_but;
     private JButton ref, create_pro;
     private JScrollPane scroll;
-    private TaskController tskc;
     private project_progressbar pro_pro;
     public JPanel getFrame() {
         return fr;
@@ -28,19 +27,11 @@ public class Task implements ActionListener {
 
         //ref.setEnabled(false);
         pl = new JPanel();
-        p = new JPanel();
         margin_p = new JPanel();
         fr.setLayout(new BorderLayout(20, 20));
 
-
-
-        pl.setLayout(new GridLayout(10,1));
-        for (int i = 0; i < 10; i++){
-            pl.add(new task_select());
-        }
         fr.add(pl);
-
-        pl.setMaximumSize(pl.getPreferredSize() );
+        pl.setMaximumSize(pl.getPreferredSize());
 
         ///scroll
         scroll = new JScrollPane(pl, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -50,7 +41,6 @@ public class Task implements ActionListener {
         javax.swing.SwingUtilities.invokeLater(() -> scroll.getVerticalScrollBar().setValue(0));
         scroll.setAutoscrolls(false);
         fr.add(scroll);
-
 
         ////but
         create_pro.setLocation(20,20);
@@ -65,19 +55,11 @@ public class Task implements ActionListener {
         ref.setForeground(Color.white);
         fr.setBackground(new Color(49,51,56));
         create_pro.addActionListener(this);
+        pl.setBackground(new Color(49,51,56));
 
-
-        fr.add(p, BorderLayout.WEST);
-
-        p.setBackground(new Color(49,51,56));
-        p.setLayout(new BorderLayout());
-        p.add(margin_p, BorderLayout.SOUTH);
         margin_p.setBackground(new Color(49,51,56));
         margin_p.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
         //margin_p.add(ref);
-
-
-
 
         fr.setSize(1000,600);
         fr.setVisible(true);
@@ -87,11 +69,20 @@ public class Task implements ActionListener {
     public JButton getRef() {
         return ref;
     }
-
-
-
     public JPanel getFr() {
         return fr;
+    }
+    public JPanel getPl_but() {
+        return pl_but;
+    }
+    public void setPl_but(JPanel pl_but) {
+        this.pl_but = pl_but;
+    }
+    public JPanel getPl() {
+        return pl;
+    }
+    public void setPl(JPanel pl) {
+        this.pl = pl;
     }
 
     @Override

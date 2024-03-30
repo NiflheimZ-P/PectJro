@@ -127,6 +127,13 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 	public void setProfile(ProfileController profile) {
 		this.profile = profile;
 	}
+	public TaskController getTask() {
+		return task;
+	}
+	public void setTask(TaskController task) {
+		this.task = task;
+	}
+
 	@Override
 	public View_Getter getContainer() {
 		return view;
