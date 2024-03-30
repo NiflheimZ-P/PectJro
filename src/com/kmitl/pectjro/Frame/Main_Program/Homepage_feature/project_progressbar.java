@@ -115,7 +115,6 @@ public class project_progressbar extends JFrame implements ActionListener {
         psouth_move.setLayout(new FlowLayout(2));
         psouth_add.setLayout(new FlowLayout(0));
 
-<<<<<<< Updated upstream
         //set color
         upper_pmain.setBackground(new Color(30,31,34));
         upper_west.setBackground(new Color(30,31,34));
@@ -135,10 +134,8 @@ public class project_progressbar extends JFrame implements ActionListener {
         bn_add_mem.setBackground(new Color(43, 45, 49));
         bn_finish.setBackground(new Color(43,45,49));
         close_bn.setBackground(new Color(43,45,49));
-=======
         //addActionListener
         add_bn.addActionListener(this);
->>>>>>> Stashed changes
 
         bn_add_mem.addActionListener(this);
         close_bn.addActionListener(this);
@@ -204,6 +201,9 @@ public class project_progressbar extends JFrame implements ActionListener {
         if(ev.getSource().equals(add_bn)){
             new NewTaskGanttChart();
         }
+        else if(ev.getSource().equals(bn_add_mem)){
+            new Addpeople();
+        }
     }
 
     public static void main(String[] args) throws Exception {
@@ -211,10 +211,5 @@ public class project_progressbar extends JFrame implements ActionListener {
         SwingUtilities.invokeLater(() -> {new project_progressbar("Gnatt Chart", "Your Task Progress");
         });
     }
-@Override
-public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(bn_add_mem)){
-                new Addpeople();
-        }
-}
+
 }
