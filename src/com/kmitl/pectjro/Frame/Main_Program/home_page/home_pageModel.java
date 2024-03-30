@@ -8,6 +8,7 @@ import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.AdminController;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -52,6 +53,8 @@ public class home_pageModel {
 				loadCache();
 				getProject();
 
+
+
 				return checkAdmin();
 			}
 
@@ -61,6 +64,7 @@ public class home_pageModel {
 				try {
 					if (get()) {
 						view.getBn_admin().setVisible(true);
+						view.getBn_profile().setIcon(new ImageIcon(new ImageIcon(controller.getCache().image).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 					}
 				} catch (InterruptedException | ExecutionException e) {
 					throw new RuntimeException(e);
