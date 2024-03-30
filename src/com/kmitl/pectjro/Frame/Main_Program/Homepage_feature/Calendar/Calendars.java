@@ -9,14 +9,15 @@ import java.util.*;
 
 public class Calendars implements ActionListener {
     private JPanel frame;
-    private JButton left, right, previousMonth, nextMonth, button;
-    private JPanel pn, calendarPanel, p_left, p_right;
+    private JButton left, right, previousMonth, nextMonth;
+    private JPanel pn, calendarPanel, p_left, p_right, changepanel;
     private Calendar cal;
-    private JLabel label, monthLb, dayLabel;
+    private JLabel label, monthLb, dayLabel, numberLabel, spaceLabel;
     private int month, year, daysInMonth, firstDayOfWeek;
     private String[] weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    private JTextArea ta;
 
-    public JPanel getFrame(){
+    public JPanel getFrame() {
         return frame;
     }
 
@@ -75,7 +76,7 @@ public class Calendars implements ActionListener {
         p_right.setBackground(new Color(49, 51, 56));
         calendarPanel.setBackground(new Color(43, 45, 49));
 
-        label.setForeground(new Color(88,101,242));
+        label.setForeground(new Color(88, 101, 242));
 
         // Display the calendar
         updateCalendar();
@@ -104,18 +105,24 @@ public class Calendars implements ActionListener {
         // Add weekday labels
         for (String weekday : weekdays) {
             dayLabel = new JLabel(weekday, SwingConstants.CENTER);
+            dayLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
             calendarPanel.add(dayLabel);
         }
 
         // Add empty labels for the days before the first day of the month
         for (int i = 1; i < firstDayOfWeek; i++) {
-            calendarPanel.add(new JLabel(""));
+            spaceLabel = new JLabel("");
+            spaceLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+            calendarPanel.add(spaceLabel);
         }
 
-        // Add buttons for each day of the month
+        // Add JTextArea for each day of the month
         for (int day = 1; day <= daysInMonth; day++) {
-            button = new JButton(Integer.toString(day));
-            calendarPanel.add(button);
+            changepanel = new JPanel();
+            numberLabel = new JLabel(Integer.toString(day));
+            changepanel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+            changepanel.add(numberLabel);
+            calendarPanel.add(changepanel);
         }
 
         // Set the month label

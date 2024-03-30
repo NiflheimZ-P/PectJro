@@ -27,6 +27,8 @@ public class ProfileModel {
 	public void setProfile() {
 		Image picture = new ImageIcon(controller.getHead_control().getCache().image).getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT);
 		view.getIcon().setIcon(new ImageIcon(picture));
+		view.getL_firstn().setText(view.getL_firstn().getText() + "  "+ controller.getHead_control().getCache().firstname);
+		view.getL_lastn().setText(view.getL_lastn().getText() + "  "+ controller.getHead_control().getCache().lastname);
 		view.getL_name().setText(view.getL_name().getText() + "  "+ controller.getHead_control().getCache().username);
 		view.getL_email().setText(view.getL_email().getText() + "  "+ controller.getHead_control().getCache().gmail);
 	}
