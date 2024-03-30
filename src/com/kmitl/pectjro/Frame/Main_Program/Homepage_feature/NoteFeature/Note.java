@@ -1,5 +1,5 @@
 
-package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
+package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
@@ -7,7 +7,6 @@ import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.*;
 
 
 public class Note implements ActionListener{

@@ -1,6 +1,7 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.AllNote;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.Addpeople;
 
 import java.awt.*;
@@ -208,6 +209,8 @@ public class project_progressbar extends JFrame implements ActionListener {
             new Addpeople();
         } else if(ev.getSource().equals(bn_finish)){
             new feedback();
+        }else if (ev.getSource().equals((close_bn))){
+            new AllNote();
         }
     }
 

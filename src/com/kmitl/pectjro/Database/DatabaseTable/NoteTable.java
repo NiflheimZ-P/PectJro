@@ -1,9 +1,8 @@
 package com.kmitl.pectjro.Database.DatabaseTable;
 
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Note;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.Note;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class NoteTable {
 
