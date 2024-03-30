@@ -2,6 +2,7 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.Addpeople;
 
 import javax.swing.*;
@@ -10,7 +11,8 @@ import java.awt.event.*;
 import java.sql.*;
 
 
-public class Note{
+public class Note implements ActionListener{
+    private NoteTable nt;
     private JFrame fr;
     private JTextArea textArea;
     private JPanel mainPanel, p_textF;
@@ -18,6 +20,10 @@ public class Note{
     private JMenuBar m;
     private JMenu edit;
     private JMenuItem save, reset;
+
+    public JTextArea getTextArea() {
+        return textArea;
+    }
 
     public Note() {
         fr = new JFrame("Note");
@@ -34,6 +40,7 @@ public class Note{
         fr.setJMenuBar(m);
         m.add(edit);
 
+        save.addActionListener(this);
         edit.add(save);
         edit.add(reset);
 
@@ -53,9 +60,23 @@ public class Note{
     }
 
 
+
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel( new FlatMacDarkLaf() );
         SwingUtilities.invokeLater(() -> {new Note();});
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(save)) {
+            String TextArea = textArea.getText();
+            String sql = String.format("INSERT INTO Note_info(Note) VALUES ('%s');", TextArea);
+            try {
+                nt.updateNote(sql);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
     }
 
 
