@@ -35,7 +35,7 @@ public class Profile {
 
         l_topic = new JLabel("Profile");
         icon = new JLabel();
-        l_name = new JLabel("Name : ");
+        l_name = new JLabel("Username : ");
         l_email = new JLabel("Email : ");
 
         bn_select_photo = new JButton("Select Photo");

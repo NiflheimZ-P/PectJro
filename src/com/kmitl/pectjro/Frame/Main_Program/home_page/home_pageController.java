@@ -80,10 +80,8 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 		}else if (e.getSource().equals(view.getBn_appraisement())){
 			page.show(view.getCenter_part(), "2");
 			view.getMain_panel().remove(view.getPn_east());
+			view.getPaneforsearch().setVisible(false);
 		}else if (e.getSource().equals(view.getBn_profile())) {
-			page.show(view.getCenter_part(), "3");
-			view.getMain_panel().remove(view.getPn_east());
-		}else if (e.getSource().equals(view.getBn_profile())){
 			page.show(view.getCenter_part(), "3");
 			view.getMain_panel().remove(view.getPn_east());
 			view.getPaneforsearch().setVisible(false);
