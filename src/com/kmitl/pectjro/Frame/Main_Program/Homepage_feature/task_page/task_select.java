@@ -1,6 +1,7 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
+import com.kmitl.pectjro.Frame.Templates.Project_Template;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -16,9 +17,8 @@ public class task_select extends JPanel implements MouseListener {
 
     private Task task;
     private TaskController tskc;
-    public task_select(){
+    public task_select(Project_Template info){
         pl = new JPanel();
-
 
         name = new JLabel("   "+"Project Name");
         desc = new JLabel("  - "+"Cum ar thi buy");

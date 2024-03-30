@@ -1,5 +1,6 @@
 package com.kmitl.pectjro.Database.DatabaseTable;
 
+import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 
 import javax.swing.*;
@@ -148,4 +149,15 @@ public class UserTable {
 		sql.setInt(2, id);
 		sql.executeUpdate();
 	}
+
+	public void updateName(int id, String username) throws SQLException{
+		String sql = String.format("UPDATE User_info SET Username = %s WHERE Id = %s;", username, id);
+		updateData(sql);
+	}
+
+	public void updatePassword(int id, String Password) throws SQLException{
+		String sql = String.format("UPDATE User_info SET Password = %s WHERE Id = %s;", Password, id);
+		updateData(sql);
+	}
+
 }

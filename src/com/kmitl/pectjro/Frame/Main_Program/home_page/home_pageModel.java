@@ -38,6 +38,8 @@ public class home_pageModel {
 		if (!inPro.isEmpty()) {
 			ProjectTable project = new ProjectTable(con);
 			controller.setProjectIn(project.getProjectData(inPro));
+		} else {
+			controller.setProjectIn(new ArrayList<>());
 		}
 	}
 
@@ -53,7 +55,7 @@ public class home_pageModel {
 				loadCache();
 				getProject();
 
-
+				controller.getTask().getModel().loadProject();
 
 				return checkAdmin();
 			}
