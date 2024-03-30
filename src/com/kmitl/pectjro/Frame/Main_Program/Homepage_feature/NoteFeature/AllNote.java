@@ -39,7 +39,7 @@ public class AllNote implements ActionListener{
         westsmar.setLayout(new FlowLayout(2));
         westsmar.add(ref_pane);
         westsmar.add(plus_pane);
-
+        center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
 
         for(int i=0; i<=10; i++){
             NoteBox n = new NoteBox();
@@ -48,14 +48,14 @@ public class AllNote implements ActionListener{
         fr.add(center, BorderLayout.CENTER);
         fr.add(westsmar, BorderLayout.SOUTH);
 
-//        ///scroll
-//        scroll = new JScrollPane(center, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//        scroll.setBorder(null);
-//        scroll.getVerticalScrollBar().setUnitIncrement(10);
-//
-//        javax.swing.SwingUtilities.invokeLater(() -> scroll.getVerticalScrollBar().setValue(0));
-//        scroll.setAutoscrolls(false);
-//        fr.add(scroll);
+        scroll = new JScrollPane(center, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        center.setAlignmentX(Component.CENTER_ALIGNMENT);
+        scroll.setBorder(null);
+        scroll.getVerticalScrollBar().setUnitIncrement(10);
+        SwingUtilities.invokeLater(() -> scroll.getVerticalScrollBar().setValue(0));
+        scroll.setAutoscrolls(false);
+        fr.add(scroll);
+
         //set visible size
         fr.setSize(1200, 800);
         fr.setVisible(true);

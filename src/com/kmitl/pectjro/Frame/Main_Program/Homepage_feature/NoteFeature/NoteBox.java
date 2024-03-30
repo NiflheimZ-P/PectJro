@@ -54,11 +54,11 @@ public class NoteBox extends JPanel implements MouseListener {
         //pl.add(desc, BorderLayout.CENTER);
         //desc.setFont(new Font("Sans", Font.PLAIN, 14));
         pl.setBorder(new LineBorder(new Color(30,31,34)));
-        //this.setBackground(new Color(49,51,56));
+        this.setBackground(new Color(49,51,56));
 
         pl.setPreferredSize(new Dimension(750,200));
         pl.addMouseListener(this);
-        this.setBackground(Color.cyan);
+
         this.setVisible(true);
     }
 
