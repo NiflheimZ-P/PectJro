@@ -9,14 +9,14 @@ import java.util.*;
 
 public class Calendars implements ActionListener {
     private JPanel frame;
-    private JButton left, right, previousMonth, nextMonth, button;
+    private JButton left, right, previousMonth, nextMonth;
     private JPanel pn, calendarPanel, p_left, p_right;
     private Calendar cal;
     private JLabel label, monthLb, dayLabel;
     private int month, year, daysInMonth, firstDayOfWeek;
     private String[] weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
-    public JPanel getFrame(){
+    public JPanel getFrame() {
         return frame;
     }
 
@@ -75,7 +75,7 @@ public class Calendars implements ActionListener {
         p_right.setBackground(new Color(49, 51, 56));
         calendarPanel.setBackground(new Color(43, 45, 49));
 
-        label.setForeground(new Color(88,101,242));
+        label.setForeground(new Color(88, 101, 242));
 
         // Display the calendar
         updateCalendar();
@@ -112,10 +112,13 @@ public class Calendars implements ActionListener {
             calendarPanel.add(new JLabel(""));
         }
 
-        // Add buttons for each day of the month
+        // Add JTextArea for each day of the month
         for (int day = 1; day <= daysInMonth; day++) {
-            button = new JButton(Integer.toString(day));
-            calendarPanel.add(button);
+            JTextArea textArea = new JTextArea(Integer.toString(day));
+            textArea.setEditable(false); // Set to non-editable
+            textArea.setLineWrap(true); // Enable line wrapping
+            textArea.setWrapStyleWord(true); // Wrap at word boundaries
+            calendarPanel.add(textArea);
         }
 
         // Set the month label
