@@ -134,11 +134,14 @@ public class project_progressbar extends JFrame implements ActionListener {
         bn_add_mem.setBackground(new Color(43, 45, 49));
         bn_finish.setBackground(new Color(43,45,49));
         close_bn.setBackground(new Color(43,45,49));
+        pro_name_label.setForeground(new Color(88,101,242));
+
+
         //addActionListener
         add_bn.addActionListener(this);
-
         bn_add_mem.addActionListener(this);
         close_bn.addActionListener(this);
+        bn_finish.addActionListener(this);
 
         //set fr
         fr.add(upper_pmain, BorderLayout.NORTH);
@@ -203,6 +206,8 @@ public class project_progressbar extends JFrame implements ActionListener {
         }
         else if(ev.getSource().equals(bn_add_mem)){
             new Addpeople();
+        } else if(ev.getSource().equals(bn_finish)){
+            new feedback();
         }
     }
 
