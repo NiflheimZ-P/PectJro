@@ -8,11 +8,19 @@ import java.util.*;
 
 public class Calendars implements ActionListener {
     private JPanel frame;
+<<<<<<< Updated upstream
     private JButton left, right, previousMonth, nextMonth;
+=======
+    private JButton left, right, previousMonth, nextMonth, button;
+>>>>>>> Stashed changes
     private JPanel pn, calendarPanel, p_left, p_right;
     private Calendar cal;
     private JLabel label;
     private int month, year, daysInMonth, firstDayOfWeek;
+
+    public JPanel getFrame(){
+        return frame;
+    }
 
     public Calendars() {
         // Add Button
@@ -61,11 +69,18 @@ public class Calendars implements ActionListener {
         // Set color and set border button
         left.setFont(new Font("Sans", Font.PLAIN, 12));
         right.setFont(new Font("Sans", Font.PLAIN, 12));
+<<<<<<< Updated upstream
         label.setFont(new Font("Sans", Font.PLAIN, 18));
+=======
+        label.setFont(new Font("Sans", Font.BOLD, 18));
+        monthLb.setFont(new Font("Sans", Font.PLAIN, 18));
+>>>>>>> Stashed changes
         pn.setBackground(new Color(49, 51, 56));
         p_left.setBackground(new Color(49, 51, 56));
         p_right.setBackground(new Color(49, 51, 56));
         calendarPanel.setBackground(new Color(43, 45, 49));
+
+        label.setForeground(new Color(88,101,242));
 
         // Display the calendar
         updateCalendar();

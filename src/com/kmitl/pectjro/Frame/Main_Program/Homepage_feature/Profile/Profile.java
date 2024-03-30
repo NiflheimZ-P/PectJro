@@ -55,7 +55,7 @@ public class Profile {
         pn_north.add(l_topic);
         l_topic.setSize(30, 50);
         l_topic.setFont(new Font("Sans", Font.BOLD, 40));
-        l_topic.setForeground(Color.white);
+        l_topic.setForeground(new Color(88,101,242));
 
 
         //Center part

@@ -52,7 +52,7 @@ public class home_page implements View_Getter, MouseListener {
 
         bn_task = new JButton("Task");
         bn_calendar = new JButton("Calendar");
-        bn_appraisement = new JButton("Appraisement");
+        bn_appraisement = new JButton("Stats");
         bn_new = new JButton("+");
         bn_admin = new JButton("Admin");
         bn_profile = new JButton();
