@@ -8,6 +8,7 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
  *
  * @author Insi
  */
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import com.kmitl.pectjro.Frame.Tools.LgoodDatePicker_Setting;
@@ -19,8 +20,8 @@ public class ProjectCreate {
     private JDialog fr;
     private JPanel p_main, p_zone1, p_zone2, p_zone11, p_zone12, p_zone21, p_zone22, p_zone23, p_zone221, p_zone222;
     private JButton b_create, b_back;
-    private JLabel l1, l2, l3, l4;
-    private JInfoGet projectname;
+    private JLabel l1, l2, l3, l4, l5;
+    private JInfoGet projectname, description;
     private DatePicker d1, d2;
     public ProjectCreate(){
 
@@ -44,7 +45,9 @@ public class ProjectCreate {
         l2 = new JLabel("Enter your ProjectName");
         l3 = new JLabel("Start");
         l4 = new JLabel("End");
+        l5 = new JLabel("Enter your Description");
         projectname = new JInfoGet("ProjectName");
+        description = new JInfoGet("Description");
 
         d1 = new DatePicker(new LgoodDatePicker_Setting().getSettings());
         d2 = new DatePicker(new LgoodDatePicker_Setting().getSettings());
@@ -64,19 +67,21 @@ public class ProjectCreate {
 
         p_zone2.setLayout(new BorderLayout());
         p_zone2.add(p_zone21, BorderLayout.NORTH);
-        p_zone21.setPreferredSize(new Dimension(400, 110));
+        p_zone21.setPreferredSize(new Dimension(400, 160));
         p_zone2.add(p_zone22, BorderLayout.CENTER);
         p_zone22.setPreferredSize(new Dimension(400, 130));
         p_zone2.add(p_zone23, BorderLayout.SOUTH);
         p_zone23.setPreferredSize(new Dimension(400, 50));
 
-        p_zone21.setLayout(new GridLayout(3,1));
+        p_zone21.setLayout(new GridLayout(5,1));
         JPanel p_top = new JPanel();
         p_top.setLayout(new FlowLayout());
         p_top.add(l1);
         p_zone21.add(p_top);
         p_zone21.add(l2);
         p_zone21.add(projectname);
+        p_zone21.add(l5);
+        p_zone21.add(description);
 
         p_zone22.setLayout(new GridLayout(1,2));
         p_zone22.add(p_zone221);
@@ -138,7 +143,9 @@ public class ProjectCreate {
         fr.setLocation(400,200);
     }
 
-    public static void main(String[] args) {
-        new ProjectCreate();
+    public static void main(String[] args) throws UnsupportedLookAndFeelException {
+        UIManager.setLookAndFeel(new FlatMacDarkLaf());
+        SwingUtilities.invokeLater(() -> {new ProjectCreate();
+        });
     }
 }
