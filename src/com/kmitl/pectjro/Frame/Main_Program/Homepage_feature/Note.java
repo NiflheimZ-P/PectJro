@@ -1,46 +1,61 @@
 
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.Addpeople;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 
 
-public class Note extends JFrame{
-
+public class Note{
+    private JFrame fr;
     private JTextArea textArea;
-    private JPanel mainPanel;
-    private JButton save;
+    private JPanel mainPanel, p_textF;
+    private JTextField textField;
+    private JMenuBar m;
+    private JMenu edit;
+    private JMenuItem save, reset;
 
     public Note() {
-        setTitle("Note");
-        setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // สร้าง Panel หลัก
+        fr = new JFrame("Note");
+        p_textF = new JPanel();
         mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-        add(mainPanel, BorderLayout.CENTER);
-
-        // สร้าง TextArea
+        m = new JMenuBar();
+        edit = new JMenu("Edit");
         textArea = new JTextArea();
+        textField = new JTextField();
+        save = new JMenuItem("Save");
+        reset = new JMenuItem("Reset");
+
+        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fr.setJMenuBar(m);
+        m.add(edit);
+
+        edit.add(save);
+        edit.add(reset);
+
+        fr.add(mainPanel);
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(textArea, BorderLayout.CENTER);
+        mainPanel.add(textField, BorderLayout.NORTH);
+        textField.setPreferredSize(new Dimension(800, 50));
+
         textArea.setFont(new Font("Tahoma", Font.PLAIN, 12));
         JScrollPane scrollPane = new JScrollPane(textArea);
-        add(scrollPane, BorderLayout.CENTER);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // สร้าง Button
-        save = new JButton("Save");
-        //save.addActionListener(this); // เพิ่ม ActionListener
-        mainPanel.add(save, BorderLayout.EAST); // เพิ่มปุ่ม save ไปทางขวา
 
-        // แสดงหน้าต่าง
-        setVisible(true);
+        fr.setSize(800, 600);
+        fr.setVisible(true);
     }
 
 
-    public static void main(String[] args) {
-        new Note();
+    public static void main(String[] args) throws UnsupportedLookAndFeelException {
+        UIManager.setLookAndFeel( new FlatMacDarkLaf() );
+        SwingUtilities.invokeLater(() -> {new Note();});
     }
 
 
