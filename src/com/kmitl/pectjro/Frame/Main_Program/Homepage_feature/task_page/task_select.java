@@ -1,8 +1,5 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
-import com.kmitl.pectjro.Frame.Main_Program.home_page;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;

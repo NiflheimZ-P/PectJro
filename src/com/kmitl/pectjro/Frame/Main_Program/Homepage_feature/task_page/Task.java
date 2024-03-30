@@ -1,12 +1,8 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.kmitl.pectjro.Frame.Groups_interface.MainPage_Controller;
-import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile.Profile;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
-import com.kmitl.pectjro.Frame.Main_Program.home_page;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 
 import java.awt.*;
@@ -84,11 +80,6 @@ public class Task implements ActionListener {
 
     public JButton getRef() {
         return ref;
-    }
-
-    public static void main(String[] args) throws Exception{
-        UIManager.setLookAndFeel(new FlatMacDarkLaf());
-        SwingUtilities.invokeLater(() -> {new Profile(); });
     }
 
     @Override

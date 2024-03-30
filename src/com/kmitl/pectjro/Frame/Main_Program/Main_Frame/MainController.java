@@ -1,11 +1,12 @@
 package com.kmitl.pectjro.Frame.Main_Program.Main_Frame;
 
 import com.kmitl.pectjro.Frame.Loading.Loading_GlassPane;
+import com.kmitl.pectjro.Frame.Main_Program.home_page.home_pageController;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.AdminController;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginController;
-import com.kmitl.pectjro.Frame.Main_Program.home_page;
+import com.kmitl.pectjro.Frame.Main_Program.home_page.home_page;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -17,10 +18,8 @@ public class MainController implements WindowListener {
 	private MainModel model;
 	private LoginController login;
 	private AdminController admin;
-	private home_page home;
+	private home_pageController home;
 	private Boolean remember;
-	private User_Template cache;
-	private ArrayList<Project_Template> projectIn;
 	private Loading_GlassPane glassPane;
 
 	// Constructor
@@ -41,20 +40,11 @@ public class MainController implements WindowListener {
 	public MainModel getModel() {return this.model;}
 	public void setRemember(Boolean stats) { remember = stats; }
 	public boolean getRemember() { return remember; }
-	public User_Template getCache(){ return this.cache; }
-	public void setCache(User_Template cache) {
-		this.cache = cache;
-	}
-	public ArrayList<Project_Template> getProjectIn() {
-		return projectIn;
-	}
-	public void setProjectIn(ArrayList<Project_Template> projectIn) {
-		this.projectIn = projectIn;
-	}
-	public home_page getHome() {
+
+	public home_pageController getHome() {
 		return home;
 	}
-	public void setHome(home_page home) {
+	public void setHome(home_pageController home) {
 		this.home = home;
 	}
 	public Loading_GlassPane getGlassPane() {
@@ -70,8 +60,7 @@ public class MainController implements WindowListener {
 		File user = new File("User_Cache");
 		if (user.exists()) {
 			setRemember(true);
-			model.loadCache();
-			model.changePage(new home_page(cache));
+			model.createHome();
 		} else {
 			model.changePage(login.getContainer());
 		}

@@ -24,7 +24,7 @@ public class Loading_GlassPane extends JPanel implements MouseListener {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(new Color(0, 0, 0, 90));
+		g.setColor(new Color(0, 0, 0, 150));
 		g.fillRect(0, 0, getWidth(), getHeight());
 	}
 
@@ -51,5 +51,9 @@ public class Loading_GlassPane extends JPanel implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent e) {
 
+	}
+
+	public void setLoading(boolean visible) {
+		loading.setVisible(visible);
 	}
 }

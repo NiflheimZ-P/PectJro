@@ -51,7 +51,6 @@ public class LoginModel {
 
 					remember.createNewFile();
 					write.writeObject(thisGmail);
-					controller.getMain_controller().setCache(thisGmail);
 				} catch (SQLException ex) {
 					load.dispose();
 					JOptionPane.showMessageDialog(null, "The email address doesn't exist.", "Error", JOptionPane.ERROR_MESSAGE);

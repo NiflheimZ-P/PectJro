@@ -5,7 +5,8 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.ProjectTable;
 import com.kmitl.pectjro.Database.DatabaseTable.UserProjectTable;
-import com.kmitl.pectjro.Frame.Main_Program.home_page;
+import com.kmitl.pectjro.Frame.Main_Program.home_page.home_page;
+import com.kmitl.pectjro.Frame.Main_Program.home_page.home_pageController;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
 import javax.swing.*;
@@ -47,30 +48,13 @@ public class MainModel {
 		view.getFrame().revalidate();
 	}
 
-	public void loadCache(){
-		try (ObjectInputStream ob = new ObjectInputStream(new FileInputStream(new File("User_Cache")))){
-		 	controller.setCache((User_Template) ob.readObject());
-		} catch (IOException  | ClassNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "Cannot access file 'User_Cache'", "Error", JOptionPane.ERROR_MESSAGE);
-			System.exit(0);
-		}
-	}
-
 	public void createHome() {
-		controller.setHome(new home_page(controller.getCache()));
-		changePage(controller.getHome());
-	}
-
-	public void getProject() throws SQLException {
-		Connection con = DBConnect.createConnect();
-		UserProjectTable allPro = new UserProjectTable(con);
-		ArrayList<Integer> inPro = allPro.getProject(controller.getCache().id);
-
-		ProjectTable project = new ProjectTable(con);
-		controller.setProjectIn(project.getProjectData(inPro));
-	}
-
-	public void loadHome() throws SQLException {
-
+		controller.setHome(new home_pageController(controller));
+		changePage(controller.getHome().getView());
+		try {
+			controller.getHome().getModel().loadHome();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Can't access to your profile", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

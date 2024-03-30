@@ -1,27 +1,13 @@
-package com.kmitl.pectjro.Frame.Main_Program;
+package com.kmitl.pectjro.Frame.Main_Program.home_page;
 
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Calendars;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Progress;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
-
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.task_select;
-import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginController;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.Task;
-import com.kmitl.pectjro.Frame.Templates.User_Template;
-
 
 import java.awt.*;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.*;
 
-public class home_page implements View_Getter, ActionListener, MouseListener {
+public class home_page implements View_Getter, MouseListener {
 
     private JPanel main_panel;
 
@@ -33,15 +19,9 @@ public class home_page implements View_Getter, ActionListener, MouseListener {
     private JButton bn_task, bn_calendar, bn_appraisement, bn_new, bn_admin, bn_profile;
     private JLabel l1, l3, l4;
 
-    CardLayout page = new CardLayout();
 
-    private Progress pro;
-    private Profile profile;
-    private Calendars calen;
-    private Task task;
-    private task_select ts;
 
-    public home_page(User_Template user){
+    public home_page(){
         //set up
         main_panel = new JPanel(new BorderLayout());
         bg = new JPanel();
@@ -81,23 +61,8 @@ public class home_page implements View_Getter, ActionListener, MouseListener {
         l3 = new JLabel("3");
         l4 = new JLabel("Deadline");
 
-        //feature create
-        pro = new Progress();
-        profile = new Profile();
-        calen = new Calendars();
-        task = new Task();
-        ts = new task_select();
-
         //card
         center_part = new JPanel();
-        center_part.setLayout(page);
-
-        //add to centerpart
-        center_part.add(task.getFrame(), "0");
-        center_part.add(calen.getFrame(), "1");
-        center_part.add(pro.getFr(),"2");
-        center_part.add(profile.getFr(), "3");
-        center_part.add(ts.getFrame(),"4");
 
         //set center part
         main_panel.setLayout(new BorderLayout());
@@ -197,26 +162,6 @@ public class home_page implements View_Getter, ActionListener, MouseListener {
         bn_admin.setPreferredSize(new Dimension(80,35));
             //Label
         l4.setForeground(new Color(88,101,242));
-
-        //add event
-        bn_new.addActionListener(this);
-        bn_task.addActionListener(this);
-        bn_appraisement.addActionListener(this);
-        bn_calendar.addActionListener(this);
-        bn_profile.addActionListener(this);
-        bn_admin.addActionListener(this);
-        ts.addMouseListener(this);
-
-        //ads
-        profile.getBn_select_photo().addActionListener(this);
-        profile.getBn_log_out().addActionListener(this);
-
-
-        //show
-//        main_panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        main_panel.setSize(1400, 800);
-//        main_panel.setResizable(false);
-//        main_panel.setVisible(true);
     }
 
     public JButton getBn_profile() {
@@ -233,49 +178,8 @@ public class home_page implements View_Getter, ActionListener, MouseListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(bn_new)){
-            new ProjectCreate();
-        }else if (e.getSource().equals(bn_task)){
-            page.show(center_part, "0");
-            main_panel.add(pn_east, BorderLayout.EAST);
-            paneforsearch.setVisible(true);
-        }else if (e.getSource().equals(bn_calendar)) {
-            page.show(center_part, "1");
-            main_panel.remove(pn_east);
-            paneforsearch.setVisible(false);
-        }else if (e.getSource().equals(bn_appraisement)){
-            page.show(center_part, "2");
-            main_panel.remove(pn_east);
-        }else if (e.getSource().equals(bn_profile)) {
-            page.show(center_part, "3");
-            main_panel.remove(pn_east);
-        }else if (e.getSource().equals(profile.getBn_select_photo())) {
-            JFileChooser fc = new JFileChooser();
-            fc.showOpenDialog(profile.getFr());
-            File f = fc.getSelectedFile();
-            im_profile = new ImageIcon(f.getAbsolutePath()).getImage();
-            Image newImage = im_profile.getScaledInstance(400, 400, Image.SCALE_DEFAULT);
-            ImageIcon ic_image = new ImageIcon(newImage);
-            profile.getIcon().setIcon(ic_image);
-            Image tmp = im_profile.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
-            ImageIcon imttmp = new ImageIcon(tmp);
-            bn_profile.setIcon(imttmp);
-            paneforsearch.setVisible(false);
-        }else if (e.getSource().equals(bn_profile)){
-            page.show(center_part, "3");
-            main_panel.remove(pn_east);
-            paneforsearch.setVisible(false);
-        }//else if (e.getSource().equals(profile.getBn_log_out())){
-
-        //}
-    }
-
-    @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getSource().equals(ts)){
-            page.show(center_part,"4");
-        }
+
     }
 
     @Override
@@ -296,5 +200,70 @@ public class home_page implements View_Getter, ActionListener, MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    // Accessor
+    public JPanel getCenter_part() {
+        return center_part;
+    }
+    public void setCenter_part(JPanel center_part) {
+        this.center_part = center_part;
+    }
+    public JPanel getPaneforsearch() {
+        return paneforsearch;
+    }
+    public void setPaneforsearch(JPanel paneforsearch) {
+        this.paneforsearch = paneforsearch;
+    }
+    public JPanel getMain_panel() {
+        return main_panel;
+    }
+    public void setMain_panel(JPanel main_panel) {
+        this.main_panel = main_panel;
+    }
+    public JButton getBn_task() {
+        return bn_task;
+    }
+    public void setBn_task(JButton bn_task) {
+        this.bn_task = bn_task;
+    }
+    public JButton getBn_calendar() {
+        return bn_calendar;
+    }
+    public void setBn_calendar(JButton bn_calendar) {
+        this.bn_calendar = bn_calendar;
+    }
+    public JButton getBn_appraisement() {
+        return bn_appraisement;
+    }
+    public void setBn_appraisement(JButton bn_appraisement) {
+        this.bn_appraisement = bn_appraisement;
+    }
+    public JButton getBn_new() {
+        return bn_new;
+    }
+    public void setBn_new(JButton bn_new) {
+        this.bn_new = bn_new;
+    }
+    public JButton getBn_admin() {
+        return bn_admin;
+    }
+    public void setBn_admin(JButton bn_admin) {
+        this.bn_admin = bn_admin;
+    }
+    public void setBn_profile(JButton bn_profile) {
+        this.bn_profile = bn_profile;
+    }
+    public Image getIm_profile() {
+        return im_profile;
+    }
+    public void setIm_profile(Image im_profile) {
+        this.im_profile = im_profile;
+    }
+    public JPanel getPn_east() {
+        return pn_east;
+    }
+    public void setPn_east(JPanel pn_east) {
+        this.pn_east = pn_east;
     }
 }

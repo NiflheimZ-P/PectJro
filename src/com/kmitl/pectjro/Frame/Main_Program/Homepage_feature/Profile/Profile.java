@@ -1,14 +1,10 @@
-package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
+package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.kmitl.pectjro.Frame.Groups_interface.MainPage_Controller;
-import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
-import com.kmitl.pectjro.Frame.Main_Program.home_page;
+import com.kmitl.pectjro.Frame.Main_Program.home_page.home_page;
+import com.kmitl.pectjro.Frame.Templates.User_Template;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.*;
 import javax.swing.*;
 
 public class Profile {
@@ -20,17 +16,13 @@ public class Profile {
     private Image im_profile;
     private home_page home;
 
-    public JButton getBn_log_out() {
-        return bn_log_out;
-    }
-
-    public JPanel getFr() {
-        return fr;
-    }
-
     public Profile() {
         //set up
         fr = new JPanel();
+
+        //Frame set up
+        fr.setLayout(new BorderLayout());
+        fr.setBackground(new Color(49,51,56));
 
         pn_north = new JPanel();
         pn_center = new JPanel();
@@ -55,10 +47,6 @@ public class Profile {
         Image newImage = im_profile.getScaledInstance(400, 400, Image.SCALE_DEFAULT);
         ImageIcon ic_image = new ImageIcon(newImage);
 
-        //Frame set up
-        fr.setLayout(new BorderLayout());
-        fr.setBackground(new Color(49,51,56));
-
         //top part and exit button
         fr.add(pn_north, BorderLayout.NORTH);
         pn_north.setLayout(new FlowLayout());
@@ -75,7 +63,7 @@ public class Profile {
         pn_center.setBackground(new Color(49,51,56));
 
         //Center left part
-        pn_center_left.setLayout(new FlowLayout(1,50,50));
+        pn_center_left.setLayout(new FlowLayout(1,500,50));
         icon.setIcon(ic_image);
         pn_center.add(pn_center_left);
         pn_center_left.add(icon);//test image
@@ -149,16 +137,56 @@ public class Profile {
         fr.setVisible(true);
     }
 
+    // Accessor
+    public void setBn_select_photo(JButton bn_select_photo) {
+        this.bn_select_photo = bn_select_photo;
+    }
     public JButton getBn_select_photo() {
         return bn_select_photo;
     }
-
+    public JButton getBn_change_name() {
+        return bn_change_name;
+    }
+    public void setBn_change_name(JButton bn_change_name) {
+        this.bn_change_name = bn_change_name;
+    }
+    public JButton getBn_change_password() {
+        return bn_change_password;
+    }
+    public void setBn_change_password(JButton bn_change_password) {
+        this.bn_change_password = bn_change_password;
+    }
+    public void setBn_log_out(JButton bn_log_out) {
+        this.bn_log_out = bn_log_out;
+    }
+    public void setFr(JPanel fr) {
+        this.fr = fr;
+    }
+    public Image getIm_profile() {
+        return im_profile;
+    }
+    public void setIm_profile(Image im_profile) {
+        this.im_profile = im_profile;
+    }
     public JLabel getIcon() {
         return icon;
     }
-
-    public static void main(String[] args) throws Exception{
-        UIManager.setLookAndFeel(new FlatMacLightLaf());
-        SwingUtilities.invokeLater(() -> {new Profile(); });
+    public JButton getBn_log_out() {
+        return bn_log_out;
+    }
+    public JPanel getFr() {
+        return fr;
+    }
+    public JLabel getL_name() {
+        return l_name;
+    }
+    public void setL_name(JLabel l_name) {
+        this.l_name = l_name;
+    }
+    public JLabel getL_email() {
+        return l_email;
+    }
+    public void setL_email(JLabel l_email) {
+        this.l_email = l_email;
     }
 }
