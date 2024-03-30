@@ -28,7 +28,7 @@ public class ProfileController implements ActionListener {
 		if (e.getSource().equals(view.getBn_select_photo())) {
 			JFileChooser fc = new JFileChooser();
 			FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE", "jpg", "gif", "png");
-			fc.addChoosableFileFilter(filter);
+			fc.setFileFilter(filter);
 			if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 				model.changePicture(fc.getSelectedFile().getAbsolutePath());
 			}

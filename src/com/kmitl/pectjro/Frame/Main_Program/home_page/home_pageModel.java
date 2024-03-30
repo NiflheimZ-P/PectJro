@@ -4,6 +4,7 @@ import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.ProjectTable;
 import com.kmitl.pectjro.Database.DatabaseTable.UserProjectTable;
 import com.kmitl.pectjro.Database.DatabaseTable.UserTable;
+import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.AdminController;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 
 import javax.swing.*;
@@ -87,6 +88,7 @@ public class home_pageModel {
 	}
 
 	public void loadAdmin() {
-
+		controller.getMain_controller().setAdmin(new AdminController(controller.getMain_controller()));
+		controller.getMain_controller().getModel().changePage(controller.getMain_controller().getAdmin().getContainer());
 	}
 }

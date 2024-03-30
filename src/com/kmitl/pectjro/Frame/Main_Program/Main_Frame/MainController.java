@@ -40,7 +40,6 @@ public class MainController implements WindowListener {
 	public MainModel getModel() {return this.model;}
 	public void setRemember(Boolean stats) { remember = stats; }
 	public boolean getRemember() { return remember; }
-
 	public home_pageController getHome() {
 		return home;
 	}
@@ -52,6 +51,12 @@ public class MainController implements WindowListener {
 	}
 	public void setGlassPane(Loading_GlassPane glassPane) {
 		this.glassPane = glassPane;
+	}
+	public AdminController getAdmin() {
+		return admin;
+	}
+	public void setAdmin(AdminController admin) {
+		this.admin = admin;
 	}
 
 	// Listener

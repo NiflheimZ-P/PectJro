@@ -44,6 +44,7 @@ public class LoginModel {
 					User_Template thisGmail = data.getUserData(gmail);
 
 					if(!pass.equals(thisGmail.password)){
+						load.dispose();
 						JOptionPane.showMessageDialog(null, "Password incorrect", "Error", JOptionPane.ERROR_MESSAGE);
 						return false;
 					} else {

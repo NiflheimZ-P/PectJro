@@ -7,11 +7,11 @@ import com.kmitl.pectjro.Frame.Tools.*;
 
 public class Admin_controls {
 	private JInternalFrame main_Panel;
-	private JButton user, project, feedback;
+	private JButton user, project, feedback, exit;
 	public Admin_controls(int frame_width, int frame_height) {
 		main_Panel = new JInternalFrame("Controls", false, false);
 		main_Panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		main_Panel.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.25),
+		main_Panel.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth()*0.3),
 				(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight()*0.17));
 		main_Panel.setLocation(
 				(frame_width - main_Panel.getWidth())/2,
@@ -21,11 +21,13 @@ public class Admin_controls {
 		user = create_button("resources/Images/Icons/user.png");
 		project = create_button("resources/Images/Icons/project.png");
 		feedback = create_button("resources/Images/Icons/feedback.png");
+		exit = create_button("resources/Images/Icons/Exit.png");
 
 		main_Panel.setLayout(new GridBagLayout());
 		main_Panel.add(user, new Constraints(0, 0, 1, 0, new Insets(0, 0, 0, 0)));
 		main_Panel.add(project, new Constraints(1, 0, 1, 0, new Insets(0, 0, 0, 0)));
 		main_Panel.add(feedback, new Constraints(2, 0, 1, 0, new Insets(0, 0, 0, 0)));
+		main_Panel.add(exit, new Constraints(3, 0, 1, 0, new Insets(0, 0, 0, 0)));
 
 		main_Panel.setVisible(true);
 	}
@@ -33,8 +35,8 @@ public class Admin_controls {
 	public JButton create_button(String path){
 		ImageIcon in = new ImageIcon(path);
 		return new JButton(new ImageIcon(in.getImage().getScaledInstance(
-				((int) (main_Panel.getWidth()*0.27)),
-				((int) (main_Panel.getWidth()*0.27)), Image.SCALE_DEFAULT)));
+				((int) (main_Panel.getWidth()*0.2)),
+				((int) (main_Panel.getWidth()*0.2)), Image.SCALE_DEFAULT)));
 	}
 
 	// Accessor
@@ -44,4 +46,5 @@ public class Admin_controls {
 	public JButton getUser() { return user; }
 	public JButton getProject() { return project; }
 	public JButton getFeedback() { return feedback; }
+	public JButton getExit() { return exit; }
 }
