@@ -1,4 +1,5 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 import java.awt.*;
@@ -18,27 +19,28 @@ import org.jfree.data.gantt.TaskSeriesCollection;
 
 public class project_progressbar extends JFrame{
     private JFrame fr;
-    private JPanel upper_pmain, upper_west, upper_west_rpart, pane_for_note, panefor_close, logo_lmar, mini_west_rpart, mid_mar_rpart, psouth_main, psouth_move, psouth_add, psouth_midmar;
+    private JPanel upper_pmain, upper_west, upper_west_rpart, pane_for_note, panefor_close, logo_lmar, mini_west_rpart, mid_mar_rpart, psouth_main, psouth_move, psouth_add, psouth_midmar, note_bn;
     private JLabel pro_pic, team_label, pro_name_label;
-    private JButton note_bn, close_bn, add_bn, lmove_arrow, rmove_arrow;
+    private JButton close_bn, add_bn, lmove_arrow, rmove_arrow;
     private static final long serialVersionUID = 1L;
     public project_progressbar(String applicationTitle, String chartTitle){
         fr = new JFrame();
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         //Label
-        pro_pic = new JLabel("Project pic");
+        //pro_pic = new JLabel("Project pic");
         team_label = new JLabel("Team: ");
         pro_name_label = new JLabel("Project Name");
 
         //button
-        note_bn = new JButton("Note");
-        close_bn = new JButton("X");
+
+        close_bn = new JButton("Note");
         add_bn = new JButton("+");
         lmove_arrow = new JButton("<");
         rmove_arrow = new JButton(">");
 
         //panel
+        note_bn = new JPanel();
         upper_west_rpart = new JPanel();
         mid_mar_rpart = new JPanel();
         mini_west_rpart = new JPanel();
@@ -56,32 +58,24 @@ public class project_progressbar extends JFrame{
 
         //upper_west side
         upper_west.add(logo_lmar, BorderLayout.WEST);
-        logo_lmar.setBackground(Color.lightGray);
         logo_lmar.setPreferredSize(new Dimension(70,100));
-        upper_west.add(pro_pic, BorderLayout.CENTER);
-        upper_west.add(upper_west_rpart, BorderLayout.EAST);
-        upper_west.setBackground(Color.lightGray);
+//        upper_west.add(pro_pic, BorderLayout.CENTER);
+        upper_west.add(upper_west_rpart, BorderLayout.CENTER);
 
         //uppper west rpart add
         mini_west_rpart.setLayout(new GridLayout(3,1,50,5));
         mini_west_rpart.add(pro_name_label);
         mini_west_rpart.add(mid_mar_rpart);
         mini_west_rpart.add(team_label);
-        mid_mar_rpart.setBackground(Color.lightGray);
-        mini_west_rpart.setBackground(Color.lightGray);
         upper_west_rpart.add(mini_west_rpart, BorderLayout.CENTER);
-        upper_west_rpart.setBackground(Color.lightGray);
 
         //upper part
         upper_pmain = new JPanel();
         upper_pmain.setLayout(new GridLayout(1,3));
-        upper_pmain.setBackground(Color.lightGray);
         upper_pmain.add(upper_west);
         pane_for_note.add(note_bn);
-        pane_for_note.setBackground(Color.lightGray);
         upper_pmain.add(pane_for_note);
         panefor_close.add(close_bn);
-        panefor_close.setBackground(Color.lightGray);
         upper_pmain.add(panefor_close);
         upper_pmain.setPreferredSize(new Dimension(1000, 100));
 
@@ -102,10 +96,7 @@ public class project_progressbar extends JFrame{
         psouth_main.setLayout(new GridLayout(1,3));
         psouth_move.setLayout(new FlowLayout(2));
         psouth_add.setLayout(new FlowLayout(0));
-        psouth_main.setBackground(Color.lightGray);
-        psouth_add.setBackground(Color.lightGray);
-        psouth_midmar.setBackground(Color.lightGray);
-        psouth_move.setBackground(Color.lightGray);
+
 
 
         //set fr
@@ -161,16 +152,13 @@ public class project_progressbar extends JFrame{
         actual.add(new Task("Testing", Date.from(LocalDate.of(2018, 9, 28).atStartOfDay().toInstant(ZoneOffset.UTC)),
                 Date.from(LocalDate.of(2018, 10, 3).atStartOfDay().toInstant(ZoneOffset.UTC))));
         dataset.add(actual);
-
-
         return dataset;
 
     }
-    public static void main(String[] args) throws Exception {
 
-        UIManager.setLookAndFeel(new FlatMacLightLaf());
+    public static void main(String[] args) throws Exception {
+        UIManager.setLookAndFeel(new FlatMacDarkLaf());
         SwingUtilities.invokeLater(() -> {new project_progressbar("Gnatt Chart", "Your Task Progress");
         });
-
     }
 }

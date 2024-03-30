@@ -2,11 +2,15 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
 import com.kmitl.pectjro.Frame.Main_Program.home_page.home_pageController;
 
+import java.awt.*;
+
+
 public class TaskController {
 	// Attribute
 	private Task view;
 	private TaskModel model;
 	private home_pageController head_control;
+
 
 	// Constructor
 	public TaskController(home_pageController head_control) {
@@ -14,7 +18,6 @@ public class TaskController {
 		this.view = new Task();
 		this.model = new TaskModel(view, this);
 	}
-
 
 
 	// Accessor

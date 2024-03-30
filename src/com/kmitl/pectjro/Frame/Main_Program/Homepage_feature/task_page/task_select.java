@@ -1,5 +1,7 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -9,10 +11,14 @@ import java.awt.event.MouseListener;
 public class task_select extends JPanel implements MouseListener {
     private JPanel pl;
     private JLabel name, desc;
+    private project_progressbar pro_pro;
+
 
     private Task task;
+    private TaskController tskc;
     public task_select(){
         pl = new JPanel();
+
 
         name = new JLabel("   "+"Project Name");
         desc = new JLabel("  - "+"Cum ar thi buy");
@@ -29,15 +35,18 @@ public class task_select extends JPanel implements MouseListener {
         pl.setPreferredSize(new Dimension(550,80));
         pl.addMouseListener(this);
     }
+
+
+
     public JPanel getFrame(){
         return pl;
     }
     @Override
     public void mouseClicked(MouseEvent e) {
-//        if(e.getSource().equals(pl)){
-//            new project_progressbar("1","2");
-//            home_page.page.show();
-//        }
+        if (e.getSource().equals(pl)){
+            new project_progressbar("Gnatt Chart", name.getText());
+        }
+
     }
 
     @Override

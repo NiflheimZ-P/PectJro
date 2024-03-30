@@ -3,6 +3,7 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile.Profile;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 
 import java.awt.*;
@@ -14,6 +15,8 @@ public class Task implements ActionListener {
     private JPanel fr, p, margin_p,pl, pl_but;
     private JButton ref, create_pro;
     private JScrollPane scroll;
+    private TaskController tskc;
+    private project_progressbar pro_pro;
     public JPanel getFrame() {
         return fr;
     }
@@ -22,11 +25,13 @@ public class Task implements ActionListener {
     public Task(){
         fr = new JPanel(); pl_but= new JPanel(new GridBagLayout());
         ref = new JButton("Refresh"); create_pro = new JButton("+");
+
         //ref.setEnabled(false);
         pl = new JPanel();
         p = new JPanel();
         margin_p = new JPanel();
         fr.setLayout(new BorderLayout(20, 20));
+
 
 
         pl.setLayout(new GridLayout(10,1));
@@ -73,6 +78,7 @@ public class Task implements ActionListener {
 
 
 
+
         fr.setSize(1000,600);
         fr.setVisible(true);
 
@@ -80,6 +86,12 @@ public class Task implements ActionListener {
 
     public JButton getRef() {
         return ref;
+    }
+
+
+
+    public JPanel getFr() {
+        return fr;
     }
 
     @Override
