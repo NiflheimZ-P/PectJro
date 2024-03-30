@@ -20,6 +20,8 @@ public class ProfileController implements ActionListener {
 		this.model = new ProfileModel(view, this);
 
 		view.getBn_select_photo().addActionListener(this);
+		view.getBn_change_name().addActionListener(this);
+		view.getBn_change_password().addActionListener(this);
 	}
 
 	// Listener
@@ -32,6 +34,12 @@ public class ProfileController implements ActionListener {
 			if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 				model.changePicture(fc.getSelectedFile().getAbsolutePath());
 			}
+		}else if (e.getSource().equals(view.getBn_change_name())){
+			new changeUsername();
+		}else if (e.getSource().equals(view.getBn_change_password())){
+			new changePass();
+		}else if (e.getSource().equals(view.getBn_log_out())){
+
 		}
 	}
 

@@ -129,8 +129,5 @@ public class Progress {
         return fr;
     }
 
-    public static void main(String[] args) {
-        new Progress();
-    }
 }
 

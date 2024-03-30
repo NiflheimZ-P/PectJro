@@ -165,14 +165,6 @@ public class home_page implements View_Getter, MouseListener {
         l4.setForeground(new Color(88,101,242));
     }
 
-    public JButton getBn_profile() {
-        return bn_profile;
-    }
-
-    public void setBn_profile(ImageIcon bn_profile) {
-        this.bn_profile.setIcon(bn_profile);
-    }
-
     @Override
     public Container getView() {
         return main_panel;
@@ -267,4 +259,11 @@ public class home_page implements View_Getter, MouseListener {
     public void setPn_east(JPanel pn_east) {
         this.pn_east = pn_east;
     }
+    public JButton getBn_profile() {
+        return bn_profile;
+    }
+    public void setBn_profile(ImageIcon bn_profile) {
+        this.bn_profile.setIcon(bn_profile);
+    }
+
 }
