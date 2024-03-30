@@ -48,7 +48,7 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 		//add to centerPart
 		view.getCenter_part().add(task.getView().getFrame(), "0");
 		view.getCenter_part().add(calen.getView().getFrame(), "1");
-		//view.getCenter_part().add(Statss.getFr(),"2");
+		view.getCenter_part().add(Statss.getFrame(),"2");
 		view.getCenter_part().add(profile.getView().getFr(), "3");
 
 		view.getBn_new().addActionListener(this);
