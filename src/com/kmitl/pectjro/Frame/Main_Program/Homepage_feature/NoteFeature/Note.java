@@ -34,7 +34,7 @@ public class Note implements ActionListener{
         save = new JMenuItem("Save");
         reset = new JMenuItem("Reset");
 
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fr.setJMenuBar(m);
         m.add(edit);
 
