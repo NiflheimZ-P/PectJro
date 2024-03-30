@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.concurrent.ExecutionException;
 
 public class LoginModel {
 	// Attribute
@@ -27,11 +28,11 @@ public class LoginModel {
 
 	// Methods
 	public void loginSystem() {
-		SwingWorker<Void, Void> getIn = new SwingWorker<Void, Void>() {
+		SwingWorker<Boolean, Void> getIn = new SwingWorker<Boolean, Void>() {
 			private final Loading_dialog load = new Loading_dialog(controller.getMain_controller().getView().getFrame());
 
 			@Override
-			protected Void doInBackground() throws Exception {
+			protected Boolean doInBackground() throws Exception {
 				load.setVisible(true);
 				String gmail = login.getEmail().getText();
 				String pass = login.getPass().getMyPass();
@@ -44,7 +45,7 @@ public class LoginModel {
 
 					if(!pass.equals(thisGmail.password)){
 						JOptionPane.showMessageDialog(null, "Password incorrect", "Error", JOptionPane.ERROR_MESSAGE);
-						return null;
+						return false;
 					} else {
 						controller.getMain_controller().setRemember(login.getCheck().isSelected());
 					}
@@ -54,17 +55,27 @@ public class LoginModel {
 				} catch (SQLException ex) {
 					load.dispose();
 					JOptionPane.showMessageDialog(null, "The email address doesn't exist.", "Error", JOptionPane.ERROR_MESSAGE);
+					return false;
 				} catch (IOException ex) {
 					load.dispose();
 					JOptionPane.showMessageDialog(null, "Cannot access file 'User_Cache'", "Error", JOptionPane.ERROR_MESSAGE);
+					return false;
 				}
-				return null;
+				return true;
 			}
 
 			@Override
 			protected void done() {
 				load.dispose();
-				controller.getMain_controller().getModel().createHome();
+				try {
+					if (get()) {
+						controller.getMain_controller().getModel().createHome();
+					} else {
+						controller.getMain_controller().setRemember(false);
+					}
+				} catch (InterruptedException | ExecutionException e) {
+					throw new RuntimeException(e);
+				}
 			}
 		};
 		getIn.execute();
