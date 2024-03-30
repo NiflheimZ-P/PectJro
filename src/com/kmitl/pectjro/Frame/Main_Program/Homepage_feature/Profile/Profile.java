@@ -16,6 +16,7 @@ public class Profile {
     private Image im_profile;
     private home_page home;
 
+
     public Profile() {
         //set up
         fr = new JPanel();
