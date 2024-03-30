@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class task_select extends JPanel implements MouseListener {
-    private JPanel pl;
+    private JPanel pl, pforname, west_mar, south_mar;
     private JLabel name;
     private JTextArea desc;
     private project_progressbar pro_pro;
@@ -20,21 +20,38 @@ public class task_select extends JPanel implements MouseListener {
     private TaskController tskc;
     public task_select(Project_Template info){
         pl = new JPanel();
+        pforname =  new JPanel();
+        west_mar = new JPanel();
+        south_mar = new JPanel();
+
+        //Label
+
 
         name = new JLabel(info.name);
         desc = new JTextArea(info.description);
         desc.setEditable(false);
 
-        pl.setLayout(new GridLayout(2,1));
+
+
+        pl.setLayout(new BorderLayout());
         this.add(pl);
-        pl.add(name);
+        pforname.add(name);
+        pforname.setPreferredSize(new Dimension(750, 50));
+        pl.add(pforname, BorderLayout.NORTH);
+
+        //add to pforname
+        west_mar.setPreferredSize(new Dimension(60, 200));
+        pl.add(west_mar, BorderLayout.WEST);
+        south_mar.setPreferredSize(new Dimension(0, 40));
+        pl.add(south_mar, BorderLayout.SOUTH);
+
         name.setFont(new Font("Sans", Font.BOLD, 18));
-        pl.add(desc);
-        desc.setFont(new Font("Sans", Font.PLAIN, 14));
+        pl.add(desc, BorderLayout.CENTER);
+        desc.setFont(new Font("Sans", Font.PLAIN, 64));
         pl.setBorder(new LineBorder(new Color(30,31,34)));
         this.setBackground(new Color(49,51,56));
         this.setVisible(true);
-        pl.setPreferredSize(new Dimension(300,350));
+        pl.setPreferredSize(new Dimension(750,200));
         pl.addMouseListener(this);
     }
 
