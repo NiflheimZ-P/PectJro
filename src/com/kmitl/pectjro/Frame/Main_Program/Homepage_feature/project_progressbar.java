@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.Date;
@@ -113,6 +115,7 @@ public class project_progressbar extends JFrame implements ActionListener {
         psouth_move.setLayout(new FlowLayout(2));
         psouth_add.setLayout(new FlowLayout(0));
 
+<<<<<<< Updated upstream
         //set color
         upper_pmain.setBackground(new Color(30,31,34));
         upper_west.setBackground(new Color(30,31,34));
@@ -132,6 +135,10 @@ public class project_progressbar extends JFrame implements ActionListener {
         bn_add_mem.setBackground(new Color(43, 45, 49));
         bn_finish.setBackground(new Color(43,45,49));
         close_bn.setBackground(new Color(43,45,49));
+=======
+        //addActionListener
+        add_bn.addActionListener(this);
+>>>>>>> Stashed changes
 
         bn_add_mem.addActionListener(this);
         close_bn.addActionListener(this);
@@ -192,6 +199,11 @@ public class project_progressbar extends JFrame implements ActionListener {
         dataset.add(actual);
         return dataset;
 
+    }
+    public void actionPerformed(ActionEvent ev){
+        if(ev.getSource().equals(add_bn)){
+            new NewTaskGanttChart();
+        }
     }
 
     public static void main(String[] args) throws Exception {
