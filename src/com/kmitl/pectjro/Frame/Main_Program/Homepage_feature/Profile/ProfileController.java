@@ -2,6 +2,7 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.UserTable;
+import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 import com.kmitl.pectjro.Frame.Main_Program.home_page.home_pageController;
 
 import javax.swing.*;
@@ -29,8 +30,6 @@ public class ProfileController implements ActionListener {
 		view.getBn_change_name().addActionListener(this);
 		view.getBn_change_password().addActionListener(this);
 		view.getBn_log_out().addActionListener(this);
-
-
 	}
 
 	// Listener
@@ -44,34 +43,13 @@ public class ProfileController implements ActionListener {
 				model.changePicture(fc.getSelectedFile().getAbsolutePath());
 			}
 		}else if (e.getSource().equals(view.getBn_change_name())){
-			cuser = new changeUsername();
-			cuser.getSubmit().addActionListener(this);
-			cuser.getCancel().addActionListener(this);
+			MainController.glassPane.setVisible(true);
+			cuser = new changeUsername(this);
 		}else if (e.getSource().equals(view.getBn_change_password())){
-			cpass = new changePass();
-			cpass.getSubmit().addActionListener(this);
-			cpass.getCancel().addActionListener(this);
+			MainController.glassPane.setVisible(true);
+			cpass = new changePass(this);
 		}else if (e.getSource().equals(view.getBn_log_out())){
 			model.loadLogin();
-		}else if (e.getActionCommand().equals("Submit")){
-			Connection con = DBConnect.createConnect();
-			UserTable use = new UserTable(con);
-            try {
-                use.updatePassword(head_control.getCache().id, cpass.getCon_txt().getText());
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-        }else if (e.getActionCommand().equals("Done")){
-			Connection con = DBConnect.createConnect();
-			UserTable use = new UserTable(con);
-			try {
-				use.updateName(head_control.getCache().id, cuser.getUser().getText());
-
-			}catch (SQLException ex){
-				throw new RuntimeException(ex);
-			}
-		}else if (e.getSource().equals(cuser.getCancel()) || e.getSource().equals(cpass.getCancel())){
-			System.exit(0);
 		}
 	}
 

@@ -7,18 +7,27 @@ import org.intellij.lang.annotations.Flow;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.SQLOutput;
-public class changeUsername {
-    private JFrame fr;
+public class changeUsername implements ActionListener, DocumentListener, WindowListener {
+    private JDialog fr;
     private JPanel pmain, top_mar, west_mar, east_mar;
     private JButton submit, cancel;
     private JTextField user;
     private JLabel txt;
+    private ProfileController controller;
 
-    public changeUsername(){
-        fr = new JFrame();
+    public changeUsername(ProfileController controller){
+        this.controller = controller;
+        fr = new JDialog();
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        fr.addWindowListener(this);
 
         //panel
         pmain = new JPanel();
@@ -32,11 +41,11 @@ public class changeUsername {
         txt = new JLabel("    Change Username");
 
         //button
-        submit = new JButton("Done");
-        cancel = new JButton("Cancel");
+        submit = new JButton("Done"); submit.addActionListener(this); submit.setEnabled(false);
+        cancel = new JButton("Cancel"); cancel.addActionListener(this);
 
         //txtfield
-        user = new JTextField();
+        user = new JTextField(); user.getDocument().addDocumentListener(this);
 
         //pmain
         pmain.add(submit); pmain.add(cancel);
@@ -59,26 +68,84 @@ public class changeUsername {
         fr.add(pmain, BorderLayout.SOUTH);
 
         //set visible and size
+        fr.setAlwaysOnTop(true);
         fr.setSize(400, 150);
         fr.setResizable(false);
         fr.setLocationRelativeTo(null);
         fr.setVisible(true);
     }
-
     public JButton getSubmit() {
         return submit;
     }
-
     public JTextField getUser() {
         return user;
     }
-
     public JButton getCancel() {
         return cancel;
     }
 
-    public static void main(String[] args) throws UnsupportedLookAndFeelException {
-        UIManager.setLookAndFeel( new FlatMacDarkLaf() );
-        SwingUtilities.invokeLater(() -> {new changeUsername();});
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(submit)) {
+            fr.dispose();
+            controller.getModel().saveName(user.getText());
+        } else {
+            fr.dispose();
+        }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        MainController.glassPane.setVisible(false);
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        if (!user.getText().isEmpty()){
+            submit.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        if (!user.getText().isEmpty()){
+            submit.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        if (!user.getText().isEmpty()){
+            submit.setEnabled(true);
+        }
     }
 }

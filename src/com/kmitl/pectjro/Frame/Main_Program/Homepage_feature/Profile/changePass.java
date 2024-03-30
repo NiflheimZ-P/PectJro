@@ -8,22 +8,29 @@ import org.intellij.lang.annotations.Flow;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.SQLOutput;
 
-public class changePass{
-    private JFrame fr;
+public class changePass implements ActionListener, DocumentListener, WindowListener {
+    private JDialog fr;
     private JPanel pmain, top_mar, west_mar, east_mar, pcenter;
     private JButton submit, cancel;
     private JTextField  old_txt, neww_txt, con_txt;
     private JLabel old, neww, con, up_txt;
+    private ProfileController controller;
 
-    public changePass(){
-        fr = new JFrame();
+    public changePass(ProfileController controller){
+        this.controller = controller;
+        fr = new JDialog();
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        fr.addWindowListener(this);
 
         //panel
         pmain = new JPanel();
@@ -43,6 +50,7 @@ public class changePass{
         //button
         submit = new JButton("Submit");
         cancel = new JButton("Cancel");
+        submit.setEnabled(false);
 
         //txtfield
         old_txt = new JTextField();
@@ -71,6 +79,11 @@ public class changePass{
         pcenter.add(con);
         pcenter.add(con_txt);
 
+        //add Listener
+        old_txt.getDocument().addDocumentListener(this);
+        neww_txt.getDocument().addDocumentListener(this);
+        con_txt.getDocument().addDocumentListener(this);
+
         //add to frame
         fr.add(top_mar, BorderLayout.NORTH);
         fr.add(east_mar, BorderLayout.EAST);
@@ -78,6 +91,8 @@ public class changePass{
         fr.add(pcenter, BorderLayout.CENTER);
         fr.add(pmain, BorderLayout.SOUTH);
 
+        submit.addActionListener(this);
+        cancel.addActionListener(this);
 
         //set visible and size
         fr.setSize(400, 400);
@@ -89,18 +104,78 @@ public class changePass{
     public JButton getSubmit() {
         return submit;
     }
-
     public JButton getCancel() {
         return cancel;
     }
-
-    public static void main(String[] args) throws UnsupportedLookAndFeelException {
-        UIManager.setLookAndFeel( new FlatMacDarkLaf() );
-        SwingUtilities.invokeLater(() -> {new changePass();});
-    }
-
     public JTextField getCon_txt() {
         return con_txt;
+    }
+
+    public void check() {
+        if (controller.getHead_control().getCache().password.equals(old_txt.getText()) && neww_txt.getText().equals(con_txt.getText())
+            && !neww_txt.getText().isEmpty()){
+            submit.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(submit)){
+            fr.dispose();
+            controller.getModel().savePass(neww_txt.getText());
+        } else if (e.getSource().equals(cancel)) {
+            fr.dispose();
+            MainController.glassPane.setVisible(false);
+        }
+    }
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        check();
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        check();
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        check();
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        MainController.glassPane.setVisible(false);
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }
 
