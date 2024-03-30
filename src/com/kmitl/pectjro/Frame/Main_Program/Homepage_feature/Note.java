@@ -3,7 +3,6 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.Addpeople;
 
 import javax.swing.*;
 import java.awt.*;
@@ -69,15 +68,10 @@ public class Note implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(save)) {
-            String TextArea = textArea.getText();
-            String sql = String.format("INSERT INTO Note_info(Note) VALUES ('%s');", TextArea);
-            try {
-                nt.updateNote(sql);
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
+            String text1 = textArea.getText();
+            String sql = String.format("INSERT INTO Note_info (Note) VALUES ('%s');", text1);
+
         }
-    }
 
 
 //package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
@@ -162,7 +156,7 @@ public class Note implements ActionListener{
 //        }
 //    }
 
-
+    }
 }
 
 //
