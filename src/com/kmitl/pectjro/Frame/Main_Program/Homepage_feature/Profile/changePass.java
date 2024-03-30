@@ -1,15 +1,20 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.kmitl.pectjro.Database.Connection.DBConnect;
+import com.kmitl.pectjro.Database.DatabaseTable.UserTable;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 import org.intellij.lang.annotations.Flow;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.SQLOutput;
 
-public class changePass {
+public class changePass{
     private JFrame fr;
     private JPanel pmain, top_mar, west_mar, east_mar, pcenter;
     private JButton submit, cancel;
@@ -73,6 +78,7 @@ public class changePass {
         fr.add(pcenter, BorderLayout.CENTER);
         fr.add(pmain, BorderLayout.SOUTH);
 
+
         //set visible and size
         fr.setSize(400, 400);
         fr.setResizable(false);
@@ -91,6 +97,10 @@ public class changePass {
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel( new FlatMacDarkLaf() );
         SwingUtilities.invokeLater(() -> {new changePass();});
+    }
+
+    public JTextField getCon_txt() {
+        return con_txt;
     }
 }
 

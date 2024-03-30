@@ -31,6 +31,7 @@ public class ProfileModel {
 		view.getL_email().setText(view.getL_email().getText() + "  "+ controller.getHead_control().getCache().gmail);
 	}
 
+
 	public void changePicture(String path) {
 		SwingWorker<Boolean, Void> change = new SwingWorker<Boolean, Void>() {
 			@Override
