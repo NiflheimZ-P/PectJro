@@ -66,7 +66,6 @@ public class ProfileController implements ActionListener {
 			UserTable use = new UserTable(con);
 			try {
 				use.updateName(head_control.getCache().id, cuser.getUser().getText());
-
 			}catch (SQLException ex){
 				throw new RuntimeException(ex);
 			}
