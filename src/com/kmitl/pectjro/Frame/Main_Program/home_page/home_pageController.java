@@ -3,14 +3,10 @@ package com.kmitl.pectjro.Frame.Main_Program.home_page;
 import com.kmitl.pectjro.Frame.Groups_interface.MainPage_Controller;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Calendar.CalendarController;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Calendar.Calendars;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile.Profile;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile.ProfileController;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Progress;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Stats;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.Task;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.TaskController;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.task_select;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
@@ -19,7 +15,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 
 public class home_pageController implements MainPage_Controller, ActionListener {
@@ -30,7 +25,7 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 	private User_Template cache;
 	private ArrayList<Project_Template> projectIn;
 	CardLayout page = new CardLayout();
-	private Progress progress;
+	private Stats Statss;
 	private ProfileController profile;
 	private CalendarController calen;
 	private TaskController task;
@@ -42,7 +37,7 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 		this.main_controller = main_controller;
 
 		//feature create
-		progress = new Progress();
+		Statss = new Stats();
 		profile = new ProfileController(this);
 		calen = new CalendarController(this);
 		task = new TaskController(this);
@@ -53,7 +48,7 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 		//add to centerPart
 		view.getCenter_part().add(task.getView().getFrame(), "0");
 		view.getCenter_part().add(calen.getView().getFrame(), "1");
-		view.getCenter_part().add(progress.getFr(),"2");
+		//view.getCenter_part().add(Statss.getFr(),"2");
 		view.getCenter_part().add(profile.getView().getFr(), "3");
 
 		view.getBn_new().addActionListener(this);
