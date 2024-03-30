@@ -155,6 +155,7 @@ public class home_page implements View_Getter, MouseListener {
         pn_east.setBackground(new Color(49,51,56));
             //Button
         bn_admin.setForeground(Color.white) ; bn_admin.setBackground(new Color(43,45,49));
+        bn_admin.setVisible(false);
         bn_task.setForeground(Color.white); bn_task.setBackground(new Color(43,45,49));
         bn_calendar.setForeground(Color.white); bn_calendar.setBackground(new Color(43,45,49));
         bn_appraisement.setForeground(Color.white); bn_appraisement.setBackground(new Color(43,45,49));

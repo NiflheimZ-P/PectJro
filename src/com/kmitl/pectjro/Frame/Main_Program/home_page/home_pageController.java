@@ -87,9 +87,15 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 			page.show(view.getCenter_part(), "3");
 			view.getMain_panel().remove(view.getPn_east());
 			view.getPaneforsearch().setVisible(false);
-		}//else if (e.getSource().equals(profile.getBn_log_out())){
+		}else if (e.getSource().equals(view.getBn_admin())) {
+			int selectedOption = JOptionPane.showConfirmDialog(null,
+					"Are you sure?",
+					"Choose",
+					JOptionPane.YES_NO_OPTION);
+			if (selectedOption == JOptionPane.YES_OPTION) {
 
-		//}
+			}
+		}
 	}
 
 

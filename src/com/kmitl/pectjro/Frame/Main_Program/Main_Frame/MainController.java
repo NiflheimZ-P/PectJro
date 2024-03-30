@@ -20,7 +20,7 @@ public class MainController implements WindowListener {
 	private AdminController admin;
 	private home_pageController home;
 	private Boolean remember;
-	private Loading_GlassPane glassPane;
+	public static Loading_GlassPane glassPane;
 
 	// Constructor
 	public MainController(){
@@ -57,7 +57,7 @@ public class MainController implements WindowListener {
 	// Listener
 	@Override
 	public void windowOpened(WindowEvent e) {
-		File user = new File("User_Cache");
+		File user = new File("User_Cache.dat");
 		if (user.exists()) {
 			setRemember(true);
 			model.createHome();
@@ -68,13 +68,13 @@ public class MainController implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		File target = new File("User_Cache");
+		File target = new File("User_Cache.dat");
 		if (!getRemember()) { target.delete(); }
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e) {
-		File target = new File("User_Cache");
+		File target = new File("User_Cache.dat");
 		if (!getRemember()) { target.delete(); }
 	}
 

@@ -141,4 +141,11 @@ public class UserTable {
 
 		return output;
 	}
+
+	public void changeUserPicture(int id, InputStream pic) throws SQLException {
+		PreparedStatement sql = con.prepareStatement("UPDATE User_info SET Image = ? WHERE Id = ?");
+		sql.setBlob(1, pic);
+		sql.setInt(2, id);
+		sql.executeUpdate();
+	}
 }

@@ -39,5 +39,5 @@ build/
 
 ### Cache file ###
 Database_Setting.dat
-User_Cache
+User_Cache.dat
 .idea/discord.xml

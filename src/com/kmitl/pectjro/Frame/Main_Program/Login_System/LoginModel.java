@@ -36,7 +36,7 @@ public class LoginModel {
 				String gmail = login.getEmail().getText();
 				String pass = login.getPass().getMyPass();
 
-				File remember = new File("User_Cache");
+				File remember = new File("User_Cache.dat");
 				try (ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(remember))) {
 					Connection con = DBConnect.createConnect();
 					UserTable data = new UserTable(con);
