@@ -4,15 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Calendars implements ActionListener {
     private JFrame frame;
-    private JButton left, right, previousMonth, nextMonth;
+    private JButton left, right, previousMonth, nextMonth, button;
     private JPanel pn, calendarPanel, p_left, p_right;
     private Calendar cal;
-    private JLabel label;
+    private JLabel label, monthLb, dayLabel;
     private int month, year, daysInMonth, firstDayOfWeek;
+    private String[] weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
     public Calendars() {
         // Add Button
@@ -25,6 +27,7 @@ public class Calendars implements ActionListener {
         p_left = new JPanel();
         p_right = new JPanel();
         label = new JLabel("Deadline Calendar");
+        monthLb = new JLabel();
 
         // Add Button on Panel for changing months
         previousMonth = new JButton("<<");
@@ -36,9 +39,10 @@ public class Calendars implements ActionListener {
 
         // Add buttons to the panel
         p_left.add(label);
-        pn.add(p_left, BorderLayout.WEST);
         p_right.add(previousMonth);
         p_right.add(nextMonth);
+        pn.add(p_left, BorderLayout.WEST);
+        pn.add(monthLb, BorderLayout.CENTER);
         pn.add(p_right, BorderLayout.EAST);
 
         // Create a calendar instance
@@ -57,11 +61,11 @@ public class Calendars implements ActionListener {
         frame.add(pn, BorderLayout.NORTH);
         frame.add(calendarPanel, BorderLayout.CENTER);
 
-
         // Set color and set border button
         left.setFont(new Font("Sans", Font.PLAIN, 12));
         right.setFont(new Font("Sans", Font.PLAIN, 12));
         label.setFont(new Font("Sans", Font.PLAIN, 18));
+        monthLb.setFont(new Font("Sans", Font.PLAIN, 18));
         pn.setBackground(new Color(49, 51, 56));
         p_left.setBackground(new Color(49, 51, 56));
         p_right.setBackground(new Color(49, 51, 56));
@@ -92,22 +96,25 @@ public class Calendars implements ActionListener {
         firstDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 
         // Add weekday labels
-        String[] weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
         for (String weekday : weekdays) {
-            JLabel dayLabel = new JLabel(weekday, SwingConstants.CENTER);
+            dayLabel = new JLabel(weekday, SwingConstants.CENTER);
             calendarPanel.add(dayLabel);
         }
 
-        // Add empty buttons for the days before the first day of the month
+        // Add empty labels for the days before the first day of the month
         for (int i = 1; i < firstDayOfWeek; i++) {
             calendarPanel.add(new JLabel(""));
         }
 
         // Add buttons for each day of the month
         for (int day = 1; day <= daysInMonth; day++) {
-            JButton button = new JButton(Integer.toString(day));
+            button = new JButton(Integer.toString(day));
             calendarPanel.add(button);
         }
+
+        // Set the month label
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy");
+        monthLb.setText(sdf.format(cal.getTime()));
 
         // Repaint the calendar panel
         calendarPanel.revalidate();
@@ -124,8 +131,6 @@ public class Calendars implements ActionListener {
         }
     }
 
-   //public JPanel getFrame() {
-        //return frame;
     public static void main(String[] args) {
         new Calendars();
     }
