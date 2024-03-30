@@ -93,7 +93,7 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 					"Choose",
 					JOptionPane.YES_NO_OPTION);
 			if (selectedOption == JOptionPane.YES_OPTION) {
-
+				model.loadAdmin();
 			}
 		}
 	}
