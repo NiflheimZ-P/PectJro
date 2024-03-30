@@ -18,7 +18,7 @@ public class NoteBox extends JPanel implements MouseListener {
     //private Task task;
     //private TaskController tskc;
 
-    public NoteBox(){
+    public NoteBox() {
         pl = new JPanel();
         pforname =  new JPanel();
         west_mar = new JPanel();
@@ -43,24 +43,24 @@ public class NoteBox extends JPanel implements MouseListener {
         //add to pforname
         west_mar.setPreferredSize(new Dimension(60, 200));
         pl.add(west_mar, BorderLayout.WEST);
-        south_mar.setPreferredSize(new Dimension(0, 40));
+        south_mar.setPreferredSize(new Dimension(1, 40));
         south_mar.setLayout(new GridLayout(1,3));
-        south_mar.add(start); south_mar.add(mid_fsouth); south_mar.add(end);
+
+        south_mar.add(mid_fsouth);
+
         pl.add(south_mar, BorderLayout.SOUTH);
 
         name.setFont(new Font("Sans", Font.BOLD, 18));
-        pl.add(desc, BorderLayout.CENTER);
-        desc.setFont(new Font("Sans", Font.PLAIN, 14));
+        //pl.add(desc, BorderLayout.CENTER);
+        //desc.setFont(new Font("Sans", Font.PLAIN, 14));
         pl.setBorder(new LineBorder(new Color(30,31,34)));
-        this.setBackground(new Color(49,51,56));
-        this.setVisible(true);
+        //this.setBackground(new Color(49,51,56));
+
         pl.setPreferredSize(new Dimension(750,200));
         pl.addMouseListener(this);
         this.setBackground(Color.cyan);
+        this.setVisible(true);
     }
-
-
-
 
 
     public JPanel getFrame(){

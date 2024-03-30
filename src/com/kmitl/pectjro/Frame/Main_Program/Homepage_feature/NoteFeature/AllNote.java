@@ -39,14 +39,15 @@ public class AllNote implements ActionListener{
         westsmar.add(ref_pane);
         westsmar.add(plus_pane);
 
-        fr.add(center);
+
         center.setLayout(new FlowLayout());
 
-        for(int i=0;i>10;i++){
+        for(int i=0; i<=10; i++){
             NoteBox n = new NoteBox();
             center.add(n);
-        }
 
+        }
+        fr.add(center, BorderLayout.NORTH);
         fr.add(westsmar, BorderLayout.SOUTH);
 
         //set visible size
