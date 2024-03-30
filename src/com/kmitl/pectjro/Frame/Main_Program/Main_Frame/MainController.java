@@ -58,6 +58,12 @@ public class MainController implements WindowListener {
 	public void setAdmin(AdminController admin) {
 		this.admin = admin;
 	}
+	public LoginController getLogin() {
+		return login;
+	}
+	public void setLogin(LoginController login) {
+		this.login = login;
+	}
 
 	// Listener
 	@Override

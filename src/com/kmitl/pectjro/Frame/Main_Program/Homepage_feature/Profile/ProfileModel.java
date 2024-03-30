@@ -2,9 +2,8 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.UserTable;
+import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginController;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -71,5 +70,13 @@ public class ProfileModel {
 			}
 		};
 		change.execute();
+	}
+
+	public void loadLogin() {
+		controller.getHead_control().getMain_controller().setLogin(new LoginController(controller.getHead_control().getMain_controller()));
+		controller.getHead_control().getMain_controller().getModel().changePage(controller.getHead_control().getMain_controller().getLogin().getContainer());
+
+		File delete = new File("User_Cache.dat");
+		delete.delete();
 	}
 }

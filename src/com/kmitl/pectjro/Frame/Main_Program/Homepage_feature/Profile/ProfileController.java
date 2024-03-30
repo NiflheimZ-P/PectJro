@@ -22,6 +22,7 @@ public class ProfileController implements ActionListener {
 		view.getBn_select_photo().addActionListener(this);
 		view.getBn_change_name().addActionListener(this);
 		view.getBn_change_password().addActionListener(this);
+		view.getBn_log_out().addActionListener(this);
 	}
 
 	// Listener
@@ -39,7 +40,7 @@ public class ProfileController implements ActionListener {
 		}else if (e.getSource().equals(view.getBn_change_password())){
 			new changePass();
 		}else if (e.getSource().equals(view.getBn_log_out())){
-
+			model.loadLogin();
 		}
 	}
 
