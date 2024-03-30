@@ -87,6 +87,6 @@ public class home_pageModel {
 	}
 
 	public void loadAdmin() {
-
+		
 	}
 }
