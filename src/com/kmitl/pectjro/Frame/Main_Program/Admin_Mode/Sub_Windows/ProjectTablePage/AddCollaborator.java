@@ -100,16 +100,18 @@ public class AddCollaborator implements DocumentListener, MouseListener, ActionL
 	}
 
 	public void searchUp(){
+		System.out.println(allPeople.size());
 		if (!search.getText().equals(search.getShouldbe()) && !search.getText().isEmpty()) {
 			findPeople.removeAll();
-
-			for (int i = 0; i < allPeople.size() && i < 10; i++){
+			int a = 0;
+			for (int i = 0; i < allPeople.size(); i++){
 				User_Template current = allPeople.get(i);
 				if ((current.username.toLowerCase().contains(search.getText().toLowerCase()) ||
 						current.firstname.toLowerCase().contains(search.getText().toLowerCase()) ||
-						current.gmail.toLowerCase().contains(search.getText().toLowerCase())) && !already.contains(current.id))  {
+						current.gmail.toLowerCase().contains(search.getText().toLowerCase())) && !already.contains(current.id) && a < 10)  {
 					UserBanner addNew = new UserBanner(current);
 					addNew.addMouseListener(this);
+					a++;
 					findPeople.add(addNew, new Constraints(0, i, 0, 0, GridBagConstraints.LINE_START, new Insets(0, 0, 0, 0)));
 				}
 			}

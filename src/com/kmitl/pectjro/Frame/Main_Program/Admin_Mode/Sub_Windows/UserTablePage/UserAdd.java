@@ -50,6 +50,7 @@ public class UserAdd implements DocumentListener, ActionListener {
 
         west_panel.add(new JLabel("Profile picture"), new Constraints(0, 0, 1, 1, GridBagConstraints.PAGE_END, new Insets(0, 20, 0, 20)));
 
+
         image = new Image_Resizer(new ImageIcon("resources/Images/aunkung.jpeg"), 125, 125);
         west_panel.add(image, new Constraints(0, 1, 1, 0, new Insets(20, 20, 20, 20)));
 
@@ -161,10 +162,12 @@ public class UserAdd implements DocumentListener, ActionListener {
         } else if (e.getActionCommand().equals("Choose image")) {
             JFileChooser choose = new JFileChooser();
             FileNameExtensionFilter filter = new FileNameExtensionFilter(".IMAGE", "jpg", "gif", "png");
-            choose.addChoosableFileFilter(filter);
+            choose.setFileFilter(filter);
             if (choose.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
                 path = choose.getSelectedFile().getAbsolutePath();
                 image.setImage(new ImageIcon(path));
+                image.revalidate();
+                image.repaint();
             }
         }
     }
