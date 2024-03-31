@@ -55,7 +55,7 @@ public class home_page implements View_Getter, MouseListener {
         ImageIcon ic_profile = new ImageIcon(tmp_profile);
         //im_task = new ImageIcon("resources/Images/task.png").getImage();
 
-        bn_task = new JButton("Task");
+        bn_task = new JButton("Home");
         bn_calendar = new JButton("Calendar");
         bn_appraisement = new JButton("Stats");
         bn_admin = new JButton("Admin");
