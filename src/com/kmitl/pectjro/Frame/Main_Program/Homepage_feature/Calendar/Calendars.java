@@ -1,21 +1,28 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Calendar;
 
+import com.kmitl.pectjro.Frame.Templates.Project_Template;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
+import java.time.ZoneOffset;
 import java.util.*;
 
 public class Calendars implements ActionListener {
     private JPanel frame;
     private JButton left, right, previousMonth, nextMonth;
-    private JPanel pn, calendarPanel, p_left, p_right, changepanel;
+    private JPanel pn, calendarPanel, p_left, p_right, changepanel, teadline;
     private Calendar cal;
     private JLabel label, monthLb, dayLabel, numberLabel, spaceLabel;
     private int month, year, daysInMonth, firstDayOfWeek;
     private String[] weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     private JTextArea ta;
+    private ArrayList<Project_Template> pt;
 
     public JPanel getFrame() {
         return frame;
@@ -107,6 +114,7 @@ public class Calendars implements ActionListener {
             dayLabel = new JLabel(weekday, SwingConstants.CENTER);
             dayLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
             calendarPanel.add(dayLabel);
+
         }
 
         // Add empty labels for the days before the first day of the month
@@ -114,19 +122,41 @@ public class Calendars implements ActionListener {
             spaceLabel = new JLabel("");
             spaceLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
             calendarPanel.add(spaceLabel);
+
         }
 
         // Add JTextArea for each day of the month
-        for (int day = 1; day <= daysInMonth; day++) {
+        for (int day = 1; day < daysInMonth; day++) {
             changepanel = new JPanel();
             numberLabel = new JLabel(Integer.toString(day));
             changepanel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
             changepanel.add(numberLabel);
-            calendarPanel.add(changepanel);
+            calendarPanel.add(changepanel, BorderLayout.NORTH);
+            SimpleDateFormat dfm = new SimpleDateFormat("MM yyyy");
+            String rfm = dfm.format(cal.getTime())+" "+day;
+            if(rfm.equals(dfm.format(cal.getTime())+" "+3)){
+                teadline = new JPanel();
+                teadline.setBackground(Color.red);
+                changepanel.add(teadline, BorderLayout.CENTER);
+
+
+            }
+
+//            if((LocalDate.of(year, month, day)).equals((LocalDate.of(year, month, 01)))){
+//                changepanel.setBackground(Color.cyan);
+//                changepanel = new JPanel();
+//                numberLabel = new JLabel(Integer.toString(day));
+//                changepanel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+//                changepanel.add(numberLabel);
+//                calendarPanel.add(changepanel);
+//            }
+
+
+
         }
 
         // Set the month label
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM yyyy");
         monthLb.setText(sdf.format(cal.getTime()));
 
         // Repaint the calendar panel
