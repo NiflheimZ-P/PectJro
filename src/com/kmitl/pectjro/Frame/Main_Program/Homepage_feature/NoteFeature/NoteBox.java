@@ -1,13 +1,9 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature;
 
-<<<<<<< HEAD
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
-=======
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
-import com.kmitl.pectjro.Frame.Templates.Project_Template;
->>>>>>> 9a8f44427b0346874028f370c16d17e46867dbb8
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
