@@ -35,9 +35,8 @@ public class NoteTable {
         sql.executeUpdate();
     }
 
-    public void UpdateNote(String note, int id) throws SQLException, FileNotFoundException {
-
-
+    public void UpdateNote(String name, String note, int id) throws SQLException, FileNotFoundException {
+        String sql = String.format("UPDATE Note_info SET Name = '%s', Note = '%s' WHERE Id = %s;", name, note, id);
+        updateNote(sql);
     }
-
 }

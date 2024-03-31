@@ -11,9 +11,6 @@ public class Task {
     private JButton ref, create_pro;
     private JScrollPane scroll;
     private project_progressbar pro_pro;
-    public JPanel getFrame() {
-        return fr;
-    }
 
 
     public Task(){

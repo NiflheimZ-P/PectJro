@@ -20,6 +20,9 @@ public class home_page implements View_Getter, MouseListener {
     private JLabel l1, l3, l4;
 
 
+    public JTextField getTf_seach_bar() {
+        return tf_seach_bar;
+    }
 
     public home_page(){
         //set up
@@ -160,6 +163,10 @@ public class home_page implements View_Getter, MouseListener {
         bn_admin.setPreferredSize(new Dimension(80,35));
             //Label
         l4.setForeground(new Color(88,101,242));
+
+        bn_task.addMouseListener(this);
+        bn_calendar.addMouseListener(this);
+        bn_appraisement.addMouseListener(this);
     }
 
     @Override
@@ -184,12 +191,30 @@ public class home_page implements View_Getter, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if (e.getSource().equals(bn_task)) {
+            bn_task.setBackground(new Color(88,101,242));
+            bn_task.setForeground(Color.black);
+        } else if (e.getSource().equals(bn_calendar)){
+            bn_calendar.setBackground(new Color(88,101,242));
+            bn_calendar.setForeground(Color.black);
+        } else if (e.getSource().equals(bn_appraisement)){
+            bn_appraisement.setBackground(new Color(88,101,242));
+            bn_appraisement.setForeground(Color.black);
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        if (e.getSource().equals(bn_task)) {
+            bn_task.setBackground(new Color(43,45,49));
+            bn_task.setForeground(Color.white);
+        } else if (e.getSource().equals(bn_calendar)){
+            bn_calendar.setBackground(new Color(43,45,49));
+            bn_calendar.setForeground(Color.white);
+        } else if (e.getSource().equals(bn_appraisement)){
+            bn_appraisement.setBackground(new Color(43,45,49));
+            bn_appraisement.setForeground(Color.white);
+        }
     }
 
     // Accessor

@@ -3,7 +3,14 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
+<<<<<<< Updated upstream
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
+=======
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
+import com.kmitl.pectjro.Frame.Templates.Note_Template;
+>>>>>>> Stashed changes
+import com.kmitl.pectjro.Frame.Templates.Project_Template;
+
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -22,6 +29,7 @@ public class NoteBox extends JPanel implements MouseListener, ActionListener {
     private JButton noteb;
     private Note note;
     private project_progressbar pro_pro;
+    private Note_Template note_info;
 
     //private Task task;
     //private TaskController tskc;
@@ -33,6 +41,7 @@ public class NoteBox extends JPanel implements MouseListener, ActionListener {
         west_mar = new JPanel();
         south_mar = new JPanel();
         mid_fsouth = new JPanel();
+        this.note_info = note_info;
 
         //Label
 
@@ -79,8 +88,8 @@ public class NoteBox extends JPanel implements MouseListener, ActionListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().equals(pl)){
-            note = new Note();
-            note.getSave().addActionListener(this);
+//            note = new Note(note_info);
+//            note.getSave().addActionListener(this);
         }
 
     }
@@ -110,7 +119,12 @@ public class NoteBox extends JPanel implements MouseListener, ActionListener {
         if (e.getSource().equals(note.getSave())){
             this.name.setText(note.getTextField().getText());
             note.getFr().setTitle(note.getTextField().getText());
-            
+
+            Connection con = DBConnect.createConnect();
+            NoteTable notetab = new NoteTable(con);
+//            try{
+//                notetab.UpdateNote(note.getFr().getTitle(), note.getTextArea().getText());
+//            }catch ()
         }
     }
 //    public void loadData() {
