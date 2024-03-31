@@ -195,7 +195,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         rend.setShadowYOffset( 0 );
         rend.setShadowPaint( Color.decode( "#C0C0C0"));
         rend.setMaximumBarWidth( 0.1);
-        
+
         theme.apply(chart);
 
         // add

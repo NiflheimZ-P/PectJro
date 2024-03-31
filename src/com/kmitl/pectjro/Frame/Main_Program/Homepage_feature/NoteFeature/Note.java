@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class Note implements ActionListener{
+public class Note{
     private NoteTable nt;
     private JFrame fr;
     private JTextArea textArea;
@@ -21,6 +21,22 @@ public class Note implements ActionListener{
 
     public JTextArea getTextArea() {
         return textArea;
+    }
+
+    public JFrame getFr() {
+        return fr;
+    }
+
+    public JTextField getTextField() {
+        return textField;
+    }
+
+    public JMenuItem getReset() {
+        return reset;
+    }
+
+    public JMenuItem getSave() {
+        return save;
     }
 
     public Note() {
@@ -38,7 +54,6 @@ public class Note implements ActionListener{
         fr.setJMenuBar(m);
         m.add(edit);
 
-        save.addActionListener(this);
         edit.add(save);
         edit.add(reset);
 
@@ -63,14 +78,6 @@ public class Note implements ActionListener{
         UIManager.setLookAndFeel( new FlatMacDarkLaf() );
         SwingUtilities.invokeLater(() -> {new Note();});
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(save)) {
-            String text1 = textArea.getText();
-            String sql = String.format("INSERT INTO Note_info (Note) VALUES ('%s');", text1);
-
-        }
 
 
 //package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
@@ -156,8 +163,6 @@ public class Note implements ActionListener{
 //    }
 
     }
-}
-
 //
 //}
 
