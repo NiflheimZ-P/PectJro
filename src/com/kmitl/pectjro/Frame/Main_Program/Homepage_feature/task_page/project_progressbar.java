@@ -1,6 +1,8 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.kmitl.pectjro.Database.Connection.DBConnect;
+import com.kmitl.pectjro.Database.DatabaseTable.StepTable;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NewTaskGanttChart;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.AllNote;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.feedback;
@@ -17,11 +19,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RectangularShape;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.Date;
+import java.util.LinkedList;
 
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
+import com.kmitl.pectjro.Frame.Templates.Step_Template;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -47,6 +53,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
     private ChartPanel chartPanel;
     private TaskSeriesCollection dataset;
     private TaskSeries expected;
+    private LinkedList<Step_Template> allStep;
     public project_progressbar(Project_Template info, Container owner){
         fr = new JFrame();
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -166,10 +173,9 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         //set fr
         fr.add(upper_pmain, BorderLayout.NORTH);
         fr.add(psouth_main, BorderLayout.SOUTH);
-        fr.setLocationRelativeTo(null);
         fr.setResizable(false);
-        fr.setVisible(true);
         fr.setSize(1000, 600);
+        fr.setLocationRelativeTo(owner);
 
         JFreeChart chart = ChartFactory.createGanttChart(info.name, "Development", "Time", createDataset(),
                 true, true, true);
@@ -181,7 +187,6 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 400));
 
         StandardChartTheme theme = (StandardChartTheme) org.jfree.chart.StandardChartTheme.createJFreeTheme();
-<<<<<<< Updated upstream:src/com/kmitl/pectjro/Frame/Main_Program/Homepage_feature/task_page/project_progressbar.java
         theme.setRegularFont(new Font("Sans", Font.BOLD, 12));
 
         theme.setChartBackgroundPaint(new Color(43,45,49));
@@ -195,7 +200,6 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         theme.setShadowPaint(Color.DARK_GRAY);
         theme.setRangeGridlinePaint(Color.white);
         theme.setTitlePaint(new Color(88,101,242));
-=======
         theme.setChartBackgroundPaint(new Color(0, 0, 0, 0));
         theme.setRegularFont(new Font("Sansserif", Font.BOLD, 12));
 //      theme.setLegendBackgroundPaint(new Color(255, 255, 255, 125));
@@ -203,7 +207,6 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         theme.setLegendItemPaint(new Color(0, 0, 0));
         theme.setPlotOutlinePaint(new Color(0, 0, 0, 0));
         theme.setTitlePaint(Color.WHITE);
->>>>>>> Stashed changes:src/com/kmitl/pectjro/Frame/Main_Program/Homepage_feature/project_progressbar.java
 
         theme.setBarPainter(new StandardBarPainter());
 
@@ -217,7 +220,6 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         theme.apply(chart);
 
         // add
-        fr.setLocationRelativeTo(owner);
         fr.add(chartPanel, BorderLayout.CENTER);
     }
 
@@ -233,7 +235,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
 
     public void actionPerformed(ActionEvent ev){
         if(ev.getSource().equals(add_bn)){
-            newtgc = new NewTaskGanttChart();
+            newtgc = new NewTaskGanttChart(fr);
             newtgc.getB_create().addActionListener(this);
         }
         else if(ev.getSource().equals(bn_add_mem)){
@@ -246,5 +248,27 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         }else if (ev.getSource().equals(newtgc.getB_create())){
             expected.add(new Task(newtgc.getProjectname().getText(), Date.from(newtgc.getD1().getDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(newtgc.getD2().getDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
         }
+    }
+
+    public void loadStep() throws SQLException {
+        Connection con = DBConnect.createConnect();
+        StepTable step = new StepTable(con);
+        allStep = step.getAllStep(info.id);
+    }
+
+    public void setUpChart() {
+        for (Step_Template i: allStep) {
+            expected.add(new Task(i.step_name, Date.from(i.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(i.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
+        }
+    }
+
+    // Accessor
+
+    public JFrame getFr() {
+        return fr;
+    }
+
+    public void setFr(JFrame fr) {
+        this.fr = fr;
     }
 }

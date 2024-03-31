@@ -1,7 +1,9 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
+import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
+import com.kmitl.pectjro.Main;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -16,6 +18,7 @@ public class task_select extends JPanel implements MouseListener {
     private JLabel name, desc, start, end;
     private Project_Template info;
     private TaskController controller;
+    private project_progressbar newone;
 
     public task_select(Project_Template info, TaskController controller){
         this.controller = controller;
@@ -58,7 +61,27 @@ public class task_select extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().equals(this)){
-            new project_progressbar(info);
+            SwingWorker<Void, Void> load = new SwingWorker<Void, Void>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    MainController.glassPane.setVisible(true);
+                    MainController.glassPane.setLoading(true);
+
+                    newone = new project_progressbar(info, controller.getHead_control().getMain_controller().getView().getFrame());
+                    newone.loadStep();
+                    newone.setUpChart();
+                    return null;
+                }
+
+                @Override
+                protected void done(){
+                    newone.getFr().setVisible(true);
+
+                    MainController.glassPane.setVisible(false);
+                    MainController.glassPane.setLoading(false);
+                }
+            };
+            load.execute();
         }
 
     }

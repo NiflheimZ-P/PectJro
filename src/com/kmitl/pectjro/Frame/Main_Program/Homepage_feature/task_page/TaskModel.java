@@ -29,13 +29,15 @@ public class TaskModel {
 		view.getPl().removeAll();
 		for (int i = 0; i < info.size(); i++){
 			if (i != info.size() - 1) {
-				view.getPl().add(new task_select(info.get(i)),
+				view.getPl().add(new task_select(info.get(i), controller),
 						new Constraints(0, i, 0, 0, new Insets(0, 0, 30, 0)));
 			} else {
-				view.getPl().add(new task_select(info.get(i)),
+				view.getPl().add(new task_select(info.get(i), controller),
 						new Constraints(0, i, 1, 1, GridBagConstraints.PAGE_START, new Insets(0, 0, 0, 0)));
 			}
 		}
+		view.getFr().revalidate();
+		view.getFr().repaint();
 	}
 
 	public void addProject(Project_Template newProject) {
@@ -48,7 +50,7 @@ public class TaskModel {
 				ProjectTable pro = new ProjectTable(con);
 				pro.addProjectData(controller.getHead_control().getCache().id, newProject.name, newProject.description, newProject.start, newProject.end);
 
-				controller.getHead_control().setProjectIn(pro.getProjectData());
+				controller.getHead_control().getModel().getProject();
 				return null;
 			}
 

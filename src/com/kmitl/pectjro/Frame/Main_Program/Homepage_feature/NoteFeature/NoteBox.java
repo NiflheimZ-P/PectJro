@@ -3,12 +3,9 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
-<<<<<<< Updated upstream
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
-=======
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
 import com.kmitl.pectjro.Frame.Templates.Note_Template;
->>>>>>> Stashed changes
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 
 

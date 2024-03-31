@@ -24,7 +24,7 @@ public class NewTaskGanttChart  {
     private JLabel l1, l2, l3, l4;
     private JInfoGet projectname;
     private DatePicker d1, d2;
-    public NewTaskGanttChart(){
+    public NewTaskGanttChart(Container owner){
 
 
         fr = new JDialog();
@@ -139,8 +139,8 @@ public class NewTaskGanttChart  {
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         fr.setResizable(false);
         fr.setSize(600,300);
+        fr.setLocationRelativeTo(owner);
         fr.setVisible(true);
-        fr.setLocation(400,200);
     }
 
     public JButton getB_create() {
@@ -157,9 +157,5 @@ public class NewTaskGanttChart  {
 
     public DatePicker getD2() {
         return d2;
-    }
-
-    public static void main(String[] args) {
-        new NewTaskGanttChart();
     }
 }
