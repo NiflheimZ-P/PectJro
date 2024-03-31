@@ -73,7 +73,7 @@ public class TaskModel {
 
 				Connection con = DBConnect.createConnect();
 				ProjectTable pro = new ProjectTable(con);
-				controller.getHead_control().setProjectIn(pro.getProjectData());
+				controller.getHead_control().getModel().getProject();
 
 				return null;
 			}

@@ -1,7 +1,9 @@
-package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
+package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NewTaskGanttChart;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.AllNote;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.feedback;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.Addpeople;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 
@@ -45,7 +47,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
     private ChartPanel chartPanel;
     private TaskSeriesCollection dataset;
     private TaskSeries expected;
-    public project_progressbar(String applicationTitle, String chartTitle, Project_Template info){
+    public project_progressbar(Project_Template info){
         fr = new JFrame();
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.info = info;
@@ -169,7 +171,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         fr.setVisible(true);
         fr.setSize(1000, 600);
 
-        JFreeChart chart = ChartFactory.createGanttChart(chartTitle, "Development", "Time", createDataset(),
+        JFreeChart chart = ChartFactory.createGanttChart(info.name, "Development", "Time", createDataset(),
                 true, true, true);
 
         // เพิ่ม chart เข้า chart panel

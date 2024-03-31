@@ -1,6 +1,5 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 
@@ -8,12 +7,9 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import static java.awt.SystemColor.info;
 
 public class task_select extends JPanel implements MouseListener {
     private JPanel pforname, south_mar;
@@ -61,7 +57,7 @@ public class task_select extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().equals(this)){
-            new project_progressbar("Gnatt Chart", name.getText(), info);
+            new project_progressbar(info);
         }
 
     }

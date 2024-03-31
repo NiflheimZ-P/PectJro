@@ -1,11 +1,8 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
