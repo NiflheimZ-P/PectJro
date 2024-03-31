@@ -20,6 +20,9 @@ public class home_page implements View_Getter, MouseListener {
     private JLabel l1, l3, l4;
 
 
+    public JTextField getTf_seach_bar() {
+        return tf_seach_bar;
+    }
 
     public home_page(){
         //set up

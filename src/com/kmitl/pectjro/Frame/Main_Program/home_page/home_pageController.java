@@ -12,18 +12,21 @@ import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class home_pageController implements MainPage_Controller, ActionListener {
+public class home_pageController implements MainPage_Controller, ActionListener, DocumentListener {
 	// Attribute
 	private home_page view;
 	private home_pageModel model;
 	private MainController main_controller;
 	private User_Template cache;
 	private ArrayList<Project_Template> projectIn;
+
 	CardLayout page = new CardLayout();
 	private Stats stats;
 	private ProfileController profile;
@@ -46,7 +49,7 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 		view.getCenter_part().setLayout(page);
 
 		//add to centerPart
-		view.getCenter_part().add(task.getView().getFrame(), "0");
+		view.getCenter_part().add(task.getView().getFr(), "0");
 		view.getCenter_part().add(calen.getView().getFrame(), "1");
 		view.getCenter_part().add(stats.getFrame(),"2");
 		view.getCenter_part().add(profile.getView().getFr(), "3");
@@ -56,6 +59,8 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 		view.getBn_calendar().addActionListener(this);
 		view.getBn_profile().addActionListener(this);
 		view.getBn_admin().addActionListener(this);
+
+		view.getTf_seach_bar().getDocument().addDocumentListener(this);
 	}
 
 	// Listener
@@ -142,4 +147,42 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 		return view;
 	}
 
+	@Override
+	public void insertUpdate(DocumentEvent e) {
+		ArrayList<Project_Template> check = new ArrayList<>();
+		for (int i = 0; i < projectIn.size(); i++){
+			if (projectIn.get(i).name.contains(view.getTf_seach_bar().getText())){
+				check.add(projectIn.get(i));
+			}
+		}
+		task.getModel().loadProject(check);
+		task.getView().getFr().revalidate();
+		task.getView().getFr().repaint();
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent e) {
+		ArrayList<Project_Template> check = new ArrayList<>();
+		for (int i = 0; i < projectIn.size(); i++){
+			if (projectIn.get(i).name.contains(view.getTf_seach_bar().getText())){
+				check.add(projectIn.get(i));
+			}
+		}
+		task.getModel().loadProject(check);
+		task.getView().getFr().revalidate();
+		task.getView().getFr().repaint();
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+		ArrayList<Project_Template> check = new ArrayList<>();
+		for (int i = 0; i < projectIn.size(); i++){
+			if (projectIn.get(i).name.contains(view.getTf_seach_bar().getText())){
+				check.add(projectIn.get(i));
+			}
+		}
+		task.getModel().loadProject(check);
+		task.getView().getFr().revalidate();
+		task.getView().getFr().repaint();
+	}
 }

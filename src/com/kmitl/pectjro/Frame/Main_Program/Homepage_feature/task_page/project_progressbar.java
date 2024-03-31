@@ -181,6 +181,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 400));
 
         StandardChartTheme theme = (StandardChartTheme) org.jfree.chart.StandardChartTheme.createJFreeTheme();
+<<<<<<< Updated upstream:src/com/kmitl/pectjro/Frame/Main_Program/Homepage_feature/task_page/project_progressbar.java
         theme.setRegularFont(new Font("Sans", Font.BOLD, 12));
 
         theme.setChartBackgroundPaint(new Color(43,45,49));
@@ -194,6 +195,15 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         theme.setShadowPaint(Color.DARK_GRAY);
         theme.setRangeGridlinePaint(Color.white);
         theme.setTitlePaint(new Color(88,101,242));
+=======
+        theme.setChartBackgroundPaint(new Color(0, 0, 0, 0));
+        theme.setRegularFont(new Font("Sansserif", Font.BOLD, 12));
+//      theme.setLegendBackgroundPaint(new Color(255, 255, 255, 125));
+        theme.setPlotBackgroundPaint(new Color(0, 0, 0, 0));
+        theme.setLegendItemPaint(new Color(0, 0, 0));
+        theme.setPlotOutlinePaint(new Color(0, 0, 0, 0));
+        theme.setTitlePaint(Color.WHITE);
+>>>>>>> Stashed changes:src/com/kmitl/pectjro/Frame/Main_Program/Homepage_feature/project_progressbar.java
 
         theme.setBarPainter(new StandardBarPainter());
 
