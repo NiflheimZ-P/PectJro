@@ -143,6 +143,14 @@ public class NewTaskGanttChart  {
         fr.setLocation(400,200);
     }
 
+    public JButton getB_create() {
+        return b_create;
+    }
+
+    public JInfoGet getProjectname() {
+        return projectname;
+    }
+
     public static void main(String[] args) {
         new NewTaskGanttChart();
     }

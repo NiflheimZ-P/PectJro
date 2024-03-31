@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import static java.awt.SystemColor.info;
+
 public class task_select extends JPanel implements MouseListener {
     private JPanel pl, pforname, west_mar, south_mar, mid_fsouth;
     private JLabel name, desc, start, end;
@@ -16,6 +18,7 @@ public class task_select extends JPanel implements MouseListener {
 
     private Task task;
     private TaskController tskc;
+    private Project_Template info;
 
     public task_select(Project_Template info){
         pl = new JPanel();
@@ -23,6 +26,7 @@ public class task_select extends JPanel implements MouseListener {
         west_mar = new JPanel();
         south_mar = new JPanel();
         mid_fsouth = new JPanel();
+        this.info = info;
 
         //Label
 
@@ -67,7 +71,7 @@ public class task_select extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().equals(pl)){
-            new project_progressbar("Gnatt Chart", name.getText());
+            new project_progressbar("Gnatt Chart", name.getText(), info);
         }
 
     }

@@ -3,6 +3,7 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.AllNote;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.Addpeople;
+import com.kmitl.pectjro.Frame.Templates.Project_Template;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,8 @@ import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.Date;
 
+import com.kmitl.pectjro.Frame.Templates.Project_Template;
+import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -29,10 +32,13 @@ public class project_progressbar extends JFrame implements ActionListener {
     private JPanel upper_pmain, upper_west, upper_west_rpart, pane_for_note, panefor_close, logo_lmar, mini_west_rpart, mid_mar_rpart, psouth_main, psouth_move, psouth_add, psouth_midmar, note_bn;
     private JLabel pro_pic, team_label, pro_name_label;
     private JButton close_bn, add_bn, lmove_arrow, bn_finish, bn_add_mem;
+    private NewTaskGanttChart newtgc;
     private static final long serialVersionUID = 1L;
-    public project_progressbar(String applicationTitle, String chartTitle){
+    private Project_Template info;
+    public project_progressbar(String applicationTitle, String chartTitle, Project_Template info){
         fr = new JFrame();
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.info = info;
 
         //Label
         //pro_pic = new JLabel("Project pic");
@@ -144,6 +150,7 @@ public class project_progressbar extends JFrame implements ActionListener {
         close_bn.addActionListener(this);
         bn_finish.addActionListener(this);
 
+
         //set fr
         fr.add(upper_pmain, BorderLayout.NORTH);
         fr.add(psouth_main, BorderLayout.SOUTH);
@@ -169,55 +176,41 @@ public class project_progressbar extends JFrame implements ActionListener {
 
         TaskSeriesCollection dataset = new TaskSeriesCollection();
         TaskSeries expected = new TaskSeries("Expected Date");
-        expected.add(new Task("Analysis", Date.from(LocalDate.of(2018, 9, 5).atStartOfDay().toInstant(ZoneOffset.UTC)),
-                Date.from(LocalDate.of(2018, 9, 8).atStartOfDay().toInstant(ZoneOffset.UTC))));
+        expected.add(new Task("Analysis", Date.from(info.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(info.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
 
-        expected.add(new Task("Design", Date.from(LocalDate.of(2018, 9, 12).atStartOfDay().toInstant(ZoneOffset.UTC)),
-                Date.from(LocalDate.of(2018, 9, 16).atStartOfDay().toInstant(ZoneOffset.UTC))));
+        expected.add(new Task("Design", Date.from(info.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(info.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
 
-        expected.add(
-                new Task("Development", Date.from(LocalDate.of(2018, 9, 19).atStartOfDay().toInstant(ZoneOffset.UTC)),
-                        Date.from(LocalDate.of(2018, 9, 23).atStartOfDay().toInstant(ZoneOffset.UTC))));
+        expected.add(new Task("Development", Date.from(info.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(info.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
 
-        expected.add(new Task("Testing", Date.from(LocalDate.of(2018, 9, 26).atStartOfDay().toInstant(ZoneOffset.UTC)),
-                Date.from(LocalDate.of(2018, 9, 29).atStartOfDay().toInstant(ZoneOffset.UTC))));
+        expected.add(new Task("Testing", Date.from(info.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(info.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
 
         dataset.add(expected);
 
-        TaskSeries actual = new TaskSeries("Actual Date");
-        actual.add(
-                new Task("Analysis", Date.from(LocalDate.of(2018, 9, 5).atStartOfDay().toInstant(ZoneOffset.UTC)),
-                        Date.from(LocalDate.of(2018, 9, 7).atStartOfDay().toInstant(ZoneOffset.UTC))));
+        for (RecipeDates data : recipeDateList){
+            TaskSeries taskSeries = new TaskSeries(dates.name);
+            dataset<>
+        }
 
-        actual.add(new Task("Design", Date.from(LocalDate.of(2018, 9, 8).atStartOfDay().toInstant(ZoneOffset.UTC)),
-                Date.from(LocalDate.of(2018, 9, 19).atStartOfDay().toInstant(ZoneOffset.UTC))));
-
-        actual.add(new Task("Development", Date.from(LocalDate.of(2018, 9, 20).atStartOfDay().toInstant(ZoneOffset.UTC)),
-                Date.from(LocalDate.of(2018, 9, 28).atStartOfDay().toInstant(ZoneOffset.UTC))));
-
-        actual.add(new Task("Testing", Date.from(LocalDate.of(2018, 9, 28).atStartOfDay().toInstant(ZoneOffset.UTC)),
-                Date.from(LocalDate.of(2018, 10, 3).atStartOfDay().toInstant(ZoneOffset.UTC))));
-        dataset.add(actual);
         return dataset;
-
     }
     public void actionPerformed(ActionEvent ev){
         if(ev.getSource().equals(add_bn)){
-            new NewTaskGanttChart();
+            newtgc = new NewTaskGanttChart();
+            newtgc.getB_create().addActionListener(this);
         }
         else if(ev.getSource().equals(bn_add_mem)){
             new Addpeople();
         } else if(ev.getSource().equals(bn_finish)){
             new feedback();
+            fr.dispose();
         }else if (ev.getSource().equals((close_bn))){
             new AllNote();
+        }else if (ev.getSource().equals(newtgc.getB_create())){
+            CreateExpectedTask(newtgc.getProjectname().getText());
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        UIManager.setLookAndFeel(new FlatMacDarkLaf());
-        SwingUtilities.invokeLater(() -> {new project_progressbar("Gnatt Chart", "Your Task Progress");
-        });
-    }
+    public void CreateExpectedTask(String task){
 
+    }
 }
