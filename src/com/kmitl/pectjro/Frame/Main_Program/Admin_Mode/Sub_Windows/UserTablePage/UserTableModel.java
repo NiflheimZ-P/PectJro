@@ -79,7 +79,7 @@ public class UserTableModel implements Admin_Table_Model {
 		view.getModel().setRowCount(0);
 		for (int i = 0; i < controller.getUserData().size(); i++) {
 			User_Template user = controller.getUserData().get(i);
-			Object[] info = {user.id, user.username, user.gmail, user.password, user.firstname, user.lastname, user.project_done, user.project_expired, user.project_ontime, user.admin};
+			Object[] info = {user.id, user.username, user.gmail, user.firstname, user.lastname, user.project_done, user.project_expired, user.project_ontime, user.admin};
 			view.getModel().addRow(info);
 		}
 		view.repaint();
@@ -91,11 +91,9 @@ public class UserTableModel implements Admin_Table_Model {
 		for (User_Template i : controller.getUserData()){
 			if (String.valueOf(i.id).contains(word) || i.username.toLowerCase().contains(word) || i.gmail.toLowerCase().contains(word) ||
 					i.firstname.toLowerCase().contains(word) || i.lastname.toLowerCase().contains(word)){
-				Object[] info = {i.id, i.username, i.gmail, i.password, i.firstname, i.lastname, i.project_done, i.project_expired, i.project_ontime, i.admin};
+				Object[] info = {i.id, i.username, i.gmail, i.firstname, i.lastname, i.project_done, i.project_expired, i.project_ontime, i.admin};
 				view.getModel().addRow(info);
 			}
 		}
 	}
-
-	// Accessor
 }

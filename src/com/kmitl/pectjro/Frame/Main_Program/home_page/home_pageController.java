@@ -5,7 +5,7 @@ import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Calendar.CalendarController;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile.ProfileController;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Stats;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.ProjectCreate;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.TaskController;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
@@ -25,7 +25,7 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 	private User_Template cache;
 	private ArrayList<Project_Template> projectIn;
 	CardLayout page = new CardLayout();
-	private Stats Statss;
+	private Stats stats;
 	private ProfileController profile;
 	private CalendarController calen;
 	private TaskController task;
@@ -37,7 +37,7 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 		this.main_controller = main_controller;
 
 		//feature create
-		Statss = new Stats();
+		stats = new Stats(this);
 		profile = new ProfileController(this);
 		calen = new CalendarController(this);
 		task = new TaskController(this);
@@ -48,10 +48,9 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 		//add to centerPart
 		view.getCenter_part().add(task.getView().getFrame(), "0");
 		view.getCenter_part().add(calen.getView().getFrame(), "1");
-		view.getCenter_part().add(Statss.getFrame(),"2");
+		view.getCenter_part().add(stats.getFrame(),"2");
 		view.getCenter_part().add(profile.getView().getFr(), "3");
 
-		view.getBn_new().addActionListener(this);
 		view.getBn_task().addActionListener(this);
 		view.getBn_appraisement().addActionListener(this);
 		view.getBn_calendar().addActionListener(this);
@@ -62,9 +61,7 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 	// Listener
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(view.getBn_new())){
-			new ProjectCreate();
-		}else if (e.getSource().equals(view.getBn_task())){
+		if (e.getSource().equals(view.getBn_task())){
 			page.show(view.getCenter_part(), "0");
 			view.getMain_panel().add(view.getPn_east(), BorderLayout.EAST);
 			view.getPaneforsearch().setVisible(true);
@@ -132,6 +129,12 @@ public class home_pageController implements MainPage_Controller, ActionListener 
 	}
 	public void setTask(TaskController task) {
 		this.task = task;
+	}
+	public Stats getStats() {
+		return stats;
+	}
+	public void setStats(Stats stats) {
+		this.stats = stats;
 	}
 
 	@Override

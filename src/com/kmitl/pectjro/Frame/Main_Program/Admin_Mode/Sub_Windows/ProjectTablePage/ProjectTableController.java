@@ -36,17 +36,20 @@ public class ProjectTableController implements ActionListener, DocumentListener 
 	public ProjectTableView getView() {
 		return view;
 	}
-
 	public ProjectTableModel getModel() {
 		return model;
 	}
-
 	public void setProjectInfo(ArrayList<Project_Template> project) {
 		this.projectInfo = project;
 	}
-
 	public ArrayList<Project_Template> getProjectInfo() {
 		return projectInfo;
+	}
+	public AdminController getHead_control() {
+		return head_control;
+	}
+	public void setHead_control(AdminController head_control) {
+		this.head_control = head_control;
 	}
 
 	// Listener

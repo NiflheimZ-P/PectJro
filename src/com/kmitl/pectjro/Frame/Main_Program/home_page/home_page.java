@@ -16,7 +16,7 @@ public class home_page implements View_Getter, MouseListener {
             s_mar_search, center_part;
     private JTextField tf_seach_bar;
     private Image im_program, im_profile;
-    private JButton bn_task, bn_calendar, bn_appraisement, bn_new, bn_admin, bn_profile;
+    private JButton bn_task, bn_calendar, bn_appraisement, bn_admin, bn_profile;
     private JLabel l1, l3, l4;
 
 
@@ -53,7 +53,6 @@ public class home_page implements View_Getter, MouseListener {
         bn_task = new JButton("Task");
         bn_calendar = new JButton("Calendar");
         bn_appraisement = new JButton("Stats");
-        bn_new = new JButton("+");
         bn_admin = new JButton("Admin");
         bn_profile = new JButton();
 
@@ -129,7 +128,6 @@ public class home_page implements View_Getter, MouseListener {
         //button (+) at bottom right of corner and right part (pn_east)
         ps_mar_pmain.setLayout(new FlowLayout(2, 30,25));
         //main_panel.add(pn_east, BorderLayout.EAST);
-        bn_new.setPreferredSize(new Dimension(40,40));
        // ps_mar_pmain.add(bn_new);
         //pn_east.setLayout(new BorderLayout());
         //pn_east.add(ps_mar_pmain, BorderLayout.SOUTH);
@@ -159,7 +157,6 @@ public class home_page implements View_Getter, MouseListener {
         bn_task.setForeground(Color.white); bn_task.setBackground(new Color(43,45,49));
         bn_calendar.setForeground(Color.white); bn_calendar.setBackground(new Color(43,45,49));
         bn_appraisement.setForeground(Color.white); bn_appraisement.setBackground(new Color(43,45,49));
-        bn_new.setForeground(Color.white) ; bn_new.setBackground(new Color(43,45,49));
         bn_admin.setPreferredSize(new Dimension(80,35));
             //Label
         l4.setForeground(new Color(88,101,242));
@@ -231,12 +228,6 @@ public class home_page implements View_Getter, MouseListener {
     }
     public void setBn_appraisement(JButton bn_appraisement) {
         this.bn_appraisement = bn_appraisement;
-    }
-    public JButton getBn_new() {
-        return bn_new;
-    }
-    public void setBn_new(JButton bn_new) {
-        this.bn_new = bn_new;
     }
     public JButton getBn_admin() {
         return bn_admin;

@@ -16,7 +16,7 @@ public class UserTableView extends Table_Page {
     public UserTableView() {
         super(1100, 500);
         this.setTitle("User Data");
-        String[] columns = {"Id", "Username", "Gmail", "Password", "Firstname", "Lastname", "Project_Done", "Project_Expired", "Project_Ontime", "Admin"};
+        String[] columns = {"Id", "Username", "Gmail", "Firstname", "Lastname", "Project_Done", "Project_Expired", "Project_Ontime", "Admin"};
         this.createTable(columns);
     }
 
@@ -31,14 +31,14 @@ public class UserTableView extends Table_Page {
         table = new JTable() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return (column == 6 || column == 7 || column == 8 || column == 9);
+                return (column == 5 || column == 6 || column == 7 || column == 8);
             }
 
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return switch (columnIndex) {
-                    case 0, 6, 7, 8 -> Integer.class;
-                    case 9 -> Boolean.class;
+                    case 0, 5, 6, 7 -> Integer.class;
+                    case 8 -> Boolean.class;
                     default -> String.class;
                 };
             }

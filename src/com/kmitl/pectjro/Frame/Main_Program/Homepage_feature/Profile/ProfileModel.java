@@ -62,6 +62,7 @@ public class ProfileModel {
 			protected void done() {
 				try {
 					if (get()) {
+						controller.getHead_control().getStats().setImage(new ImageIcon(controller.getHead_control().getCache().image));
 						controller.getHead_control().getView().getBn_profile().setIcon(new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 						view.getIcon().setIcon(new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT)));
 					} else {

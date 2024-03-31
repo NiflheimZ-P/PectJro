@@ -1,8 +1,5 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile.Profile;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.ProjectCreate;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 
@@ -12,7 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class Task implements ActionListener {
+public class Task {
     private JPanel fr, p, margin_p,pl, pl_but;
     private JButton ref, create_pro;
     private JScrollPane scroll;
@@ -55,10 +52,10 @@ public class Task implements ActionListener {
         ref.setBackground(new Color(43,45,49));
         ref.setForeground(Color.white);
         fr.setBackground(new Color(49,51,56));
-        create_pro.addActionListener(this);
         pl.setBackground(new Color(49,51,56));
 
         pl.setBorder(new EmptyBorder(30, 30, 0, 10));
+        pl.setLayout(new GridBagLayout());
 
         margin_p.setBackground(new Color(49,51,56));
         margin_p.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
@@ -87,10 +84,12 @@ public class Task implements ActionListener {
         this.pl = pl;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(create_pro)){
-            new ProjectCreate();
-        }
+
+    // Accessor
+    public JButton getCreate_pro() {
+        return create_pro;
+    }
+    public void setCreate_pro(JButton create_pro) {
+        this.create_pro = create_pro;
     }
 }

@@ -1,4 +1,7 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
+import com.kmitl.pectjro.Frame.Main_Program.home_page.home_pageController;
+import com.kmitl.pectjro.Frame.Templates.User_Template;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -6,18 +9,17 @@ import java.awt.*;
 
 public class Stats {
     private JPanel pn;
-    private JPanel mainPanel, statsPanel, projectPanel, pn_north, pn_center, pn_center_2, pn_center_3;
-    private JLabel titleLabel, username, profile, l1, l2, l3;
+    private JPanel pn_north, pn_center, pn_center_2, pn_center_3;
+    private JLabel titleLabel, username, profile, l1, l2, l3, score_l1, score_l2, score_l3;
     private Image im_profile;
-    private JLabel userLabel;
-    private JLabel projectLabel;
-    private JComboBox<String> statusComboBox;
+    private home_pageController controller;
 
     public JPanel getFrame(){
         return pn;
     }
 
-    public Stats() {
+    public Stats(home_pageController controller) {
+        this.controller = controller;
         pn = new JPanel();
 
         pn_north = new JPanel();
@@ -64,7 +66,7 @@ public class Stats {
         pn_l1.setLayout(new FlowLayout(FlowLayout.RIGHT, 30, 30));
         pn_l1.setBorder(new LineBorder(new Color(30,31,34)));
         pn_l1.add(l1);
-        JLabel score_l1 = new JLabel("0");
+        score_l1 = new JLabel("0");
         pn_l1.add(score_l1);
         pn_center.add(pn_l1);
 
@@ -74,7 +76,7 @@ public class Stats {
         pn_l2.setLayout(new FlowLayout(FlowLayout.RIGHT, 30, 30));
         pn_l2.setBorder(new LineBorder(new Color(30,31,34)));
         pn_l2.add(l2);
-        JLabel score_l2 = new JLabel("0");
+        score_l2 = new JLabel("0");
         pn_l2.add(score_l2);
         pn_center_2.add(pn_l2);
 
@@ -84,7 +86,7 @@ public class Stats {
         pn_l3.setLayout(new FlowLayout(FlowLayout.RIGHT, 30, 30));
         pn_l3.setBorder(new LineBorder(new Color(30,31,34)));
         pn_l3.add(l3);
-        JLabel score_l3 = new JLabel("0");
+        score_l3 = new JLabel("0");
         pn_l3.add(score_l3);
         pn_center_3.add(pn_l3);
 
@@ -127,43 +129,19 @@ public class Stats {
         //pn.setResizable(false);
         pn.setVisible(true);
 
-
-
-        // pn = new JPanel();
-        // mainPanel = new JPanel(new BorderLayout());
-        // statsPanel = new JPanel(new GridLayout(3, 1));
-        // projectPanel = new JPanel(new GridLayout(3, 1));
-
-        // userLabel = new JLabel("Username: ");
-        // projectLabel = new JLabel("Project Status: ");
-        // titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        // titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-        // statusComboBox = new JComboBox<>();
-        // statusComboBox.addItem("Completed");
-        // statusComboBox.addItem("In Progress");
-        // statusComboBox.addItem("Incomplete");
-
-        // // Add components to the Panel
-        // statsPanel.add(titleLabel);
-        // statsPanel.add(userLabel);
-
-        // projectPanel.add(projectLabel);
-        // projectPanel.add(statusComboBox);
-
-        // mainPanel.add(statsPanel, BorderLayout.NORTH);
-        // mainPanel.add(projectPanel, BorderLayout.CENTER);
-
-        // pn.add(mainPanel);
-        // pn.setBackground(Color.CYAN);
-        // //pn.setResizable(false);
-        // pn.setSize(400, 300);
-        // pn.setVisible(true);
-
     }
 
-    public static void main(String[] args) {
-        new Stats();
+    // Methods
+    public void setImage(ImageIcon image) {
+        profile.setIcon(new ImageIcon(image.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+    }
+
+    public void setStats() {
+        setImage(new ImageIcon(controller.getCache().image));
+        username.setText(controller.getCache().username);
+        score_l1.setText(String.valueOf(controller.getCache().project_done));
+        score_l2.setText(String.valueOf(controller.getCache().project_ontime));
+        score_l3.setText(String.valueOf(controller.getCache().project_expired));
     }
 }
 

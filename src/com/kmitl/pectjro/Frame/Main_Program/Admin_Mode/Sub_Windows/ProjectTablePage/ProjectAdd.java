@@ -126,7 +126,7 @@ public class ProjectAdd implements ActionListener, DocumentListener, DateChangeL
 				protected Void doInBackground() throws Exception {
 					Connection con = DBConnect.createConnect();
 					ProjectTable project = new ProjectTable(con);
-					project.addProjectData(name.getText(), description.getText(), Date.valueOf(start.getDate()), Date.valueOf(end.getDate()));
+					project.addProjectData(controller.getHead_control().getMain_controller().getHome().getCache().id, name.getText(), description.getText(), Date.valueOf(start.getDate()), Date.valueOf(end.getDate()));
 					controller.getModel().loadData();
 					frame.dispose();
 					System.out.println("Done");

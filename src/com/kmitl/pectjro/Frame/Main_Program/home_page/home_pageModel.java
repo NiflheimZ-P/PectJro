@@ -55,7 +55,8 @@ public class home_pageModel {
 				loadCache();
 				getProject();
 
-				controller.getTask().getModel().loadProject();
+				controller.getTask().getModel().loadProject(controller.getProjectIn());
+				controller.getStats().setStats();
 
 				return checkAdmin();
 			}

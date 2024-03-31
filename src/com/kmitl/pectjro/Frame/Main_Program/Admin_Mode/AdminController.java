@@ -106,9 +106,13 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 				view.getView().add(projectTable.getView());
 				projectTable.getView().moveToFront();
 				projectTable.getModel().loadData();
+				System.out.println("in");
 			} else { projectTable.getView().toFront(); }
 		} else if (e.getSource().equals(admin_control.getExit())) {
-			main_controller.getModel().createHome();
+			int i = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
+			if (i == JOptionPane.YES_OPTION) {
+				main_controller.getModel().createHome();
+			}
 		}
 	}
 
@@ -147,5 +151,13 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 	@Override
 	public void internalFrameDeactivated(InternalFrameEvent e) {
 
+	}
+
+	// Accessor
+	public MainController getMain_controller() {
+		return main_controller;
+	}
+	public void setMain_controller(MainController main_controller) {
+		this.main_controller = main_controller;
 	}
 }

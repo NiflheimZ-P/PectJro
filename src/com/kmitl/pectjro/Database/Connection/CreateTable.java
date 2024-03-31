@@ -40,6 +40,7 @@ public class CreateTable {
         try{
             updateData("CREATE TABLE IF NOT EXISTS Project_info (" +
                     "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
+                    "Creator int NOT NULL," +
                     "Name VARCHAR(50) NOT NULL," +
                     "Description MEDIUMTEXT," +
                     "Start DATE NOT NULL," +

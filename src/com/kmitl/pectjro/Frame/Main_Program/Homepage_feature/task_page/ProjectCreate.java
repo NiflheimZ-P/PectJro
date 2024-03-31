@@ -1,4 +1,4 @@
-package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
+package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -10,22 +10,26 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
  */
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.github.lgooddatepicker.components.DatePicker;
+import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import com.kmitl.pectjro.Frame.Tools.LgoodDatePicker_Setting;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
 import javax.swing.*;
 
-public class ProjectCreate {
+public class ProjectCreate implements ActionListener {
     private JDialog fr;
     private JPanel p_main, p_zone1, p_zone2, p_zone11, p_zone12, p_zone21, p_zone22, p_zone23, p_zone221, p_zone222;
     private JButton b_create, b_back;
     private JLabel l1, l2, l3, l4, l5;
     private JInfoGet projectname, description;
     private DatePicker d1, d2;
-    public ProjectCreate(){
-
-
+    private TaskController controller;
+    public ProjectCreate(TaskController controller){
+        this.controller = controller;
         fr = new JDialog();
         p_main = new JPanel();
         p_zone1 = new JPanel();
@@ -136,16 +140,58 @@ public class ProjectCreate {
         l4.setFont(new Font("Sans", Font.PLAIN, 12));
         l4.setForeground(Color.white);
 
+        b_create.addActionListener(this);
+        b_back.addActionListener(this);
+
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         fr.setResizable(false);
         fr.setSize(600,300);
-        fr.setVisible(true);
-        fr.setLocation(400,200);
+        fr.setLocationRelativeTo(controller.getHead_control().getMain_controller().getView().getFrame());
     }
 
-    public static void main(String[] args) throws UnsupportedLookAndFeelException {
-        UIManager.setLookAndFeel(new FlatMacDarkLaf());
-        SwingUtilities.invokeLater(() -> {new ProjectCreate();
-        });
+    // Listener
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(b_create)) {
+            Project_Template addNew = new Project_Template();
+            addNew.name = projectname.getText();
+            addNew.description = description.getText();
+            addNew.start = Date.valueOf(d1.getDate());
+            addNew.end = Date.valueOf(d2.getDate());
+            controller.getModel().addProject(addNew);
+            fr.dispose();
+        }
+    }
+
+    // Accessor
+    public JDialog getFr() {
+        return fr;
+    }
+    public void setFr(JDialog fr) {
+        this.fr = fr;
+    }
+    public JInfoGet getProjectname() {
+        return projectname;
+    }
+    public void setProjectname(JInfoGet projectname) {
+        this.projectname = projectname;
+    }
+    public JInfoGet getDescription() {
+        return description;
+    }
+    public void setDescription(JInfoGet description) {
+        this.description = description;
+    }
+    public DatePicker getD1() {
+        return d1;
+    }
+    public void setD1(DatePicker d1) {
+        this.d1 = d1;
+    }
+    public DatePicker getD2() {
+        return d2;
+    }
+    public void setD2(DatePicker d2) {
+        this.d2 = d2;
     }
 }

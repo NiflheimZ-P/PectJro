@@ -42,13 +42,22 @@ public class ProjectTable {
 		return output;
 	}
 
-	public void addProjectData(String name, String description, Date start, Date end) throws SQLException {
-		PreparedStatement state = con.prepareStatement("INSERT INTO Project_info VALUES (DEFAULT, ?, ?, ?, ?, DEFAULT)");
-		state.setString(1, name);
-		state.setString(2, description);
-		state.setDate(3, start);
-		state.setDate(4, end);
+	public void addProjectData(int id, String name, String description, Date start, Date end) throws SQLException {
+		PreparedStatement state = con.prepareStatement("INSERT INTO Project_info VALUES (DEFAULT, ?, ?, ?, ?, ?, DEFAULT)");
+		state.setInt(1, id);
+		state.setString(2, name);
+		state.setString(3, description);
+		state.setDate(4, start);
+		state.setDate(5, end);
 		state.executeUpdate();
+
+		String sql = String.format("SELECT pi.Id FROM Project_info pi WHERE pi.Creator = %s AND pi.Id NOT IN (SELECT pi2.Id FROM Project_info pi2 WHERE pi2.Id IN (SELECT up.Project_id  FROM User_Project up WHERE User_id = %s));", id, id);
+		ResultSet result = getData(sql);
+
+		UserProjectTable user = new UserProjectTable(con);
+		while (result.next()) {
+			user.addCollaborator(id, result.getInt("Id"));
+		}
 	}
 
 	public void deleteProject(int id) throws SQLException {
