@@ -151,6 +151,14 @@ public class NewTaskGanttChart  {
         return projectname;
     }
 
+    public DatePicker getD1() {
+        return d1;
+    }
+
+    public DatePicker getD2() {
+        return d2;
+    }
+
     public static void main(String[] args) {
         new NewTaskGanttChart();
     }

@@ -13,6 +13,8 @@ import javax.swing.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.RectangularShape;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.Date;
@@ -22,12 +24,17 @@ import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.StandardChartTheme;
+import org.jfree.chart.renderer.category.BarPainter;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
+import org.jfree.ui.RectangleEdge;
 
-public class project_progressbar extends JFrame implements ActionListener {
+public class project_progressbar extends JFrame implements ActionListener, Serializable {
     private JFrame fr;
     private JPanel upper_pmain, upper_west, upper_west_rpart, pane_for_note, panefor_close, logo_lmar, mini_west_rpart, mid_mar_rpart, psouth_main, psouth_move, psouth_add, psouth_midmar, note_bn;
     private JLabel pro_pic, team_label, pro_name_label;
@@ -35,6 +42,9 @@ public class project_progressbar extends JFrame implements ActionListener {
     private NewTaskGanttChart newtgc;
     private static final long serialVersionUID = 1L;
     private Project_Template info;
+    private ChartPanel chartPanel;
+    private TaskSeriesCollection dataset;
+    private TaskSeries expected;
     public project_progressbar(String applicationTitle, String chartTitle, Project_Template info){
         fr = new JFrame();
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -159,40 +169,49 @@ public class project_progressbar extends JFrame implements ActionListener {
         fr.setVisible(true);
         fr.setSize(1000, 600);
 
-
         JFreeChart chart = ChartFactory.createGanttChart(chartTitle, "Development", "Time", createDataset(),
                 true, true, true);
 
         // เพิ่ม chart เข้า chart panel
-        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel = new ChartPanel(chart);
 
         // setting size
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 100));
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 400));
+
+        StandardChartTheme theme = (StandardChartTheme) org.jfree.chart.StandardChartTheme.createJFreeTheme();
+        theme.setChartBackgroundPaint(new Color(0, 0, 0, 0));
+        theme.setRegularFont(new Font("Sansserif", Font.BOLD, 12));
+//        theme.setLegendBackgroundPaint(new Color(255, 255, 255, 125));
+        theme.setPlotBackgroundPaint(new Color(0, 0, 0, 0));
+        theme.setLegendItemPaint(new Color(0, 0, 0));
+        theme.setPlotOutlinePaint(new Color(0, 0, 0, 0));
+        theme.setTitlePaint(Color.WHITE);
+
+        theme.setBarPainter(new StandardBarPainter());
+        chart.getCategoryPlot().getRenderer().setSeriesPaint(0, Color.decode("#4572a7"));
+        BarRenderer rend = (BarRenderer) chart.getCategoryPlot().getRenderer();
+        rend.setShadowVisible( true );
+        rend.setShadowXOffset( 2 );
+        rend.setShadowYOffset( 0 );
+        rend.setShadowPaint( Color.decode( "#C0C0C0"));
+        rend.setMaximumBarWidth( 0.1);
+        
+        theme.apply(chart);
 
         // add
         fr.add(chartPanel, BorderLayout.CENTER);
     }
+
     private IntervalCategoryDataset createDataset() {
 
-        TaskSeriesCollection dataset = new TaskSeriesCollection();
-        TaskSeries expected = new TaskSeries("Expected Date");
-        expected.add(new Task("Analysis", Date.from(info.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(info.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
-
-        expected.add(new Task("Design", Date.from(info.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(info.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
-
-        expected.add(new Task("Development", Date.from(info.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(info.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
-
-        expected.add(new Task("Testing", Date.from(info.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(info.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
+        dataset = new TaskSeriesCollection();
+        expected = new TaskSeries("Expected Date");
 
         dataset.add(expected);
 
-//        for (RecipeDates data : recipeDateList){
-//            TaskSeries taskSeries = new TaskSeries(dates.name);
-//            dataset<>
-//        }
-
         return dataset;
     }
+
     public void actionPerformed(ActionEvent ev){
         if(ev.getSource().equals(add_bn)){
             newtgc = new NewTaskGanttChart();
@@ -200,17 +219,13 @@ public class project_progressbar extends JFrame implements ActionListener {
         }
         else if(ev.getSource().equals(bn_add_mem)){
             new Addpeople();
-        } else if(ev.getSource().equals(bn_finish)){
+        }else if(ev.getSource().equals(bn_finish)){
             new feedback();
             fr.dispose();
         }else if (ev.getSource().equals((close_bn))){
             new AllNote();
         }else if (ev.getSource().equals(newtgc.getB_create())){
-            CreateExpectedTask(newtgc.getProjectname().getText());
+            expected.add(new Task(newtgc.getProjectname().getText(), Date.from(newtgc.getD1().getDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(newtgc.getD2().getDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
         }
-    }
-
-    public void CreateExpectedTask(String task){
-
     }
 }
