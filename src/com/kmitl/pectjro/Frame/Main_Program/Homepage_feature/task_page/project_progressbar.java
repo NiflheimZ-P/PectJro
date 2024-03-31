@@ -181,22 +181,28 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 400));
 
         StandardChartTheme theme = (StandardChartTheme) org.jfree.chart.StandardChartTheme.createJFreeTheme();
-        theme.setChartBackgroundPaint(new Color(0, 0, 0, 0));
-        theme.setRegularFont(new Font("Sansserif", Font.BOLD, 12));
-//        theme.setLegendBackgroundPaint(new Color(255, 255, 255, 125));
-        theme.setPlotBackgroundPaint(new Color(0, 0, 0, 0));
-        theme.setLegendItemPaint(new Color(0, 0, 0));
-        theme.setPlotOutlinePaint(new Color(0, 0, 0, 0));
-        theme.setTitlePaint(Color.WHITE);
+        theme.setRegularFont(new Font("Sans", Font.BOLD, 12));
+
+        theme.setChartBackgroundPaint(new Color(43,45,49));
+        theme.setPlotBackgroundPaint(new Color(49, 51, 56));
+        theme.setPlotOutlinePaint(new Color(88,101,242));
+        theme.setLegendBackgroundPaint(new Color(43, 45, 49));
+        theme.setLegendItemPaint(Color.white);
+        theme.setAxisLabelPaint(Color.white);
+        theme.setTickLabelPaint(Color.white);
+        theme.setLabelLinkPaint(Color.white);
+        theme.setShadowPaint(Color.DARK_GRAY);
+        theme.setRangeGridlinePaint(Color.white);
+        theme.setTitlePaint(new Color(88,101,242));
 
         theme.setBarPainter(new StandardBarPainter());
-        chart.getCategoryPlot().getRenderer().setSeriesPaint(0, Color.decode("#4572a7"));
+
         BarRenderer rend = (BarRenderer) chart.getCategoryPlot().getRenderer();
-        rend.setShadowVisible( true );
-        rend.setShadowXOffset( 2 );
-        rend.setShadowYOffset( 0 );
-        rend.setShadowPaint( Color.decode( "#C0C0C0"));
-        rend.setMaximumBarWidth( 0.1);
+        rend.setShadowVisible(true);
+        rend.setShadowXOffset(2);
+        rend.setShadowYOffset(0);
+        rend.setShadowPaint(Color.decode( "#C0C0C0"));
+        rend.setMaximumBarWidth(0.1);
 
         theme.apply(chart);
 
