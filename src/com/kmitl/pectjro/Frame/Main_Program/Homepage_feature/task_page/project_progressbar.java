@@ -46,7 +46,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
     private JFrame fr;
     private JPanel upper_pmain, upper_west, upper_west_rpart, pane_for_note, panefor_close, logo_lmar, mini_west_rpart, mid_mar_rpart, psouth_main, psouth_move, psouth_add, psouth_midmar, note_bn;
     private JLabel pro_pic, team_label, pro_name_label;
-    private JButton close_bn, add_bn, lmove_arrow, bn_finish, bn_add_mem;
+    private JButton close_bn, add_bn, lmove_arrow, bn_finish, bn_add_mem, del_bn;
     private NewTaskGanttChart newtgc;
     private static final long serialVersionUID = 1L;
     private Project_Template info;
@@ -68,6 +68,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
 
         close_bn = new JButton("Note");
         add_bn = new JButton("+");
+        del_bn = new JButton("-");
         //lmove_arrow = new JButton("<");
         bn_finish = new JButton("Finish!");
         bn_add_mem = new JButton("Add Member");
@@ -123,7 +124,11 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         //south part
         psouth_main = new JPanel();
         psouth_add.add(add_bn);
+        psouth_add.add(del_bn);
+
         add_bn.setFont(new Font("Sans", Font.PLAIN, 14));
+        del_bn.setFont(new Font("Sans", Font.PLAIN, 14));
+
 
         //psouth_move add
         // psouth_move.add(lmove_arrow);
@@ -156,6 +161,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         psouth_midmar.setBackground(new Color(30,31,34));
         note_bn.setBackground(new Color(30,31,34));
         add_bn.setBackground(new Color(43,45,49));
+        del_bn.setBackground(new Color(43,45,49));
         //lmove_arrow.setBackground(new Color(43,45,49));
         bn_add_mem.setBackground(new Color(43, 45, 49));
         bn_finish.setBackground(new Color(43,45,49));
@@ -168,6 +174,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         bn_add_mem.addActionListener(this);
         close_bn.addActionListener(this);
         bn_finish.addActionListener(this);
+        del_bn.addActionListener(this);
 
 
         //set fr
@@ -233,23 +240,24 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         return dataset;
     }
 
-    public void actionPerformed(ActionEvent ev){
-        if(ev.getSource().equals(add_bn)){
+    public void actionPerformed(ActionEvent ev) {
+        if (ev.getSource().equals(add_bn)) {
             newtgc = new NewTaskGanttChart(fr);
             newtgc.getB_create().addActionListener(this);
-        }
-        else if(ev.getSource().equals(bn_add_mem)){
+        } else if (ev.getSource().equals(bn_add_mem)) {
             new Addpeople();
-        }else if(ev.getSource().equals(bn_finish)){
+        } else if (ev.getSource().equals(bn_finish)) {
             new feedback();
             fr.dispose();
-        }else if (ev.getSource().equals((close_bn))){
+        } else if (ev.getSource().equals((close_bn))) {
             new AllNote();
-        }else if (ev.getSource().equals(newtgc.getB_create())){
+        } else if (ev.getSource().equals(del_bn)) {
+            new DeleteTask();
+        } else if (ev.getSource().equals(newtgc.getB_create())) {
             expected.add(new Task(newtgc.getProjectname().getText(), Date.from(newtgc.getD1().getDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(newtgc.getD2().getDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
+
         }
     }
-
     public void loadStep() throws SQLException {
         Connection con = DBConnect.createConnect();
         StepTable step = new StepTable(con);

@@ -167,45 +167,45 @@ public class Addpeople implements MouseListener, ActionListener, DocumentListene
         }
     }
     public void loadUser(){
-//        SwingWorker<Void, Void> load = new SwingWorker<Void, Void>() {
-//            @Override
-//            protected Void doInBackground() throws Exception {
-//                Connection con = DBConnect.createConnect();
-//                UserTable user = new UserTable(con);
-//                allPeople = user.load_AllUser();
-//                return null;
-//            }
-//
-//            @Override
-//            protected void done(){
-//                tx.setEditable(true);
-//            }
-//        };
-//        load.execute();
+        SwingWorker<Void, Void> load = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                Connection con = DBConnect.createConnect();
+                UserTable user = new UserTable(con);
+                allPeople = user.load_AllUser();
+                return null;
+            }
+
+            @Override
+            protected void done(){
+                tx.setEditable(true);
+            }
+        };
+        load.execute();
     }
-//    public void searchUp(){
-//        System.out.println(allPeople.size());
-//        if (!tx.getText().equals(tx.getShouldbe()) && !tx.getText().isEmpty()) {
-//            findPeople.removeAll();
-//            int a = 0;
-//            for (int i = 0; i < allPeople.size(); i++){
-//                User_Template current = allPeople.get(i);
-//                if ((current.username.toLowerCase().contains(tx.getText().toLowerCase()) ||
-//                        current.firstname.toLowerCase().contains(tx.getText().toLowerCase()) ||
-//                        current.gmail.toLowerCase().contains(tx.getText().toLowerCase())) && !already.contains(current.id) && a < 10)  {
-//                    UserBanner addNew = new UserBanner(current);
-//                    addNew.addMouseListener(this);
-//                    a++;
-//                    findPeople.add(addNew, new Constraints(0, i, 0, 0, GridBagConstraints.LINE_START, new Insets(0, 0, 0, 0)));
-//                }
-//            }
-//        } else {
-//            findPeople.removeAll();
-//        }
-//        fr.pack();
-//        fr.revalidate();
-//        fr.repaint();
-//    }
+    public void searchUp(){
+        System.out.println(allPeople.size());
+        if (!tx.getText().equals(tx.getShouldbe()) && !tx.getText().isEmpty()) {
+            findPeople.removeAll();
+            int a = 0;
+            for (int i = 0; i < allPeople.size(); i++){
+                User_Template current = allPeople.get(i);
+                if ((current.username.toLowerCase().contains(tx.getText().toLowerCase()) ||
+                        current.firstname.toLowerCase().contains(tx.getText().toLowerCase()) ||
+                        current.gmail.toLowerCase().contains(tx.getText().toLowerCase())) && !already.contains(current.id) && a < 10)  {
+                    UserBanner addNew = new UserBanner(current);
+                    addNew.addMouseListener(this);
+                    a++;
+                    findPeople.add(addNew, new Constraints(0, i, 0, 0, GridBagConstraints.LINE_START, new Insets(0, 0, 0, 0)));
+                }
+            }
+        } else {
+            findPeople.removeAll();
+        }
+        fr.pack();
+        fr.revalidate();
+        fr.repaint();
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -257,16 +257,16 @@ public class Addpeople implements MouseListener, ActionListener, DocumentListene
 
     @Override
     public void insertUpdate(DocumentEvent e) {
-//        searchUp();
+        searchUp();
     }
 
     @Override
     public void removeUpdate(DocumentEvent e) {
-//        searchUp();
+        searchUp();
     }
 
     @Override
     public void changedUpdate(DocumentEvent e) {
-//        searchUp();
+        searchUp();
     }
 }
