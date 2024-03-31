@@ -3,12 +3,9 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
-<<<<<<< Updated upstream
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
-=======
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
 import com.kmitl.pectjro.Frame.Templates.Note_Template;
->>>>>>> Stashed changes
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 
 
@@ -24,7 +21,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class NoteBox extends JPanel implements MouseListener, ActionListener {
-    private JPanel pl, pforname, west_mar, south_mar, mid_fsouth;
+    private JPanel pl, pforname, west_mar, south_mar, mid_fsouth, gap_north;
     private JLabel name, desc, start, end;
     private JButton noteb;
     private Note note;
@@ -41,6 +38,7 @@ public class NoteBox extends JPanel implements MouseListener, ActionListener {
         west_mar = new JPanel();
         south_mar = new JPanel();
         mid_fsouth = new JPanel();
+        gap_north = new JPanel();
         this.note_info = note_info;
 
         //Label
@@ -51,21 +49,26 @@ public class NoteBox extends JPanel implements MouseListener, ActionListener {
 
         pl.setLayout(new BorderLayout());
         this.add(pl);
+        pforname.setLayout(new FlowLayout(FlowLayout.CENTER));
         pforname.add(name);
-        pforname.setPreferredSize(new Dimension(750, 50));
-        pl.add(pforname, BorderLayout.NORTH);
+        pforname.setPreferredSize(new Dimension(750, 200));
+        pl.add(pforname, BorderLayout.CENTER);
+
+        gap_north = new JPanel();
+        gap_north.setPreferredSize(new Dimension(750, 70));
+        pl.add(gap_north, BorderLayout.NORTH);
 
         //add to pforname
-        west_mar.setPreferredSize(new Dimension(60, 200));
-        pl.add(west_mar, BorderLayout.WEST);
-        south_mar.setPreferredSize(new Dimension(1, 40));
-        south_mar.setLayout(new GridLayout(1,3));
+        // west_mar.setPreferredSize(new Dimension(60, 200));
+        // pl.add(west_mar, BorderLayout.WEST);
+        // south_mar.setPreferredSize(new Dimension(1, 40));
+        // south_mar.setLayout(new GridLayout(1,3));
 
-        south_mar.add(mid_fsouth);
+        // south_mar.add(mid_fsouth);
 
-        pl.add(south_mar, BorderLayout.SOUTH);
+        // pl.add(south_mar, BorderLayout.SOUTH);
 
-        name.setFont(new Font("Sans", Font.BOLD, 18));
+        name.setFont(new Font("Sans", Font.BOLD, 50));
         //pl.add(desc, BorderLayout.CENTER);
         //desc.setFont(new Font("Sans", Font.PLAIN, 14));
         pl.setBorder(new LineBorder(new Color(30,31,34)));
@@ -106,12 +109,22 @@ public class NoteBox extends JPanel implements MouseListener, ActionListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if (e.getSource().equals(pl)) {
+            pforname.setBackground(new Color(88,101,242));
+            gap_north.setBackground(new Color(88,101,242));
+            pl.setBackground(new Color(88,101,242));
+            name.setForeground(Color.black);
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        if (e.getSource().equals(pl)) {
+            pforname.setBackground(new Color(30,31,34));
+            gap_north.setBackground(new Color(30,31,34));
+            pl.setBackground(new Color(30,31,34));
+            name.setForeground(Color.white);
+        }
     }
 
     @Override
