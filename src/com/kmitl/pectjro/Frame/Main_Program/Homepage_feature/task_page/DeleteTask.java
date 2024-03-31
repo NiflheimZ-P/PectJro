@@ -3,8 +3,11 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
+import com.kmitl.pectjro.Database.Connection.DBConnect;
+import com.kmitl.pectjro.Database.DatabaseTable.StepTable;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
+import com.kmitl.pectjro.Frame.Templates.Step_Template;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import com.kmitl.pectjro.Frame.Tools.LgoodDatePicker_Setting;
 
@@ -13,19 +16,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.LinkedList;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 public class DeleteTask {
+    public JButton getCon() {
+        return con;
+    }
+
+    public JButton getCancel() {
+        return cancel;
+    }
+
     private JFrame fr;
     private JPanel pmain, psouth, west_mar, east_mar;
     private JComboBox tasksel;
     private JLabel txt;
     private JButton con, cancel;
-    public DeleteTask(){
+    private LinkedList<Step_Template> allStepName;
+    private Project_Template info;
+    public DeleteTask(Project_Template info){
         fr = new JFrame();
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.info = info;
+
 
         //pmain
         pmain = new JPanel();
@@ -66,8 +84,25 @@ public class DeleteTask {
         fr.setVisible(true);
     }
 
-    public static void main(String[] args) throws UnsupportedLookAndFeelException {
-        UIManager.setLookAndFeel( new FlatMacDarkLaf() );
-        SwingUtilities.invokeLater(() -> {new DeleteTask();});
+//    public static void main(String[] args) throws UnsupportedLookAndFeelException {
+//        UIManager.setLookAndFeel( new FlatMacDarkLaf() );
+//        SwingUtilities.invokeLater(() -> {new DeleteTask();});
+//    }
+    public JComboBox getTasksel() {
+        return tasksel;
+    }
+
+    public JFrame getFr() {
+        return fr;
+    }
+    public void loadStep() throws SQLException {
+        Connection con = DBConnect.createConnect();
+        StepTable step = new StepTable(con);
+        allStepName = step.getAllStep(info.id);
+    }
+    public void addToCombobox() {
+        for (Step_Template i : allStepName) {
+            tasksel.addItem(i.step_name);
+        }
     }
 }

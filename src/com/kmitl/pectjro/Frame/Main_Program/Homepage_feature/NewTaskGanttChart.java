@@ -24,6 +24,15 @@ public class NewTaskGanttChart  {
     private JLabel l1, l2, l3, l4;
     private JInfoGet projectname;
     private DatePicker d1, d2;
+
+    public JDialog getFr() {
+        return fr;
+    }
+
+    public JButton getB_back() {
+        return b_back;
+    }
+
     public NewTaskGanttChart(Container owner){
 
         fr = new JDialog();
