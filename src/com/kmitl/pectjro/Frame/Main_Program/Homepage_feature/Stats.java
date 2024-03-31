@@ -94,9 +94,9 @@ public class Stats {
         titleLabel.setFont(new Font("Sans", Font.BOLD, 30));
         username.setFont(new Font("Sans", Font.PLAIN, 18));
         profile.setFont(new Font("Sans", Font.PLAIN, 16));
-        l1.setFont(new Font("Sans", Font.BOLD, 14));
-        l2.setFont(new Font("Sans", Font.BOLD, 14));
-        l3.setFont(new Font("Sans", Font.BOLD, 14));
+        l1.setFont(new Font("Sans", Font.BOLD, 12));
+        l2.setFont(new Font("Sans", Font.BOLD, 12));
+        l3.setFont(new Font("Sans", Font.BOLD, 12));
         score_l1.setFont(new Font("Sans", Font.PLAIN, 14));
         score_l2.setFont(new Font("Sans", Font.PLAIN, 14));
         score_l3.setFont(new Font("Sans", Font.PLAIN, 14));

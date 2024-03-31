@@ -22,13 +22,18 @@ public class TaskController implements ActionListener {
 		this.model = new TaskModel(view, this);
 
 		view.getCreate_pro().addActionListener(this);
+		view.getRef().addActionListener(this);
 	}
 
 	// Listener
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		MainController.glassPane.setVisible(true);
-		new ProjectCreate(this);
+		if (e.getSource().equals(view.getCreate_pro())){
+			MainController.glassPane.setVisible(true);
+			new ProjectCreate(this);
+		} else if (e.getSource().equals(view.getRef())) {
+			model.refresh();
+		}
 	}
 
 	// Accessor

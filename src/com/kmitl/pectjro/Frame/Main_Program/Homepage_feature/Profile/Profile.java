@@ -15,8 +15,6 @@ public class Profile {
     private JLabel l_topic, icon,l_firstn, l_lastn, l_name, l_email;
     private JButton bn_select_photo, bn_change_name, bn_change_password, bn_log_out;
     private Image im_profile;
-    private home_page home;
-
 
     public Profile() {
         //set up
