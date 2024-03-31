@@ -245,6 +245,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         if(ev.getSource().equals(add_bn)){
             newtgc = new NewTaskGanttChart(fr);
             newtgc.getB_create().addActionListener(this);
+            newtgc.getB_back().addActionListener(this);
         }
         else if(ev.getSource().equals(bn_add_mem)){
             new Addpeople(fr);
@@ -263,7 +264,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
                 throw new RuntimeException(e);
             }
             delt.addToCombobox();
-        }else if (ev.getSource().equals(newtgc.getB_create())){
+        }else if (ev.getActionCommand().equals("Create")){
             SwingWorker<Void, Void> add = new SwingWorker<Void, Void>() {
                 private final Loading_dialog load = new Loading_dialog(fr);
                 @Override
@@ -278,6 +279,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
                     newOne.start = Date.valueOf(newtgc.getD1().getDate());
                     newOne.end = Date.valueOf(newtgc.getD2().getDate());
 
+                    allStep.add(newOne);
                     step.addStep(newOne);
                     return null;
                 }
@@ -285,12 +287,12 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
                 @Override
                 protected void done() {
                     expected.add(new Task(newtgc.getProjectname().getText(), Date.from(newtgc.getD1().getDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(newtgc.getD2().getDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
-
                     load.dispose();
                 }
             };
             add.execute();
-        }else if (ev.getSource().equals(delt.getCon())){
+            newtgc.getFr().dispose();
+        }else if (ev.getActionCommand().equals("Confirm")){
             LinkedList<Step_Template> check = new LinkedList<>();
             for (int i = 0; i < allStep.size(); i++){
                 if (allStep.get(i).step_name.contains(String.valueOf(delt.getTasksel().getSelectedItem()))){
@@ -300,8 +302,11 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
             expected.remove(new Task(check.get(0).step_name, Date.from(check.get(0).start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(check.get(0).end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
             check.remove(0);
             delt.getTasksel().removeItem(String.valueOf(delt.getTasksel().getSelectedItem()));
+            delt.getFr().dispose();
         }else if (ev.getSource().equals(delt.getCancel())){
-            System.exit(0);
+            delt.getFr().dispose();
+        }else if (ev.getActionCommand().equals("Back")){
+            newtgc.getFr().dispose();
         }
 
     }
