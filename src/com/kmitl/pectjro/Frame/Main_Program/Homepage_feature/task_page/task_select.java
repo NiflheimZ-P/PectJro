@@ -39,13 +39,17 @@ public class task_select extends JPanel implements MouseListener {
         //add to pforname
         south_mar.setLayout(new GridBagLayout());
         south_mar.add(start, new Constraints(0, 0, 1, 0, 21, new Insets(0, 0, 0, 0)));
+        start.setForeground(Color.white);
         south_mar.add(end, new Constraints(1, 0, 1, 0, 22, new Insets(0, 0, 0, 0)));
+        end.setForeground(Color.white);
         this.add(south_mar, BorderLayout.SOUTH);
 
 
-        name.setFont(new Font("Sans", Font.BOLD, 18));
+        name.setFont(new Font("Sans", Font.BOLD, 26));
+        name.setForeground(new Color(88,101,242));
         this.add(desc, BorderLayout.CENTER);
         desc.setFont(new Font("Sans", Font.PLAIN, 14));
+        desc.setForeground(Color.white);
         this.setBorder(new CompoundBorder(new LineBorder(new Color(30,31,34)),
             new EmptyBorder(20, 20, 20, 20)));
 
@@ -74,16 +78,24 @@ public class task_select extends JPanel implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        pforname.setBackground(new Color(36,48,65,255));
-        south_mar.setBackground(new Color(36,48,65,255));
-        this.setBackground(new Color(36,48,65,255));
-        this.setBorder(new CompoundBorder(new LineBorder (new Color(47,79,125,255)),
+        name.setForeground(Color.white);
+        desc.setForeground(Color.black);
+        start.setForeground(Color.black);
+        end.setForeground(Color.black);
+        pforname.setBackground(new Color(88,101,242,255));
+        south_mar.setBackground(new Color(88,101,242,255));
+        this.setBackground(new Color(88,101,242,255));
+        this.setBorder(new CompoundBorder(new LineBorder (new Color(88,101,242,255)),
                 new EmptyBorder(20, 20, 20, 20)));
         this.revalidate(); this.repaint();
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+        name.setForeground(new Color(88,101,242));
+        desc.setForeground(Color.white);
+        start.setForeground(Color.white);
+        end.setForeground(Color.white);
         pforname.setBackground(new Color(30,30,30,255));
         south_mar.setBackground(new Color(30,30,30,255));
         this.setBackground(new Color(30,30,30,255));
