@@ -2,6 +2,10 @@ package com.kmitl.pectjro.Database.DatabaseTable;
 
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.Note;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 
 public class NoteTable {
@@ -23,9 +27,17 @@ public class NoteTable {
         Statement state = con.createStatement();
         return state.executeQuery(sql);
     }
-    public void addNote(String Note) throws SQLException{
-        String sql = String.format("INSERT INTO Note_info VALUES (DEFAULT,'%s');", Note);
-        updateNote(sql);
+    public void addNote(int id, String name, String note) throws SQLException, FileNotFoundException {
+        PreparedStatement sql = con.prepareStatement("INSERT INTO Note_info VALUES (DEFAULT, ?, ?, ?, DEFAULT);");
+        sql.setInt(1, id);
+        sql.setString(2, name);
+        sql.setString(3, note);
+        sql.executeUpdate();
+    }
+
+    public void UpdateNote(String note, int id) throws SQLException, FileNotFoundException {
+
+
     }
 
 }

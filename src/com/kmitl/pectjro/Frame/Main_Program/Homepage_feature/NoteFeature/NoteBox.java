@@ -1,21 +1,35 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature;
 
+<<<<<<< HEAD
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
+=======
+import com.kmitl.pectjro.Database.Connection.DBConnect;
+import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
+import com.kmitl.pectjro.Frame.Templates.Project_Template;
+>>>>>>> 9a8f44427b0346874028f370c16d17e46867dbb8
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
-public class NoteBox extends JPanel implements MouseListener {
+public class NoteBox extends JPanel implements MouseListener, ActionListener {
     private JPanel pl, pforname, west_mar, south_mar, mid_fsouth;
     private JLabel name, desc, start, end;
-    private JButton note;
+    private JButton noteb;
+    private Note note;
     private project_progressbar pro_pro;
 
     //private Task task;
     //private TaskController tskc;
+
 
     public NoteBox() {
         pl = new JPanel();
@@ -28,9 +42,6 @@ public class NoteBox extends JPanel implements MouseListener {
 
         name = new JLabel("Note");
         //desc = new JLabel(info.description);
-
-
-
 
 
         pl.setLayout(new BorderLayout());
@@ -62,13 +73,18 @@ public class NoteBox extends JPanel implements MouseListener {
     }
 
 
+    public JLabel getNamea() {
+        return name;
+    }
+
     public JPanel getFrame(){
         return pl;
     }
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().equals(pl)){
-            new Note();
+            note = new Note();
+            note.getSave().addActionListener(this);
         }
 
     }
@@ -91,6 +107,15 @@ public class NoteBox extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(note.getSave())){
+            this.name.setText(note.getTextField().getText());
+            note.getFr().setTitle(note.getTextField().getText());
+            
+        }
     }
 //    public void loadData() {
 //        SwingWorker<Void, Void> getFeed = new SwingWorker<Void, Void>() {
