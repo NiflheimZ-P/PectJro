@@ -194,13 +194,6 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         theme.setShadowPaint(Color.DARK_GRAY);
         theme.setRangeGridlinePaint(Color.white);
         theme.setTitlePaint(new Color(88,101,242));
-        theme.setChartBackgroundPaint(new Color(0, 0, 0, 0));
-        theme.setRegularFont(new Font("Sansserif", Font.BOLD, 12));
-//      theme.setLegendBackgroundPaint(new Color(255, 255, 255, 125));
-        theme.setPlotBackgroundPaint(new Color(0, 0, 0, 0));
-        theme.setLegendItemPaint(new Color(0, 0, 0));
-        theme.setPlotOutlinePaint(new Color(0, 0, 0, 0));
-        theme.setTitlePaint(Color.WHITE);
 
         theme.setBarPainter(new StandardBarPainter());
 
