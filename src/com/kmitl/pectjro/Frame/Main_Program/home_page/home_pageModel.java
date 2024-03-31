@@ -125,7 +125,6 @@ public class home_pageModel {
 			if (i != near.size() -1) {
 				view.getWarning().add(new DeadLine(near.get(i), controller), new Constraints(0, i, 0, 0, new Insets(10, 0, 10, 0)));
 			} else {
-				System.out.println("in");
 				view.getWarning().add(new DeadLine(near.get(i), controller), new Constraints(0, i, 0, 1, GridBagConstraints.PAGE_START, new Insets(10, 0, 10, 0)));
 			}
 		}

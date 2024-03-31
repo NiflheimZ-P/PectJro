@@ -106,7 +106,6 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 				view.getView().add(projectTable.getView());
 				projectTable.getView().moveToFront();
 				projectTable.getModel().loadData();
-				System.out.println("in");
 			} else { projectTable.getView().toFront(); }
 		} else if (e.getSource().equals(admin_control.getExit())) {
 			int i = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);

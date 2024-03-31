@@ -143,6 +143,31 @@ public class UserTable {
 		return output;
 	}
 
+	public ArrayList<User_Template> getById(int id) throws SQLException{
+		String sql = String.format("SELECT * FROM User_info ui WHERE Id IN (SELECT up.User_id FROM User_Project up WHERE up.Project_id = %s);", id);
+
+		ResultSet result = getData(sql);
+		ArrayList<User_Template> output = new ArrayList<>();
+		while (result.next()) {
+			User_Template current = new User_Template();
+			current.setData(
+					result.getInt("Id"),
+					result.getString("Username"),
+					result.getString("Gmail"),
+					result.getString("Password"),
+					result.getString("Firstname"),
+					result.getString("Lastname"),
+					result.getBytes("Image"),
+					result.getInt("Project_Done"),
+					result.getInt("Project_Expired"),
+					result.getInt("Project_Ontime"),
+					result.getBoolean("Admin"));
+			output.add(current);
+		}
+
+		return output;
+	}
+
 	public void changeUserPicture(int id, InputStream pic) throws SQLException {
 		PreparedStatement sql = con.prepareStatement("UPDATE User_info SET Image = ? WHERE Id = ?");
 		sql.setBlob(1, pic);

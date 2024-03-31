@@ -200,14 +200,6 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         theme.setLabelLinkPaint(Color.white);
         theme.setShadowPaint(Color.DARK_GRAY);
         theme.setRangeGridlinePaint(Color.white);
-        theme.setTitlePaint(new Color(88,101,242));
-        theme.setChartBackgroundPaint(new Color(0, 0, 0, 0));
-        theme.setRegularFont(new Font("Sansserif", Font.BOLD, 12));
-//      theme.setLegendBackgroundPaint(new Color(255, 255, 255, 125));
-        theme.setPlotBackgroundPaint(new Color(0, 0, 0, 0));
-        theme.setLegendItemPaint(new Color(0, 0, 0));
-        theme.setPlotOutlinePaint(new Color(0, 0, 0, 0));
-        theme.setTitlePaint(Color.WHITE);
 
         theme.setBarPainter(new StandardBarPainter());
 
@@ -240,7 +232,8 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
             newtgc.getB_create().addActionListener(this);
         }
         else if(ev.getSource().equals(bn_add_mem)){
-            new Addpeople(fr);
+            Addpeople add = new Addpeople(info, fr);
+            add.loadAllUser();
         }else if(ev.getSource().equals(bn_finish)){
             new feedback();
             fr.dispose();
