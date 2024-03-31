@@ -26,7 +26,6 @@ public class NewTaskGanttChart  {
     private DatePicker d1, d2;
     public NewTaskGanttChart(Container owner){
 
-
         fr = new JDialog();
         p_main = new JPanel();
         p_zone1 = new JPanel();
@@ -134,8 +133,6 @@ public class NewTaskGanttChart  {
         l4.setForeground(Color.white);
 
         //addActionListener
-
-
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         fr.setResizable(false);
         fr.setSize(600,300);

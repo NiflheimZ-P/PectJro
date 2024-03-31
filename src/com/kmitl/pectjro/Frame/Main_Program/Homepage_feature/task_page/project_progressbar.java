@@ -3,6 +3,7 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.StepTable;
+import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NewTaskGanttChart;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.AllNote;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.feedback;
@@ -23,7 +24,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
-import java.util.Date;
+import java.sql.Date;
 import java.util.LinkedList;
 
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
@@ -239,14 +240,39 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
             newtgc.getB_create().addActionListener(this);
         }
         else if(ev.getSource().equals(bn_add_mem)){
-            new Addpeople();
+            new Addpeople(fr);
         }else if(ev.getSource().equals(bn_finish)){
             new feedback();
             fr.dispose();
         }else if (ev.getSource().equals((close_bn))){
             new AllNote();
         }else if (ev.getSource().equals(newtgc.getB_create())){
-            expected.add(new Task(newtgc.getProjectname().getText(), Date.from(newtgc.getD1().getDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(newtgc.getD2().getDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
+            SwingWorker<Void, Void> add = new SwingWorker<Void, Void>() {
+                private final Loading_dialog load = new Loading_dialog(fr);
+                @Override
+                protected Void doInBackground() throws Exception {
+                    load.setVisible(true);
+                    Connection con = DBConnect.createConnect();
+                    StepTable step = new StepTable(con);
+
+                    Step_Template newOne = new Step_Template();
+                    newOne.owner_id = info.id;
+                    newOne.step_name = newtgc.getProjectname().getText();
+                    newOne.start = Date.valueOf(newtgc.getD1().getDate());
+                    newOne.end = Date.valueOf(newtgc.getD2().getDate());
+
+                    step.addStep(newOne);
+                    return null;
+                }
+
+                @Override
+                protected void done() {
+                    expected.add(new Task(newtgc.getProjectname().getText(), Date.from(newtgc.getD1().getDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(newtgc.getD2().getDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
+
+                    load.dispose();
+                }
+            };
+            add.execute();
         }
     }
 
@@ -263,11 +289,9 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
     }
 
     // Accessor
-
     public JFrame getFr() {
         return fr;
     }
-
     public void setFr(JFrame fr) {
         this.fr = fr;
     }

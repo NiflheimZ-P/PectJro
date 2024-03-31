@@ -35,7 +35,7 @@ public class home_pageController implements MainPage_Controller, ActionListener,
 
 	// Constructor
 	public home_pageController(MainController main_controller) {
-		this.view = new home_page();
+		this.view = new home_page(main_controller.getView().getFrame().getHeight());
 		this.model = new home_pageModel(view, this);
 		this.main_controller = main_controller;
 

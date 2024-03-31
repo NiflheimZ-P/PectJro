@@ -100,7 +100,6 @@ public class AddCollaborator implements DocumentListener, MouseListener, ActionL
 	}
 
 	public void searchUp(){
-		System.out.println(allPeople.size());
 		if (!search.getText().equals(search.getShouldbe()) && !search.getText().isEmpty()) {
 			findPeople.removeAll();
 			int a = 0;

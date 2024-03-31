@@ -3,6 +3,7 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.UserTable;
+import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.ProjectTablePage.UserBanner;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
@@ -26,16 +27,16 @@ public class Addpeople implements MouseListener, ActionListener, DocumentListene
     private JPanel p_main, p_zone1, p_zone2, p_zone11, p_zone12, west, top, choose_team, pl_but , West_choose, East_choose, findPeople, select;
     private JButton Add, Close;
     private JTextArea ta;
-
     private JInfoGet search_member, tx;
     private JLabel l1;
     private ArrayList<User_Template> allPeople;
     private ArrayList<Integer> already;
     private JScrollPane scroll;
     private boolean selected;
+    private Container owner;
 
-    public Addpeople(){
-        this.already = already;
+    public Addpeople(Container owner){
+        this.owner = owner;
         selected = false;
 
         fr = new JFrame();
@@ -126,37 +127,17 @@ public class Addpeople implements MouseListener, ActionListener, DocumentListene
         East_choose.setBackground(new Color(49,51,56));
         West_choose.setBackground(new Color(49,51,56));
         choose_team.setBorder(new LineBorder(new Color(49,51,56)));
-//        p_main.setBackground(Color.ORANGE);
-//        choose_team.setBackground(Color.pink);
-//        p_zone1.setBackground(Color.gray);
-//        p_zone2.setBackground(Color.RED);
-//        tmp.setBackground(Color.BLUE);
-//        p_zone11.setBackground(Color.CYAN);
-//        p_zone12.setBackground(Color.GREEN);
-//        west.setBackground(Color.darkGray);
-//        top.setBackground(Color.lightGray);
-//        Add.setBackground(new Color(30,31,34));
-//        Close.setBackground(new Color(30,31,34));
-//        pl_but.setBackground(Color.magenta);
-//        East_choose.setBackground(Color.GREEN);
-//        West_choose.setBackground(Color.RED);
-//        choose_team.setBorder(new LineBorder(new Color(49,51,56)));
         Add.addActionListener(this);
         Close.addActionListener(this);
 
         fr.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        fr.setLocationRelativeTo(null);
         fr.setResizable(false);
         fr.setSize(600,300);
         fr.setVisible(true);
+        fr.setLocationRelativeTo(owner);
 
     }
 
-    public static void main(String[] args) throws UnsupportedLookAndFeelException {
-
-        UIManager.setLookAndFeel( new FlatMacDarkLaf() );
-        SwingUtilities.invokeLater(() -> {new Addpeople();});
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -166,63 +147,8 @@ public class Addpeople implements MouseListener, ActionListener, DocumentListene
             System.exit(0);
         }
     }
-    public void loadUser(){
-//        SwingWorker<Void, Void> load = new SwingWorker<Void, Void>() {
-//            @Override
-//            protected Void doInBackground() throws Exception {
-//                Connection con = DBConnect.createConnect();
-//                UserTable user = new UserTable(con);
-//                allPeople = user.load_AllUser();
-//                return null;
-//            }
-//
-//            @Override
-//            protected void done(){
-//                tx.setEditable(true);
-//            }
-//        };
-//        load.execute();
-    }
-//    public void searchUp(){
-//        System.out.println(allPeople.size());
-//        if (!tx.getText().equals(tx.getShouldbe()) && !tx.getText().isEmpty()) {
-//            findPeople.removeAll();
-//            int a = 0;
-//            for (int i = 0; i < allPeople.size(); i++){
-//                User_Template current = allPeople.get(i);
-//                if ((current.username.toLowerCase().contains(tx.getText().toLowerCase()) ||
-//                        current.firstname.toLowerCase().contains(tx.getText().toLowerCase()) ||
-//                        current.gmail.toLowerCase().contains(tx.getText().toLowerCase())) && !already.contains(current.id) && a < 10)  {
-//                    UserBanner addNew = new UserBanner(current);
-//                    addNew.addMouseListener(this);
-//                    a++;
-//                    findPeople.add(addNew, new Constraints(0, i, 0, 0, GridBagConstraints.LINE_START, new Insets(0, 0, 0, 0)));
-//                }
-//            }
-//        } else {
-//            findPeople.removeAll();
-//        }
-//        fr.pack();
-//        fr.revalidate();
-//        fr.repaint();
-//    }
-
     @Override
     public void mouseClicked(MouseEvent e) {
-//        p_main.remove(scroll);
-//        selected = true;
-//        tx.setText("");
-//        Add.setEnabled(true);
-//
-//        select = (JPanel) e.getSource();
-//        select.setBackground(new Color(36,48,65,255));
-//        select.setBorder(new MatteBorder(1, 1, 1, 1, new Color(47,79,125,255)));
-//        select.add(Close, new Constraints(3, 0, 1, 0, 22, new Insets(10, 10, 10, 10)));
-//        p_main.add(select, new Constraints(0, 2, 0, 0, new Insets(20, 0, 0, 0)));
-//
-//        fr.pack();
-//        fr.revalidate();
-//        fr.repaint();
     }
 
     @Override
@@ -237,36 +163,44 @@ public class Addpeople implements MouseListener, ActionListener, DocumentListene
 
     @Override
     public void mouseEntered(MouseEvent e) {
-//        if (!selected){
-//            JPanel enter = ((JPanel) e.getSource());
-//            enter.setBackground(new Color(56,108,204));
-//            fr.revalidate();
-//            fr.repaint();
-//        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-//        if (!selected){
-//            JPanel enter = ((JPanel) e.getSource());
-//            enter.setBackground(new Color(30,30,30,255));
-//            fr.revalidate();
-//            fr.repaint();
-//        }
+
     }
 
     @Override
     public void insertUpdate(DocumentEvent e) {
-//        searchUp();
     }
 
     @Override
     public void removeUpdate(DocumentEvent e) {
-//        searchUp();
     }
 
     @Override
     public void changedUpdate(DocumentEvent e) {
-//        searchUp();
+    }
+
+    public void loadAlluser() {
+        SwingWorker<Void, Void> load = new SwingWorker<Void, Void>() {
+            private final Loading_dialog load = new Loading_dialog(owner);
+            @Override
+            protected Void doInBackground() throws Exception {
+                load.setVisible(true);
+
+                Connection con = DBConnect.createConnect();
+                
+
+                return null;
+            }
+
+            @Override
+            protected void done(){
+
+                load.dispose();
+            }
+        };
+        load.execute();
     }
 }

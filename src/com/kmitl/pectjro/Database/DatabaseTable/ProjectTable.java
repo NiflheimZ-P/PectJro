@@ -75,12 +75,8 @@ public class ProjectTable {
 		sql.executeUpdate();
 	}
 
-	public ArrayList<Project_Template> getProjectData(ArrayList<Integer> info) throws SQLException{
-		String sql = String.format("SELECT * FROM Project_info WHERE Id = %s", info.get(0));
-		for (int i = 1; i < info.size(); i++) {
-			sql += "|| Id = " + info.get(i);
-		}
-		sql += ";";
+	public ArrayList<Project_Template> getProjectData(int id) throws SQLException {
+		String sql = String.format("SELECT * FROM Project_info pi2 WHERE Id IN (SELECT up.Project_id FROM User_Project up WHERE up.User_id = %s) ORDER BY Expired;", id);
 
 		ArrayList<Project_Template> output = new ArrayList<>();
 		ResultSet result = getData(sql);
