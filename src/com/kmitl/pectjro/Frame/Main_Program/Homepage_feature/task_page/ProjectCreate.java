@@ -10,6 +10,9 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
  */
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
+import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
+import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import com.kmitl.pectjro.Frame.Tools.LgoodDatePicker_Setting;
@@ -17,10 +20,14 @@ import com.kmitl.pectjro.Frame.Tools.LgoodDatePicker_Setting;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.Date;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
-public class ProjectCreate implements ActionListener {
+public class ProjectCreate implements ActionListener, DocumentListener, WindowListener, DateChangeListener {
     private JDialog fr;
     private JPanel p_main, p_zone1, p_zone2, p_zone11, p_zone12, p_zone21, p_zone22, p_zone23, p_zone221, p_zone222;
     private JButton b_create, b_back;
@@ -126,6 +133,8 @@ public class ProjectCreate implements ActionListener {
         b_create.setForeground(Color.white);
         b_back.setBackground(new Color(30,31,34));
         b_back.setForeground(Color.white);
+        d1.setDateToToday();
+        d2.setDateToToday();
 
         l1.setSize(30, 50);
         l1.setFont(new Font("Sans", Font.BOLD, 18));
@@ -140,13 +149,26 @@ public class ProjectCreate implements ActionListener {
         l4.setFont(new Font("Sans", Font.PLAIN, 12));
         l4.setForeground(Color.white);
 
-        b_create.addActionListener(this);
+        b_create.addActionListener(this); b_create.setEnabled(false);
         b_back.addActionListener(this);
+        projectname.getDocument().addDocumentListener(this);
+        description.getDocument().addDocumentListener(this);
+        fr.addWindowListener(this);
+        d1.addDateChangeListener(this);
+        d2.addDateChangeListener(this);
 
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         fr.setResizable(false);
         fr.setSize(600,300);
         fr.setLocationRelativeTo(controller.getHead_control().getMain_controller().getView().getFrame());
+        fr.setVisible(true);
+    }
+
+    // Methods
+    public boolean check() {
+        return (!projectname.getText().isEmpty() &&
+                !description.getText().isEmpty() &&
+				d2.getDate().isAfter(d1.getDate()));
     }
 
     // Listener
@@ -161,6 +183,51 @@ public class ProjectCreate implements ActionListener {
             controller.getModel().addProject(addNew);
             fr.dispose();
         }
+    }
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+		b_create.setEnabled(check());
+    }
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+		b_create.setEnabled(check());
+    }
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+		b_create.setEnabled(check());
+    }
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+    @Override
+    public void windowClosing(WindowEvent e) {
+
+    }
+    @Override
+    public void windowClosed(WindowEvent e) {
+        MainController.glassPane.setVisible(false);
+    }
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void dateChanged(DateChangeEvent dateChangeEvent) {
+        b_create.setEnabled(check());
     }
 
     // Accessor

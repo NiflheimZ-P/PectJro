@@ -14,7 +14,6 @@ public class TaskController implements ActionListener {
 	private Task view;
 	private TaskModel model;
 	private home_pageController head_control;
-	private ProjectCreate create;
 
 	// Constructor
 	public TaskController(home_pageController head_control) {
@@ -29,8 +28,7 @@ public class TaskController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		MainController.glassPane.setVisible(true);
-		create = new ProjectCreate(this);
-		create.getFr().setVisible(true);
+		new ProjectCreate(this);
 	}
 
 	// Accessor

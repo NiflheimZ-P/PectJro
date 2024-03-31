@@ -28,6 +28,7 @@ public class LgoodDatePicker_Setting {
 		settings.setColor(DatePickerSettings.DateArea.CalendarTextWeekdays, Color.WHITE);
 		settings.setColor(DatePickerSettings.DateArea.CalendarBorderSelectedDate, Color.black);
 		settings.setColor(DatePickerSettings.DateArea.CalendarBackgroundSelectedDate, new Color(40,40,40,255));
+		settings.setVisibleClearButton(false);
 	}
 
 	// Accessor
