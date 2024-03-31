@@ -30,7 +30,7 @@ public class TaskModel {
 		for (int i = 0; i < info.size(); i++){
 			if (i != info.size() - 1) {
 				view.getPl().add(new task_select(info.get(i)),
-						new Constraints(0, i, 0, 0, new Insets(0, 0, 0, 0)));
+						new Constraints(0, i, 0, 0, new Insets(0, 0, 30, 0)));
 			} else {
 				view.getPl().add(new task_select(info.get(i)),
 						new Constraints(0, i, 1, 1, GridBagConstraints.PAGE_START, new Insets(0, 0, 0, 0)));

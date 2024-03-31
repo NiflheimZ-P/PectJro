@@ -2,9 +2,13 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.project_progressbar;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
+import com.kmitl.pectjro.Frame.Tools.Constraints;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -12,20 +16,13 @@ import java.awt.event.MouseListener;
 import static java.awt.SystemColor.info;
 
 public class task_select extends JPanel implements MouseListener {
-    private JPanel pl, pforname, west_mar, south_mar, mid_fsouth;
+    private JPanel pforname, south_mar;
     private JLabel name, desc, start, end;
-    private project_progressbar pro_pro;
-
-    private Task task;
-    private TaskController tskc;
     private Project_Template info;
 
     public task_select(Project_Template info){
-        pl = new JPanel();
         pforname =  new JPanel();
-        west_mar = new JPanel();
         south_mar = new JPanel();
-        mid_fsouth = new JPanel();
         this.info = info;
 
         //Label
@@ -33,44 +30,37 @@ public class task_select extends JPanel implements MouseListener {
 
         name = new JLabel(info.name);
         desc = new JLabel(info.description);
-        start = new JLabel("            Start : "+ info.start.toString());
-        end = new JLabel("                                  End :  "+ info.end.toString());
+        start = new JLabel("Start : "+ info.start.toString());
+        end = new JLabel("End :  "+ info.end.toString());
 
 
 
 
-        pl.setLayout(new BorderLayout());
-        this.add(pl);
+        this.setLayout(new BorderLayout());
         pforname.add(name);
-        pforname.setPreferredSize(new Dimension(750, 50));
-        pl.add(pforname, BorderLayout.NORTH);
+        this.add(pforname, BorderLayout.NORTH);
 
         //add to pforname
-        west_mar.setPreferredSize(new Dimension(60, 200));
-        pl.add(west_mar, BorderLayout.WEST);
-        south_mar.setPreferredSize(new Dimension(0, 40));
-        south_mar.setLayout(new GridLayout(1,3));
-        south_mar.add(start); south_mar.add(mid_fsouth); south_mar.add(end);
-        pl.add(south_mar, BorderLayout.SOUTH);
+        south_mar.setLayout(new GridBagLayout());
+        south_mar.add(start, new Constraints(0, 0, 1, 0, 21, new Insets(0, 0, 0, 0)));
+        south_mar.add(end, new Constraints(1, 0, 1, 0, 22, new Insets(0, 0, 0, 0)));
+        this.add(south_mar, BorderLayout.SOUTH);
+
 
         name.setFont(new Font("Sans", Font.BOLD, 18));
-        pl.add(desc, BorderLayout.CENTER);
+        this.add(desc, BorderLayout.CENTER);
         desc.setFont(new Font("Sans", Font.PLAIN, 14));
-        pl.setBorder(new LineBorder(new Color(30,31,34)));
-        this.setBackground(new Color(49,51,56));
+        this.setBorder(new CompoundBorder(new LineBorder(new Color(30,31,34)),
+            new EmptyBorder(20, 20, 20, 20)));
+
         this.setVisible(true);
-        pl.setPreferredSize(new Dimension(750,200));
-        pl.addMouseListener(this);
+        this.setPreferredSize(new Dimension(750,200));
+        this.addMouseListener(this);
     }
 
-
-
-    public JPanel getFrame(){
-        return pl;
-    }
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource().equals(pl)){
+        if (e.getSource().equals(this)){
             new project_progressbar("Gnatt Chart", name.getText(), info);
         }
 
@@ -88,37 +78,21 @@ public class task_select extends JPanel implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        pforname.setBackground(new Color(36,48,65,255));
+        south_mar.setBackground(new Color(36,48,65,255));
+        this.setBackground(new Color(36,48,65,255));
+        this.setBorder(new CompoundBorder(new LineBorder (new Color(47,79,125,255)),
+                new EmptyBorder(20, 20, 20, 20)));
+        this.revalidate(); this.repaint();
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        pforname.setBackground(new Color(30,30,30,255));
+        south_mar.setBackground(new Color(30,30,30,255));
+        this.setBackground(new Color(30,30,30,255));
+        this.setBorder(new CompoundBorder(new LineBorder(new Color(30,31,34)),
+                new EmptyBorder(20, 20, 20, 20)));
+        this.revalidate(); this.repaint();
     }
-//    public void loadData() {
-//        SwingWorker<Void, Void> getFeed = new SwingWorker<Void, Void>() {
-//            private Loading_dialog loading = new Loading_dialog(pl);
-//            @Override
-//            protected Void doInBackground() throws Exception {
-//                loading.setVisible(true);
-//                name.removeAll();
-//                desc.removeAll();
-//
-//                task.getRef().setEnabled(false);
-//                Connection con = DBConnect.createConnect();
-//
-//                task.getRef().setEnabled(true);
-////                if (!view.getSearch().getText().equals(view.getSearch().getShouldbe())){
-////                    search();
-////                }
-////                return null;
-////            }
-//
-////            @Override
-////            protected void done() {
-////                loading.dispose();
-////            }
-////        };
-////        getFeed.execute();
-//        }
 }

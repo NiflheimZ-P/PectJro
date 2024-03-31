@@ -9,10 +9,7 @@ import com.kmitl.pectjro.Frame.Templates.User_Template;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -53,6 +50,7 @@ public class home_pageModel {
 				con = DBConnect.createConnect();
 
 				loadCache();
+				loadNewCache();
 				getProject();
 
 				controller.getTask().getModel().loadProject(controller.getProjectIn());
@@ -97,5 +95,19 @@ public class home_pageModel {
 	public void loadAdmin() {
 		controller.getMain_controller().setAdmin(new AdminController(controller.getMain_controller()));
 		controller.getMain_controller().getModel().changePage(controller.getMain_controller().getAdmin().getContainer());
+	}
+
+	public void loadNewCache() throws SQLException {
+		Connection con = DBConnect.createConnect();
+		UserTable user = new UserTable(con);
+		User_Template output = new User_Template();
+		output = user.getUserData(controller.getCache().id);
+
+		controller.setCache(output);
+		try(ObjectOutputStream getIn = new ObjectOutputStream(new FileOutputStream("User_Cache.dat"))) {
+			getIn.writeObject(output);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 	}
 }

@@ -54,6 +54,9 @@ public class Loading_GlassPane extends JPanel implements MouseListener {
 	}
 
 	public void setLoading(boolean visible) {
+		if (visible) {
+			loading = new Loading_dialog(this);
+		}
 		loading.setVisible(visible);
 	}
 }

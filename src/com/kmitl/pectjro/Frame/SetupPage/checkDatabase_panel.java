@@ -14,7 +14,7 @@ import com.kmitl.pectjro.Frame.Tools.*;
 
 public class checkDatabase_panel extends JPanel {
     private JPanel main_panel;
-    private Image_Resizer data_bar, userInfo_bar, userpro_bar, project_bar, proStep_bar, all_bar, feed_bar, proNote_bar, note_bar;
+    private Image_Resizer data_bar, userInfo_bar, userpro_bar, project_bar, all_bar, feed_bar, note_bar;
     private ImageIcon pass, error, wait;
     private Connection con;
 
@@ -56,30 +56,20 @@ public class checkDatabase_panel extends JPanel {
         main_panel.add(project,
                 new Constraints(0, 3, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10, 1, 1)));
 
-        JLabel prost = new JLabel("Project_step Table");
-        prost.setFont(new Font("", Font.PLAIN, 15));
-        main_panel.add(prost,
-                new Constraints(0, 4, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10, 1, 1)));
-
         JLabel all = new JLabel("Step_info Table");
         all.setFont(new Font("", Font.PLAIN, 15));
         main_panel.add(all,
-                new Constraints(0, 5, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 1, 1)));
+                new Constraints(0, 4, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 1, 1)));
 
         JLabel feed = new JLabel("Feedback Table");
         feed.setFont(new Font("", Font.PLAIN, 15));
         main_panel.add(feed,
-                new Constraints(0, 6, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 1, 1)));
-
-        JLabel proNote = new JLabel("Project_note");
-        proNote.setFont(new Font("", Font.PLAIN, 15));
-        main_panel.add(proNote,
-                new Constraints(0, 7, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 1, 1)));
+                new Constraints(0, 5, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 1, 1)));
 
         JLabel note = new JLabel("Note_info");
         note.setFont(new Font("", Font.PLAIN, 15));
         main_panel.add(note,
-                new Constraints(0, 8, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 10, 1)));
+                new Constraints(0, 6, 1, 1, GridBagConstraints.LINE_START, new Insets(0, 10 , 10, 1)));
 
         data_bar = new Image_Resizer(wait, 20, 100);
         main_panel.add(data_bar, new Constraints(1, 0, 1, 1, GridBagConstraints.LINE_END, new Insets(10, 1, 1, 10)));
@@ -93,20 +83,14 @@ public class checkDatabase_panel extends JPanel {
         project_bar = new Image_Resizer(wait, 20, 100);
         main_panel.add(project_bar, new Constraints(1, 3, 1, 1, 22, new Insets(0, 1, 1, 10)));
 
-        proStep_bar = new Image_Resizer(wait, 20, 100);
-        main_panel.add(proStep_bar, new Constraints(1, 4, 1, 1, 22, new Insets(0, 1, 1, 10)));
-
         all_bar = new Image_Resizer(wait, 20, 100);
-        main_panel.add(all_bar, new Constraints(1, 5, 1, 1, 22, new Insets(0, 1, 1, 10)));
+        main_panel.add(all_bar, new Constraints(1, 4, 1, 1, 22, new Insets(0, 1, 1, 10)));
 
         feed_bar = new Image_Resizer(wait, 20, 100);
-        main_panel.add(feed_bar, new Constraints(1, 6, 1, 1, 22, new Insets(0, 1, 1, 10)));
-
-        proNote_bar = new Image_Resizer(wait, 20, 100);
-        main_panel.add(proNote_bar, new Constraints(1, 7, 1, 1, 22, new Insets(0, 1, 1, 10)));
+        main_panel.add(feed_bar, new Constraints(1, 5, 1, 1, 22, new Insets(0, 1, 1, 10)));
 
         note_bar = new Image_Resizer(wait, 20, 100);
-        main_panel.add(note_bar, new Constraints(1, 8, 1, 1, 22, new Insets(0, 1, 10, 10)));
+        main_panel.add(note_bar, new Constraints(1, 6, 1, 1, 22, new Insets(0, 1, 10, 10)));
 
     }
     public void check(ArrayList <String> info){
@@ -119,10 +103,8 @@ public class checkDatabase_panel extends JPanel {
                     check_userInfo();
                     check_UserProject();
                     check_projectInfo();
-                    check_ProjectStep();
                     check_StepInfo();
                     check_Feedback();
-                    check_ProNote();
                     check_Note();
                     Main_Setup.bypass = true;
                 } else {
@@ -171,29 +153,11 @@ public class checkDatabase_panel extends JPanel {
         repaint();
     }
 
-    public void check_ProjectStep() {
-        if (new CreateTable(con).createJoinProjectStep()) {
-            proStep_bar.setImage(pass);
-        } else {
-            proStep_bar.setImage(error);
-        }
-        repaint();
-    }
-
     public void check_Feedback() {
         if (new CreateTable(con).createFeedbackTable()) {
             feed_bar.setImage(pass);
         } else {
             feed_bar.setImage(error);
-        }
-        repaint();
-    }
-
-    public void check_ProNote() {
-        if (new CreateTable(con).createJoinProjectNote()) {
-            proNote_bar.setImage(pass);
-        } else {
-            proNote_bar.setImage(error);
         }
         repaint();
     }
@@ -212,10 +176,8 @@ public class checkDatabase_panel extends JPanel {
                 userInfo_bar.getImage().equals(pass.getImage()) &&
                 userpro_bar.getImage().equals(pass.getImage()) &&
                 project_bar.getImage().equals(pass.getImage()) &&
-                proStep_bar.getImage().equals(pass.getImage()) &&
                 all_bar.getImage().equals(pass.getImage()) &&
                 feed_bar.getImage().equals(pass.getImage()) &&
-                proNote_bar.getImage().equals(pass.getImage()) &&
                 note_bar.getImage().equals(pass.getImage())
                 );
     }
@@ -225,10 +187,8 @@ public class checkDatabase_panel extends JPanel {
         userInfo_bar.setImage(error);
         userpro_bar.setImage(error);
         project_bar.setImage(error);
-        proStep_bar.setImage(error);
         all_bar.setImage(error);
         feed_bar.setImage(error);
-        proNote_bar.setImage(error);
         note_bar.setImage(error);
         repaint();
     }
@@ -238,10 +198,8 @@ public class checkDatabase_panel extends JPanel {
         userInfo_bar.setImage(wait);
         userpro_bar.setImage(wait);
         project_bar.setImage(wait);
-        proStep_bar.setImage(wait);
         all_bar.setImage(wait);
         feed_bar.setImage(wait);
-        proNote_bar.setImage(wait);
         note_bar.setImage(wait);
         repaint();
     }

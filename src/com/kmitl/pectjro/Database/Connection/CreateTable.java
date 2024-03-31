@@ -55,6 +55,7 @@ public class CreateTable {
         try{
             updateData("CREATE TABLE IF NOT EXISTS Step_info (" +
                     "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
+                    "Owner_id int NOT NULL," +
                     "Name VARCHAR(50) NOT NULL," +
                     "Start DATE NOT NULL," +
                     "Expired DATE NOT NULL);");
@@ -87,34 +88,11 @@ public class CreateTable {
         }
     }
 
-    public boolean createJoinProjectStep(){
-        try {
-            updateData("CREATE TABLE IF NOT EXISTS Project_Step (" +
-                    "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
-                    "Project_id int NOT NULL," +
-                    "Step_id int NOT NULL);");
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean createJoinProjectNote() {
-        try {
-            updateData("CREATE TABLE IF NOT EXISTS Project_note (" +
-                    "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
-                    "Project_id int NOT NULL," +
-                    "Note_id int NOT NULL);");
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     public boolean createNoteTable() {
         try {
             updateData("CREATE TABLE IF NOT EXISTS Note_info (" +
                     "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
+                    "Owner_id int NOT NULL," +
                     "Name VARCHAR(250) NOT NULL," +
                     "Note LONGTEXT," +
                     "Access boolean DEFAULT true);");
