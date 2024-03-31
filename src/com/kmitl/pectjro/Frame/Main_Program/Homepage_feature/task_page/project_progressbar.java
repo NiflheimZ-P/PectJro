@@ -263,20 +263,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
                 throw new RuntimeException(e);
             }
             delt.addToCombobox();
-        }else if (ev.getSource().equals(delt.getCon())){
-            LinkedList<Step_Template> check = new LinkedList<>();
-            for (int i = 0; i < allStep.size(); i++){
-                if (allStep.get(i).step_name.contains(String.valueOf(delt.getTasksel().getSelectedItem()))){
-                    check.add(allStep.get(i));
-                }
-            }
-            expected.remove(new Task(check.get(0).step_name, Date.from(check.get(0).start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(check.get(0).end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
-            check.remove(0);
-            delt.getTasksel().removeItem(String.valueOf(delt.getTasksel().getSelectedItem()));
-        }else if (ev.getSource().equals(delt.getCancel())){
-            System.exit(0);
-        }
-        else if (ev.getSource().equals(newtgc.getB_create())){
+        }else if (ev.getSource().equals(newtgc.getB_create())){
             SwingWorker<Void, Void> add = new SwingWorker<Void, Void>() {
                 private final Loading_dialog load = new Loading_dialog(fr);
                 @Override
@@ -303,7 +290,20 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
                 }
             };
             add.execute();
+        }else if (ev.getSource().equals(delt.getCon())){
+            LinkedList<Step_Template> check = new LinkedList<>();
+            for (int i = 0; i < allStep.size(); i++){
+                if (allStep.get(i).step_name.contains(String.valueOf(delt.getTasksel().getSelectedItem()))){
+                    check.add(allStep.get(i));
+                }
+            }
+            expected.remove(new Task(check.get(0).step_name, Date.from(check.get(0).start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(check.get(0).end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
+            check.remove(0);
+            delt.getTasksel().removeItem(String.valueOf(delt.getTasksel().getSelectedItem()));
+        }else if (ev.getSource().equals(delt.getCancel())){
+            System.exit(0);
         }
+
     }
 
     public void loadStep() throws SQLException {
