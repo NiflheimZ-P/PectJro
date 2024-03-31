@@ -15,22 +15,19 @@ public class task_select extends JPanel implements MouseListener {
     private JPanel pforname, south_mar;
     private JLabel name, desc, start, end;
     private Project_Template info;
+    private TaskController controller;
 
-    public task_select(Project_Template info){
+    public task_select(Project_Template info, TaskController controller){
+        this.controller = controller;
         pforname =  new JPanel();
         south_mar = new JPanel();
         this.info = info;
 
         //Label
-
-
         name = new JLabel(info.name);
         desc = new JLabel(info.description);
         start = new JLabel("Start : "+ info.start.toString());
         end = new JLabel("End :  "+ info.end.toString());
-
-
-
 
         this.setLayout(new BorderLayout());
         pforname.add(name);

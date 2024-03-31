@@ -47,7 +47,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
     private ChartPanel chartPanel;
     private TaskSeriesCollection dataset;
     private TaskSeries expected;
-    public project_progressbar(Project_Template info){
+    public project_progressbar(Project_Template info, Container owner){
         fr = new JFrame();
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.info = info;
@@ -201,6 +201,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         theme.apply(chart);
 
         // add
+        fr.setLocationRelativeTo(owner);
         fr.add(chartPanel, BorderLayout.CENTER);
     }
 
