@@ -47,7 +47,15 @@ public class home_pageModel {
 				con = DBConnect.createConnect();
 
 				loadCache();
-				loadNewCache();
+				try {
+					loadNewCache();
+				} catch (SQLException ex) {
+					controller.getMain_controller().setRemember(false);
+					MainController.glassPane.setLoading(false);
+
+					JOptionPane.showMessageDialog(null, "Can't find your user", "Error", JOptionPane.YES_OPTION);
+					System.exit(0);
+				}
 				getProject();
 
 				controller.getTask().getModel().loadProject(controller.getProjectIn());

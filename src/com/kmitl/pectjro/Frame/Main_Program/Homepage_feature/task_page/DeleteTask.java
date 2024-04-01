@@ -23,7 +23,7 @@ import java.util.LinkedList;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-public class DeleteTask {
+public class DeleteTask implements WindowListener{
     public JButton getCon() {
         return con;
     }
@@ -39,7 +39,10 @@ public class DeleteTask {
     private JButton con, cancel;
     private LinkedList<Step_Template> allStepName;
     private Project_Template info;
-    public DeleteTask(Project_Template info){
+    private project_progressbar controller;
+    public DeleteTask(Project_Template info, project_progressbar controller){
+        this.controller = controller;
+
         fr = new JFrame();
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.info = info;
@@ -104,5 +107,40 @@ public class DeleteTask {
         for (Step_Template i : allStepName) {
             tasksel.addItem(i.step_name);
         }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        controller.setDelt(null);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        controller.setDelt(null);
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }

@@ -1,4 +1,4 @@
-package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
+package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -11,23 +11,28 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.TaskController;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import com.kmitl.pectjro.Frame.Tools.LgoodDatePicker_Setting;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class NewTaskGanttChart implements DocumentListener, DateChangeListener {
+public class NewTaskGanttChart implements DocumentListener, DateChangeListenerm, WindowListener {
     private JDialog fr;
     private JPanel p_main, p_zone1, p_zone2, p_zone11, p_zone12, p_zone21, p_zone22, p_zone23, p_zone221, p_zone222;
     private JButton b_create, b_back;
     private JLabel l1, l2, l3, l4;
     private JInfoGet projectname;
     private DatePicker d1, d2;
+    private project_progressbar controller;
 
     public JDialog getFr() {
         return fr;
@@ -37,7 +42,8 @@ public class NewTaskGanttChart implements DocumentListener, DateChangeListener {
         return b_back;
     }
 
-    public NewTaskGanttChart(Container owner){
+    public NewTaskGanttChart(Container owner, project_progressbar controller){
+        this.controller = controller;
 
         fr = new JDialog();
         p_main = new JPanel();
@@ -195,5 +201,40 @@ public class NewTaskGanttChart implements DocumentListener, DateChangeListener {
 
     public boolean check(){
         return (!projectname.getText().equals(projectname.getShouldbe()) && !projectname.getText().isEmpty() && d2.getDate().isAfter(d1.getDate()));
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        controller.setNewtgc(null);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        controller.setNewtgc(null);
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }

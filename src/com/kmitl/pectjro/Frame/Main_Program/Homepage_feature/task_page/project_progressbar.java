@@ -1,14 +1,9 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.StepTable;
 import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NewTaskGanttChart;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.AllNote;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.AllNoteController;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.feedback;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.Addpeople;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 
 import java.awt.*;
@@ -17,32 +12,23 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.geom.RectangularShape;
 import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.sql.Date;
 import java.util.LinkedList;
 
-import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Templates.Step_Template;
-import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
-import org.jfree.chart.renderer.category.BarPainter;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
-import org.jfree.ui.RectangleEdge;
 
 public class project_progressbar extends JFrame implements ActionListener, Serializable {
     private JFrame fr;
@@ -230,9 +216,13 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
 
     public void actionPerformed(ActionEvent ev){
         if(ev.getSource().equals(add_bn)){
-            newtgc = new NewTaskGanttChart(fr);
-            newtgc.getB_create().addActionListener(this);
-            newtgc.getB_back().addActionListener(this);
+            if (newtgc == null) {
+                newtgc = new NewTaskGanttChart(fr, this);
+                newtgc.getB_create().addActionListener(this);
+                newtgc.getB_back().addActionListener(this);
+            } else {
+                newtgc.getFr().toFront();
+            }
         }
         else if(ev.getSource().equals(bn_add_mem)){
             Addpeople add = new Addpeople(info, fr);
@@ -244,15 +234,19 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
             AllNoteController allnote = new AllNoteController(info, fr);
             allnote.loadNote(true);
         }else if (ev.getSource().equals(del_bn)){
-            delt = new DeleteTask(info);
-            delt.getCon().addActionListener(this);
-            delt.getCancel().addActionListener(this);
-            try {
-                delt.loadStep();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            if (delt == null){
+                delt = new DeleteTask(info, this);
+                delt.getCon().addActionListener(this);
+                delt.getCancel().addActionListener(this);
+                try {
+                    delt.loadStep();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                delt.addToCombobox();
+            } else {
+                delt.getFr().toFront();
             }
-            delt.addToCombobox();
         }else if (ev.getActionCommand().equals("Create")){
             SwingWorker<Void, Void> add = new SwingWorker<Void, Void>() {
                 private final Loading_dialog load = new Loading_dialog(fr);
@@ -337,5 +331,17 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
     }
     public void setFr(JFrame fr) {
         this.fr = fr;
+    }
+    public NewTaskGanttChart getNewtgc() {
+        return newtgc;
+    }
+    public void setNewtgc(NewTaskGanttChart newtgc) {
+        this.newtgc = newtgc;
+    }
+    public DeleteTask getDelt() {
+        return delt;
+    }
+    public void setDelt(DeleteTask delt) {
+        this.delt = delt;
     }
 }
