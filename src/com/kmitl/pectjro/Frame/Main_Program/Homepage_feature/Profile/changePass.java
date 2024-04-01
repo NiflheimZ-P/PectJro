@@ -115,6 +115,8 @@ public class changePass implements ActionListener, DocumentListener, WindowListe
         if (controller.getHead_control().getCache().password.equals(old_txt.getText()) && neww_txt.getText().equals(con_txt.getText())
             && !neww_txt.getText().isEmpty()){
             submit.setEnabled(true);
+        } else {
+            submit.setEnabled(false);
         }
     }
 
