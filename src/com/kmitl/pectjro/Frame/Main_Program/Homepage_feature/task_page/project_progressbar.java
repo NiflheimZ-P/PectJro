@@ -288,17 +288,19 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
                             check = allStep.get(i);
                         }
                     }
-                    expected.remove(new Task(check.step_name, Date.from(check.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.ofHours(+7))), Date.from(check.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.ofHours(+7)))));
 
                     Connection con = DBConnect.createConnect();
                     StepTable step = new StepTable(con);
                     step.deleteStep(check.id);
+
+                    allStep = step.getAllStep(info.id);
 
                     return null;
                 }
 
                 @Override
                 protected void done() {
+                    setUpChart();
                     delt.getTasksel().removeItem(String.valueOf(delt.getTasksel().getSelectedItem()));
                     delt.getFr().dispose();
                     fr.revalidate();
@@ -322,6 +324,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
     }
 
     public void setUpChart() {
+        expected.removeAll();
         for (Step_Template i: allStep) {
             expected.add(new Task(i.step_name, Date.from(i.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(i.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
         }
