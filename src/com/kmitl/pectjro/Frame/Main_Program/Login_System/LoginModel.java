@@ -57,13 +57,13 @@ public class LoginModel {
 					write.writeObject(thisGmail);
 				} catch (SQLException ex) {
 					load.dispose();
-					JOptionPane.showMessageDialog(null, "The email address doesn't exist.", "Error", JOptionPane.ERROR_MESSAGE);
 					login.getLogin().setEnabled(true);
+					JOptionPane.showMessageDialog(null, "The email address doesn't exist.", "Error", JOptionPane.ERROR_MESSAGE);
 					return false;
 				} catch (IOException ex) {
 					load.dispose();
-					JOptionPane.showMessageDialog(null, "Cannot access file 'User_Cache'", "Error", JOptionPane.ERROR_MESSAGE);
 					login.getLogin().setEnabled(true);
+					JOptionPane.showMessageDialog(null, "Cannot access file 'User_Cache'", "Error", JOptionPane.ERROR_MESSAGE);
 					return false;
 				}
 				return true;
