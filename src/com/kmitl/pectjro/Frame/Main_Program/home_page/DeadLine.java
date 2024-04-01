@@ -25,7 +25,7 @@ public class DeadLine extends JPanel implements MouseListener {
 	public DeadLine(Project_Template info, home_pageController controller) {
 		this.info = info;
 		name = new JLabel(info.name);
-		int space = (int) Math.ceil((info.end.getTime() - System.currentTimeMillis()) / 86400000);
+		int space = (int) Math.ceil((info.end.getTime() - System.currentTimeMillis()) / 86400000		) + 1;
 		date = new JLabel();
 		if (space < 0) {
 			date.setText("Pass " + space*-1 + " day");
