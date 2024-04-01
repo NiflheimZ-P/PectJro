@@ -31,6 +31,7 @@ public class MainModel {
 		} catch (Exception e) { e.printStackTrace(); }
 		SwingUtilities.updateComponentTreeUI(view.getFrame());
 	}
+	
 	public void changePage(View_Getter page){
 		view.getFrame().setContentPane(page.getView());
 		view.getFrame().repaint();
