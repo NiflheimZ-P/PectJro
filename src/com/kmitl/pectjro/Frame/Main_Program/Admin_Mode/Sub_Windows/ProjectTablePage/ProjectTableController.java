@@ -92,7 +92,6 @@ public class ProjectTableController implements ActionListener, DocumentListener 
 			}
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, "Please select user first.", "Error", JOptionPane.ERROR_MESSAGE);
-			ex.printStackTrace();
 		}
 	}
 
