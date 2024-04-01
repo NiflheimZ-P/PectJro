@@ -169,10 +169,8 @@ public class ProjectCreate implements ActionListener, DocumentListener, WindowLi
     // Methods
     public boolean check() {
         return (!projectname.getText().isEmpty() &&
-                !description.getText().isEmpty() &&
 				d2.getDate().isAfter(d1.getDate())) &&
-                !projectname.getText().equals(projectname.getShouldbe()) &&
-                !description.getText().equals(description.getShouldbe());
+                !projectname.getText().equals(projectname.getShouldbe());
     }
 
     // Listener

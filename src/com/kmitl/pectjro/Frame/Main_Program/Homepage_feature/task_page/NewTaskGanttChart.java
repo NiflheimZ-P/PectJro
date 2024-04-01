@@ -162,6 +162,7 @@ public class NewTaskGanttChart implements DocumentListener, DateChangeListener, 
         d1.addDateChangeListener(this);
         d2.addDateChangeListener(this);
 
+        name = new LinkedList<>();
         for (Step_Template i: allstep) {
             name.add(i.step_name);
         }

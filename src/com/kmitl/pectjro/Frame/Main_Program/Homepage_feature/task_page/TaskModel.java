@@ -48,7 +48,11 @@ public class TaskModel {
 
 				Connection con = DBConnect.createConnect();
 				ProjectTable pro = new ProjectTable(con);
-				pro.addProjectData(controller.getHead_control().getCache().id, newProject.name, newProject.description, newProject.start, newProject.end);
+				if (newProject.description.equals("Description")){
+					pro.addProjectData(controller.getHead_control().getCache().id, newProject.name, "", newProject.start, newProject.end);
+				} else {
+					pro.addProjectData(controller.getHead_control().getCache().id, newProject.name, newProject.description, newProject.start, newProject.end);
+				}
 
 				controller.getHead_control().getModel().getProject();
 				return null;
