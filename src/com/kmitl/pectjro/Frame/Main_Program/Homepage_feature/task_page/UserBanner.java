@@ -10,7 +10,7 @@ import java.awt.*;
 public class UserBanner extends JPanel {
 	private Image_Resizer image;
 	private JLabel name;
-	private User_Template user;
+	private final User_Template user;
 	public UserBanner(User_Template user, int width, int height) {
 		name = new JLabel(user.username);
 		this.user = user;
@@ -27,8 +27,5 @@ public class UserBanner extends JPanel {
 
 	public User_Template getUser() {
 		return user;
-	}
-	public void setUser(User_Template user) {
-		this.user = user;
 	}
 }

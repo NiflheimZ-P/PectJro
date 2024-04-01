@@ -17,7 +17,7 @@ public class DeadLine extends JPanel implements MouseListener {
 	private JLabel name;
 	private JLabel date;
 	private project_progressbar newone;
-	private Project_Template info;
+	private final Project_Template info;
 	private home_pageController controller;
 	public DeadLine(Project_Template info, home_pageController controller) {
 		this.info = info;

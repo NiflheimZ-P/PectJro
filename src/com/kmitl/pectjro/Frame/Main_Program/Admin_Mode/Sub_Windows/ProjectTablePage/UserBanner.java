@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class UserBanner extends JPanel {
 	// Attribute
-	private User_Template user;
+	private final User_Template user;
 
 	// Constructor
 	public UserBanner(User_Template user) {
@@ -29,8 +29,5 @@ public class UserBanner extends JPanel {
 	// Accessor
 	public User_Template getUser() {
 		return user;
-	}
-	public void setUser(User_Template user) {
-		this.user = user;
 	}
 }

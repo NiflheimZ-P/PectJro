@@ -14,7 +14,7 @@ import java.awt.event.MouseListener;
 public class task_select extends JPanel implements MouseListener {
     private JPanel pforname, south_mar;
     private JLabel name, desc, start, end;
-    private Project_Template info;
+    private final Project_Template info;
     private TaskController controller;
     private project_progressbar newone;
 

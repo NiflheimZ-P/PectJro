@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 public class NoteBox extends JPanel implements MouseListener, WindowListener {
     private JPanel pl, pforname;
     private JLabel name;
-    private Note_Template note_info;
+    private final Note_Template note_info;
     private Container owner;
     private AllNoteController controller;
 
