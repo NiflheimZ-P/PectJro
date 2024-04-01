@@ -25,7 +25,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class NewTaskGanttChart implements DocumentListener, DateChangeListenerm, WindowListener {
+public class NewTaskGanttChart implements DocumentListener, DateChangeListener, WindowListener {
     private JDialog fr;
     private JPanel p_main, p_zone1, p_zone2, p_zone11, p_zone12, p_zone21, p_zone22, p_zone23, p_zone221, p_zone222;
     private JButton b_create, b_back;
@@ -155,6 +155,8 @@ public class NewTaskGanttChart implements DocumentListener, DateChangeListenerm,
         projectname.getDocument().addDocumentListener(this);
         d1.addDateChangeListener(this);
         d2.addDateChangeListener(this);
+
+        fr.addWindowListener(this);
 
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         fr.setResizable(false);

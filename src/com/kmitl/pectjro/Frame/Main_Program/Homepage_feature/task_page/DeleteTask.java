@@ -80,6 +80,8 @@ public class DeleteTask implements WindowListener{
         fr.add(tasksel, BorderLayout.CENTER);
         fr.add(psouth, BorderLayout.SOUTH);
 
+        fr.addWindowListener(this);
+
         //set visible size
         fr.setSize(350,150);
         fr.setResizable(false);
