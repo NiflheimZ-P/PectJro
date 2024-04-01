@@ -7,6 +7,7 @@ import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 
 public class TaskController implements ActionListener {
@@ -32,7 +33,11 @@ public class TaskController implements ActionListener {
 			MainController.glassPane.setVisible(true);
 			new ProjectCreate(this);
 		} else if (e.getSource().equals(view.getRef())) {
-			model.refresh();
+			try {
+				head_control.getModel().loadHome();
+			} catch (SQLException ex) {
+				throw new RuntimeException(ex);
+			}
 		}
 	}
 
