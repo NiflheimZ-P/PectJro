@@ -28,7 +28,9 @@ public class LoginModel {
 
 	// Methods
 	public void loginSystem() {
+		login.getLogin().setEnabled(false);
 		SwingWorker<Boolean, Void> getIn = new SwingWorker<Boolean, Void>() {
+
 			private final Loading_dialog load = new Loading_dialog(controller.getMain_controller().getView().getFrame());
 
 			@Override
@@ -56,10 +58,12 @@ public class LoginModel {
 				} catch (SQLException ex) {
 					load.dispose();
 					JOptionPane.showMessageDialog(null, "The email address doesn't exist.", "Error", JOptionPane.ERROR_MESSAGE);
+					login.getLogin().setEnabled(true);
 					return false;
 				} catch (IOException ex) {
 					load.dispose();
 					JOptionPane.showMessageDialog(null, "Cannot access file 'User_Cache'", "Error", JOptionPane.ERROR_MESSAGE);
+					login.getLogin().setEnabled(true);
 					return false;
 				}
 				return true;
