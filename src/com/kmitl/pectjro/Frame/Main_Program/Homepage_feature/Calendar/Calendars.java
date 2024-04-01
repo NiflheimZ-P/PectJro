@@ -47,7 +47,7 @@ public class Calendars implements ActionListener {
 
         // Add Action Listeners for changing months
         previousMonth.addActionListener(this);
-        nextMonth.addActionListener(this); 
+        nextMonth.addActionListener(this);
 
         // Add buttons to the panel
         p_left.add(label);
@@ -126,21 +126,12 @@ public class Calendars implements ActionListener {
         }
 
         // Add JTextArea for each day of the month
-        for (int day = 1; day < daysInMonth; day++) {
+        for (int day = 1; day <= daysInMonth; day++) {
             changepanel = new JPanel();
             numberLabel = new JLabel(Integer.toString(day));
             changepanel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
             changepanel.add(numberLabel);
             calendarPanel.add(changepanel, BorderLayout.NORTH);
-            SimpleDateFormat dfm = new SimpleDateFormat("MM yyyy");
-            String rfm = dfm.format(cal.getTime())+" "+day;
-            if(rfm.equals(dfm.format(cal.getTime())+" "+3)){
-                teadline = new JPanel();
-                teadline.setBackground(Color.red);
-                changepanel.add(teadline, BorderLayout.CENTER);
-
-
-            }
 
 //            if((LocalDate.of(year, month, day)).equals((LocalDate.of(year, month, 01)))){
 //                changepanel.setBackground(Color.cyan);
