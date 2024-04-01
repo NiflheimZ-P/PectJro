@@ -1,28 +1,21 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Calendar;
 
-import com.kmitl.pectjro.Frame.Templates.Project_Template;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
-import java.time.ZoneOffset;
+
 import java.util.*;
 
 public class Calendars implements ActionListener {
     private JPanel frame;
     private JButton left, right, previousMonth, nextMonth;
-    private JPanel pn, calendarPanel, p_left, p_right, changepanel, teadline;
+    private JPanel pn, calendarPanel, p_left, p_right, changepanel;
     private Calendar cal;
     private JLabel label, monthLb, dayLabel, numberLabel, spaceLabel;
-    private int month, year, daysInMonth, firstDayOfWeek;
+    private int daysInMonth, firstDayOfWeek;
     private String[] weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-    private JTextArea ta;
-    private ArrayList<Project_Template> pt;
 
     public JPanel getFrame() {
         return frame;
@@ -57,9 +50,6 @@ public class Calendars implements ActionListener {
         // Set the calendar to the first day of the current month
         cal.set(Calendar.DAY_OF_MONTH, 1);
 
-        month = cal.get(Calendar.MONTH);
-        year = cal.get(Calendar.YEAR);
-
         // 0 rows, 7 columns
         calendarPanel = new JPanel(new GridLayout(0, 7));
 
@@ -87,9 +77,6 @@ public class Calendars implements ActionListener {
 
     private void updateCalendar() {
         calendarPanel.removeAll();
-
-        month = cal.get(Calendar.MONTH);
-        year = cal.get(Calendar.YEAR);
 
         cal.set(Calendar.DAY_OF_MONTH, 1);
 
@@ -122,18 +109,6 @@ public class Calendars implements ActionListener {
             changepanel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
             changepanel.add(numberLabel);
             calendarPanel.add(changepanel, BorderLayout.NORTH);
-
-//            if((LocalDate.of(year, month, day)).equals((LocalDate.of(year, month, 01)))){
-//                changepanel.setBackground(Color.cyan);
-//                changepanel = new JPanel();
-//                numberLabel = new JLabel(Integer.toString(day));
-//                changepanel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-//                changepanel.add(numberLabel);
-//                calendarPanel.add(changepanel);
-//            }
-
-
-
         }
 
         // Set the month label

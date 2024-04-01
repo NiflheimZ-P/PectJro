@@ -1,10 +1,8 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
-import com.kmitl.pectjro.Frame.Main_Program.home_page.home_pageController;
-import com.kmitl.pectjro.Frame.Templates.User_Template;
 
+import com.kmitl.pectjro.Frame.Main_Program.home_page.home_pageController;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-
 import java.awt.*;
 
 public class Stats {

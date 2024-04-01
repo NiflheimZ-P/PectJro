@@ -66,7 +66,7 @@ public class ProjectTableController implements ActionListener, DocumentListener 
 				model.loadData();
 			} else if (e.getActionCommand().equals("Edit")) {
 				ProjectEdit edit = new ProjectEdit(projectInfo.get(view.getTable().getSelectedRow()));
-				SaveEditController save = new SaveEditController(model, edit);
+				new SaveEditController(model, edit);
 				edit.getFrame().addInternalFrameListener(head_control);
 
 				SwingWorker<Void, Void> loadEdit = new SwingWorker<Void, Void>() {

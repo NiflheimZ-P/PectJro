@@ -1,15 +1,12 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Feedback_Page;
 
-import com.kmitl.pectjro.Frame.Templates.Feedback_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
-
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
-import java.util.LinkedList;
 
 public class FeedbackView {
 	// Attribute

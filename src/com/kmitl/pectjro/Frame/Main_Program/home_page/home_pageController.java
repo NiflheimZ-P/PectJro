@@ -2,10 +2,9 @@ package com.kmitl.pectjro.Frame.Main_Program.home_page;
 
 import com.kmitl.pectjro.Frame.Groups_interface.MainPage_Controller;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Calendar.CalendarController;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Calendar.Calendars;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile.ProfileController;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Stats;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.ProjectCreate;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.TaskController;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
@@ -30,7 +29,7 @@ public class home_pageController implements MainPage_Controller, ActionListener,
 	CardLayout page = new CardLayout();
 	private Stats stats;
 	private ProfileController profile;
-	private CalendarController calen;
+	private Calendars calen;
 	private TaskController task;
 
 	// Constructor
@@ -42,7 +41,7 @@ public class home_pageController implements MainPage_Controller, ActionListener,
 		//feature create
 		stats = new Stats(this);
 		profile = new ProfileController(this);
-		calen = new CalendarController(this);
+		calen = new Calendars();
 		task = new TaskController(this);
 
 
@@ -50,7 +49,7 @@ public class home_pageController implements MainPage_Controller, ActionListener,
 
 		//add to centerPart
 		view.getCenter_part().add(task.getView().getFr(), "0");
-		view.getCenter_part().add(calen.getView().getFrame(), "1");
+		view.getCenter_part().add(calen.getFrame(), "1");
 		view.getCenter_part().add(stats.getFrame(),"2");
 		view.getCenter_part().add(profile.getView().getFr(), "3");
 

@@ -1,9 +1,7 @@
 package com.kmitl.pectjro.Database.DatabaseTable;
 
 import com.kmitl.pectjro.Frame.Templates.Step_Template;
-
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class StepTable extends Database_Simple<Step_Template> {

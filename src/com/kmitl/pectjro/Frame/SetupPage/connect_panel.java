@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import com.kmitl.pectjro.Frame.Tools.*;
-import com.kmitl.pectjro.Main;
 
 public class connect_panel extends JPanel implements DocumentListener, ActionListener {
     private JLabel info;
@@ -33,7 +32,6 @@ public class connect_panel extends JPanel implements DocumentListener, ActionLis
         connection_info.setBorder(BorderFactory.createCompoundBorder(
                 new TitledBorder("Connection info"),
                 new EmptyBorder(5, 5, 5, 5)));
-        GridBagConstraints manage = new GridBagConstraints();
 
         hostname = new JTextField("", 15); port = new JTextField(""); database = new JTextField("", 26);
         username = new JTextField("", 26); password = new JPasswordField("", 26);

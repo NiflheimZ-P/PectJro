@@ -1,22 +1,12 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature;
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
-import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
-import com.kmitl.pectjro.Frame.Templates.Note_Template;
-import com.kmitl.pectjro.Frame.Templates.Project_Template;
-import com.kmitl.pectjro.Frame.Tools.Constraints;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.*;
-import java.sql.Connection;
-import java.util.ArrayList;
 
 public class AllNote{
     private JFrame fr;
-    private JPanel psouth, westsmar, eastmar, plus_pane, ref_pane, center;
+    private JPanel westsmar, plus_pane, ref_pane, center;
     private JButton plus, ref;
     private JScrollPane scroll;
 
@@ -31,8 +21,6 @@ public class AllNote{
         //panel
         center = new JPanel();
         westsmar = new JPanel();
-        eastmar = new JPanel();
-        psouth = new JPanel();
         plus_pane = new JPanel();
         ref_pane = new JPanel();
 

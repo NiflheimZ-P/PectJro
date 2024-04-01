@@ -2,9 +2,7 @@ package com.kmitl.pectjro.Database.DatabaseTable;
 
 import com.kmitl.pectjro.Frame.Groups_interface.Database_template;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 

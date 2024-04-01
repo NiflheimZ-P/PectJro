@@ -1,12 +1,10 @@
 
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature;
 
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
 import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Templates.Note_Template;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -15,10 +13,9 @@ import java.sql.Connection;
 
 
 public class Note implements ActionListener{
-    private NoteTable nt;
     private JFrame fr;
     private JTextArea textArea;
-    private JPanel mainPanel, p_textF;
+    private JPanel mainPanel;
     private JTextField textField;
     private JMenuBar m;
     private JMenu edit;
@@ -52,7 +49,6 @@ public class Note implements ActionListener{
         this.note_info = note;
         this.controller = controller;
         fr = new JFrame("Note");
-        p_textF = new JPanel();
         mainPanel = new JPanel();
         m = new JMenuBar();
         edit = new JMenu("Edit");

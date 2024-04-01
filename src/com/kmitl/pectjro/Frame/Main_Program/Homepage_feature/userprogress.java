@@ -1,21 +1,20 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
 
-
-import org.intellij.lang.annotations.Flow;
-
 import java.awt.*;
 import javax.swing.*;
+
 public class userprogress {
+
     private JFrame fr;
-    private JPanel p, p_zone1, p_zone2, p_zone12, p_zone21, p_zone22, p_zone221;
+    private JPanel p, p_zone1, p_zone2, p_zone21, p_zone22, p_zone221;
     private JLabel pic, name, probarname;
     private JProgressBar pg;
+
     public userprogress(){
         fr = new JFrame();
         p = new JPanel();
         p_zone1 = new JPanel();
         p_zone2 = new JPanel();
-        p_zone12 = new JPanel();
         p_zone21 = new JPanel();
         p_zone22 = new JPanel();
         p_zone221 = new JPanel();

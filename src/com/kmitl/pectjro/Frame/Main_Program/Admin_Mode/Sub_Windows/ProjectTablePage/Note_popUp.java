@@ -1,9 +1,6 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.ProjectTablePage;
 
-import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.AllNoteController;
 import com.kmitl.pectjro.Frame.Templates.Note_Template;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -11,12 +8,11 @@ import java.awt.*;
 public class Note_popUp {
 	private JFrame fr;
 	private JTextArea textArea;
-	private JPanel mainPanel, p_textF;
+	private JPanel mainPanel;
 	private JTextField textField;
 
 	public Note_popUp(Note_Template note, Container owner) {
 		fr = new JFrame("Note");
-		p_textF = new JPanel();
 		mainPanel = new JPanel();
 		textArea = new JTextArea(note.note);
 		textField = new JTextField(note.name);

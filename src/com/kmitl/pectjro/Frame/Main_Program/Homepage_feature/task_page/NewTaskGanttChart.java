@@ -1,28 +1,14 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
-/**
- *
- * @author Insi
- */
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.TaskController;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
 import com.kmitl.pectjro.Frame.Templates.Step_Template;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import com.kmitl.pectjro.Frame.Tools.LgoodDatePicker_Setting;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -36,7 +22,6 @@ public class NewTaskGanttChart implements DocumentListener, DateChangeListener, 
     private JInfoGet projectname;
     private DatePicker d1, d2;
     private project_progressbar controller;
-    private LinkedList<Step_Template> allstep;
     private LinkedList<String> name;
 
     public JDialog getFr() {
@@ -48,7 +33,6 @@ public class NewTaskGanttChart implements DocumentListener, DateChangeListener, 
     }
 
     public NewTaskGanttChart(Container owner, project_progressbar controller, LinkedList<Step_Template> allstep){
-        this.allstep = allstep;
         this.controller = controller;
 
         fr = new JDialog();

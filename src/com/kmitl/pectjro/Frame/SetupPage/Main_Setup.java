@@ -1,17 +1,12 @@
 package com.kmitl.pectjro.Frame.SetupPage;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.kmitl.pectjro.Database.Connection.DBConnect;
-import com.kmitl.pectjro.Database.DatabaseTable.UserTable;
 import com.kmitl.pectjro.Frame.Templates.Setting_Template;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.*;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.io.*;
 

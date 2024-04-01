@@ -1,23 +1,19 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
+
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.StepTable;
 import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.AllNoteController;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.feedback;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-
-import java.io.Serializable;
 import java.sql.Connection;
 import java.time.ZoneOffset;
 import java.sql.Date;
 import java.util.LinkedList;
-
 import com.kmitl.pectjro.Frame.Templates.Step_Template;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -30,7 +26,7 @@ import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 
-public class project_progressbar extends JFrame implements ActionListener, Serializable {
+public class project_progressbar extends JFrame implements ActionListener {
     private JFrame fr;
     private JPanel upper_pmain, upper_west, upper_west_rpart, pane_for_note, panefor_close, logo_lmar, mini_west_rpart, mid_mar_rpart, psouth_main, psouth_move, psouth_add, psouth_midmar, note_bn;
     private JLabel pro_name_label;

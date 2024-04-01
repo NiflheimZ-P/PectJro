@@ -4,10 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.SQLException;
 import javax.swing.*;
-
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.FeedbackTable;
 import com.kmitl.pectjro.Database.DatabaseTable.ProjectTable;

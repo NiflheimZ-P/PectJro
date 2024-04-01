@@ -2,12 +2,9 @@ package com.kmitl.pectjro.Frame.Main_Program.Login_System;
 
 import com.kmitl.pectjro.Frame.Groups_interface.MainPage_Controller;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
-import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginPage.Login_Page;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginPage.Register_Page;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
-
-import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;

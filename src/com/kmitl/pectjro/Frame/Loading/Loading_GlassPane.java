@@ -1,15 +1,12 @@
 package com.kmitl.pectjro.Frame.Loading;
 
-import com.kmitl.pectjro.Frame.Tools.Constraints;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class Loading_GlassPane extends JPanel implements MouseListener {
-	private JLabel pic;
-	private JLabel text;
+
 	private Loading_dialog loading;
 
 	public Loading_GlassPane() {

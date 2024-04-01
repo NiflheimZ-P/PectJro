@@ -1,11 +1,9 @@
 package com.kmitl.pectjro.Frame.Main_Program.Login_System;
 
-import com.kmitl.pectjro.Frame.Groups_interface.MainPage_Controller;
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginPage.Login_Page;
 import com.kmitl.pectjro.Frame.Main_Program.Login_System.LoginPage.Register_Page;
 import com.kmitl.pectjro.Frame.Tools.JPanelBG;
-
 import javax.swing.*;
 import java.awt.*;
 

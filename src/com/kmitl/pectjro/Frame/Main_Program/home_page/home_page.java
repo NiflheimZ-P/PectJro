@@ -1,8 +1,6 @@
 package com.kmitl.pectjro.Frame.Main_Program.home_page;
 
 import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
-import com.kmitl.pectjro.Frame.Tools.Constraints;
-
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -14,11 +12,11 @@ public class home_page implements View_Getter, MouseListener {
 
     private JPanel bg, pn_north, pn_west, pn_east, ctn_pn_task, ctn_pn_calendar, ctn_pn_appraisement, ctn_pn_deadline,
             pn_north_right, ps_mar_pmain, paneforsearch, up_mar_search, l_mar_search, r_mar_search,
-            s_mar_search, center_part, warning;
+            s_mar_search, center_part;
     private JTextField tf_seach_bar;
     private Image im_program, im_profile;
     private JButton bn_task, bn_calendar, bn_appraisement, bn_admin, bn_profile;
-    private JLabel l1, l3, l4;
+    private JLabel l1, l4;
 
 
     public JTextField getTf_seach_bar() {
@@ -61,7 +59,6 @@ public class home_page implements View_Getter, MouseListener {
         bn_profile = new JButton();
 
         l1 = new JLabel();
-        l3 = new JLabel("3");
         l4 = new JLabel("Deadline");
 
         //card
@@ -132,17 +129,10 @@ public class home_page implements View_Getter, MouseListener {
         ctn_pn_deadline.add(l4);
         pn_west.add(ctn_pn_deadline);
 
-
         //button (+) at bottom right of corner and right part (pn_east)
         ps_mar_pmain.setLayout(new FlowLayout(2, 30,25));
-        //main_panel.add(pn_east, BorderLayout.EAST);
-       // ps_mar_pmain.add(bn_new);
-        //pn_east.setLayout(new BorderLayout());
-        //pn_east.add(ps_mar_pmain, BorderLayout.SOUTH);
-
 
         //set color
-            //Panel
         bg.setBackground(new Color(49,51,56));
         pn_north.setBackground(new Color(30,31,34));
         up_mar_search.setBackground(new Color(30,31,34));

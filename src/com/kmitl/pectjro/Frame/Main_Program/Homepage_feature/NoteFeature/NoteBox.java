@@ -1,29 +1,21 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature;
 
 import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
 import com.kmitl.pectjro.Frame.Templates.Note_Template;
-import com.kmitl.pectjro.Frame.Templates.Project_Template;
 
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.FileNotFoundException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.concurrent.ExecutionException;
 
 public class NoteBox extends JPanel implements MouseListener, WindowListener {
-    private JPanel pl, pforname, west_mar, south_mar, mid_fsouth, gap_north;
-    private JLabel name, desc, start, end;
-    private JButton noteb;
-    private project_progressbar pro_pro;
+    private JPanel pl, pforname;
+    private JLabel name;
     private Note_Template note_info;
     private Container owner;
     private AllNoteController controller;
@@ -34,9 +26,6 @@ public class NoteBox extends JPanel implements MouseListener, WindowListener {
         this.owner = owner;
         pl = new JPanel();
         pforname =  new JPanel();
-        west_mar = new JPanel();
-        south_mar = new JPanel();
-        mid_fsouth = new JPanel();
         this.note_info = note;
 
         //Label

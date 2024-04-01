@@ -1,7 +1,5 @@
 package com.kmitl.pectjro.Database.DatabaseTable;
 
-import com.kmitl.pectjro.Frame.Templates.User_Template;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

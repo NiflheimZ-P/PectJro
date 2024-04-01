@@ -1,10 +1,5 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
 
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.kmitl.pectjro.Frame.Main_Program.home_page.home_page;
-import com.kmitl.pectjro.Frame.Templates.User_Template;
-import org.intellij.lang.annotations.Flow;
-
 import java.awt.*;
 import javax.swing.*;
 

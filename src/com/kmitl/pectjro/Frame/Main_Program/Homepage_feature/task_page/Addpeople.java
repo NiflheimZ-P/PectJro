@@ -1,6 +1,5 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.UserProjectTable;
 import com.kmitl.pectjro.Database.DatabaseTable.UserTable;
@@ -9,10 +8,8 @@ import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
@@ -32,7 +29,6 @@ public class Addpeople implements MouseListener, ActionListener, DocumentListene
     private ArrayList<User_Template> allPeople;
     private ArrayList<User_Template> already;
     private JScrollPane scroll, scroll_in;
-    private boolean selected;
     private Container owner;
     private Project_Template info;
     private User_Template select;
@@ -41,7 +37,6 @@ public class Addpeople implements MouseListener, ActionListener, DocumentListene
     public Addpeople(Project_Template info, Container owner){
         this.info = info;
         this.owner = owner;
-        selected = false;
 
         fr = new JFrame();
         p_main = new JPanel();          choose_team = new JPanel();

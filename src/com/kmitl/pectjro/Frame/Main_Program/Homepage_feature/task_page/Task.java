@@ -7,10 +7,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class Task {
-    private JPanel fr, p, margin_p,pl, pl_but;
+    private JPanel fr, margin_p,pl, pl_but;
     private JButton ref, create_pro;
     private JScrollPane scroll;
-    private project_progressbar pro_pro;
 
 
     public Task(){

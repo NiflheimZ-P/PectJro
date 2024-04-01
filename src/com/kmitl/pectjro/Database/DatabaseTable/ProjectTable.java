@@ -1,7 +1,6 @@
 package com.kmitl.pectjro.Database.DatabaseTable;
 
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -70,8 +69,6 @@ public class ProjectTable extends Database_Simple<Project_Template>{
 
 	public ArrayList<Project_Template> getProjectData(int id) throws Exception {
 		String sql = String.format("SELECT * FROM Project_info pi2 WHERE Id IN (SELECT up.Project_id FROM User_Project up WHERE up.User_id = %s) ORDER BY Expired;", id);
-
-		ArrayList<Project_Template> output = new ArrayList<>();
 		ResultSet result = getData(sql);
 
 		return getArray(result);

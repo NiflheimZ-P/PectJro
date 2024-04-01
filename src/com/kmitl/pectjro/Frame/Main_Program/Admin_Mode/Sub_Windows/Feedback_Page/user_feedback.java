@@ -1,15 +1,11 @@
 package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Feedback_Page;
 
 import com.kmitl.pectjro.Frame.Templates.Feedback_Template;
-import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Tools.Image_Resizer;
-
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.text.BadLocationException;
 import java.awt.*;
 
 public class user_feedback extends JPanel {

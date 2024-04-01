@@ -6,14 +6,12 @@ import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
 import com.kmitl.pectjro.Database.DatabaseTable.UserProjectTable;
 import com.kmitl.pectjro.Database.DatabaseTable.UserTable;
 import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
-import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.NoteBox;
 import com.kmitl.pectjro.Frame.Templates.Note_Template;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import com.kmitl.pectjro.Frame.Tools.LgoodDatePicker_Setting;
-
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -27,13 +25,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProjectEdit implements ActionListener, WindowListener, DocumentListener {
 	// Attribute
 	private JInternalFrame frame;
-	private JPanel north_info, north_peo, south, infomation, people, addPeople, north_add, center_add, noPeople, note, inNote, south_note;
+	private JPanel north_info, north_peo, south, infomation, people, addPeople, north_add, center_add, noPeople, note, inNote;
 	private JTabbedPane center;
 	private JTextField name;
 	private JTextArea description;
@@ -151,7 +148,6 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 
 		note = new JPanel(new BorderLayout());
 		inNote = new JPanel(new GridBagLayout());
-		south_note = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
 		scroll_note = new JScrollPane(inNote, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll_note.setBorder(null);

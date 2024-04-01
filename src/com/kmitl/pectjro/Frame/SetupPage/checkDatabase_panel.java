@@ -97,9 +97,9 @@ public class checkDatabase_panel extends JPanel {
 
     }
     public void check(ArrayList <String> info){
-        SwingWorker<Void, Void> check = new SwingWorker() {
+        SwingWorker<Void, Void> check = new SwingWorker<>() {
             @Override
-            protected Object doInBackground() throws Exception {
+            protected Void doInBackground() throws Exception {
                 con = DBConnect.checkConnection(info);
                 if (con != null) {
                     data_bar.setImage(pass);

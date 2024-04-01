@@ -2,8 +2,6 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page;
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.ProjectTable;
-import com.kmitl.pectjro.Database.DatabaseTable.UserProjectTable;
-import com.kmitl.pectjro.Frame.Groups_interface.MainPage_Controller;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
@@ -79,7 +77,7 @@ public class TaskModel {
 				view.getPl().removeAll();
 
 				Connection con = DBConnect.createConnect();
-				ProjectTable pro = new ProjectTable(con);
+				new ProjectTable(con);
 				controller.getHead_control().getModel().getProject();
 
 				return null;

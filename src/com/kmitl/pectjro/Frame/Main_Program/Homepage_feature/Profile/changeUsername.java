@@ -1,12 +1,7 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.Profile;
 
-
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
-import org.intellij.lang.annotations.Flow;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
@@ -14,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.sql.SQLOutput;
+
 public class changeUsername implements ActionListener, DocumentListener, WindowListener {
     private JDialog fr;
     private JPanel pmain, top_mar, west_mar, east_mar;

@@ -2,20 +2,13 @@ package com.kmitl.pectjro.Database.DatabaseTable;
 
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.Note;
 import com.kmitl.pectjro.Frame.Templates.Note_Template;
-
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class NoteTable extends Database_Simple<Note_Template> {
-
 	private Connection con;
 	public Note note;
-	private Statement stm;
-	private ResultSet rs;
 
 	public NoteTable(Connection con) {
 		super(Note_Template.class);

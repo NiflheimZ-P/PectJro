@@ -1,10 +1,6 @@
 package com.kmitl.pectjro.Database.DatabaseTable;
 
-import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
-
-import javax.swing.*;
-import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;

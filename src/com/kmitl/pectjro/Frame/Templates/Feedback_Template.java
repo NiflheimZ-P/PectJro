@@ -1,9 +1,6 @@
 package com.kmitl.pectjro.Frame.Templates;
 
 import com.kmitl.pectjro.Frame.Groups_interface.Database_template;
-
-import javax.swing.*;
-import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

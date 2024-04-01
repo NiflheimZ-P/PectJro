@@ -6,13 +6,10 @@ import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Admin_control
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Feedback_Page.FeedbackController;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.ProjectTablePage.ProjectTableController;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage.UserTableController;
-import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage.UserTableView;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
-
 import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,7 +17,6 @@ import java.util.ArrayList;
 public class AdminController implements MainPage_Controller, ActionListener, InternalFrameListener {
 	// Attribute
 	private AdminView view;
-	private AdminModel model;
 	private MainController main_controller;
 	private Admin_controls admin_control;
 	private UserTableController userTable;
@@ -33,7 +29,6 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 		this.opened = new ArrayList<>();
 		this.main_controller = main_controller;
 		view = new AdminView();
-		model = new AdminModel(view, this);
 		admin_control = new Admin_controls(main_controller.getView().getFrame().getWidth(),
 				main_controller.getView().getFrame().getHeight()
 		);

@@ -7,8 +7,6 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 public class Note_Box extends JPanel implements MouseListener {
 	private JPanel pl, pforname;
@@ -50,7 +48,7 @@ public class Note_Box extends JPanel implements MouseListener {
 		return pl;
 	}
 	public void createNote() {
-		Note_popUp open = new Note_popUp(note_info, owner);
+		new Note_popUp(note_info, owner);
 	}
 
 	@Override

@@ -13,12 +13,10 @@ public class FeedbackController implements ActionListener, DocumentListener {
 	// Attribute
 	private FeedbackView view;
 	private FeedbackModel model;
-	private AdminController head_control;
 	private LinkedList<Feedback_Template> feed;
 
 	// Constructor
 	public FeedbackController(AdminController head_control) {
-		this.head_control = head_control;
 		view = new FeedbackView();
 		model = new FeedbackModel(view, this);
 
