@@ -151,7 +151,7 @@ public class home_pageController implements MainPage_Controller, ActionListener,
 	public void insertUpdate(DocumentEvent e) {
 		ArrayList<Project_Template> check = new ArrayList<>();
 		for (int i = 0; i < projectIn.size(); i++){
-			if (projectIn.get(i).name.toLowerCase().contains(view.getTf_seach_bar().getText())){
+			if (projectIn.get(i).name.toLowerCase().contains(view.getTf_seach_bar().getText().toLowerCase())){
 				check.add(projectIn.get(i));
 			}
 		}
@@ -164,7 +164,7 @@ public class home_pageController implements MainPage_Controller, ActionListener,
 	public void removeUpdate(DocumentEvent e) {
 		ArrayList<Project_Template> check = new ArrayList<>();
 		for (int i = 0; i < projectIn.size(); i++){
-			if (projectIn.get(i).name.toLowerCase().contains(view.getTf_seach_bar().getText())){
+			if (projectIn.get(i).name.toLowerCase().contains(view.getTf_seach_bar().getText().toLowerCase())){
 				check.add(projectIn.get(i));
 			}
 		}
@@ -177,7 +177,7 @@ public class home_pageController implements MainPage_Controller, ActionListener,
 	public void changedUpdate(DocumentEvent e) {
 		ArrayList<Project_Template> check = new ArrayList<>();
 		for (int i = 0; i < projectIn.size(); i++){
-			if (projectIn.get(i).name.toLowerCase().contains(view.getTf_seach_bar().getText())){
+			if (projectIn.get(i).name.toLowerCase().contains(view.getTf_seach_bar().getText().toLowerCase())){
 				check.add(projectIn.get(i));
 			}
 		}

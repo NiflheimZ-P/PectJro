@@ -212,7 +212,6 @@ public class NewTaskGanttChart implements DocumentListener, DateChangeListener, 
 
     @Override
     public void windowClosing(WindowEvent e) {
-        controller.setNewtgc(null);
     }
 
     @Override

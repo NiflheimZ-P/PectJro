@@ -118,7 +118,6 @@ public class DeleteTask implements WindowListener{
 
     @Override
     public void windowClosing(WindowEvent e) {
-        controller.setDelt(null);
     }
 
     @Override

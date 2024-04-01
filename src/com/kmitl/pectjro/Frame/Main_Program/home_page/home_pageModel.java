@@ -50,8 +50,9 @@ public class home_pageModel {
 				try {
 					loadNewCache();
 				} catch (SQLException ex) {
-					controller.getMain_controller().setRemember(false);
 					MainController.glassPane.setLoading(false);
+					File delete = new File("User_Cache.dat");
+					delete.delete();
 
 					JOptionPane.showMessageDialog(null, "Can't find your user", "Error", JOptionPane.YES_OPTION);
 					System.exit(0);

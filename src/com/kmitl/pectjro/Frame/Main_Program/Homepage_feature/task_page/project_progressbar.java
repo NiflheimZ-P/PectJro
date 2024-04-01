@@ -270,12 +270,13 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
                 @Override
                 protected void done() {
                     expected.add(new Task(newtgc.getProjectname().getText(), Date.from(newtgc.getD1().getDate().atStartOfDay().toInstant(ZoneOffset.ofHours(+7))), Date.from(newtgc.getD2().getDate().atStartOfDay().toInstant(ZoneOffset.ofHours(+7)))));
+
                     newtgc.getFr().dispose();
                     load.dispose();
                 }
             };
             add.execute();
-            newtgc.getFr().dispose();
+
         }else if (ev.getActionCommand().equals("Confirm")){
             SwingWorker<Void, Void> delete = new SwingWorker<Void, Void>() {
                 private final Loading_dialog load = new Loading_dialog(fr);
