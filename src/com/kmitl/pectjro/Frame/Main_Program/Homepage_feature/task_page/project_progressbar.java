@@ -275,7 +275,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
 
                 @Override
                 protected void done() {
-                    expected.add(new Task(newtgc.getProjectname().getText(), Date.from(newtgc.getD1().getDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(newtgc.getD2().getDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
+                    expected.add(new Task(newtgc.getProjectname().getText(), Date.from(newtgc.getD1().getDate().atStartOfDay().toInstant(ZoneOffset.ofHours(+7))), Date.from(newtgc.getD2().getDate().atStartOfDay().toInstant(ZoneOffset.ofHours(+7)))));
                     newtgc.getFr().dispose();
                     load.dispose();
                 }
@@ -294,7 +294,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
                             check = allStep.get(i);
                         }
                     }
-                    expected.remove(new Task(check.step_name, Date.from(check.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(check.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
+                    expected.remove(new Task(check.step_name, Date.from(check.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.ofHours(+7))), Date.from(check.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.ofHours(+7)))));
 
                     Connection con = DBConnect.createConnect();
                     StepTable step = new StepTable(con);
