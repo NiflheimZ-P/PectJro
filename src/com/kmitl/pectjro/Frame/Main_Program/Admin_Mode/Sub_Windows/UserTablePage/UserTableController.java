@@ -25,13 +25,6 @@ public class UserTableController implements TableModelListener, ActionListener, 
 		this.view = new UserTableView();
 		this.model = new UserTableModel(this, view);
 
-		view.addInternalFrameListener(head_controll);
-		view.getDelete().addActionListener(this);
-		view.getAdd_new().addActionListener(this);
-		view.getSearch().getDocument().addDocumentListener(this);
-		view.getRefresh().addActionListener(this);
-		view.getView().addActionListener(this);
-		view.getModel().addTableModelListener(this);
 	}
 
 	// Accessor
@@ -39,6 +32,12 @@ public class UserTableController implements TableModelListener, ActionListener, 
 	public UserTableModel getModel() {return model;}
 	public ArrayList<User_Template> getUserData() {return userData;}
 	public void setUserData(ArrayList<User_Template> data) {this.userData = data;}
+	public AdminController getHead_control() {
+		return head_control;
+	}
+	public void setHead_control(AdminController head_control) {
+		this.head_control = head_control;
+	}
 
 	// Listener
 	@Override

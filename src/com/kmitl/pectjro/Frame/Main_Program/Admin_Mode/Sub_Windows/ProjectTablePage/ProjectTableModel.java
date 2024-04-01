@@ -94,4 +94,13 @@ public class ProjectTableModel {
 			}
 		}
 	}
+
+	public void setUpProgram() {
+		view.addInternalFrameListener(controller.getHead_control());
+		view.getAdd_new().addActionListener(controller);
+		view.getRefresh().addActionListener(controller);
+		view.getDelete().addActionListener(controller);
+		view.getSearch().getDocument().addDocumentListener(controller);
+		view.getView().addActionListener(controller);
+	}
 }

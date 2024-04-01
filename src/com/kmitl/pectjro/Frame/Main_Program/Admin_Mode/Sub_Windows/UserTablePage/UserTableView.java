@@ -15,8 +15,6 @@ public class UserTableView extends Table_Page {
     public UserTableView() {
         super(1100, 500);
         this.setTitle("User Data");
-        String[] columns = {"Id", "Username", "Gmail", "Firstname", "Lastname", "Project_Done", "Project_Expired", "Project_Ontime", "Admin"};
-        this.createTable(columns);
     }
 
     // Accessor

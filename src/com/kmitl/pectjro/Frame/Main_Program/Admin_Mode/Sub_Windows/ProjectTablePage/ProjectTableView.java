@@ -16,8 +16,6 @@ public class ProjectTableView extends Table_Page {
 	public ProjectTableView() {
 		super(700, 500);
 		this.setTitle("Project Data");
-		String[] columns = {"Id", "Name", "Description", "Start", "End"};
-		this.createTable(columns);
 		view.setText("Edit");
 	}
 

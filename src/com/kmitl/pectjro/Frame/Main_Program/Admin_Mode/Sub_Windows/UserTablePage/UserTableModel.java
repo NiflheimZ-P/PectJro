@@ -96,4 +96,14 @@ public class UserTableModel implements Admin_Table_Model {
 			}
 		}
 	}
+
+	public void setUpProgram() {
+		view.addInternalFrameListener(controller.getHead_control());
+		view.getDelete().addActionListener(controller);
+		view.getAdd_new().addActionListener(controller);
+		view.getSearch().getDocument().addDocumentListener(controller);
+		view.getRefresh().addActionListener(controller);
+		view.getView().addActionListener(controller);
+		view.getModel().addTableModelListener(controller);
+	}
 }

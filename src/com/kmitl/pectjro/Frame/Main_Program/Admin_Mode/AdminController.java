@@ -5,6 +5,7 @@ import com.kmitl.pectjro.Frame.Groups_interface.View_Getter;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Admin_controls;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Feedback_Page.FeedbackController;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.ProjectTablePage.ProjectTableController;
+import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.Table_Page;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.UserTablePage.UserTableController;
 import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 import javax.swing.*;
@@ -39,11 +40,20 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 
 		projectTable = new ProjectTableController(this);
 
+		String[][] columns = {{"Id", "Username", "Gmail", "Firstname", "Lastname", "Project_Done", "Project_Expired", "Project_Ontime", "Admin"}, {"Id", "Name", "Description", "Start", "End"}};
+		createTableAll(new Table_Page[]{userTable.getView(), projectTable.getView()}, columns);
+
+		userTable.getModel().setUpProgram();
+
+		projectTable.getModel().setUpProgram();
+
 		view.getView().add(admin_control.getFrame());
 		admin_control.getUser().addActionListener(this);
 		admin_control.getFeedback().addActionListener(this);
 		admin_control.getProject().addActionListener(this);
 		admin_control.getExit().addActionListener(this);
+
+
 	}
 
 	// Methods
@@ -53,6 +63,12 @@ public class AdminController implements MainPage_Controller, ActionListener, Int
 				(getContainer().getView().getWidth() - add.getWidth()) / 2,
 				(getContainer().getView().getHeight() - add.getHeight()) / 2);
 		add.setVisible(true);
+	}
+
+	public void createTableAll(Table_Page[] table, String[][] columns) {
+		for (int i = 0; i < table.length; i++) {
+			table[i].createTable(columns[i]);
+		}
 	}
 
 	// Accessor

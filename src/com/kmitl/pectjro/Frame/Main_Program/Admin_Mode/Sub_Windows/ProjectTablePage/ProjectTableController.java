@@ -23,13 +23,6 @@ public class ProjectTableController implements ActionListener, DocumentListener 
 		view = new ProjectTableView();
 		model = new ProjectTableModel(view, this);
 		this.head_control = head_control;
-
-		view.addInternalFrameListener(head_control);
-		view.getAdd_new().addActionListener(this);
-		view.getRefresh().addActionListener(this);
-		view.getDelete().addActionListener(this);
-		view.getSearch().getDocument().addDocumentListener(this);
-		view.getView().addActionListener(this);
 	}
 
 	// Accessor
