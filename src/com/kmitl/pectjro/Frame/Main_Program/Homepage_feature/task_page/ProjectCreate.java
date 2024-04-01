@@ -54,11 +54,11 @@ public class ProjectCreate implements ActionListener, DocumentListener, WindowLi
         b_back = new JButton("Back");
 
         l1 = new JLabel("New Project");
-        l2 = new JLabel("Enter your ProjectName");
+        l2 = new JLabel("Enter your Project Name");
         l3 = new JLabel("Start");
         l4 = new JLabel("End");
         l5 = new JLabel("Enter your Description");
-        projectname = new JInfoGet("ProjectName");
+        projectname = new JInfoGet("Project Name");
         description = new JInfoGet("Description");
 
         d1 = new DatePicker(new LgoodDatePicker_Setting().getSettings());
