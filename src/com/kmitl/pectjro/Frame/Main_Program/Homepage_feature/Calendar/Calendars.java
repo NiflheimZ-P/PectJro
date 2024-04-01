@@ -29,11 +29,10 @@ public class Calendars implements ActionListener {
     }
 
     public Calendars() {
-        // Add Button
         frame = new JPanel();
         left = new JButton("<");
         right = new JButton(">");
-        // Add Button on Panel
+
         pn = new JPanel();
         pn.setLayout(new BorderLayout());
         p_left = new JPanel();
@@ -41,15 +40,12 @@ public class Calendars implements ActionListener {
         label = new JLabel("Calendar");
         monthLb = new JLabel();
 
-        // Add Button on Panel for changing months
         previousMonth = new JButton("<<");
         nextMonth = new JButton(">>");
 
-        // Add Action Listeners for changing months
         previousMonth.addActionListener(this);
         nextMonth.addActionListener(this);
 
-        // Add buttons to the panel
         p_left.add(label);
         p_right.add(previousMonth);
         p_right.add(nextMonth);
@@ -57,18 +53,16 @@ public class Calendars implements ActionListener {
         pn.add(monthLb, BorderLayout.CENTER);
         pn.add(p_right, BorderLayout.EAST);
 
-        // Create a calendar instance
         cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH, 1); // Set the calendar to the first day of the current month
+        // Set the calendar to the first day of the current month
+        cal.set(Calendar.DAY_OF_MONTH, 1);
 
-        // Get the current month and year
         month = cal.get(Calendar.MONTH);
         year = cal.get(Calendar.YEAR);
 
-        // Create the panel with GridLayout
-        calendarPanel = new JPanel(new GridLayout(0, 7)); // 0 rows, 7 columns
+        // 0 rows, 7 columns
+        calendarPanel = new JPanel(new GridLayout(0, 7));
 
-        // Add the calendar panel to the frame
         frame.setLayout(new BorderLayout());
         frame.add(pn, BorderLayout.NORTH);
         frame.add(calendarPanel, BorderLayout.CENTER);
@@ -85,7 +79,6 @@ public class Calendars implements ActionListener {
 
         label.setForeground(new Color(88, 101, 242));
 
-        // Display the calendar
         updateCalendar();
 
         frame.setSize(1000, 600);
@@ -93,14 +86,11 @@ public class Calendars implements ActionListener {
     }
 
     private void updateCalendar() {
-        // Clear existing calendar panel
         calendarPanel.removeAll();
 
-        // Update calendar instance
         month = cal.get(Calendar.MONTH);
         year = cal.get(Calendar.YEAR);
 
-        // Set the calendar to the first day of the month
         cal.set(Calendar.DAY_OF_MONTH, 1);
 
         // Get the number of days in the month
@@ -157,11 +147,11 @@ public class Calendars implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == previousMonth) {
-            cal.add(Calendar.MONTH, -1); // Move to previous month
-            updateCalendar(); // Update calendar display
+            cal.add(Calendar.MONTH, -1);
+            updateCalendar();
         } else if (e.getSource() == nextMonth) {
-            cal.add(Calendar.MONTH, 1); // Move to next month
-            updateCalendar(); // Update calendar display
+            cal.add(Calendar.MONTH, 1);
+            updateCalendar();
         }
     }
 
