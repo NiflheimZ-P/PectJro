@@ -42,13 +42,13 @@ public class AllNoteController implements ActionListener {
 					Connection con = DBConnect.createConnect();
 					NoteTable note = new NoteTable(con);
 					note.addNote(info.id, inputValue, "");
+					loadNote(false);
 
 					return null;
 				}
 
 				@Override
 				protected void done() {
-					loadNote(false);
 
 					load.dispose();
 				}
