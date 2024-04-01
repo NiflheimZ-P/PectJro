@@ -5,11 +5,14 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
+import java.io.*;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.Connection.CreateTable;
+import com.kmitl.pectjro.Database.DatabaseTable.UserTable;
 import com.kmitl.pectjro.Frame.Tools.*;
 
 public class checkDatabase_panel extends JPanel {
@@ -22,7 +25,7 @@ public class checkDatabase_panel extends JPanel {
         super();
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        JLabel head = new JLabel("<html><h1>Checking Database</h1><br/>creating database table on your computer, Please wait...</html>");
+        JLabel head = new JLabel("<html><h1>Checking Database</h1><br/>Your username and password in the connection info<br/>can access to admin mode</html>");
         this.add(head);
 
         pass = new ImageIcon("resources/Images/Status/Pass.png"); error = new ImageIcon("resources/Images/Status/Error.png");
@@ -203,4 +206,5 @@ public class checkDatabase_panel extends JPanel {
         note_bar.setImage(wait);
         repaint();
     }
+
 }
