@@ -38,7 +38,7 @@ public class Calendars implements ActionListener {
         pn.setLayout(new BorderLayout());
         p_left = new JPanel();
         p_right = new JPanel();
-        label = new JLabel("Deadline Calendar");
+        label = new JLabel("Calendar");
         monthLb = new JLabel();
 
         // Add Button on Panel for changing months
