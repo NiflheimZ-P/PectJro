@@ -47,7 +47,7 @@ public class Calendars implements ActionListener {
 
         // Add Action Listeners for changing months
         previousMonth.addActionListener(this);
-        nextMonth.addActionListener(this);
+        nextMonth.addActionListener(this); 
 
         // Add buttons to the panel
         p_left.add(label);
