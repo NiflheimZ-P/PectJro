@@ -98,35 +98,16 @@ public class Main_Setup implements ActionListener {
             System.exit(0);
         }
         else if (command.equals("Finish")) {
-            SwingWorker<Void, Void> done = new SwingWorker<Void, Void>() {
-                @Override
-                protected Void doInBackground() throws Exception {
-                    Setting_Template storage = new Setting_Template();
-                    storage.setData(info);
+            Setting_Template storage = new Setting_Template();
+            storage.setData(info);
+            File info = new File("Database_Setting.dat");
+            try(ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(info))){
+                write.writeObject(storage);
+            } catch (IOException ex){
+                ex.printStackTrace();
+            }
 
-                    Connection con = DBConnect.checkConnection(info);
-                    UserTable user = new UserTable(con);
-                    try (InputStream in = new FileInputStream(new File("resources/Images/aunkung.jpeg"))){
-                        user.addUserData("admin", info.get(3), info.get(4), "admin", "admin", in, true);
-                    } catch (IOException | SQLException e) {
-                        e.printStackTrace();
-                    }
-
-                    File info = new File("Database_Setting.dat");
-                    try(ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(info))){
-                        write.writeObject(storage);
-                    } catch (IOException ex){
-                        ex.printStackTrace();
-                    }
-                    return null;
-                }
-
-                @Override
-                protected void done() {
-                    System.exit(0);
-                }
-            };
-            done.execute();
+            System.exit(0);
         }
     }
 

@@ -109,6 +109,7 @@ public class checkDatabase_panel extends JPanel {
                     check_StepInfo();
                     check_Feedback();
                     check_Note();
+                    create_admin(info.get(3), info.get(4));
                     Main_Setup.bypass = true;
                 } else {
                     setError();
@@ -172,6 +173,15 @@ public class checkDatabase_panel extends JPanel {
             note_bar.setImage(error);
         }
         repaint();
+    }
+
+    public void create_admin(String username, String password){
+        UserTable user = new UserTable(con);
+        try (InputStream in = new FileInputStream(new File("resources/Images/aunkung.jpeg"))){
+            user.addUserData("admin", username, password, "admin", "admin", in, true);
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean check_enable(){
