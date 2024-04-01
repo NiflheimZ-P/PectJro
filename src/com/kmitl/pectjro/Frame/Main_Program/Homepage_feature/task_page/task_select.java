@@ -67,7 +67,7 @@ public class task_select extends JPanel implements MouseListener {
                     MainController.glassPane.setVisible(true);
                     MainController.glassPane.setLoading(true);
 
-                    newone = new project_progressbar(info, controller.getHead_control().getMain_controller().getView().getFrame());
+                    newone = new project_progressbar(info, controller);
                     newone.loadStep();
                     newone.setUpChart();
                     return null;

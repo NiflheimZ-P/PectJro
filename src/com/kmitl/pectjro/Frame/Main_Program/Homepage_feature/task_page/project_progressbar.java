@@ -6,6 +6,7 @@ import com.kmitl.pectjro.Database.DatabaseTable.StepTable;
 import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NewTaskGanttChart;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.AllNote;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.AllNoteController;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.feedback;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.Addpeople;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
@@ -46,8 +47,8 @@ import org.jfree.ui.RectangleEdge;
 public class project_progressbar extends JFrame implements ActionListener, Serializable {
     private JFrame fr;
     private JPanel upper_pmain, upper_west, upper_west_rpart, pane_for_note, panefor_close, logo_lmar, mini_west_rpart, mid_mar_rpart, psouth_main, psouth_move, psouth_add, psouth_midmar, note_bn;
-    private JLabel pro_pic, team_label, pro_name_label;
-    private JButton close_bn, add_bn, lmove_arrow, bn_finish, bn_add_mem, del_bn;
+    private JLabel pro_name_label;
+    private JButton close_bn, add_bn, bn_finish, bn_add_mem, del_bn;
     private NewTaskGanttChart newtgc;
     private static final long serialVersionUID = 1L;
     private Project_Template info;
@@ -57,15 +58,16 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
     private LinkedList<Step_Template> allStep;
     private LinkedList<Step_Template> check;
     private DeleteTask delt;
-    public project_progressbar(Project_Template info, Container owner){
+    private TaskController controller;
+    public project_progressbar(Project_Template info, TaskController controller){
         fr = new JFrame();
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.info = info;
+        this.controller = controller;
 
         //Label
         //pro_pic = new JLabel("Project pic");
-        team_label = new JLabel("Member: ");
-        pro_name_label = new JLabel("Project Name");
+        pro_name_label = new JLabel(info.name);
 
         //button
 
@@ -89,7 +91,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         psouth_midmar = new JPanel();
         psouth_move = new JPanel();
         upper_west.setLayout(new BorderLayout());
-        upper_west_rpart.setLayout(new BorderLayout());
+        upper_west_rpart.setLayout(new GridLayout());
         pane_for_note.setLayout(new FlowLayout(2, 40,60));
         panefor_close.setLayout(new FlowLayout(2,10,10));
 
@@ -100,13 +102,8 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         upper_west.add(upper_west_rpart, BorderLayout.CENTER);
 
         //uppper west rpart add
-        mini_west_rpart.setLayout(new GridLayout(3,1,50,5));
-        mini_west_rpart.add(pro_name_label);
-        pro_name_label.setFont(new Font("Sans", Font.BOLD, 26));
-        mini_west_rpart.add(mid_mar_rpart);
-        mini_west_rpart.add(team_label);
-        team_label.setFont(new Font("Sans", Font.PLAIN, 18));
-        upper_west_rpart.add(mini_west_rpart, BorderLayout.CENTER);
+        upper_west_rpart.add(pro_name_label);
+        pro_name_label.setFont(new Font("Sans", Font.BOLD, 40));
 
         //upper part
         upper_pmain = new JPanel();
@@ -131,9 +128,6 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         psouth_add.add(del_bn);
         del_bn.setFont(new Font("Sans", Font.PLAIN, 14));
 
-        //psouth_move add
-        // psouth_move.add(lmove_arrow);
-        // lmove_arrow.setFont(new Font("Sans", Font.PLAIN, 14));
         psouth_move.add(bn_finish);
         bn_finish.setFont(new Font("Sans", Font.PLAIN, 14));
 
@@ -183,9 +177,9 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         fr.add(psouth_main, BorderLayout.SOUTH);
         fr.setResizable(false);
         fr.setSize(1000, 600);
-        fr.setLocationRelativeTo(owner);
+        fr.setLocationRelativeTo(controller.getHead_control().getMain_controller().getView().getFrame());
 
-        JFreeChart chart = ChartFactory.createGanttChart(info.name, "Development", "Time", createDataset(),
+        JFreeChart chart = ChartFactory.createGanttChart("", "Task", "Time", createDataset(),
                 true, true, true);
 
         // เพิ่ม chart เข้า chart panel
@@ -207,6 +201,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         theme.setLabelLinkPaint(Color.white);
         theme.setShadowPaint(Color.DARK_GRAY);
         theme.setRangeGridlinePaint(Color.white);
+        theme.setTitlePaint(new Color(88,101,242));
 
         theme.setBarPainter(new StandardBarPainter());
 
@@ -243,10 +238,11 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
             Addpeople add = new Addpeople(info, fr);
             add.loadAllUser();
         }else if(ev.getSource().equals(bn_finish)){
-            new feedback();
+            new feedback(fr, controller, info);
             fr.dispose();
         }else if (ev.getSource().equals((close_bn))){
-            new AllNote();
+            AllNoteController allnote = new AllNoteController(info, fr);
+            allnote.loadNote(true);
         }else if (ev.getSource().equals(del_bn)){
             delt = new DeleteTask(info);
             delt.getCon().addActionListener(this);
@@ -272,36 +268,55 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
                     newOne.start = Date.valueOf(newtgc.getD1().getDate());
                     newOne.end = Date.valueOf(newtgc.getD2().getDate());
 
-                    allStep.add(newOne);
                     step.addStep(newOne);
+                    allStep = step.getAllStep(info.id);
                     return null;
                 }
 
                 @Override
                 protected void done() {
                     expected.add(new Task(newtgc.getProjectname().getText(), Date.from(newtgc.getD1().getDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(newtgc.getD2().getDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
+                    newtgc.getFr().dispose();
                     load.dispose();
                 }
             };
             add.execute();
             newtgc.getFr().dispose();
         }else if (ev.getActionCommand().equals("Confirm")){
-            LinkedList<Step_Template> check = new LinkedList<>();
-            for (int i = 0; i < allStep.size(); i++){
-                if (allStep.get(i).step_name.contains(String.valueOf(delt.getTasksel().getSelectedItem()))){
-                    check.add(allStep.get(i));
+            SwingWorker<Void, Void> delete = new SwingWorker<Void, Void>() {
+                private final Loading_dialog load = new Loading_dialog(fr);
+                @Override
+                protected Void doInBackground() throws Exception {
+                    load.setVisible(true);
+                    Step_Template check = new Step_Template();
+                    for (int i = 0; i < allStep.size(); i++){
+                        if (allStep.get(i).step_name.contains(String.valueOf(delt.getTasksel().getSelectedItem()))){
+                            check = allStep.get(i);
+                        }
+                    }
+                    expected.remove(new Task(check.step_name, Date.from(check.start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(check.end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
+
+                    Connection con = DBConnect.createConnect();
+                    StepTable step = new StepTable(con);
+                    step.deleteStep(check.id);
+
+                    return null;
                 }
-            }
-            expected.remove(new Task(check.get(0).step_name, Date.from(check.get(0).start.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC)), Date.from(check.get(0).end.toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC))));
-            check.remove(0);
-            delt.getTasksel().removeItem(String.valueOf(delt.getTasksel().getSelectedItem()));
-            delt.getFr().dispose();
-        }else if (ev.getSource().equals(delt.getCancel())){
+
+                @Override
+                protected void done() {
+                    delt.getTasksel().removeItem(String.valueOf(delt.getTasksel().getSelectedItem()));
+                    delt.getFr().dispose();
+
+                    load.dispose();
+                }
+            };
+            delete.execute();
+        }else if (ev.getActionCommand().equals("Cancel")){
             delt.getFr().dispose();
         }else if (ev.getActionCommand().equals("Back")){
             newtgc.getFr().dispose();
         }
-
     }
 
     public void loadStep() throws SQLException {

@@ -20,7 +20,7 @@ public class MainController implements WindowListener {
 	private AdminController admin;
 	private home_pageController home;
 	private Boolean remember;
-	public static Loading_GlassPane glassPane;
+	public static final Loading_GlassPane glassPane = new Loading_GlassPane();
 
 	// Constructor
 	public MainController(){
@@ -31,7 +31,6 @@ public class MainController implements WindowListener {
 
 		remember = false;
 		view.getFrame().addWindowListener(this);
-		glassPane = new Loading_GlassPane();
 		view.getFrame().setGlassPane(glassPane);
 	}
 
@@ -48,9 +47,6 @@ public class MainController implements WindowListener {
 	}
 	public Loading_GlassPane getGlassPane() {
 		return glassPane;
-	}
-	public void setGlassPane(Loading_GlassPane glassPane) {
-		this.glassPane = glassPane;
 	}
 	public AdminController getAdmin() {
 		return admin;

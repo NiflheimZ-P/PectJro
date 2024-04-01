@@ -43,7 +43,6 @@ public class home_page implements View_Getter, MouseListener {
         l_mar_search = new JPanel();
         r_mar_search = new JPanel();
         s_mar_search = new JPanel();
-        warning = new JPanel(new GridBagLayout());
 
         tf_seach_bar = new JTextField();
         //prepare to add image
@@ -103,7 +102,7 @@ public class home_page implements View_Getter, MouseListener {
 
         //set left part (pn_west)
         main_panel.add(pn_west, BorderLayout.WEST);
-        pn_west.setLayout(new GridBagLayout());
+        pn_west.setLayout(new GridLayout(10, 1));
         pn_west.setPreferredSize(new Dimension(200, 600));
 
         //set up inside left part
@@ -112,28 +111,26 @@ public class home_page implements View_Getter, MouseListener {
         bn_task.setFont(new Font("Sans", Font.PLAIN, 24));
         bn_task.setPreferredSize(new Dimension(200, 100));
         ctn_pn_task.add(bn_task);
-        pn_west.add(ctn_pn_task, new Constraints(0, 0, 0, 0, new Insets(0, 0, 0, 0)));
+        pn_west.add(ctn_pn_task);
 
         ctn_pn_calendar.setLayout(new GridLayout());
         bn_calendar.setBorder(BorderFactory.createEmptyBorder());
         bn_calendar.setFont(new Font("Sans", Font.PLAIN, 24));
         bn_calendar.setPreferredSize(new Dimension(200, 100));
         ctn_pn_calendar.add(bn_calendar);
-        pn_west.add(ctn_pn_calendar, new Constraints(0, 1, 0, 0, new Insets(0, 0, 0, 0)));
+        pn_west.add(ctn_pn_calendar);
 
         ctn_pn_appraisement.setLayout(new GridLayout());
         bn_appraisement.setBorder(BorderFactory.createEmptyBorder());
         bn_appraisement.setFont(new Font("Sans", Font.PLAIN, 24));
         bn_appraisement.setPreferredSize(new Dimension(200, 100));
         ctn_pn_appraisement.add(bn_appraisement);
-        pn_west.add(ctn_pn_appraisement, new Constraints(0, 2, 0, 0, new Insets(0, 0, 0, 0)));
+        pn_west.add(ctn_pn_appraisement);
 
         ctn_pn_deadline.setLayout(new FlowLayout());
         l4.setFont(new Font("Sans", Font.BOLD, 18));
         ctn_pn_deadline.add(l4);
-        pn_west.add(ctn_pn_deadline, new Constraints(0, 3, 0, 0, new Insets(0, 0, 0, 0)));
-        pn_west.add(warning, new Constraints(0, 4, 1, 1, GridBagConstraints.PAGE_START, new Insets(0, 0, 0, 0)));
-        warning.setPreferredSize(new Dimension(200, (int)(height * 0.54)));
+        pn_west.add(ctn_pn_deadline);
 
 
         //button (+) at bottom right of corner and right part (pn_east)
@@ -295,10 +292,16 @@ public class home_page implements View_Getter, MouseListener {
     public void setPn_west(JPanel pn_west) {
         this.pn_west = pn_west;
     }
-    public JPanel getWarning() {
-        return warning;
+    public JLabel getL4() {
+        return l4;
     }
-    public void setWarning(JPanel warning) {
-        this.warning = warning;
+    public void setL4(JLabel l4) {
+        this.l4 = l4;
+    }
+    public JPanel getCtn_pn_deadline() {
+        return ctn_pn_deadline;
+    }
+    public void setCtn_pn_deadline(JPanel ctn_pn_deadline) {
+        this.ctn_pn_deadline = ctn_pn_deadline;
     }
 }

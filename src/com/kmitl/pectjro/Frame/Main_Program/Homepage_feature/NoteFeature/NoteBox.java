@@ -1,5 +1,6 @@
 package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature;
 
+import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
 import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.task_page.project_progressbar;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
 import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
@@ -12,74 +13,51 @@ import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.concurrent.ExecutionException;
 
-public class NoteBox extends JPanel implements MouseListener, ActionListener {
+public class NoteBox extends JPanel implements MouseListener, WindowListener {
     private JPanel pl, pforname, west_mar, south_mar, mid_fsouth, gap_north;
     private JLabel name, desc, start, end;
     private JButton noteb;
-    private Note note;
     private project_progressbar pro_pro;
     private Note_Template note_info;
+    private Container owner;
+    private AllNoteController controller;
 
-    //private Task task;
-    //private TaskController tskc;
 
-
-    public NoteBox() {
+    public NoteBox(Note_Template note, Container owner, AllNoteController controller) {
+        this.controller = controller;
+        this.owner = owner;
         pl = new JPanel();
         pforname =  new JPanel();
         west_mar = new JPanel();
         south_mar = new JPanel();
         mid_fsouth = new JPanel();
-        gap_north = new JPanel();
-        this.note_info = note_info;
+        this.note_info = note;
 
         //Label
+        name = new JLabel(note.name);
 
-        name = new JLabel("Note");
-        //desc = new JLabel(info.description);
-
-
-        pl.setLayout(new BorderLayout());
+        pl.setLayout(new GridBagLayout());
         this.add(pl);
         pforname.setLayout(new FlowLayout(FlowLayout.CENTER));
         pforname.add(name);
         pforname.setPreferredSize(new Dimension(750, 200));
-        pl.add(pforname, BorderLayout.CENTER);
-
-        gap_north = new JPanel();
-        gap_north.setPreferredSize(new Dimension(750, 70));
-        pl.add(gap_north, BorderLayout.NORTH);
-
-        //add to pforname
-        // west_mar.setPreferredSize(new Dimension(60, 200));
-        // pl.add(west_mar, BorderLayout.WEST);
-        // south_mar.setPreferredSize(new Dimension(1, 40));
-        // south_mar.setLayout(new GridLayout(1,3));
-
-        // south_mar.add(mid_fsouth);
-
-        // pl.add(south_mar, BorderLayout.SOUTH);
+        pl.add(pforname);
 
         name.setFont(new Font("Sans", Font.BOLD, 50));
-        //pl.add(desc, BorderLayout.CENTER);
-        //desc.setFont(new Font("Sans", Font.PLAIN, 14));
         pl.setBorder(new LineBorder(new Color(30,31,34)));
         this.setBackground(new Color(49,51,56));
 
-        pl.setPreferredSize(new Dimension(750,200));
+        pl.setPreferredSize(new Dimension(400,500));
         pl.addMouseListener(this);
 
         this.setVisible(true);
     }
-
 
     public JLabel getNamea() {
         return name;
@@ -88,11 +66,46 @@ public class NoteBox extends JPanel implements MouseListener, ActionListener {
     public JPanel getFrame(){
         return pl;
     }
+    public void createNote() {
+        Note open = new Note(note_info, controller);
+        open.getFr().addWindowListener(this);
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().equals(pl)){
-//            note = new Note(note_info);
-//            note.getSave().addActionListener(this);
+            SwingWorker<Boolean, Void> request = new SwingWorker<Boolean, Void>() {
+                private final Loading_dialog load = new Loading_dialog(owner);
+                @Override
+                protected Boolean doInBackground() throws Exception {
+                    load.setVisible(true);
+                    Connection con = DBConnect.createConnect();
+                    NoteTable note = new NoteTable(con);
+                    if (note.getAccess(note_info.id)) {
+                        note.updateAccess(note_info.id, false);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+
+                @Override
+                protected void done(){
+					try {
+						if (get()) {
+                            createNote();
+                        } else {
+                            load.dispose();
+                            JOptionPane.showMessageDialog(null, "Someone is using this note, Please try again later.", "Can not access", JOptionPane.ERROR_MESSAGE);
+                        }
+					} catch (InterruptedException | ExecutionException ex) {
+						throw new RuntimeException(ex);
+					}
+
+					load.dispose();
+                }
+            };
+            request.execute();
         }
 
     }
@@ -111,7 +124,6 @@ public class NoteBox extends JPanel implements MouseListener, ActionListener {
     public void mouseEntered(MouseEvent e) {
         if (e.getSource().equals(pl)) {
             pforname.setBackground(new Color(88,101,242));
-            gap_north.setBackground(new Color(88,101,242));
             pl.setBackground(new Color(88,101,242));
             name.setForeground(Color.black);
         }
@@ -121,49 +133,60 @@ public class NoteBox extends JPanel implements MouseListener, ActionListener {
     public void mouseExited(MouseEvent e) {
         if (e.getSource().equals(pl)) {
             pforname.setBackground(new Color(30,31,34));
-            gap_north.setBackground(new Color(30,31,34));
             pl.setBackground(new Color(30,31,34));
             name.setForeground(Color.white);
         }
     }
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(note.getSave())){
-            this.name.setText(note.getTextField().getText());
-            note.getFr().setTitle(note.getTextField().getText());
-
-            Connection con = DBConnect.createConnect();
-            NoteTable notetab = new NoteTable(con);
-//            try{
-//                notetab.UpdateNote(note.getFr().getTitle(), note.getTextArea().getText());
-//            }catch ()
-        }
+    public void windowClosing(WindowEvent e) {
+        SwingWorker<Void, Void> change = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                Connection con = DBConnect.createConnect();
+                NoteTable note = new NoteTable(con);
+                note.updateAccess(note_info.id, true);
+                return null;
+            }
+        };
+        change.execute();
     }
-//    public void loadData() {
-//        SwingWorker<Void, Void> getFeed = new SwingWorker<Void, Void>() {
-//            private Loading_dialog loading = new Loading_dialog(pl);
-//            @Override
-//            protected Void doInBackground() throws Exception {
-//                loading.setVisible(true);
-//                name.removeAll();
-//                desc.removeAll();
-//
-//                task.getRef().setEnabled(false);
-//                Connection con = DBConnect.createConnect();
-//
-//                task.getRef().setEnabled(true);
-////                if (!view.getSearch().getText().equals(view.getSearch().getShouldbe())){
-////                    search();
-////                }
-////                return null;
-////            }
-//
-////            @Override
-////            protected void done() {
-////                loading.dispose();
-////            }
-////        };
-////        getFeed.execute();
-//        }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        SwingWorker<Void, Void> change = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                Connection con = DBConnect.createConnect();
+                NoteTable note = new NoteTable(con);
+                note.updateAccess(note_info.id, true);
+                return null;
+            }
+        };
+        change.execute();
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
 }

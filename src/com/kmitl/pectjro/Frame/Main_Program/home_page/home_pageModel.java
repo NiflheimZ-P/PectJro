@@ -109,6 +109,11 @@ public class home_pageModel {
 	}
 
 	public void warning() {
+		view.getPn_west().removeAll();
+		view.getPn_west().add(view.getBn_task());
+		view.getPn_west().add(view.getBn_calendar());
+		view.getPn_west().add(view.getBn_appraisement());
+		view.getPn_west().add(view.getCtn_pn_deadline());
 		ArrayList<Project_Template> near = new ArrayList<>();
 		int check = 0;
 		for (Project_Template i: controller.getProjectIn()) {
@@ -122,11 +127,12 @@ public class home_pageModel {
 		}
 
 		for (int i = 0; i < near.size(); i++) {
-			if (i != near.size() -1) {
-				view.getWarning().add(new DeadLine(near.get(i), controller), new Constraints(0, i, 0, 0, new Insets(10, 0, 10, 0)));
-			} else {
-				view.getWarning().add(new DeadLine(near.get(i), controller), new Constraints(0, i, 0, 1, GridBagConstraints.PAGE_START, new Insets(10, 0, 10, 0)));
-			}
+			int finalI = i;
+			view.getPn_west().add(new JPanel() {
+				{
+					this.add(new DeadLine(near.get(finalI), controller));
+				}
+			});
 		}
 	}
 

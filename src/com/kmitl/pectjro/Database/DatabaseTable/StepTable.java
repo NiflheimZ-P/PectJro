@@ -51,4 +51,9 @@ public class StepTable {
 
 		return output;
 	}
+
+	public void deleteStep(int id) throws SQLException{
+		String sql = String.format("DELETE FROM Step_info WHERE Id = %s;", id);
+		updateData(sql);
+	}
 }

@@ -9,6 +9,8 @@ package com.kmitl.pectjro.Frame.Main_Program.Homepage_feature;
  * @author Insi
  */
 import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
+import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 import com.kmitl.pectjro.Frame.Tools.JInfoGet;
 import com.kmitl.pectjro.Frame.Tools.LgoodDatePicker_Setting;
 
@@ -16,8 +18,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
-public class NewTaskGanttChart  {
+public class NewTaskGanttChart implements DocumentListener, DateChangeListener {
     private JDialog fr;
     private JPanel p_main, p_zone1, p_zone2, p_zone11, p_zone12, p_zone21, p_zone22, p_zone23, p_zone221, p_zone222;
     private JButton b_create, b_back;
@@ -54,10 +58,10 @@ public class NewTaskGanttChart  {
         l2 = new JLabel("Enter your Task");
         l3 = new JLabel("Start");
         l4 = new JLabel("End");
-        projectname = new JInfoGet("ProjectName");
+        projectname = new JInfoGet("Create new task in this project");
 
-        d1 = new DatePicker(new LgoodDatePicker_Setting().getSettings());
-        d2 = new DatePicker(new LgoodDatePicker_Setting().getSettings());
+        d1 = new DatePicker(new LgoodDatePicker_Setting().getSettings()); d1.setDateToToday();
+        d2 = new DatePicker(new LgoodDatePicker_Setting().getSettings()); d2.setDateToToday();
 
         fr.add(p_main);
         p_main.setLayout(new BorderLayout());
@@ -142,6 +146,10 @@ public class NewTaskGanttChart  {
         l4.setForeground(Color.white);
 
         //addActionListener
+        projectname.getDocument().addDocumentListener(this);
+        d1.addDateChangeListener(this);
+        d2.addDateChangeListener(this);
+
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         fr.setResizable(false);
         fr.setSize(600,300);
@@ -163,5 +171,29 @@ public class NewTaskGanttChart  {
 
     public DatePicker getD2() {
         return d2;
+    }
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        b_create.setEnabled(check());
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        b_create.setEnabled(check());
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        b_create.setEnabled(check());
+    }
+
+    @Override
+    public void dateChanged(DateChangeEvent dateChangeEvent) {
+        b_create.setEnabled(check());
+    }
+
+    public boolean check(){
+        return (!projectname.getText().equals(projectname.getShouldbe()) && !projectname.getText().isEmpty() && d2.getDate().isAfter(d1.getDate()));
     }
 }

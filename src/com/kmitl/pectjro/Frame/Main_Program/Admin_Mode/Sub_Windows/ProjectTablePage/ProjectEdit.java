@@ -2,9 +2,12 @@ package com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.Sub_Windows.ProjectTable
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.kmitl.pectjro.Database.Connection.DBConnect;
+import com.kmitl.pectjro.Database.DatabaseTable.NoteTable;
 import com.kmitl.pectjro.Database.DatabaseTable.UserProjectTable;
 import com.kmitl.pectjro.Database.DatabaseTable.UserTable;
 import com.kmitl.pectjro.Frame.Loading.Loading_dialog;
+import com.kmitl.pectjro.Frame.Main_Program.Homepage_feature.NoteFeature.NoteBox;
+import com.kmitl.pectjro.Frame.Templates.Note_Template;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
@@ -30,25 +33,26 @@ import java.util.ArrayList;
 public class ProjectEdit implements ActionListener, WindowListener, DocumentListener {
 	// Attribute
 	private JInternalFrame frame;
-	private JPanel north_info, north_peo, south, infomation, people, addPeople, north_add, center_add, noPeople, note;
+	private JPanel north_info, north_peo, south, infomation, people, addPeople, north_add, center_add, noPeople, note, inNote, south_note;
 	private JTabbedPane center;
 	private JTextField name;
 	private JTextArea description;
 	private DatePicker start, end;
 	private JButton add, save, cancel;
-	private JScrollPane scroll_des, scroll_people;
+	private JScrollPane scroll_des, scroll_people, scroll_note;
 	private JInfoGet search;
 	private Project_Template info;
 	private AddCollaborator find;
 	private ArrayList<Integer> delete, addNew;
 	private ArrayList<User_Template> data;
+	private ArrayList<Note_Template> allNote;
 
 	// Constructor
 	public ProjectEdit(Project_Template info) {
 		delete = new ArrayList<>();
 		addNew = new ArrayList<>();
 		this.info = info;
-		frame = new JInternalFrame("'" + info.name + "' Info", false, true, false);
+		frame = new JInternalFrame("'" + info.name + "' Info", true, true, false);
 		frame.setSize(700, 550);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		center = new JTabbedPane();
@@ -145,7 +149,19 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 		noPeople.add(noOne, new Constraints(0, 0, 0, 0, new Insets(0, 0, 30, 0)));
 		noPeople.setBorder(new LineBorder(new Color(51,51,51,255)));
 
-		note = new JPanel(); // TODO: Make admin can edit note
+		note = new JPanel(new BorderLayout()); // TODO: Make admin can edit note
+		inNote = new JPanel(new GridBagLayout());
+		south_note = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+		scroll_note = new JScrollPane(inNote, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scroll_note.setBorder(null);
+		scroll_note.getHorizontalScrollBar().setUnitIncrement(20);
+		scroll_note.setAutoscrolls(false);
+
+		note.setBackground(new Color(49,51,56));
+		inNote.setBackground(new Color(49,51,56));
+
+		note.add(scroll_note);
 
 		people.setBorder(new EmptyBorder(0, 30, 0, 30));
 		center.add("Information", infomation);
@@ -275,6 +291,44 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 		}
 	}
 
+	public void loadNote() {
+		SwingWorker<Void, Void> load = new SwingWorker<Void, Void>() {
+			@Override
+			protected Void doInBackground() throws Exception {
+				inNote.removeAll();
+				inNote.revalidate();
+				inNote.repaint();
+
+				Connection con = DBConnect.createConnect();
+				NoteTable note = new NoteTable(con);
+				allNote = note.getAllNote(info.id);
+
+				return null;
+			}
+
+			@Override
+			protected void done() {
+				setUpNote();
+			}
+
+		};
+		load.execute();
+	}
+
+	public void setUpNote() {
+		inNote.removeAll();
+		for (int i = 0; i < allNote.size(); i++) {
+			Note_Box note = new Note_Box(allNote.get(i), frame);
+			if (i != allNote.size() - 1) {
+				inNote.add(note, new Constraints(i, 0, 0, 1, new Insets(0, 5, 0, 5)));
+			} else {
+				inNote.add(note, new Constraints(i, 0, 1, 1, 21, new Insets(0, 5, 0, 5)));
+			}
+		}
+		inNote.revalidate();
+		inNote.repaint();
+	}
+
 	// Listener
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -299,42 +353,34 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 			search.setText("");
 		}
 	}
-
 	@Override
 	public void windowOpened(WindowEvent e) {
 
 	}
-
 	@Override
 	public void windowClosing(WindowEvent e) {
 
 	}
-
 	@Override
 	public void windowClosed(WindowEvent e) {
 		find = null;
 	}
-
 	@Override
 	public void windowIconified(WindowEvent e) {
 
 	}
-
 	@Override
 	public void windowDeiconified(WindowEvent e) {
 
 	}
-
 	@Override
 	public void windowActivated(WindowEvent e) {
 
 	}
-
 	@Override
 	public void windowDeactivated(WindowEvent e) {
 
 	}
-
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		searchUp();

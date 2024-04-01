@@ -61,8 +61,10 @@ public class ProjectTable {
 	}
 
 	public void deleteProject(int id) throws SQLException {
-		String sql = String.format("DELETE FROM Project_info WHERE Id = %s;", id);
-		updateData(sql);
+		String sql_project = String.format("DELETE FROM Project_info WHERE Id = %s;", id);
+		String sql_user = String.format("DELETE FROM User_Project WHERE Project_id = %s;", id);
+		updateData(sql_project);
+		updateData(sql_user);
 	}
 
 	public void updateProject(Project_Template info) throws SQLException {

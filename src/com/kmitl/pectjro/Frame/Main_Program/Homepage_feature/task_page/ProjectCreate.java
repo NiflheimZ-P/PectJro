@@ -158,6 +158,7 @@ public class ProjectCreate implements ActionListener, DocumentListener, WindowLi
         d2.addDateChangeListener(this);
 
         fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        fr.setAlwaysOnTop(true);
         fr.setResizable(false);
         fr.setSize(600,300);
         fr.setLocationRelativeTo(controller.getHead_control().getMain_controller().getView().getFrame());
@@ -181,6 +182,8 @@ public class ProjectCreate implements ActionListener, DocumentListener, WindowLi
             addNew.start = Date.valueOf(d1.getDate());
             addNew.end = Date.valueOf(d2.getDate());
             controller.getModel().addProject(addNew);
+            fr.dispose();
+        } else {
             fr.dispose();
         }
     }
