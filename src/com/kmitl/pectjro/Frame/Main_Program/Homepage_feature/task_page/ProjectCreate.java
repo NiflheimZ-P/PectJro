@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Date;
+import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -182,7 +183,7 @@ public class ProjectCreate implements ActionListener, DocumentListener, WindowLi
             addNew.start = Date.valueOf(d1.getDate());
             addNew.end = Date.valueOf(d2.getDate());
             controller.getModel().addProject(addNew);
-            fr.dispose();
+			fr.dispose();
         } else {
             fr.dispose();
         }

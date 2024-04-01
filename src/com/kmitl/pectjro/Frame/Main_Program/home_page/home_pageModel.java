@@ -5,6 +5,7 @@ import com.kmitl.pectjro.Database.DatabaseTable.ProjectTable;
 import com.kmitl.pectjro.Database.DatabaseTable.UserProjectTable;
 import com.kmitl.pectjro.Database.DatabaseTable.UserTable;
 import com.kmitl.pectjro.Frame.Main_Program.Admin_Mode.AdminController;
+import com.kmitl.pectjro.Frame.Main_Program.Main_Frame.MainController;
 import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import com.kmitl.pectjro.Frame.Templates.User_Template;
 import com.kmitl.pectjro.Frame.Tools.Constraints;
@@ -58,11 +59,11 @@ public class home_pageModel {
 			@Override
 			protected void done() {
 				controller.getProfile().getModel().setProfile();
+				view.getBn_profile().setIcon(new ImageIcon(new ImageIcon(controller.getCache().image).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 				warning();
 				try {
 					if (get()) {
 						view.getBn_admin().setVisible(true);
-						view.getBn_profile().setIcon(new ImageIcon(new ImageIcon(controller.getCache().image).getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 					}
 				} catch (InterruptedException | ExecutionException e) {
 					throw new RuntimeException(e);
@@ -79,6 +80,7 @@ public class home_pageModel {
 		try (ObjectInputStream ob = new ObjectInputStream(new FileInputStream(new File("User_Cache.dat")))){
 			controller.setCache((User_Template) ob.readObject());
 		} catch (IOException | ClassNotFoundException e) {
+			MainController.glassPane.setLoading(false);
 			JOptionPane.showMessageDialog(null, "Cannot access file 'User_Cache'", "Error", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		}

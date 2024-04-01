@@ -57,6 +57,7 @@ public class TaskModel {
 			@Override
 			protected void done(){
 				loadProject(controller.getHead_control().getProjectIn());
+				controller.getHead_control().getModel().warning();
 
 				MainController.glassPane.setVisible(false);
 				MainController.glassPane.setLoading(false);
