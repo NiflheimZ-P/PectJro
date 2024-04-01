@@ -95,7 +95,7 @@ public class DeleteTask {
     public JFrame getFr() {
         return fr;
     }
-    public void loadStep() throws SQLException {
+    public void loadStep() throws Exception {
         Connection con = DBConnect.createConnect();
         StepTable step = new StepTable(con);
         allStepName = step.getAllStep(info.id);

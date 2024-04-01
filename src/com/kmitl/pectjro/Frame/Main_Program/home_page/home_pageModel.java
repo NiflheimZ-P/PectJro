@@ -31,7 +31,7 @@ public class home_pageModel {
 	}
 
 	// Methods
-	public void getProject() throws SQLException {
+	public void getProject() throws Exception {
 		ProjectTable project = new ProjectTable(con);
 		controller.setProjectIn(project.getProjectData(controller.getCache().id));
 	}

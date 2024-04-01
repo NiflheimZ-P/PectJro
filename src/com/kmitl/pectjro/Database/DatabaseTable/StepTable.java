@@ -6,12 +6,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class StepTable {
+public class StepTable extends Database_Simple<Step_Template> {
 	// Attribute
 	private Connection con;
 
 	// Constructor
 	public StepTable(Connection con) {
+		super(Step_Template.class);
+
 		this.con = con;
 	}
 
@@ -34,22 +36,11 @@ public class StepTable {
 		state.executeUpdate();
 	}
 
-	public LinkedList<Step_Template> getAllStep(int project_id) throws SQLException{
+	public LinkedList<Step_Template> getAllStep(int project_id) throws Exception {
 		String sql = String.format("SELECT * FROM Step_info WHERE Owner_id = %s;", project_id);
 		ResultSet result = getData(sql);
 
-		LinkedList<Step_Template> output = new LinkedList<>();
-		while (result.next()) {
-			Step_Template current = new Step_Template();
-			current.id = result.getInt("Id");
-			current.owner_id = result.getInt("Owner_id");
-			current.step_name = result.getString("Name");
-			current.start = result.getDate("Start");
-			current.end = result.getDate("Expired");
-			output.add(current);
-		}
-
-		return output;
+		return getLink(result);
 	}
 
 	public void deleteStep(int id) throws SQLException{

@@ -149,7 +149,7 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 		noPeople.add(noOne, new Constraints(0, 0, 0, 0, new Insets(0, 0, 30, 0)));
 		noPeople.setBorder(new LineBorder(new Color(51,51,51,255)));
 
-		note = new JPanel(new BorderLayout()); // TODO: Make admin can edit note
+		note = new JPanel(new BorderLayout());
 		inNote = new JPanel(new GridBagLayout());
 		south_note = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
@@ -173,7 +173,7 @@ public class ProjectEdit implements ActionListener, WindowListener, DocumentList
 	}
 
 	// Methods
-	public void loadCon() throws SQLException {
+	public void loadCon() throws Exception {
 		Connection con = DBConnect.createConnect();
 		UserProjectTable up = new UserProjectTable(con);
 		info.people = up.getCollaborator(info.id);

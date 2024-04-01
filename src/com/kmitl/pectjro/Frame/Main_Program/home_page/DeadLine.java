@@ -86,6 +86,7 @@ public class DeadLine extends JPanel implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
+		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		name.setForeground(Color.white);
 		date.setForeground(new Color(221,7,51));
 		this.setBackground(new Color(88,101,242,255));

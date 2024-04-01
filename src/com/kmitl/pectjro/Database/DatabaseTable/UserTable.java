@@ -12,10 +12,12 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class UserTable {
+public class UserTable extends Database_Simple<User_Template>{
 	private final Connection con;
 
 	public UserTable(Connection con) {
+		super(User_Template.class);
+
 		this.con = con;
 	}
 
@@ -90,30 +92,13 @@ public class UserTable {
 		return output;
 	}
 
-	public ArrayList<User_Template> load_AllUser() throws SQLException{
-		ArrayList<User_Template> output = new ArrayList<>();
+	public ArrayList<User_Template> load_AllUser() throws Exception {
 		ResultSet result = getData("SELECT * FROM User_info;");
-		User_Template user;
-		while (result.next()){
-			user = new User_Template();
-			user.setData(
-					result.getInt("Id"),
-					result.getString("Username"),
-					result.getString("Gmail"),
-					result.getString("Password"),
-					result.getString("Firstname"),
-					result.getString("Lastname"),
-					result.getBytes("Image"),
-					result.getInt("Project_Done"),
-					result.getInt("Project_Expired"),
-					result.getInt("Project_Ontime"),
-					result.getBoolean("Admin"));
-			output.add(user);
-		}
-		return output;
+
+		return getArray(result);
 	}
 
-	public ArrayList<User_Template> getById(ArrayList<Integer> id) throws SQLException{
+	public ArrayList<User_Template> getById(ArrayList<Integer> id) throws Exception {
 		String sql = String.format("SELECT * FROM User_info WHERE Id = %s", id.get(0));
 
 		for (int i = 1; i < id.size(); i++) {
@@ -122,50 +107,15 @@ public class UserTable {
 		sql += ";";
 
 		ResultSet result = getData(sql);
-		ArrayList<User_Template> output = new ArrayList<>();
-		while (result.next()) {
-			User_Template current = new User_Template();
-			current.setData(
-					result.getInt("Id"),
-					result.getString("Username"),
-					result.getString("Gmail"),
-					result.getString("Password"),
-					result.getString("Firstname"),
-					result.getString("Lastname"),
-					result.getBytes("Image"),
-					result.getInt("Project_Done"),
-					result.getInt("Project_Expired"),
-					result.getInt("Project_Ontime"),
-					result.getBoolean("Admin"));
-			output.add(current);
-		}
 
-		return output;
+		return getArray(result);
 	}
 
-	public ArrayList<User_Template> getById(int id) throws SQLException{
+	public ArrayList<User_Template> getById(int id) throws Exception {
 		String sql = String.format("SELECT * FROM User_info ui WHERE Id IN (SELECT up.User_id FROM User_Project up WHERE up.Project_id = %s);", id);
-
 		ResultSet result = getData(sql);
-		ArrayList<User_Template> output = new ArrayList<>();
-		while (result.next()) {
-			User_Template current = new User_Template();
-			current.setData(
-					result.getInt("Id"),
-					result.getString("Username"),
-					result.getString("Gmail"),
-					result.getString("Password"),
-					result.getString("Firstname"),
-					result.getString("Lastname"),
-					result.getBytes("Image"),
-					result.getInt("Project_Done"),
-					result.getInt("Project_Expired"),
-					result.getInt("Project_Ontime"),
-					result.getBoolean("Admin"));
-			output.add(current);
-		}
 
-		return output;
+		return getArray(result);
 	}
 
 	public void changeUserPicture(int id, InputStream pic) throws SQLException {

@@ -14,14 +14,10 @@ public class DBConnect {
 		try (ObjectInputStream data = new ObjectInputStream(new FileInputStream(info))) {
             connect_data = (Setting_Template) data.readObject();
             con = DriverManager.getConnection("jdbc:mysql://" + connect_data.host + ":" + connect_data.port + "/" + connect_data.database_name, connect_data.username, connect_data.password);
-        } catch (ClassNotFoundException ex){
+        } catch (ClassNotFoundException | IOException | SQLException ex){
             ex.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();  //TODO make new Exception type that will appear pop up
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return con;
+		return con;
     }
 
     public synchronized static Connection checkConnection(ArrayList<String> info) {

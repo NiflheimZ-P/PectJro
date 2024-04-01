@@ -17,7 +17,7 @@ public class UserView {
 
 	// Constructor
 	public UserView(User_Template user) {
-		frame = new JInternalFrame("User Profile", true, true, false);
+		frame = new JInternalFrame("User Profile", false, true, false);
 		main_panel = new JPanel(new GridBagLayout());
 		frame.setSize(400, 550);
 

@@ -249,7 +249,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
             delt.getCancel().addActionListener(this);
             try {
                 delt.loadStep();
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
             delt.addToCombobox();
@@ -319,7 +319,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
         }
     }
 
-    public void loadStep() throws SQLException {
+    public void loadStep() throws Exception {
         Connection con = DBConnect.createConnect();
         StepTable step = new StepTable(con);
         allStep = step.getAllStep(info.id);

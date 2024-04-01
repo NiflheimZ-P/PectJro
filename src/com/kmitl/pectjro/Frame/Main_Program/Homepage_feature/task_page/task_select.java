@@ -98,6 +98,7 @@ public class task_select extends JPanel implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         name.setForeground(Color.white);
         desc.setForeground(Color.black);
         start.setForeground(Color.black);

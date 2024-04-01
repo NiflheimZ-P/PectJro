@@ -123,6 +123,7 @@ public class NoteBox extends JPanel implements MouseListener, WindowListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         if (e.getSource().equals(pl)) {
+            setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             pforname.setBackground(new Color(88,101,242));
             pl.setBackground(new Color(88,101,242));
             name.setForeground(Color.black);

@@ -10,10 +10,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class FeedbackTable {
+public class FeedbackTable extends Database_Simple<Feedback_Template> {
 	private final Connection con;
 
 	public FeedbackTable(Connection con){
+		super(Feedback_Template.class);
 		this.con = con;
 	}
 
@@ -32,21 +33,11 @@ public class FeedbackTable {
 		updateData(sql);
 	}
 
-	public LinkedList<Feedback_Template> getAllFeedback() throws SQLException {
+	public LinkedList<Feedback_Template> getAllFeedback() throws Exception {
 		String sql = "SELECT f.Id, ui.Image, ui.Username, f.Word FROM Feedback f JOIN User_info ui ON f.User_id = ui.Id;";
 		ResultSet result = getData(sql);
 
-		LinkedList<Feedback_Template> output = new LinkedList<Feedback_Template>();
-		while (result.next()){
-			Feedback_Template feed = new Feedback_Template();
-			feed.id = result.getInt("Id");
-			feed.image = result.getBytes("Image");
-			feed.username = result.getString("Username");
-			feed.word = result.getString("Word");
-			output.add(feed);
-		}
-
-		return output;
+		return getLink(result);
 	}
 
 }

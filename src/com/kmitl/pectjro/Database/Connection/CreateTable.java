@@ -15,7 +15,7 @@ public class CreateTable {
             Statement execute = con.createStatement();
             execute.executeUpdate(sql);
         } catch (SQLException e) {
-            e.printStackTrace(); //TODO make error appear here
+            e.printStackTrace();
         }
     }
     public boolean createUserTable(){
@@ -93,7 +93,7 @@ public class CreateTable {
             updateData("CREATE TABLE IF NOT EXISTS Note_info (" +
                     "Id int NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE," +
                     "Owner_id int NOT NULL," +
-                    "Name VARCHAR(250) NOT NULL," +
+                    "Name TEXT NOT NULL," +
                     "Note LONGTEXT," +
                     "Access boolean DEFAULT true);");
             return true;

@@ -5,10 +5,12 @@ import com.kmitl.pectjro.Frame.Templates.Project_Template;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ProjectTable {
+public class ProjectTable extends Database_Simple<Project_Template>{
 	private Connection con;
 
 	public ProjectTable(Connection con) {
+		super(Project_Template.class);
+
 		this.con = con;
 	}
 
@@ -22,24 +24,11 @@ public class ProjectTable {
 		return state.executeQuery(sql);
 	}
 
-	public ArrayList<Project_Template> getProjectData() throws SQLException{
+	public ArrayList<Project_Template> getProjectData() throws Exception {
 		String sql = "SELECT * FROM Project_info;";
 		ResultSet result = getData(sql);
 
-		ArrayList<Project_Template> output = new ArrayList<>();
-		while (result.next()) {
-			Project_Template current = new Project_Template();
-			current.setData(
-					result.getInt("Id"),
-					result.getString("Name"),
-					result.getString("Description"),
-					result.getDate("Start"),
-					result.getDate("Expired")
-			);
-			output.add(current);
-		}
-
-		return output;
+		return getArray(result);
 	}
 
 	public void addProjectData(int id, String name, String description, Date start, Date end) throws SQLException {
@@ -77,20 +66,12 @@ public class ProjectTable {
 		sql.executeUpdate();
 	}
 
-	public ArrayList<Project_Template> getProjectData(int id) throws SQLException {
+	public ArrayList<Project_Template> getProjectData(int id) throws Exception {
 		String sql = String.format("SELECT * FROM Project_info pi2 WHERE Id IN (SELECT up.Project_id FROM User_Project up WHERE up.User_id = %s) ORDER BY Expired;", id);
 
 		ArrayList<Project_Template> output = new ArrayList<>();
 		ResultSet result = getData(sql);
-		while (result.next()) {
-			Project_Template current = new Project_Template();
-			current.id = result.getInt("Id");
-			current.name = result.getString("Name");
-			current.description = result.getString("Description");
-			current.start = result.getDate("Start");
-			current.end = result.getDate("Expired");
-			output.add(current);
-		}
-		return output;
+
+		return getArray(result);
 	}
 }
