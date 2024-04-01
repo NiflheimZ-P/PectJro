@@ -52,7 +52,7 @@ public class ProjectTable extends Database_Simple<Project_Template>{
 	public void deleteProject(int id) throws SQLException {
 		String sql_project = String.format("DELETE FROM Project_info WHERE Id = %s;", id);
 		String sql_user = String.format("DELETE FROM User_Project WHERE Project_id = %s;", id);
-		String sql_step = String.format("DELETE FROM Step_info WHERE Owner_id = %s;");
+		String sql_step = String.format("DELETE FROM Step_info WHERE Owner_id = %s;", id);
 		updateData(sql_project);
 		updateData(sql_user);
 		updateData(sql_step);
