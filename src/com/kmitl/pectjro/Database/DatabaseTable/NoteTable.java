@@ -70,4 +70,11 @@ public class NoteTable extends Database_Simple<Note_Template> {
 		String sql = String.format("DELETE FROM Note_info WHERE Id = %s;", note_id);
 		updateData(sql);
 	}
+
+	public Note_Template getNote(int note_id) throws SQLException {
+		String sql = String.format("SELECT * FROM Note_info WHERE Id = %s", note_id);
+		ResultSet result = getData(sql);
+		result.next();
+		return new Note_Template(result);
+	}
 }

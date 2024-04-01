@@ -83,6 +83,7 @@ public class NoteBox extends JPanel implements MouseListener, WindowListener {
                     NoteTable note = new NoteTable(con);
                     if (note.getAccess(note_info.id)) {
                         note.updateAccess(note_info.id, false);
+                        note_info = note.getNote(note_info.id);
                         return true;
                     } else {
                         return false;

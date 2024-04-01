@@ -106,6 +106,8 @@ public class ProfileModel {
 			@Override
 			protected void done() {
 				view.getL_name().setText("Username :  "+ name);
+				controller.getHead_control().getStats().setStats();
+
 
 				MainController.glassPane.setVisible(false);
 				MainController.glassPane.setLoading(false);

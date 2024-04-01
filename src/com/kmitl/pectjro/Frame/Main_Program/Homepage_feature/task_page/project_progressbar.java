@@ -42,7 +42,6 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
     private TaskSeriesCollection dataset;
     private TaskSeries expected;
     private LinkedList<Step_Template> allStep;
-    private LinkedList<Step_Template> check;
     private DeleteTask delt;
     private TaskController controller;
     public project_progressbar(Project_Template info, TaskController controller){
@@ -217,7 +216,7 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
     public void actionPerformed(ActionEvent ev){
         if(ev.getSource().equals(add_bn)){
             if (newtgc == null) {
-                newtgc = new NewTaskGanttChart(fr, this);
+                newtgc = new NewTaskGanttChart(fr, this, allStep);
                 newtgc.getB_create().addActionListener(this);
                 newtgc.getB_back().addActionListener(this);
             } else {
@@ -302,6 +301,8 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
                 protected void done() {
                     delt.getTasksel().removeItem(String.valueOf(delt.getTasksel().getSelectedItem()));
                     delt.getFr().dispose();
+                    fr.revalidate();
+                    fr.repaint();
 
                     load.dispose();
                 }
@@ -344,5 +345,11 @@ public class project_progressbar extends JFrame implements ActionListener, Seria
     }
     public void setDelt(DeleteTask delt) {
         this.delt = delt;
+    }
+    public ChartPanel getChartPanel() {
+        return chartPanel;
+    }
+    public void setChartPanel(ChartPanel chartPanel) {
+        this.chartPanel = chartPanel;
     }
 }

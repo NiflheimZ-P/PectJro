@@ -18,7 +18,6 @@ public class AllNote{
     private JFrame fr;
     private JPanel psouth, westsmar, eastmar, plus_pane, ref_pane, center;
     private JButton plus, ref;
-    private NoteBox nb;
     private JScrollPane scroll;
 
     public AllNote(Container owner){
